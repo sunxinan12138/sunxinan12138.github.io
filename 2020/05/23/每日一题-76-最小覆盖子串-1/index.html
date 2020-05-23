@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="我的hexo博客搭建配置更改, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
+    <meta name="keywords" content="每日一题-76.最小覆盖子串, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
     <meta name="description" content="采坑,学习和生活记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>我的hexo博客搭建配置更改 | 熙楠の博客</title>
+    <title>每日一题-76.最小覆盖子串 | 熙楠の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -286,12 +286,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">我的hexo博客搭建配置更改</h1>
+                    <h1 class="description center-align post-title">每日一题-76.最小覆盖子串</h1>
                 </div>
             </div>
         </div>
@@ -408,12 +408,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/build/">
-                                <span class="chip bg-color">build</span>
-                            </a>
-                        
-                            <a href="/tags/hexo/">
-                                <span class="chip bg-color">hexo</span>
+                            <a href="/tags/DataBase-algorithm/">
+                                <span class="chip bg-color">DataBase&amp;algorithm</span>
                             </a>
                         
                     </div>
@@ -424,8 +420,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/build/" class="post-category">
-                                build
+                            <a href="/categories/%E8%AE%B0%E5%BD%95/" class="post-category">
+                                记录
                             </a>
                         
                     </div>
@@ -437,14 +433,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-22
+                    2020-05-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-22
+                    2020-05-23
                 </div>
                 
 
@@ -458,58 +454,57 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="从0开始搭建hexo博客-win10"><a href="#从0开始搭建hexo博客-win10" class="headerlink" title="从0开始搭建hexo博客(win10)"></a>从0开始搭建hexo博客(win10)</h1><h2 id="基本安装"><a href="#基本安装" class="headerlink" title="基本安装"></a>基本安装</h2><blockquote>
-<p>安装node.js <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网下载地址</a></br><br>安装git <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git官方下载地址</a></br><br>在git/gitee 新建库并且以你的名字命名 git:<kbd>yourName.github.io</kbd> gitee:<kbd>yourName</kbd><br><br>安装hexo<kbd>$ npm install -g hexo-cli</kbd> win会有警告 忽略就好</br><br>新建: (<strong>找到你的文件夹</strong>)执行 <kbd>hexo init</kbd>   <kbd>$ cd </kbd>   <kbd>$ npm install </kbd></br><br>配置:</p>
-<blockquote>
-<p>可以参考 <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">这里</a> <br></p>
-<pre><code>建议配置:
-**url**: https://gitee.com/xxx/xxx.git 你的博客访问地址
-**per_page**:改为6的倍数 6,12,18
- **# Site** 此处 有更多关于首页配置
-**title**: 博客名字</code></pre></blockquote>
-</blockquote>
-<p>hexo的目录配置</p>
-<pre class=" language-markdown"><code class="language-markdown">|-- demo//项目跟目录名
-<span class="token code keyword">    |-- .gitignore//git时忽略的文件或目录</span>
-<span class="token code keyword">    |-- package-lock.json</span>
-<span class="token code keyword">    |-- package.json//应用程序的信息</span>
-<span class="token code keyword">    |-- _config.yml//网站的配置信息</span>
-<span class="token code keyword">    |-- scaffolds//模板文件夹，Hexo的模板是指在新建的markdown文件中默认填充的内容。</span>
-<span class="token code keyword">    |   |-- draft.md</span>
-<span class="token code keyword">    |   |-- page.md</span>
-<span class="token code keyword">    |   |-- post.md//博文模板</span>
-<span class="token code keyword">    |-- source//资源文件夹，存放用户资源</span>
-<span class="token code keyword">    |   |-- _posts//博文目录</span>
-<span class="token code keyword">    |       |-- hello-world.md//博文</span>
-<span class="token code keyword">    |-- themes//主题文件夹，Hexo 会根据主题来生成静态页面</span>
-<span class="token code keyword">        |-- landscape.//默认主题</span></code></pre>
-<h2 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h2><ul>
-<li>执行 <kbd>hexo server</kbd> == <kbd>hexo s</kbd> 默认为 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a><br><ul>
-<li><ul>
-<li><kbd>-p</kbd> 选项，指定服务器端口，默认为 4000</li>
-</ul>
-</li>
-<li><ul>
-<li><kbd>-i</kbd> 选项，指定服务器 IP 地址，默认为 0.0.0.0</li>
-</ul>
-</li>
-<li><ul>
-<li><kbd>-s</kbd> 选项，静态模式 ，仅提供 public 文件夹中的文件并禁用文件监视</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><kbd>hexo generate</kbd> 命令用于生成静态文件，一般可以简写为 hexo g</li>
-<li><kbd>hexo d</kbd> 发布到 git/gitee库</li>
-<li><strong>说明</strong> ：部署前需要修改 _config.yml 配置文件，下面以 git/gitee 为例进行说明<pre><code>deploy:
-  type: &#39;git&#39;
-  repo:
-      github: https://github.com/xxxx/xxxx.github.io.git
-      gitee: https://gitee.com/xxxx/xxxx.git
-  branch: master</code></pre></li>
-<li><kbd>hexo clean</kbd> 命令用于清理缓存文件，是一个比较常用的命令</li>
-</ul>
-<h2 id="主题安装配置"><a href="#主题安装配置" class="headerlink" title="主题安装配置"></a>主题安装配置</h2><p> 有很多优秀好看的主题 next等 不想折腾就用next吧 用的多排坑的也多 <br><br> 我的是Matery 我的主页下方有下载地址[^ Theme Matery ] 或者戳<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">这里</a><br><br> (下次再更,主体和插件的配置)😜 </p>
+                <h1 id="leetcode每日一题-76-最小覆盖子串"><a href="#leetcode每日一题-76-最小覆盖子串" class="headerlink" title="leetcode每日一题:76.最小覆盖子串"></a>leetcode每日一题:76.最小覆盖子串</h1><p><a href="https://leetcode-cn.com/problems/minimum-window-substring/" target="_blank" rel="noopener">76.最小覆盖子串</a><br><br><img src="/source/images/76.png" alt="img"><br><br>代码和注释:</p>
+<pre class=" language-java"><code class="language-java"> <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">mainTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">minWindow</span><span class="token punctuation">(</span><span class="token string">"ADOBECODEBANC"</span><span class="token punctuation">,</span> <span class="token string">"ABC"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 滑动窗口</span>
+    <span class="token keyword">public</span> String <span class="token function">minWindow</span><span class="token punctuation">(</span>String s<span class="token punctuation">,</span> String t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> t<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 左右指针</span>
+        <span class="token keyword">int</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 存储s和t出现次数</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> snum <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> tnum <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> tlen <span class="token operator">=</span> t<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// t串存入</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tlen<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            tnum<span class="token punctuation">[</span>t<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">int</span> minLenth <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> min <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>right <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">// 右指针移动</span>
+            <span class="token keyword">char</span> ch <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            snum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 将s出现的次数存入数组</span>
+            <span class="token comment" spellcheck="true">// 如果满足 当前字符是t字符里的 并且在当前范围只出现一次</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>tnum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> tnum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">>=</span> snum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                count<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">// 当长度满足t时</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> tlen<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">char</span> c <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">// 从左到右移动left 指针直到count长度不足</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>tnum<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> tnum<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">>=</span> snum<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    count<span class="token operator">--</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment" spellcheck="true">// 找到最短长度 将初始和结尾储存</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">-</span> left <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&lt;</span> minLenth<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    minLenth <span class="token operator">=</span> right <span class="token operator">-</span> left <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    min <span class="token operator">=</span> left<span class="token punctuation">;</span>
+                    max <span class="token operator">=</span> right <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                snum<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token operator">--</span><span class="token punctuation">;</span>
+                left<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            right<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> s<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>min<span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre>
 
             </div>
             <hr/>
@@ -535,7 +530,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/22/%E6%88%91%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%94%B9/">https://gitee.com/sunxinan/sunxinan.git/2020/05/22/%E6%88%91%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%94%B9/</a>
+                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/23/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2-1/">https://gitee.com/sunxinan/sunxinan.git/2020/05/23/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -573,12 +568,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/build/">
-                                    <span class="chip bg-color">build</span>
-                                </a>
-                            
-                                <a href="/tags/hexo/">
-                                    <span class="chip bg-color">hexo</span>
+                                <a href="/tags/DataBase-algorithm/">
+                                    <span class="chip bg-color">DataBase&amp;algorithm</span>
                                 </a>
                             
                         </div>
@@ -749,7 +740,7 @@
         repo: 'sunxinan12138.github.io',
         owner: 'sunxinan12138',
         admin: ["sunxinan12138"],
-        id: '2020-05-22T20-32-31',
+        id: '2020-05-23T14-59-59',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -773,9 +764,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/05/23/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2-1/">
                     <div class="card-image">
@@ -793,9 +785,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -808,6 +800,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -826,31 +819,32 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/21/%E6%88%91%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">
+                <a href="/2020/05/22/%E6%88%91%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%94%B9/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="我第一个博客">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="我的hexo博客搭建配置更改">
                         
-                        <span class="card-title">我第一个博客</span>
+                        <span class="card-title">我的hexo博客搭建配置更改</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            摘要
+                            从0开始搭建hexo博客(win10)基本安装
+安装node.js Node.js官网下载地址安装git git官方下载地址在git/gitee 新建库并且以你的名字命名 git:yourName.github.io gitee:yourN
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Diary/" class="post-category">
-                                    Diary
+                            <a href="/categories/build/" class="post-category">
+                                    build
                                 </a>
                             
                             
@@ -860,12 +854,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/introduction/">
-                        <span class="chip bg-color">introduction</span>
+                    <a href="/tags/build/">
+                        <span class="chip bg-color">build</span>
                     </a>
                     
-                    <a href="/tags/Test/">
-                        <span class="chip bg-color">Test</span>
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
                     </a>
                     
                 </div>
