@@ -424,11 +424,11 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                代理模式
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                设计模式
                             </a>
                         
-                            <a href="/categories/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
                                 抄书
                             </a>
                         
@@ -448,7 +448,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-23
+                    2020-05-24
                 </div>
                 
 
@@ -465,9 +465,102 @@
                 <h1 id="简单的工厂模式-大话设计模式"><a href="#简单的工厂模式-大话设计模式" class="headerlink" title="简单的工厂模式 - 大话设计模式"></a>简单的工厂模式 - 大话设计模式</h1><blockquote>
 <p>当你需要实例化哪个类,或者未来会不会增加实例化对象,所以考虑用一个单独的类来做这个创造实例化的过程–<kbd>工厂</kbd> </p>
 </blockquote>
-<p>例子:</p>
-<pre class=" language-java"><code class="language-java"></code></pre>
-<p><img src="/images/SimpleFactory.png" alt="简单的工厂模式"></p>
+<blockquote>
+<p>耦合度降低 每个实例是相对独立的 做到了<strong>容易维护,扩展和复用</strong></p>
+</blockquote>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:<br></h2><p><img src="/images/SimpleFactory.png" alt="简单的工厂模式"><br>1.PO类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>sjs<span class="token punctuation">.</span>SimpleFactory<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Operation</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> numberA<span class="token punctuation">;</span>
+    <span class="token keyword">double</span> numberB<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getNumberA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> numberA<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNumberA</span><span class="token punctuation">(</span><span class="token keyword">double</span> numberA<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>numberA <span class="token operator">=</span> numberA<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getNumberB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> numberB<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNumberB</span><span class="token punctuation">(</span><span class="token keyword">double</span> numberB<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>numberB <span class="token operator">=</span> numberB<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getReasult</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">double</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>2.加减乘除类(封装类继承基类)</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>sjs<span class="token punctuation">.</span>SimpleFactory<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Add</span> <span class="token keyword">extends</span> <span class="token class-name">Operation</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 重写getResult方法</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getReasult</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span>numberA <span class="token operator">+</span> <span class="token keyword">super</span><span class="token punctuation">.</span>numberB<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Sub</span> <span class="token keyword">extends</span> <span class="token class-name">Operation</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 重写getResult方法</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getReasult</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span>numberA <span class="token operator">-</span> <span class="token keyword">super</span><span class="token punctuation">.</span>numberB<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>3.简单工厂类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>sjs<span class="token punctuation">.</span>SimpleFactory<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OperationFactory</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 当你输入表达式工厂自动匹配类创建对象</span>
+    <span class="token comment" spellcheck="true">// 实例化对象的问题交给工厂</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Operation <span class="token function">operation</span><span class="token punctuation">(</span>String operate<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">// 用符号自动匹配要创建的实例</span>
+        Operation operation <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>operate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> <span class="token string">"+"</span><span class="token operator">:</span>
+                <span class="token comment" spellcheck="true">// add</span>
+                operation <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token string">"-"</span><span class="token operator">:</span>
+                <span class="token comment" spellcheck="true">// sub</span>
+                operation <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sub</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> operation<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>4.使用简单工厂模式</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>sjs<span class="token punctuation">.</span>SimpleFactory<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 简单工厂模式()</span>
+        <span class="token comment" spellcheck="true">// 用工厂类自动创建实例</span>
+        Operation operation <span class="token operator">=</span> OperationFactory<span class="token punctuation">.</span><span class="token function">operation</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        operation<span class="token punctuation">.</span><span class="token function">setNumberA</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        operation<span class="token punctuation">.</span><span class="token function">setNumberB</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>operation<span class="token punctuation">.</span><span class="token function">getReasult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 没有代理模式</span>
+<span class="token comment" spellcheck="true">//        Operation add = new Add();</span>
+<span class="token comment" spellcheck="true">//        add.setNumberA(12);</span>
+<span class="token comment" spellcheck="true">//        add.setNumberB(23);</span>
+<span class="token comment" spellcheck="true">//        System.out.println(add.getReasult());</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token comment" spellcheck="true">//        Operation sub = new Sub();</span>
+<span class="token comment" spellcheck="true">//        sub.setNumberA(12);</span>
+<span class="token comment" spellcheck="true">//        sub.setNumberB(23);</span>
+<span class="token comment" spellcheck="true">//        System.out.println(sub.getReasult());</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 
             </div>
             <hr/>
@@ -759,11 +852,11 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    代理模式
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
                                 </a>
                             
-                            <a href="/categories/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
                                     抄书
                                 </a>
                             

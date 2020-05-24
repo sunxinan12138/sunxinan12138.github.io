@@ -444,7 +444,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-23
+                    2020-05-24
                 </div>
                 
 
@@ -483,8 +483,17 @@
 <span class="token code keyword">    |       |-- hello-world.md//博文</span>
 <span class="token code keyword">    |-- themes//主题文件夹，Hexo 会根据主题来生成静态页面</span>
 <span class="token code keyword">        |-- landscape.//默认主题</span></code></pre>
-<h2 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h2><ul>
-<li>执行 <kbd>hexo server</kbd> == <kbd>hexo s</kbd> 默认为 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a><br><ul>
+<h2 id="配置git和gitee库"><a href="#配置git和gitee库" class="headerlink" title="配置git和gitee库"></a>配置git和gitee库</h2><ol>
+<li>首先你要有这两个仓库</li>
+<li>修改[^ _config.yml ] 此文件的配置<pre><code>deploy:
+type: &#39;git&#39;
+repo:
+   github: https://github.com/xxxx/xxxx.github.io.git
+   gitee: https://gitee.com/xxxx/xxxx.git
+branch: master</code></pre></li>
+<li>在执行 hexo d 就能在你的链接访问啦</li>
+<li><strong>提示</strong>：gitee要启动一下gitee Pages<kbd>自你的库-服务- gitee pages</kbd>每次更新后要重新更新一下gitee Pages<h2 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h2><ul>
+<li>执行 <kbd>hexo server</kbd> == <kbd>hexo s</kbd> 默认为 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a><br></li>
 <li><ul>
 <li><kbd>-p</kbd> 选项，指定服务器端口，默认为 4000</li>
 </ul>
@@ -497,19 +506,14 @@
 <li><kbd>-s</kbd> 选项，静态模式 ，仅提供 public 文件夹中的文件并禁用文件监视</li>
 </ul>
 </li>
-</ul>
-</li>
 <li><kbd>hexo generate</kbd> 命令用于生成静态文件，一般可以简写为 hexo g</li>
 <li><kbd>hexo d</kbd> 发布到 git/gitee库</li>
-<li><strong>说明</strong> ：部署前需要修改 _config.yml 配置文件，下面以 git/gitee 为例进行说明<pre><code>deploy:
-  type: &#39;git&#39;
-  repo:
-      github: https://github.com/xxxx/xxxx.github.io.git
-      gitee: https://gitee.com/xxxx/xxxx.git
-  branch: master</code></pre></li>
+<li><strong>说明</strong> ：部署前需要修改 _config.yml 配置文件，下面以 git/gitee 为例进行</li>
 <li><kbd>hexo clean</kbd> 命令用于清理缓存文件，是一个比较常用的命令</li>
 </ul>
-<h2 id="主题安装配置"><a href="#主题安装配置" class="headerlink" title="主题安装配置"></a>主题安装配置</h2><p> 有很多优秀好看的主题 next等 不想折腾就用next吧 用的多排坑的也多 <br><br> 我的是Matery 我的主页下方有下载地址[^ Theme Matery ] 或者戳<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">这里</a><br><br> (下次再更,主体和插件的配置)😜 </p>
+</li>
+</ol>
+<h2 id="主题安装配置"><a href="#主题安装配置" class="headerlink" title="主题安装配置"></a>主题安装配置</h2><p> 有很多优秀好看的主题 next等 不想折腾就用next吧 用的多排坑的也多 <br><br> 我的是Matery 我的主页下方有下载地址[^ Theme Matery ] 或者戳<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">这里</a><br><br> (下载的主题有说明文档)😜 </p>
 
             </div>
             <hr/>
