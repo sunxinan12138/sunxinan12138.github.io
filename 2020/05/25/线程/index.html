@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="你好吖~ 欢迎来到我的博客, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
+    <meta name="keywords" content="线程, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
     <meta name="description" content="采坑,学习和生活记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>你好吖~ 欢迎来到我的博客 | 熙楠の博客</title>
+    <title>线程 | 熙楠の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -286,12 +286,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">你好吖~ 欢迎来到我的博客</h1>
+                    <h1 class="description center-align post-title">线程</h1>
                 </div>
             </div>
         </div>
@@ -406,12 +406,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">线程的基础</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
+                                多线程
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -420,14 +433,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-18
+                    2020-05-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-18
+                    2020-05-25
                 </div>
                 
 
@@ -441,16 +454,63 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="线程Thread"><a href="#线程Thread" class="headerlink" title="线程Thread"></a>线程Thread</h1><blockquote>
+<p>Thread隶属于java.lang包下的类 ,java语言的JVM允许程序运行多个线程</p>
+<p>Thread:每个线程通过特定Thread对象的run()方法来完成操作,经常把run()方法的主体称为<strong>线程体</strong></p>
+<p>通过该Thread对象的start()方法调用这个线程</p>
+</blockquote>
+<h2 id="程序-线程和进程"><a href="#程序-线程和进程" class="headerlink" title="程序,线程和进程"></a>程序,线程和进程</h2><ul>
+<li><p><strong>程序(Program):</strong>为了完成特定任务, 用某种语言编写的一组指令集合. 即<kbd>一段静态代码</kbd>,静态对象</p>
+</li>
+<li><p><strong>进程(process):</strong>是指程序的一次执行过程, 或是<kbd>正在运行的一个程序</kbd>. 动态过程: 有它自身的产生, 存在和消亡的过程.</p>
+<blockquote>
+<p>如: 运行中的软件qq 浏览器等</p>
+<p>程序是静态的,运行的进程是动态的</p>
+</blockquote>
+</li>
+<li><p><strong>线程(Thread):</strong>进程细化一些为线程,是一个程序内部的一条执行路径</p>
+<blockquote>
+<p>当热程序在同一时间可以有多个执行路径, 也就是支持多线程</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><pre><code>1.线程就是独立执行的路径
+2.在程序运行时，即使没有创建线程，也会有多个线程(javg gc线程，主线程)
+3.main()称为主线程 ，为系统的入口，用于执行整个程序
+4.在一个进程中，开了多个线程，线程的运行由调度器安排调度，调度器是与操作系统5.紧密相关的，先后顺序是不能人为干预的
+6.对同一份资源操作时，会存在资源抢夺问题，要加入并发控制
+7.线程会带来额外的开销，cpu调度时间，并发控制开销
+8.每个线程在自己的工作内存中交互，内存控制不当会造成数据不一致</code></pre><h2 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h2><h3 id="一-继承Thread类"><a href="#一-继承Thread类" class="headerlink" title="一 . 继承Thread类"></a>一 . 继承Thread类</h3><blockquote>
+<p>重写run()方法 ,并且用thread.start()启动线程</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadBuild</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ThreadTest threadTest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        threadTest<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 启动线程</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
+<span class="token keyword">class</span> <span class="token class-name">ThreadTest</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 重写run方法</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">"线程1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 线程命名</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 获取当前线程名 + 变量</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p>程序中创建了一个 <strong>线程1</strong> 线程 在主线程中启动 线程间是独立执行的 ,如图:</p>
+<p><img src="/images/Thread.png" alt="img"></p>
+<p>所以会看到这样的情况:</p>
+<p><img src="/images/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="img"></p>
+</blockquote>
+<p>在Thread中有以下代码保证了不能重复一个线程的Start()方法:<img src="/images/start.png" alt="img"></p>
+<h3 id="二-实现Runnable接口"><a href="#二-实现Runnable接口" class="headerlink" title="二. 实现Runnable接口"></a>二. 实现Runnable接口</h3><h3 id="三-实现Callable接口"><a href="#三-实现Callable接口" class="headerlink" title="三. 实现Callable接口"></a>三. 实现Callable接口</h3>
             </div>
             <hr/>
 
@@ -475,7 +535,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/18/hello-world/">https://gitee.com/sunxinan/sunxinan.git/2020/05/18/hello-world/</a>
+                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/25/%E7%BA%BF%E7%A8%8B/">https://gitee.com/sunxinan/sunxinan.git/2020/05/25/%E7%BA%BF%E7%A8%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -512,7 +572,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">线程的基础</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -681,7 +745,7 @@
         repo: 'sunxinan12138.github.io',
         owner: 'sunxinan12138',
         admin: ["sunxinan12138"],
-        id: '2020-05-18T02-34-10',
+        id: '2020-05-25T19-00-06',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -705,50 +769,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/21/%E6%88%91%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">
+                <a href="/2020/05/25/%E7%BA%BF%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="我第一个博客">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="线程">
                         
-                        <span class="card-title">我第一个博客</span>
+                        <span class="card-title">线程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            摘要
+                            线程Thread
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Diary/" class="post-category">
-                                    Diary
+                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
+                                    多线程
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/introduction/">
-                        <span class="chip bg-color">introduction</span>
-                    </a>
-                    
-                    <a href="/tags/Test/">
-                        <span class="chip bg-color">Test</span>
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">线程的基础</span>
                     </a>
                     
                 </div>
@@ -759,37 +821,56 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/18/hello-world/">
+                <a href="/2020/05/23/%E7%AE%80%E5%8D%95%E7%9A%84%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="你好吖~ 欢迎来到我的博客">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="简单的工厂模式">
                         
-                        <span class="card-title">你好吖~ 欢迎来到我的博客</span>
+                        <span class="card-title">简单的工厂模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            简单的工厂模式
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-23
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            sunjusong
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                            
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
+                                    抄书
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">大话设计模式</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">简单工厂模式</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
