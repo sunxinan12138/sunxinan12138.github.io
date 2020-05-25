@@ -505,12 +505,47 @@
 <span class="token punctuation">}</span></code></pre>
 <blockquote>
 <p>程序中创建了一个 <strong>线程1</strong> 线程 在主线程中启动 线程间是独立执行的 ,如图:</p>
-<p><img src="/images/Thread.png" alt="img"></p>
-<p>所以会看到这样的情况:</p>
-<p><img src="/images/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="img"></p>
+<p><img src="/images/Thread.png" alt="执行方式图解"></p>
+<p>所以会看到并行交替执行的情况:</p>
+<p><img src="/images/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="并没有顺序"></p>
 </blockquote>
-<p>在Thread中有以下代码保证了不能重复一个线程的Start()方法:<img src="/images/start.png" alt="img"></p>
-<h3 id="二-实现Runnable接口"><a href="#二-实现Runnable接口" class="headerlink" title="二. 实现Runnable接口"></a>二. 实现Runnable接口</h3><h3 id="三-实现Callable接口"><a href="#三-实现Callable接口" class="headerlink" title="三. 实现Callable接口"></a>三. 实现Callable接口</h3>
+<p>在Thread中有以下代码保证了Start()方法不能重复调用:<img src="/images/start.png" alt="start的源码"></p>
+<h3 id="二-实现Runnable接口"><a href="#二-实现Runnable接口" class="headerlink" title="二. 实现Runnable接口"></a>二. 实现Runnable接口</h3><h3 id="三-实现Callable接口"><a href="#三-实现Callable接口" class="headerlink" title="三. 实现Callable接口"></a>三. 实现Callable接口</h3><h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><blockquote>
+<ol>
+<li><p>start: 启动线程并执行响应的run()方法</p>
+</li>
+<li><p>run():子线程要执行的代码</p>
+</li>
+<li><p>currentThread(): 静态的,调用当前的线程</p>
+</li>
+<li><p>getName()/setName(): 获取和设置线程名字</p>
+</li>
+<li><p>yield():  调用此方法的线程放弃当前cpu的执行权</p>
+</li>
+<li><p>join(): 在A线程中调用B线程的join方法. </p>
+<blockquote>
+<p><strong>表示</strong>: A线程停止,直到B线程执行完毕 A线程在执行后面的代码</p>
+</blockquote>
+</li>
+<li><p>isAlive(): 判断当前线程是否存活</p>
+</li>
+<li><p>sleeo(long time): 当前线程睡眠time毫秒</p>
+</li>
+<li><p>线程通信中wait()</p>
+</li>
+<li><p>notify()</p>
+</li>
+<li><p>notifyAll()</p>
+</li>
+<li><p>设置线程的优先级</p>
+<blockquote>
+<p>getPriority(): 返回当前线程优先级</p>
+<p>setPriority(int newPriority): 改变当前线程优先级 : <kbd>正常为5,最大10,最小是1</kbd></p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+
             </div>
             <hr/>
 
