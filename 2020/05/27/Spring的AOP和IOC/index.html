@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="线程, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
+    <meta name="keywords" content="Spring的AOP和IOC, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
     <meta name="description" content="采坑,学习和生活记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>线程 | 熙楠の博客</title>
+    <title>Spring的AOP和IOC | 熙楠の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -286,12 +286,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/05/26/t8PpFJzjDavOfME.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/source/images/xxx.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">线程</h1>
+                    <h1 class="description center-align post-title">Spring的AOP和IOC</h1>
                 </div>
             </div>
         </div>
@@ -408,12 +408,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E7%A1%80/">
-                                <span class="chip bg-color">线程的基础</span>
-                            </a>
-                        
                             <a href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/">
                                 <span class="chip bg-color">未完成</span>
+                            </a>
+                        
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
                             </a>
                         
                     </div>
@@ -424,8 +424,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%BA%BF%E7%A8%8B/" class="post-category">
-                                线程
+                            <a href="/categories/%E6%A1%86%E6%9E%B6Spring/" class="post-category">
+                                框架Spring
                             </a>
                         
                     </div>
@@ -437,28 +437,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-25
+                    2020-05-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-27
+                    2020-05-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    306
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    1 分
                 </div>
                 
 
@@ -473,147 +473,47 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="线程Thread"><a href="#线程Thread" class="headerlink" title="线程Thread"></a>线程Thread</h1><blockquote>
-<p>Thread隶属于java.lang包下的类 ,java语言的JVM允许程序运行多个线程</p>
-<p>Thread:每个线程通过特定Thread对象的run()方法来完成操作,经常把run()方法的主体称为<strong>线程体</strong></p>
-<p>通过该Thread对象的start()方法调用这个线程</p>
+                <h1 id="Spring的IOC和AOP"><a href="#Spring的IOC和AOP" class="headerlink" title="Spring的IOC和AOP"></a>Spring的IOC和AOP</h1><blockquote>
+<p>Spring(容器/代理类框架)  </p>
+<p><img src="https://i.loli.net/2020/05/27/Pcl8ygk3zEiVHWY.png" alt="image.png"></p>
 </blockquote>
-<h2 id="程序-线程和进程"><a href="#程序-线程和进程" class="headerlink" title="程序,线程和进程"></a>程序,线程和进程</h2><ul>
-<li><p><strong>程序(Program):</strong>为了完成特定任务, 用某种语言编写的一组指令集合. 即<kbd>一段静态代码</kbd>,静态对象</p>
-</li>
-<li><p><strong>进程(process):</strong>是指程序的一次执行过程, 或是<kbd>正在运行的一个程序</kbd>. 动态过程: 有它自身的产生, 存在和消亡的过程.</p>
-<blockquote>
-<p>如: 运行中的软件qq 浏览器等</p>
-<p>程序是静态的,运行的进程是动态的</p>
-</blockquote>
-</li>
-<li><p><strong>线程(Thread):</strong>进程细化一些为线程,是一个程序内部的一条执行路径</p>
-<blockquote>
-<p>当热程序在同一时间可以有多个执行路径, 也就是支持多线程</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
-<p>java中线程分为:<strong>守护线程</strong>和<strong>用户线程</strong></p>
-</blockquote>
-<pre><code>1.线程就是独立执行的路径
-2.在程序运行时，即使没有创建线程，也会有多个线程(javg gc线程，主线程)
-3.main()称为主线程 ，为系统的入口，用于执行整个程序
-4.在一个进程中，开了多个线程，线程的运行由调度器安排调度，调度器是与操作系统5.紧密相关的，先后顺序是不能人为干预的
-6.对同一份资源操作时，会存在资源抢夺问题，要加入并发控制
-7.线程会带来额外的开销，cpu调度时间，并发控制开销
-8.每个线程在自己的工作内存中交互，内存控制不当会造成数据不一致</code></pre><h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><blockquote>
-<p>在JDK中Thread.State枚举表示了线程的五种状态</p>
-<ul>
-<li>新建:  当一个Thread类或子类的对象被声明并且创建后,新的线程处于新建状态</li>
-<li>就绪: 当线程被start()后,将进入线程队列等待cpu时间片</li>
-<li>运行: 线程被调度并且获得处理器资源时,进入运行状态,-run()方法内执行</li>
-<li>阻塞: 被人为挂起或者其它方式,让出cpu并临时终止自己执行</li>
-<li>死亡: 线程完成或者出现错误/异常被强制终止</li>
-</ul>
-</blockquote>
-<p>​                                                            如图</p>
-<p><img src="https://i.loli.net/2020/05/27/sQ7TN4wSIAkUCFp.png" alt="线程生命周期"></p>
-<h2 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h2><h3 id="一-继承Thread类"><a href="#一-继承Thread类" class="headerlink" title="一 . 继承Thread类"></a>一 . 继承Thread类</h3><blockquote>
-<p>重写run()方法 ,并且用thread.start()启动线程</p>
-</blockquote>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadBuild</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        ThreadTest threadTest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        threadTest<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 启动线程</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">class</span> <span class="token class-name">ThreadTest</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 重写run方法</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">"线程1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 线程命名</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 获取当前线程名 + 变量</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<blockquote>
-<p>程序中创建了一个 <strong>线程1</strong> 线程 在主线程中启动 线程间是独立执行的 ,如图:</p>
-<p><img src="/images/Thread.png" alt="执行方式图解"></p>
-<p>所以会看到并行交替执行的情况:</p>
-<p><img src="/images/%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="并没有顺序"></p>
-</blockquote>
-<p>在Thread中有以下代码保证了Start()方法不能重复调用:<img src="/images/start.png" alt="start的源码"></p>
-<h4 id="练习"><a href="#练习" class="headerlink" title="练习:"></a>练习:</h4><blockquote>
-<p> 用多线程写图片复制/用线程实现3个售票窗口(<strong>要考虑产生资源冲突</strong>)(代码emmmm就不粘了)</p>
-</blockquote>
-<h3 id="二-实现Runnable接口"><a href="#二-实现Runnable接口" class="headerlink" title="二. 实现Runnable接口"></a>二. 实现Runnable接口</h3><blockquote>
-<p>实现Runnable接口并且重写run()方法</p>
-</blockquote>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 实现接口的线程创建方式</span>
-        ThreadTest threadTest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// Runnable接口实现类对象</span>
-        <span class="token comment" spellcheck="true">// 将此对象作为形参放入 Thread的构造方法中 并创造对象</span>
-        Thread thread1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>threadTest<span class="token punctuation">)</span><span class="token punctuation">;</span>
-         Thread thread2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>threadTest<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        thread1<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">"1Thread"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 命名</span>
-        thread1<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 启动线程</span>
-           thread2<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<blockquote>
+<h2 id="IOC-控制反转-Inversion-of-Control"><a href="#IOC-控制反转-Inversion-of-Control" class="headerlink" title="IOC(控制反转)(Inversion of Control)"></a>IOC(控制反转)(Inversion of Control)</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><blockquote>
 <ol>
-<li><p>Thread 本身就实现了Runnable接口</p>
+<li><p>作用: 借助于“第三方”实现具有依赖关系的对象之间的解耦</p>
 </li>
-<li><p>实现方式优于继承方式</p>
+<li><p>ioc也可以叫DI(依赖注入)</p>
 <ol>
-<li>避免了java中单继承的局限性</li>
-<li>在操作同一份资源中,更适合使用实现方式<ol>
-<li>一个对象的资源给多个线程使用</li>
-</ol>
+<li><p>区别</p>
+<p>DI：依赖注入：实现方式</p>
+<p>IOC：控制反转:一种思想</p>
 </li>
 </ol>
 </li>
-</ol>
-</blockquote>
-<h3 id="三-实现Callable接口"><a href="#三-实现Callable接口" class="headerlink" title="三. 实现Callable接口"></a>三. 实现Callable接口</h3><blockquote>
-<p>重写的call()方法 </p>
-<p>需要执行服务和关闭服务(ExecutorService的对象 )<br><kbd>ExecutorService service = Executors.newFixedThreadPool(3);</kbd></p>
-<p>提交执行 submit(线程对象)<br><kbd>Future f1 = service.submit(c);</kbd></p>
-<p>获取返回值 记得结束服务<br><kbd>String s1 = (String) f1.get();</kbd><kbd>service.shutdown();</kbd></p>
-</blockquote>
-<h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><blockquote>
+<li><p>IOC:</p>
 <ol>
-<li><p>start: 启动线程并执行响应的run()方法</p>
+<li>对象由Spring创建、管理、装配</li>
+<li>控制的内容：控制对象的创建：传统的由程序本身去创建, 框架由Spring来创建</li>
+</ol>
 </li>
-<li><p>run():子线程要执行的代码</p>
+<li><p>反转：(正转：程序自己创建对象) 需要对象时，被动接受Spring容器创建的对象，并且注入程序</p>
 </li>
-<li><p>currentThread(): 静态的,调用当前的线程</p>
+<li><p>对象A获得依赖对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”</p>
 </li>
-<li><p>getName()/setName(): 获取和设置线程名字</p>
-</li>
-<li><p>yield():  调用此方法的线程放弃当前cpu的执行权</p>
-</li>
-<li><p>join(): 在A线程中调用B线程的join方法. </p>
-<blockquote>
-<p><strong>表示</strong>: A线程停止,直到B线程执行完毕 A线程在执行后面的代码</p>
-</blockquote>
-</li>
-<li><p>isAlive(): 判断当前线程是否存活</p>
-</li>
-<li><p>sleeo(long time): 当前线程睡眠time毫秒</p>
-</li>
-<li><p>线程通信中wait()</p>
-</li>
-<li><p>notify()</p>
-</li>
-<li><p>notifyAll()</p>
-</li>
-<li><p>设置线程的优先级</p>
-<blockquote>
-<p>getPriority(): 返回当前线程优先级</p>
-<p>setPriority(int newPriority): 改变当前线程优先级 : <kbd>正常为5,最大10,最小是1</kbd></p>
-</blockquote>
+<li><p>ioc实现由容器BeanFactory实现</p>
 </li>
 </ol>
 </blockquote>
+<h3 id="java反射机制和工厂模式"><a href="#java反射机制和工厂模式" class="headerlink" title="java反射机制和工厂模式"></a>java反射机制和工厂模式</h3><blockquote>
+<p> 要了解Spring的Ioc实现不得不说到java的反射机制</p>
+</blockquote>
+<h3 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h3><h2 id="AOP代理-面向切面"><a href="#AOP代理-面向切面" class="headerlink" title="AOP代理-面向切面"></a>AOP代理-面向切面</h2><blockquote>
+<p>正常编程<img src="https://i.loli.net/2020/05/28/rQZ36jmDFYCR5NI.png" alt="image.png"></p>
+</blockquote>
+<blockquote>
+<p>面向切面: 在一个功能(类)中切入一个功能</p>
+<p><img src="file:///C:/Users/25778/AppData/Local/Temp/msohtmlclip1/01/clip_image001.png" alt="计算机生成了可选文字: Log() Service"></p>
+</blockquote>
+<h3 id="AOP重要性："><a href="#AOP重要性：" class="headerlink" title="AOP重要性："></a>AOP重要性：</h3><p>aop将公共业务（日志，安全）和领域业务结合。公共业务可以重复使用，程序猿更专注与领域业务 本质动态代理</p>
 
             </div>
             <hr/>
@@ -629,7 +529,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">sunjusong</a>
+                    <a href="/about" rel="external nofollow noreferrer">孙鉅淞</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -639,7 +539,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/25/%E7%BA%BF%E7%A8%8B/">https://gitee.com/sunxinan/sunxinan.git/2020/05/25/%E7%BA%BF%E7%A8%8B/</a>
+                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/27/Spring%E7%9A%84AOP%E5%92%8CIOC/">https://gitee.com/sunxinan/sunxinan.git/2020/05/27/Spring%E7%9A%84AOP%E5%92%8CIOC/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -652,7 +552,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">sunjusong</a>
+                    <a href="/about" target="_blank">孙鉅淞</a>
                     !
                 </span>
             </div>
@@ -677,12 +577,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E7%A1%80/">
-                                    <span class="chip bg-color">线程的基础</span>
-                                </a>
-                            
                                 <a href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/">
                                     <span class="chip bg-color">未完成</span>
+                                </a>
+                            
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
                                 </a>
                             
                         </div>
@@ -853,7 +753,7 @@
         repo: 'sunxinan12138.github.io',
         owner: 'sunxinan12138',
         admin: ["sunxinan12138"],
-        id: '2020-05-25T19-00-06',
+        id: '2020-05-27T23-47-41',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -877,9 +777,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/05/27/Spring%E7%9A%84AOP%E5%92%8CIOC/">
                     <div class="card-image">
@@ -896,9 +797,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -911,6 +812,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -933,35 +835,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/23/%E7%AE%80%E5%8D%95%E7%9A%84%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                <a href="/2020/05/25/%E7%BA%BF%E7%A8%8B/">
                     <div class="card-image">
                         
+                        <img src="https://i.loli.net/2020/05/26/t8PpFJzjDavOfME.jpg" class="responsive-img" alt="线程">
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="简单的工厂模式">
-                        
-                        <span class="card-title">简单的工厂模式</span>
+                        <span class="card-title">线程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简单的工厂模式
+                            线程Thread
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-25
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    设计模式
-                                </a>
-                            
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
-                                    抄书
+                            <a href="/categories/%E7%BA%BF%E7%A8%8B/" class="post-category">
+                                    线程
                                 </a>
                             
                             
@@ -971,12 +868,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">大话设计模式</span>
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">线程的基础</span>
                     </a>
                     
-                    <a href="/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">简单工厂模式</span>
+                    <a href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/">
+                        <span class="chip bg-color">未完成</span>
                     </a>
                     
                 </div>

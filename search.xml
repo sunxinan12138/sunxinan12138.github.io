@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Spring的AOP和IOC</title>
+      <link href="/2020/05/27/Spring%E7%9A%84AOP%E5%92%8CIOC/"/>
+      <url>/2020/05/27/Spring%E7%9A%84AOP%E5%92%8CIOC/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring的IOC和AOP"><a href="#Spring的IOC和AOP" class="headerlink" title="Spring的IOC和AOP"></a>Spring的IOC和AOP</h1><blockquote><p>Spring(容器/代理类框架)  </p><p><img src="https://i.loli.net/2020/05/27/Pcl8ygk3zEiVHWY.png" alt="image.png"></p></blockquote><h2 id="IOC-控制反转-Inversion-of-Control"><a href="#IOC-控制反转-Inversion-of-Control" class="headerlink" title="IOC(控制反转)(Inversion of Control)"></a>IOC(控制反转)(Inversion of Control)</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><blockquote><ol><li><p>作用: 借助于“第三方”实现具有依赖关系的对象之间的解耦</p></li><li><p>ioc也可以叫DI(依赖注入)</p><ol><li><p>区别</p><p>DI：依赖注入：实现方式</p><p>IOC：控制反转:一种思想</p></li></ol></li><li><p>IOC:</p><ol><li>对象由Spring创建、管理、装配</li><li>控制的内容：控制对象的创建：传统的由程序本身去创建, 框架由Spring来创建</li></ol></li><li><p>反转：(正转：程序自己创建对象) 需要对象时，被动接受Spring容器创建的对象，并且注入程序</p></li><li><p>对象A获得依赖对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”</p></li><li><p>ioc实现由容器BeanFactory实现</p></li></ol></blockquote><h3 id="java反射机制和工厂模式"><a href="#java反射机制和工厂模式" class="headerlink" title="java反射机制和工厂模式"></a>java反射机制和工厂模式</h3><blockquote><p> 要了解Spring的Ioc实现不得不说到java的反射机制</p></blockquote><h3 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h3><h2 id="AOP代理-面向切面"><a href="#AOP代理-面向切面" class="headerlink" title="AOP代理-面向切面"></a>AOP代理-面向切面</h2><blockquote><p>正常编程<img src="https://i.loli.net/2020/05/28/rQZ36jmDFYCR5NI.png" alt="image.png"></p></blockquote><blockquote><p>面向切面: 在一个功能(类)中切入一个功能</p><p><img src="file:///C:/Users/25778/AppData/Local/Temp/msohtmlclip1/01/clip_image001.png" alt="计算机生成了可选文字: Log() Service"></p></blockquote><h3 id="AOP重要性："><a href="#AOP重要性：" class="headerlink" title="AOP重要性："></a>AOP重要性：</h3><p>aop将公共业务（日志，安全）和领域业务结合。公共业务可以重复使用，程序猿更专注与领域业务 本质动态代理</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 框架Spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 未完成 </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>线程</title>
       <link href="/2020/05/25/%E7%BA%BF%E7%A8%8B/"/>
       <url>/2020/05/25/%E7%BA%BF%E7%A8%8B/</url>
