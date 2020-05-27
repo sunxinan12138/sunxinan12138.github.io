@@ -451,14 +451,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    985
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -493,13 +493,28 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><pre><code>1.线程就是独立执行的路径
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
+<p>java中线程分为:<strong>守护线程</strong>和<strong>用户线程</strong></p>
+</blockquote>
+<pre><code>1.线程就是独立执行的路径
 2.在程序运行时，即使没有创建线程，也会有多个线程(javg gc线程，主线程)
 3.main()称为主线程 ，为系统的入口，用于执行整个程序
 4.在一个进程中，开了多个线程，线程的运行由调度器安排调度，调度器是与操作系统5.紧密相关的，先后顺序是不能人为干预的
 6.对同一份资源操作时，会存在资源抢夺问题，要加入并发控制
 7.线程会带来额外的开销，cpu调度时间，并发控制开销
-8.每个线程在自己的工作内存中交互，内存控制不当会造成数据不一致</code></pre><h2 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h2><h3 id="一-继承Thread类"><a href="#一-继承Thread类" class="headerlink" title="一 . 继承Thread类"></a>一 . 继承Thread类</h3><blockquote>
+8.每个线程在自己的工作内存中交互，内存控制不当会造成数据不一致</code></pre><h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><blockquote>
+<p>在JDK中Thread.State枚举表示了线程的五种状态</p>
+<ul>
+<li>新建:  当一个Thread类或子类的对象被声明并且创建后,新的线程处于新建状态</li>
+<li>就绪: 当线程被start()后,将进入线程队列等待cpu时间片</li>
+<li>运行: 线程被调度并且获得处理器资源时,进入运行状态,-run()方法内执行</li>
+<li>阻塞: 被人为挂起或者其它方式,让出cpu并临时终止自己执行</li>
+<li>死亡: 线程完成或者出现错误/异常被强制终止</li>
+</ul>
+</blockquote>
+<p>​                                                            如图</p>
+<p><img src="https://i.loli.net/2020/05/27/sQ7TN4wSIAkUCFp.png" alt="线程生命周期"></p>
+<h2 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h2><h3 id="一-继承Thread类"><a href="#一-继承Thread类" class="headerlink" title="一 . 继承Thread类"></a>一 . 继承Thread类</h3><blockquote>
 <p>重写run()方法 ,并且用thread.start()启动线程</p>
 </blockquote>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadBuild</span> <span class="token punctuation">{</span>
@@ -533,7 +548,7 @@
 <p> 用多线程写图片复制/用线程实现3个售票窗口(<strong>要考虑产生资源冲突</strong>)(代码emmmm就不粘了)</p>
 </blockquote>
 <h3 id="二-实现Runnable接口"><a href="#二-实现Runnable接口" class="headerlink" title="二. 实现Runnable接口"></a>二. 实现Runnable接口</h3><blockquote>
-<p>实现Runnable接口并且实现run()方法</p>
+<p>实现Runnable接口并且重写run()方法</p>
 </blockquote>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 实现接口的线程创建方式</span>
         ThreadTest threadTest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// Runnable接口实现类对象</span>
@@ -558,7 +573,13 @@
 </li>
 </ol>
 </blockquote>
-<h3 id="三-实现Callable接口"><a href="#三-实现Callable接口" class="headerlink" title="三. 实现Callable接口"></a>三. 实现Callable接口</h3><h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><blockquote>
+<h3 id="三-实现Callable接口"><a href="#三-实现Callable接口" class="headerlink" title="三. 实现Callable接口"></a>三. 实现Callable接口</h3><blockquote>
+<p>重写的call()方法 </p>
+<p>需要执行服务和关闭服务(ExecutorService的对象 )<br><kbd>ExecutorService service = Executors.newFixedThreadPool(3);</kbd></p>
+<p>提交执行 submit(线程对象)<br><kbd>Future f1 = service.submit(c);</kbd></p>
+<p>获取返回值 记得结束服务<br><kbd>String s1 = (String) f1.get();</kbd><kbd>service.shutdown();</kbd></p>
+</blockquote>
+<h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><blockquote>
 <ol>
 <li><p>start: 启动线程并执行响应的run()方法</p>
 </li>
@@ -1164,7 +1185,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">2.2k</span>&nbsp;字
+                class="white-color">2.5k</span>&nbsp;字
             
             
             
