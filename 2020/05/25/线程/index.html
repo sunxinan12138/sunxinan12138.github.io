@@ -444,21 +444,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-29
+                    2020-05-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    10 分
                 </div>
                 
 
@@ -475,8 +475,7 @@
             <div id="articleContent">
                 <h1 id="线程Thread"><a href="#线程Thread" class="headerlink" title="线程Thread"></a>线程Thread</h1><blockquote>
 <p>Thread隶属于java.lang包下的类 ,java语言的JVM允许程序运行多个线程</p>
-<p>Thread:每个线程通过特定Thread对象的run()方法来完成操作,经常把run()方法的主体称为<strong>线程体</strong></p>
-<p>通过该Thread对象的start()方法调用这个线程</p>
+<p>Thread:每个线程通过特定Thread对象的run()方法来完成操作,经常把</p>
 </blockquote>
 <h2 id="程序-线程和进程"><a href="#程序-线程和进程" class="headerlink" title="程序,线程和进程"></a>程序,线程和进程</h2><ul>
 <li><p><strong>程序(Program):</strong>为了完成特定任务, 用某种语言编写的一组指令集合. 即<kbd>一段静态代码</kbd>,静态对象</p>
@@ -494,7 +493,11 @@
 </li>
 </ul>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
-<p>java中线程分为:<strong>守护线程</strong>和<strong>用户线程</strong></p>
+<p>java中线程分为:<strong>守护线程(daemon)</strong>和<strong>用户线程</strong></p>
+<blockquote>
+<p>虚拟机必须保证用户线程执行完毕,守护线程不需要等待: 如后台记录日志,内存监控,gc垃圾回收等</p>
+</blockquote>
+<p>守护线程设置: thread.setDemon(true为守护线程)</p>
 </blockquote>
 <pre><code>1.线程就是独立执行的路径
 2.在程序运行时，即使没有创建线程，也会有多个线程(javg gc线程，主线程)
@@ -503,13 +506,23 @@
 6.对同一份资源操作时，会存在资源抢夺问题，要加入并发控制
 7.线程会带来额外的开销，cpu调度时间，并发控制开销
 8.每个线程在自己的工作内存中交互，内存控制不当会造成数据不一致</code></pre><h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><blockquote>
-<p>在JDK中Thread.State枚举表示了线程的五种状态</p>
+<p>在JDK中Thread.State枚举表示了线程的六种状态</p>
+<blockquote>
+<p>getState():获取状态:hamburger:</p>
+</blockquote>
 <ul>
-<li>新建:  当一个Thread类或子类的对象被声明并且创建后,新的线程处于新建状态</li>
-<li>就绪: 当线程被start()后,将进入线程队列等待cpu时间片</li>
-<li>运行: 线程被调度并且获得处理器资源时,进入运行状态,-run()方法内执行</li>
-<li>阻塞: 被人为挂起或者其它方式,让出cpu并临时终止自己执行</li>
-<li>死亡: 线程完成或者出现错误/异常被强制终止</li>
+<li>新生(NEW):  当一个Thread类或子类的对象被声明并且创建后,新的线程处于新建状态</li>
+<li>就绪(RUNABLE): 当线程被start()后,将进入线程队列等待cpu时间片</li>
+<li>运行(): 线程被调度并且获得处理器资源时,进入运行状态,-run()方法内执行</li>
+<li>阻塞(BLOCKED): 被人为挂起或者其它方式,让出cpu并临时终止自己执行<ul>
+<li>(Waiting):正在等待另一个线程执行特定动作的线程出于此状态</li>
+<li>(TIMED_WAITTING):正在等待另一个线程执行动作达到指定等待时间的线程处于此状态</li>
+</ul>
+</li>
+<li>死亡(TERMINATED): 线程完成或者出现错误/异常被强制终止<ul>
+<li>主动线程停止方式：推荐使用标志位，设置一个停止状态让线程自然死亡</li>
+</ul>
+</li>
 </ul>
 </blockquote>
 <p>​                                                            如图</p>
@@ -552,6 +565,7 @@
 </blockquote>
 <h3 id="二-实现Runnable接口"><a href="#二-实现Runnable接口" class="headerlink" title="二. 实现Runnable接口"></a>二. 实现Runnable接口</h3><blockquote>
 <p>实现Runnable接口并且重写run()方法</p>
+<p>由于Thread类为一个代理类 代理了Runnable</p>
 </blockquote>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 实现接口的线程创建方式</span>
         ThreadTest threadTest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// Runnable接口实现类对象</span>
@@ -561,6 +575,10 @@
         thread1<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">"1Thread"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 命名</span>
         thread1<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 启动线程</span>
            thread2<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// lamdba表达式（1.8新特性）</span>
+     <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"run方法"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
 <ol>
 <li><p>Thread 本身就实现了Runnable接口</p>
@@ -584,7 +602,7 @@
 </blockquote>
 <h2 id="Thread类常用方法"><a href="#Thread类常用方法" class="headerlink" title="Thread类常用方法"></a>Thread类常用方法</h2><blockquote>
 <ol>
-<li><p>start: 启动线程并执行响应的run()方法</p>
+<li><p>start(): 启动线程并执行响应的run()方法</p>
 </li>
 <li><p>run():子线程要执行的代码</p>
 </li>
@@ -592,22 +610,25 @@
 </li>
 <li><p>getName()/setName(): 获取和设置线程名字</p>
 </li>
-<li><p>yield():  调用此方法的线程放弃当前cpu的执行权</p>
+<li><p>yield():  调用此方法的线程放弃当前cpu的执行权，礼让别的线程（我让了但是，你们抢不抢得到那不归我管）</p>
 </li>
-<li><p>join(): 在A线程中调用B线程的join方法. </p>
+<li><p>join(): 在A线程中调用B线程的join方法. （插队）</p>
 <blockquote>
 <p><strong>表示</strong>: A线程停止,直到B线程执行完毕 A线程在执行后面的代码</p>
 </blockquote>
 </li>
 <li><p>isAlive(): 判断当前线程是否存活</p>
 </li>
-<li><p>sleeo(long time): 当前线程睡眠time毫秒</p>
+<li><p>sleep(long time): 当前线程睡眠time毫秒(1000ms = 1s)</p>
+<ol>
+<li>不会释放线程</li>
+</ol>
 </li>
 <li><p>线程通信中wait()</p>
 </li>
-<li><p>notify()</p>
+<li><p>notify()：释放优先级高的等待的线程</p>
 </li>
-<li><p>notifyAll()</p>
+<li><p>notifyAll()：释放所有等待的线程</p>
 </li>
 <li><p>设置线程的优先级</p>
 <blockquote>
@@ -618,6 +639,9 @@
 </ol>
 </blockquote>
 <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><blockquote>
+<p><del>线程不安全的集合:ArrayList –&gt; CopyOnWriterArrayLis(JUC下并发安全的包)</del>(待完成)</p>
+</blockquote>
+<blockquote>
 <p>刚才的窗口买票程序就会出现安全问题</p>
 <p>原因:由于多个线程在操作共享的数据时,在其中一个线程未执行完毕时,另一个线程进入,导致共享数据出现问题</p>
 </blockquote>
@@ -632,7 +656,7 @@
 <ul>
 <li><p>一 同步代码块</p>
 <blockquote>
-<p>synchronize关键字 — 要有一个对象充当同步监视器</p>
+<p>synchronized关键字 — 要有一个对象充当同步监视器(缺点:会影响效率)</p>
 <p>同步监视器:由一个类的对象充当.当一个线程获取监视器,就执行代码. — <strong>锁</strong></p>
 </blockquote>
 <p><img src="https://i.loli.net/2020/05/28/dEHqCfLVynIOJQP.png" alt="synchronized.png"></p>
@@ -677,6 +701,36 @@
 </li>
 </ul>
 </blockquote>
+<h4 id="LOCK锁"><a href="#LOCK锁" class="headerlink" title="LOCK锁"></a>LOCK锁</h4><blockquote>
+<ul>
+<li>从JDk5.0开始, JAVA提供了更强大的线程同步机制–通过显式定义同步锁对象来实现同步. 同步锁使用Lock对象充当</li>
+<li>Java.util.concurrent.locks.Lock接口是控制多个线程对共享资源进行访问的工具. 锁提供了对共享资源的独占访问, 每次只能有一个线程对Lock对象加锁, 线程开始访问共享资源之前硬获得LOck对象</li>
+<li>ReentrantLock(可重入锁)类实现了Lock, 它拥有与synchronized相同的并发性,在实现线程安全控制中,比较常用的是ReentrantLock, 可以显式加锁,释放锁</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>Lock与synchronized的对比</strong></p>
+<ul>
+<li>Lock是显式锁(需要手动开关)  synchronized是隐式锁,自动释放</li>
+<li>Lock只是锁代码块</li>
+<li>使用Lock, JVM调度线程花费时间少,性能好. 而且具有更好的扩展性(提供更多的子类)</li>
+<li>优先级:<ul>
+<li>Lock &gt; 同步代码块&gt;同步方法</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">private</span> <span class="token keyword">final</span> ReentrantLock lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">show2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 官方建议用Try，catch， finally</span>
+            lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 加锁</span>
+               <span class="token comment" spellcheck="true">// 需要加锁的代码区</span>
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+            lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 解锁</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span></code></pre>
 <h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2><blockquote>
 <p>关键字:wait(), notify()和 notifyAll()</p>
 <ul>
@@ -695,7 +749,8 @@
  2. 是否涉及共享数据
  3. 如果有共享数据 考虑线程安全/同步的问题
  4. 是否有线程通信</code></pre></blockquote>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">P2CTest</span> <span class="token punctuation">{</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 管城法</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">P2CTest</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 主线程</span>
         Clerk clerk <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Clerk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         Producer producer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Producer</span><span class="token punctuation">(</span>clerk<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -797,6 +852,19 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
+<h2 id="线程池-了解"><a href="#线程池-了解" class="headerlink" title="线程池(了解)"></a>线程池(了解)</h2><blockquote>
+<ul>
+<li>将线程放入池子,方便使用和管理,也避免了销毁造成的浪费</li>
+<li>ExecutorService:线程池接口</li>
+<li>Executors(Runable 接口):工具类,线程池工厂</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="language-java">ExecutorService service <span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 数量</span>
+service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SJSThread</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SJSThread</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SJSThread</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+service<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//结束线程连接池</span></code></pre>
 
             </div>
             <hr/>
@@ -1366,7 +1434,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">3.7k</span>&nbsp;字
+                class="white-color">4.3k</span>&nbsp;字
             
             
             
