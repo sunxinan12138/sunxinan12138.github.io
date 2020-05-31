@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="单例模式, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
+    <meta name="keywords" content="Java8新特性, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
     <meta name="description" content="采坑,学习和生活记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>单例模式 | 熙楠の博客</title>
+    <title>Java8新特性 | 熙楠の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -286,12 +286,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/source/images/xxx.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">单例模式</h1>
+                    <h1 class="description center-align post-title">Java8新特性</h1>
                 </div>
             </div>
         </div>
@@ -408,8 +408,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%A0%87%E7%AD%BE/">
-                                <span class="chip bg-color">标签</span>
+                            <a href="/tags/JDK1-8/">
+                                <span class="chip bg-color">JDK1.8</span>
                             </a>
                         
                     </div>
@@ -420,8 +420,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%B1%BB%E5%88%AB/" class="post-category">
-                                类别
+                            <a href="/categories/JDK/" class="post-category">
+                                JDK
+                            </a>
+                        
+                            <a href="/categories/JDK/%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-category">
+                                新特性
                             </a>
                         
                     </div>
@@ -447,7 +451,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    47
+                    223
                 </div>
                 
 
@@ -469,9 +473,50 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="单例模式-大话设计模式"><a href="#单例模式-大话设计模式" class="headerlink" title="单例模式 - 大话设计模式"></a>单例模式 - 大话设计模式</h1><p><strong><em>每一个模式描述了一个在我们周围不断重复发生的问题,以及该问题的解决方案的核心。</em></strong></p>
-<blockquote>
+                <h1 id="Java8新特性-–-了解一个写一个"><a href="#Java8新特性-–-了解一个写一个" class="headerlink" title="Java8新特性 – 了解一个写一个"></a>Java8新特性 – 了解一个写一个</h1><h2 id="Lamda表达式"><a href="#Lamda表达式" class="headerlink" title="Lamda表达式"></a>Lamda表达式</h2><blockquote>
+<p>λ表达式:</p>
+<p>本质上也是函数式编程:</p>
+<pre class=" language-java"><code class="language-java"><span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> expression<span class="token punctuation">[</span>表达式<span class="token punctuation">]</span>
+<span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> statement<span class="token punctuation">[</span>语句<span class="token punctuation">]</span>
+<span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>statements<span class="token punctuation">}</span></code></pre>
+<ul>
+<li>使用原因<ol>
+<li>避免匿名内部类过多</li>
+<li>代码看上去简洁</li>
+<li>去掉了冗余的代码,留下核心逻辑</li>
+</ol>
+</li>
+<li>使用前提:<ol>
+<li>一定是Function Interface(函数式接口) — Function Interface定义:  任何接口如果只包含唯一一个抽象方法, 那么这就是个函数式接口. 例如 Runnable</li>
+</ol>
+</li>
+</ul>
 </blockquote>
+<p>例子:</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 写一个函数式接口</span>
+<span class="token keyword">public</span> Interface <span class="token class-name">TestInterface</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testmethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 用lamda创建接口对象</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 匿名内部类实现 ,(我觉得Lamda表达式是匿名内部类的简化)</span>
+    <span class="token keyword">new</span> <span class="token class-name">TestInterface</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 重写方法</span>
+         <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testmethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 代码.....    </span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">testmethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//当然有参数的就可以添加参数</span>
+<span class="token comment" spellcheck="true">/*----------------------------------------------------*/</span>  
+    <span class="token comment" spellcheck="true">// Lamda表达式</span>
+   <span class="token comment" spellcheck="true">//Interface test1 = (参数)->{方法体};</span>
+     Interface <span class="token class-name">test1</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// 代码....</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        a<span class="token punctuation">.</span><span class="token function">testmethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 
             </div>
             <hr/>
@@ -497,7 +542,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">https://gitee.com/sunxinan/sunxinan.git/2020/05/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</a>
+                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/31/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">https://gitee.com/sunxinan/sunxinan.git/2020/05/31/Java8%E6%96%B0%E7%89%B9%E6%80%A7/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -535,8 +580,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%A0%87%E7%AD%BE/">
-                                    <span class="chip bg-color">标签</span>
+                                <a href="/tags/JDK1-8/">
+                                    <span class="chip bg-color">JDK1.8</span>
                                 </a>
                             
                         </div>
@@ -707,7 +752,7 @@
         repo: 'sunxinan12138.github.io',
         owner: 'sunxinan12138',
         admin: ["sunxinan12138"],
-        id: '2020-05-31T12-36-45',
+        id: '2020-05-31T16-37-44',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -735,18 +780,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/31/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+                <a href="/2020/05/31/OOP-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/">
                     <div class="card-image">
                         
-                        <img src="/source/images/xxx.jpg" class="responsive-img" alt="Java8新特性">
                         
-                        <span class="card-title">Java8新特性</span>
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="OOP(面向对象)基础">
+                        
+                        <span class="card-title">OOP(面向对象)基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Java8新特性
+                            面向对象基础
                         
                     </div>
                     <div class="publish-info">
@@ -757,12 +803,12 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JDK/" class="post-category">
-                                    JDK
+                            <a href="/categories/%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    基础
                                 </a>
                             
-                            <a href="/categories/JDK/%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-category">
-                                    新特性
+                            <a href="/categories/%E5%9F%BA%E7%A1%80/%E6%8A%84%E4%B9%A6/" class="post-category">
+                                    抄书
                                 </a>
                             
                             
@@ -772,8 +818,20 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JDK1-8/">
-                        <span class="chip bg-color">JDK1.8</span>
+                    <a href="/tags/OOP/">
+                        <span class="chip bg-color">OOP</span>
+                    </a>
+                    
+                    <a href="/tags/OOD/">
+                        <span class="chip bg-color">OOD</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">基础</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>
@@ -787,13 +845,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/31/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+                <a href="/2020/05/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="代理模式">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="单例模式">
                         
-                        <span class="card-title">代理模式</span>
+                        <span class="card-title">单例模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
