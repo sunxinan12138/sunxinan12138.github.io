@@ -323,7 +323,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/4.jpg)');
 </script>
 
 
@@ -346,7 +346,7 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">12</a></span>
+    <span class="count"><a href="/categories">15</a></span>
     <span class="name">分类</span>
 </div>
 
@@ -376,7 +376,7 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">12</a></span>
+    <span class="count"><a href="/categories">15</a></span>
     <span class="name">分类</span>
 </div>
 
@@ -529,7 +529,7 @@
         },
         xAxis: {
             type: 'category',
-            data: ["2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-02","2020-03","2020-04","2020-05"]
+            data: ["2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-02","2020-03","2020-04","2020-05","2020-06"]
         },
         yAxis: {
             type: 'value',
@@ -539,7 +539,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,0,9],
+                data: [0,0,0,0,0,0,0,0,0,0,0,9,0],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -581,7 +581,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"基础","value":1},{"name":"JDK","value":1},{"name":"类别","value":2},{"name":"框架Spring","value":1},{"name":"抄书","value":1},{"name":"build","value":1},{"name":"新特性","value":1},{"name":"记录","value":1},{"name":"设计模式","value":1},{"name":"线程","value":1},{"name":"GOF-23","value":1},{"name":"抄书","value":1}],
+                data: [{"name":"基础","value":1},{"name":"JDK","value":1},{"name":"框架Spring","value":1},{"name":"抄书","value":1},{"name":"build","value":1},{"name":"新特性","value":1},{"name":"记录","value":1},{"name":"设计模式","value":1},{"name":"线程","value":1},{"name":"GOF-23","value":1},{"name":"抄书","value":1},{"name":"代理模式","value":1},{"name":"单例模式","value":1},{"name":"抄书","value":1},{"name":"抄书","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -605,7 +605,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["标签","OOP","OOD","基础","设计模式","JDK1.8","Spring","未完成","build","hexo"]
+                data: ["大话设计模式","GOF-23","待完成","基础","设计模式","JDK1.8","Spring","未完成","build","hexo"]
             }
         ],
         yAxis: [
@@ -618,7 +618,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [2,1,1,1,1,1,1,1,1,1],
+                data: [3,2,2,1,1,1,1,1,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -751,18 +751,6 @@
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/OOP/">
-                <span class="chip center-align waves-effect waves-light chip-default">OOP</span>
-            </a>
-            
-            
-            
-            <a href="/tags/OOD/">
-                <span class="chip center-align waves-effect waves-light chip-default">OOD</span>
-            </a>
-            
-            
-            
             <a href="/tags/%E5%9F%BA%E7%A1%80/">
                 <span class="chip center-align waves-effect waves-light chip-default">基础</span>
             </a>
@@ -777,12 +765,6 @@
             
             <a href="/tags/JDK1-8/">
                 <span class="chip center-align waves-effect waves-light chip-default">JDK1.8</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E6%A0%87%E7%AD%BE/">
-                <span class="chip center-align waves-effect waves-light chip-default">标签</span>
             </a>
             
             
@@ -831,6 +813,24 @@
             
             <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E7%A1%80/">
                 <span class="chip center-align waves-effect waves-light chip-default">线程的基础</span>
+            </a>
+            
+            
+            
+            <a href="/tags/GOF-23/">
+                <span class="chip center-align waves-effect waves-light chip-default">GOF-23</span>
+            </a>
+            
+            
+            
+            <a href="/tags/OOP-OOD/">
+                <span class="chip center-align waves-effect waves-light chip-default">OOP/OOD</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%BE%85%E5%AE%8C%E6%88%90/">
+                <span class="chip center-align waves-effect waves-light chip-default">待完成</span>
             </a>
             
             
@@ -976,7 +976,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">4.9k</span>&nbsp;字
+                class="white-color">6.5k</span>&nbsp;字
             
             
             

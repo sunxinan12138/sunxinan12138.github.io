@@ -440,7 +440,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-31
+                    2020-06-02
                 </div>
                 
 
@@ -635,7 +635,17 @@
 </ol>
 </blockquote>
 <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><blockquote>
-<p><del>线程不安全的集合:ArrayList –&gt; CopyOnWriterArrayLis(JUC下并发安全的包)</del>(待完成)</p>
+<p><del>线程不安全的集合:ArrayList –&gt; CopyOnWriterArrayLis(JUC下并发安全的包)</del></p>
+<ul>
+<li><del>ArrayList ：</del></li>
+<li><del>LinkedList：</del></li>
+<li><del>HashMap：</del></li>
+<li><del>HashSet：</del></li>
+<li><del>TreeMap：</del></li>
+<li><del>TreeSet：</del></li>
+<li><del>StringBulider：</del></li>
+</ul>
+<p>(待完成)</p>
 </blockquote>
 <blockquote>
 <p>刚才的窗口买票程序就会出现安全问题</p>
@@ -686,6 +696,9 @@
 <p>同步监视器对象默认为当前对象</p>
 </blockquote>
 </li>
+</ul>
+<ul>
+<li>在单例模式中 – <a href="https://sunxinan12138.github.io/2020/05/31/单例模式/" target="_blank" rel="noopener">锁的问题(双重锁定)</a></li>
 </ul>
 <h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><blockquote>
 <ul>
@@ -739,12 +752,14 @@
 </li>
 </ul>
 </blockquote>
-<h2 id="写个生产者-消费者练习"><a href="#写个生产者-消费者练习" class="headerlink" title="写个生产者/消费者练习"></a>写个生产者/消费者练习</h2><blockquote>
-<p>分析</p>
-<pre><code>1. 是否考虑线程
- 2. 是否涉及共享数据
- 3. 如果有共享数据 考虑线程安全/同步的问题
- 4. 是否有线程通信</code></pre></blockquote>
+<h2 id="写个生产者-消费者练习-不是OO的Pattern"><a href="#写个生产者-消费者练习-不是OO的Pattern" class="headerlink" title="写个生产者/消费者练习(不是OO的Pattern)"></a>写个生产者/消费者练习(不是OO的Pattern)</h2><p><img src="https://i.loli.net/2020/06/01/jQAPyZdFRN1Ye4w.png" alt="image.png"></p>
+<blockquote>
+<p>分析:</p>
+<pre class=" language-markdown"><code class="language-markdown"><span class="token list punctuation">1.</span> 是否考虑线程
+<span class="token list punctuation">2.</span> 是否涉及共享数据
+<span class="token list punctuation">3.</span> 如果有共享数据 考虑线程安全/同步的问题
+<span class="token list punctuation">4.</span> 是否有线程通信</code></pre>
+</blockquote>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 管城法</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">P2CTest</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 主线程</span>
@@ -886,7 +901,7 @@ service<span class="token punctuation">.</span><span class="token function">shut
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/25/%E7%BA%BF%E7%A8%8B/">https://gitee.com/sunxinan/sunxinan.git/2020/05/25/%E7%BA%BF%E7%A8%8B/</a>
+                    <a href="https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/25/%E7%BA%BF%E7%A8%8B/">https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/25/%E7%BA%BF%E7%A8%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1430,7 +1445,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">4.9k</span>&nbsp;字
+                class="white-color">6.5k</span>&nbsp;字
             
             
             

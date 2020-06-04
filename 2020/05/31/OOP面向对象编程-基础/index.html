@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="OOP(面向对象)基础, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
+    <meta name="keywords" content="OOP编程(面向对象)基础, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
     <meta name="description" content="采坑,学习和生活记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>OOP(面向对象)基础 | 熙楠の博客</title>
+    <title>OOP编程(面向对象)基础 | 熙楠の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -286,12 +286,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">OOP(面向对象)基础</h1>
+                    <h1 class="description center-align post-title">OOP编程(面向对象)基础</h1>
                 </div>
             </div>
         </div>
@@ -408,20 +408,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/OOP/">
-                                <span class="chip bg-color">OOP</span>
-                            </a>
-                        
-                            <a href="/tags/OOD/">
-                                <span class="chip bg-color">OOD</span>
-                            </a>
-                        
                             <a href="/tags/%E5%9F%BA%E7%A1%80/">
                                 <span class="chip bg-color">基础</span>
                             </a>
                         
                             <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
                                 <span class="chip bg-color">设计模式</span>
+                            </a>
+                        
+                            <a href="/tags/OOP-OOD/">
+                                <span class="chip bg-color">OOP/OOD</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%BE%85%E5%AE%8C%E6%88%90/">
+                                <span class="chip bg-color">待完成</span>
                             </a>
                         
                     </div>
@@ -456,21 +456,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-31
+                    2020-06-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    271
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -486,12 +486,99 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="OOP编程-面向对象-基础"><a href="#OOP编程-面向对象-基础" class="headerlink" title="OOP编程(面向对象)基础"></a>OOP编程(面向对象)基础</h1><h2 id="类与实例"><a href="#类与实例" class="headerlink" title="类与实例"></a>类与实例</h2><blockquote>
+<ul>
+<li><p>OOP: Object-Oriented Programming</p>
+<ol>
+<li>对象: 对象是一个自包含的实体,用一组可识别的特性和行为来标识</li>
+<li>类: 类就是具有相同属性和功能的对象的抽象集合</li>
+<li>实例: 一个真实的对象(实例化就是创建对象的过程)</li>
+</ol>
+<blockquote>
+<p>类A name;             // 声明一个 <kbd>类A</kbd>的对象 叫name </p>
+<p>name = new 类A();  // 将name对象实例化 </p>
+</blockquote>
+</li>
+</ul>
 </blockquote>
 <h2 id="构造方法-方法重载"><a href="#构造方法-方法重载" class="headerlink" title="构造方法/方法重载"></a>构造方法/方法重载</h2><blockquote>
+<ul>
+<li>构造方法—构造函数,就是对类进行初始化. 在被new时调用 <ol>
+<li>所有类都有个默认无参数构造方法,,如果你定义了构造方法,则默认的失效</li>
+</ol>
+</li>
+<li>方法重载提供了创建同名的多个方法的能力, 需要<strong>参数类型</strong>,<strong>参数个数</strong>不同</li>
+</ul>
 </blockquote>
 <h2 id="封装-继承和多态"><a href="#封装-继承和多态" class="headerlink" title="封装,继承和多态"></a>封装,继承和多态</h2><blockquote>
+<ul>
+<li><p>封装: 每个对象都包含它能进行操作所需要的所有信息, 这就是封装, 所以对象不必依赖其他对象来完成自己的操作,好处:</p>
+<ol>
+<li>良好的封装能降低耦合</li>
+<li>类内部的实现可以自由修改</li>
+<li>类有清晰的对外接口</li>
+</ol>
+</li>
+<li><p>继承: 面向对象中  <em>is - a</em>  的关系,可以说为<em>是一个</em> 的关系 . (猫类继承动物类—猫是动物)    继承可使得修改和扩展 继承而来的实现 比较容易</p>
+<ol>
+<li>子类拥有父类非private的属性和功能</li>
+<li>子类具有自己的属性和功能</li>
+<li>子类可以通过自己的方式实现弗雷德功能(方法重写)</li>
+<li>protected修饰的只对子类公开</li>
+</ol>
+</li>
+<li><p>多态: 不同的对象可以执行相同的动作,但是要通过他们自己的实现代码执行(实现的结果一样,但是行为方式不同)</p>
+<ol>
+<li>子类以父类的身份出现</li>
+<li>子类在工作时以自己的方式实现</li>
+<li>子类以父类的身份出现是,子类特有的实行和方法不可使用</li>
+</ol>
+<pre class=" language-java"><code class="language-java">父 f1 <span class="token operator">=</span><span class="token keyword">new</span> 子（）；<span class="token comment" spellcheck="true">// 每个子类通过自己的方式完成</span></code></pre>
+</li>
+</ul>
 </blockquote>
 <h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><blockquote>
+<p> 重构就是在不改变软件系统外部行为的前提下，改善它的内部结构。具体实现方式不同</p>
+</blockquote>
+<h2 id="抽象类-abstract"><a href="#抽象类-abstract" class="headerlink" title="抽象类(abstract)"></a>抽象类(abstract)</h2><blockquote>
+<ul>
+<li>Java可以把类和方法声明为abstract, 即抽象方法和抽象类<ol>
+<li>抽象类不能实例化</li>
+<li>抽象方法必须被自类重写</li>
+<li>抽象方法必须在抽象类中</li>
+</ol>
+</li>
+<li>抽象类拥有尽可能多的共同代码,尽可能少的数据<kbd>J&DP</kbd><ol>
+<li>抽象类提供一个继承的出发点–一定使用来继承的</li>
+<li>在一个继承关系里 – 树叶是具体类, 树枝是抽象类</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h2 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口(interface)"></a>接口(interface)</h2><blockquote>
+<p>官方解释:Java接口是一系列方法的声明，是一些方法特征的集合，<strong>一个接口只有方法的特征没有方法的实现，因此这些方法可以在不同的地方被不同的类实现，而这些实现可以具有不同的行为（功能）</strong>。</p>
+<ul>
+<li><p>特性</p>
+<ol>
+<li>实现接口必须实现所有方法和属性</li>
+<li>接口中的方法默认抽象的</li>
+<li>Java只支持单一继承,但是可以实现多个接口,接口也可以被多个类实现</li>
+</ol>
+</li>
+<li><p>接口回调:</p>
+<pre class=" language-java"><code class="language-java">接口 Interface <span class="token operator">=</span><span class="token keyword">new</span> 实现（）； <span class="token comment" spellcheck="true">// 接口对象可以调用被实现类中的方法</span></code></pre>
+</li>
+<li><p>接口和抽象类</p>
+<ol>
+<li>类是对对象的抽象 ,抽象类是对对象的抽象, 接口是对行为的抽象</li>
+<li>如果行为跨越不同的类—可以用接口; 对于一些相似的类对象–用继承抽象类</li>
+<li>实现接口和继承抽象类可以一起用不冲突</li>
+<li>从设计角度来说: 抽象类是从子类中发现了公共选项,泛化出来的(<strong>重构</strong>); 而接口是预先定义设计出来的</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h2 id="委托与事件"><a href="#委托与事件" class="headerlink" title="委托与事件"></a>委托与事件</h2><blockquote>
+<p>一般我们在实现主要业务，一些辅助功能一般是父类(一般类或抽象类)中实现好了或者通过委托实现，大多数中一般使用父类，继承父类需要耦合在主类中，使用的委托的方式是解耦主类，使主类不知道谁帮我做了这些事，但是Java中没有对委托进行封装，则需要开发者自己实现。(待完成)</p>
 </blockquote>
 <h2 id="OOP编程的七大原则"><a href="#OOP编程的七大原则" class="headerlink" title="OOP编程的七大原则"></a>OOP编程的七大原则</h2><blockquote>
 <ul>
@@ -529,7 +616,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gitee.com/sunxinan/sunxinan.git/2020/05/31/OOP-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/">https://gitee.com/sunxinan/sunxinan.git/2020/05/31/OOP-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/</a>
+                    <a href="https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/31/OOP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%9F%BA%E7%A1%80/">https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/31/OOP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%9F%BA%E7%A1%80/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -567,20 +654,20 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/OOP/">
-                                    <span class="chip bg-color">OOP</span>
-                                </a>
-                            
-                                <a href="/tags/OOD/">
-                                    <span class="chip bg-color">OOD</span>
-                                </a>
-                            
                                 <a href="/tags/%E5%9F%BA%E7%A1%80/">
                                     <span class="chip bg-color">基础</span>
                                 </a>
                             
                                 <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
                                     <span class="chip bg-color">设计模式</span>
+                                </a>
+                            
+                                <a href="/tags/OOP-OOD/">
+                                    <span class="chip bg-color">OOP/OOD</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%BE%85%E5%AE%8C%E6%88%90/">
+                                    <span class="chip bg-color">待完成</span>
                                 </a>
                             
                         </div>
@@ -780,13 +867,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/05/31/OOP-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/">
+                <a href="/2020/05/31/OOP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%9F%BA%E7%A1%80/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="OOP(面向对象)基础">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="OOP编程(面向对象)基础">
                         
-                        <span class="card-title">OOP(面向对象)基础</span>
+                        <span class="card-title">OOP编程(面向对象)基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -819,20 +906,20 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/OOP/">
-                        <span class="chip bg-color">OOP</span>
-                    </a>
-                    
-                    <a href="/tags/OOD/">
-                        <span class="chip bg-color">OOD</span>
-                    </a>
-                    
                     <a href="/tags/%E5%9F%BA%E7%A1%80/">
                         <span class="chip bg-color">基础</span>
                     </a>
                     
                     <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
                         <span class="chip bg-color">设计模式</span>
+                    </a>
+                    
+                    <a href="/tags/OOP-OOD/">
+                        <span class="chip bg-color">OOP/OOD</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BE%85%E5%AE%8C%E6%88%90/">
+                        <span class="chip bg-color">待完成</span>
                     </a>
                     
                 </div>
@@ -1091,7 +1178,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">4.9k</span>&nbsp;字
+                class="white-color">6.5k</span>&nbsp;字
             
             
             
