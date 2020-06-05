@@ -4,6 +4,83 @@
   
     
     <entry>
+      <title>JAVA的JUC</title>
+      <link href="/2020/06/05/JAVA%E7%9A%84JUC/"/>
+      <url>/2020/06/05/JAVA%E7%9A%84JUC/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 类别 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JAVA注解</title>
+      <link href="/2020/06/05/JAVA%E6%B3%A8%E8%A7%A3/"/>
+      <url>/2020/06/05/JAVA%E6%B3%A8%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="基本概述"><a href="#基本概述" class="headerlink" title="基本概述"></a>基本概述</h2><blockquote><ul><li>Annotation(注解):<ol><li>作用:<ol><li>对程序作出解释(和注释(comment)一样)</li><li>可以被其他程序读取(编译器等)</li></ol></li><li>格式 – @注释名(参数)</li><li>作用于package/class/method/field等上, 给他们添加了额外的辅助信息,可以通过反射机制对这些元数据进行访问</li></ol></li></ul></blockquote><h2 id="部分常见注解"><a href="#部分常见注解" class="headerlink" title="部分常见注解"></a>部分常见注解</h2><blockquote><ol><li><strong>@Override:</strong> 重写超累的方法 </li><li><strong>@Deprecated:</strong> 定义为废弃的,不推荐使用, 或者有更好的选择</li><li><strong>SuppressWarnings:</strong> 用来抑制编译时 的警告信息(强迫症福利??) 有参数:<ol><li>(“all”)/(“Unchecked”)/(value = {“unchecked”,”deprecation”})</li></ol></li></ol></blockquote><h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><blockquote><p>元注解(Meta-Annotation) 用来注解其他注解, java提供了四个标准元注解</p><ul><li><p>这些类型和支持的类在(java.lang.annotation)包中</p><ol><li><strong>@Target:</strong> 描述作用范围</li><li><strong>@Retention:</strong> 表示保存注释的级别, 描述注释的生命周期(SOURCE&lt;CLASS&lt;<strong>RUNTIME</strong>)</li><li><strong>@Document:</strong> 说明该注释被包含在javadoc中</li><li><strong>@Inherited:</strong> 说明子类可以<strong>继承</strong>父类的注释</li></ol><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 描述作用域(ElementTYpe)</span><span class="token comment" spellcheck="true">//    TYPE, //接口、类、枚举、注解</span><span class="token comment" spellcheck="true">//    FIELD,//字段、枚举的常量</span><span class="token comment" spellcheck="true">//    METHOD,  //方法</span><span class="token comment" spellcheck="true">//    PARAMETER,  //方法参数</span><span class="token comment" spellcheck="true">//    CONSTRUCTOR,   //构造函数</span><span class="token comment" spellcheck="true">//    LOCAL_VARIABLE,  //局部变量</span><span class="token comment" spellcheck="true">//    ANNOTATION_TYPE, //注解</span><span class="token comment" spellcheck="true">//    PACKAGE   //包</span><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">{</span>ElementType<span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">// 生命周期(RetentionPolicy)</span><span class="token comment" spellcheck="true">//    SOURCE, // 源码</span><span class="token comment" spellcheck="true">//    CLASS,  // 类</span><span class="token comment" spellcheck="true">//    RUNTIME // 运行时</span><span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>value <span class="token operator">=</span> RetentionPolicy<span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span><span class="token comment" spellcheck="true">// 在javaDoc中</span><span class="token annotation punctuation">@Documented</span><span class="token comment" spellcheck="true">// 子类可继承</span><span class="token annotation punctuation">@Inherited</span>@<span class="token keyword">interface</span> <span class="token class-name">MyAnnotation</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></code></pre></li></ul></blockquote><h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><blockquote><p>使用<strong>@interface</strong>来声明自定义注解,<kbd>public @interface name{内容}</kbd>  </p><ul><li>自动继承Annotation接口</li><li>对于参数<ol><li>格式:  <strong>类型 名称();</strong></li><li>内部每一个方法其实是个参数  返回值类型就是参数类型(只能是基本类)</li><li>可以通过default来默认参数</li><li>如果只有一个参数成员, 一般命名为Value</li><li>注解元素必须要有值,通常使用默认为: 空字符串和0</li></ol></li></ul></blockquote><pre class=" language-java"><code class="language-java"><span class="token operator">/</span> 定义作用域<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">{</span>ElementType<span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">// 定义生命周期</span><span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>RetentionPolicy<span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>@<span class="token keyword">interface</span> <span class="token class-name">Demo1</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">// 参数格式: 类型 名字();</span>    <span class="token comment" spellcheck="true">// 如果只有一个参数建议使用value 因为填写参数时可以省略(value = )</span>    String <span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">int</span> <span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 设置默认值 如果为-1 则不存在</span>    String<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">tel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java注解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 基础 </tag>
+            
+            <tag> 注解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JAVA反射机制</title>
+      <link href="/2020/06/05/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+      <url>/2020/06/05/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 类别 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>OOP编程(面向对象)基础</title>
       <link href="/2020/05/31/OOP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%9F%BA%E7%A1%80/"/>
       <url>/2020/05/31/OOP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%9F%BA%E7%A1%80/</url>
