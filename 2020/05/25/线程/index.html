@@ -440,14 +440,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-02
+                    2020-06-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    2.8k
                 </div>
                 
 
@@ -524,7 +524,7 @@
 <p>​                                                            如图</p>
 <p><img src="https://i.loli.net/2020/05/27/sQ7TN4wSIAkUCFp.png" alt="线程生命周期"></p>
 <h2 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h2><blockquote>
-<p><strong>Junit单元测试线程异常</strong>: 具体原因不太了解但是和junit的实现有关(记到小本本–下次在了解)</p>
+<p><strong>Junit4单元测试线程异常</strong>: 具体原因不太了解但是和junit的实现有关(记到小本本–下次在了解)</p>
 </blockquote>
 <h3 id="一-继承Thread类"><a href="#一-继承Thread类" class="headerlink" title="一 . 继承Thread类"></a>一 . 继承Thread类</h3><blockquote>
 <p>重写run()方法 ,并且用thread.start()启动线程</p>
@@ -663,7 +663,7 @@
 <li><p>一 同步代码块</p>
 <blockquote>
 <p>synchronized关键字 — 要有一个对象充当同步监视器(缺点:会影响效率)</p>
-<p>同步监视器:由一个类的对象充当.当一个线程获取监视器,就执行代码. — <strong>锁</strong></p>
+<p>同步监视器:由一个类的对象充当.当一个线程获取监视器,就执行代码.(通一把锁的对象一定是同一个对象) — <strong>锁</strong></p>
 </blockquote>
 <p><img src="https://i.loli.net/2020/05/28/dEHqCfLVynIOJQP.png" alt="synchronized.png"></p>
 </li>
@@ -673,7 +673,7 @@
 <pre><code>实现代码:
 
 ```java
- public void run() {
+ public  void run() {
         while (true) {
             synchronized (this) { // 用本类的对象为同步监视器
                 if (ticket &gt; 0) { // 如果有票 修改变量
@@ -713,7 +713,7 @@
 <h4 id="LOCK锁"><a href="#LOCK锁" class="headerlink" title="LOCK锁"></a>LOCK锁</h4><blockquote>
 <ul>
 <li>从JDk5.0开始, JAVA提供了更强大的线程同步机制–通过显式定义同步锁对象来实现同步. 同步锁使用Lock对象充当</li>
-<li>Java.util.concurrent.locks.Lock接口是控制多个线程对共享资源进行访问的工具. 锁提供了对共享资源的独占访问, 每次只能有一个线程对Lock对象加锁, 线程开始访问共享资源之前硬获得LOck对象</li>
+<li>Java.util.concurrent.locks.Lock接口是控制多个线程对共享资源进行访问的工具. 锁提供了对共享资源的独占访问, 每次只能有一个线程对Lock对象加锁, 线程开始访问共享资源之前硬获得Lock对象</li>
 <li>ReentrantLock(可重入锁)类实现了Lock, 它拥有与synchronized相同的并发性,在实现线程安全控制中,比较常用的是ReentrantLock, 可以显式加锁,释放锁</li>
 </ul>
 </blockquote>
@@ -761,6 +761,7 @@
 <span class="token list punctuation">4.</span> 是否有线程通信</code></pre>
 </blockquote>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 管城法</span>
+<span class="token comment" spellcheck="true">// 生产者做东西 消费者买 (通信:生产到20 停止生产 0开始生产停止购买)</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">P2CTest</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 主线程</span>
         Clerk clerk <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Clerk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1445,7 +1446,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">7.1k</span>&nbsp;字
+                class="white-color">9.4k</span>&nbsp;字
             
             
             
