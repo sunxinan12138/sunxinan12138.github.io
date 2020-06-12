@@ -227,7 +227,7 @@
       
       <categories>
           
-          <category> 线程 </category>
+          <category> 基础 </category>
           
       </categories>
       
@@ -235,6 +235,8 @@
         <tags>
             
             <tag> 线程的基础 </tag>
+            
+            <tag> 线程 </tag>
             
         </tags>
       
@@ -252,9 +254,7 @@
       
       <categories>
           
-          <category> 设计模式 </category>
-          
-          <category> GOF-23 </category>
+          <category> 大话设计模式 </category>
           
           <category> 抄书 </category>
           
@@ -263,9 +263,9 @@
       
         <tags>
             
-            <tag> 大话设计模式 </tag>
-            
             <tag> 简单工厂模式 </tag>
+            
+            <tag> GOF-23 </tag>
             
         </tags>
       
@@ -303,7 +303,7 @@
       <link href="/2020/05/22/%E6%88%91%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%94%B9/"/>
       <url>/2020/05/22/%E6%88%91%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%94%B9/</url>
       
-        <content type="html"><![CDATA[<h1 id="从0开始搭建hexo博客-win10"><a href="#从0开始搭建hexo博客-win10" class="headerlink" title="从0开始搭建hexo博客(win10)"></a>从0开始搭建hexo博客(win10)</h1><h2 id="基本安装"><a href="#基本安装" class="headerlink" title="基本安装"></a>基本安装</h2><blockquote><p>安装node.js <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网下载地址</a></br><br>安装git <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git官方下载地址</a></br><br>在git/gitee 新建库并且以你的名字命名 git:<kbd>yourName.github.io</kbd> gitee:<kbd>yourName</kbd><br><br>安装hexo<kbd>$ npm install -g hexo-cli</kbd> win会有警告 忽略就好</br><br>新建: (<strong>找到你的文件夹</strong>)执行 <kbd>hexo init</kbd>   <kbd>$ cd </kbd>   <kbd>$ npm install </kbd></br><br>配置:</p><blockquote><p>可以参考 <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">这里</a> <br></p><pre><code>建议配置:**url**: https://gitee.com/xxx/xxx.git 你的博客访问地址**per_page**:改为6的倍数 6,12,18 **# Site** 此处 有更多关于首页配置**title**: 博客名字</code></pre></blockquote></blockquote><p>hexo的目录配置</p><pre class=" language-markdown"><code class="language-markdown">|-- demo//项目跟目录名<span class="token code keyword">    |-- .gitignore//git时忽略的文件或目录</span><span class="token code keyword">    |-- package-lock.json</span><span class="token code keyword">    |-- package.json//应用程序的信息</span><span class="token code keyword">    |-- _config.yml//网站的配置信息</span><span class="token code keyword">    |-- scaffolds//模板文件夹，Hexo的模板是指在新建的markdown文件中默认填充的内容。</span><span class="token code keyword">    |   |-- draft.md</span><span class="token code keyword">    |   |-- page.md</span><span class="token code keyword">    |   |-- post.md//博文模板</span><span class="token code keyword">    |-- source//资源文件夹，存放用户资源</span><span class="token code keyword">    |   |-- _posts//博文目录</span><span class="token code keyword">    |       |-- hello-world.md//博文</span><span class="token code keyword">    |-- themes//主题文件夹，Hexo 会根据主题来生成静态页面</span><span class="token code keyword">        |-- landscape.//默认主题</span></code></pre><h2 id="配置git和gitee库"><a href="#配置git和gitee库" class="headerlink" title="配置git和gitee库"></a>配置git和gitee库</h2><ol><li>首先你要有这两个仓库</li><li>修改[^ _config.yml ] 此文件的配置<pre><code>deploy:type: &#39;git&#39;repo:   github: https://github.com/xxxx/xxxx.github.io.git   gitee: https://gitee.com/xxxx/xxxx.gitbranch: master</code></pre></li><li>在执行 hexo d 就能在你的链接访问啦</li><li><strong>提示</strong>：gitee要启动一下gitee Pages<kbd>自你的库-服务- gitee pages</kbd>每次更新后要重新更新一下gitee Pages<h2 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h2><ul><li>执行 <kbd>hexo server</kbd> == <kbd>hexo s</kbd> 默认为 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a><br></li><li><ul><li><kbd>-p</kbd> 选项，指定服务器端口，默认为 4000</li></ul></li><li><ul><li><kbd>-i</kbd> 选项，指定服务器 IP 地址，默认为 0.0.0.0</li></ul></li><li><ul><li><kbd>-s</kbd> 选项，静态模式 ，仅提供 public 文件夹中的文件并禁用文件监视</li></ul></li><li><kbd>hexo generate</kbd> 命令用于生成静态文件，一般可以简写为 hexo g</li><li><kbd>hexo d</kbd> 发布到 git/gitee库</li><li><strong>说明</strong> ：部署前需要修改 _config.yml 配置文件，下面以 git/gitee 为例进行</li><li><kbd>hexo clean</kbd> 命令用于清理缓存文件，是一个比较常用的命令</li><li>根目录命令行输入hexo new &lt;模板&gt; &lt;文章名&gt; 新建博客</li><li>末班在scaffold文件夹下</li></ul></li></ol><table><thead><tr><th>参数</th><th>功能</th><th>路径</th></tr></thead><tbody><tr><td>post</td><td>新建文章</td><td>/source/_posts/</td></tr><tr><td>draft</td><td>新建草稿</td><td>/source/_drafts/</td></tr><tr><td>page</td><td>新建页面（标签页，分类页等）</td><td>/source/</td></tr></tbody></table><h2 id="主题安装配置"><a href="#主题安装配置" class="headerlink" title="主题安装配置"></a>主题安装配置</h2><p> 有很多优秀好看的主题 next等 不想折腾就用next吧 用的多排坑的也多 <br><br> 我的是Matery 我的主页下方有下载地址[^ Theme Matery ] 或者戳<a href="https://github.com/blinkfox/hexo-theme-matery">这里</a><br><br> (下载的主题有说明文档)😜 </p>]]></content>
+        <content type="html"><![CDATA[<h1 id="从0开始搭建hexo博客-win10"><a href="#从0开始搭建hexo博客-win10" class="headerlink" title="从0开始搭建hexo博客(win10)"></a>从0开始搭建hexo博客(win10)</h1><h2 id="基本安装"><a href="#基本安装" class="headerlink" title="基本安装"></a>基本安装</h2><blockquote><p>安装node.js <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网下载地址</a></br><br>安装git <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git官方下载地址</a></br><br>在git/gitee 新建库并且以你的名字命名 git:<kbd>yourName.github.io</kbd> gitee:<kbd>yourName</kbd><br><br>安装hexo<kbd>$ npm install -g hexo-cli</kbd> win会有警告 忽略就好</br><br>新建: (<strong>找到你的文件夹</strong>)执行 <kbd>hexo init</kbd>   <kbd>$ cd </kbd>   <kbd>$ npm install </kbd></br><br>配置:</p><blockquote><p>可以参考 <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">这里</a> <br></p><pre><code>建议配置:**url**: https://gitee.com/xxx/xxx.git 你的博客访问地址**per_page**:改为6的倍数 6,12,18 **# Site** 此处 有更多关于首页配置**title**: 博客名字</code></pre></blockquote></blockquote><p>hexo的目录配置</p><pre class=" language-markdown"><code class="language-markdown">|-- demo//项目跟目录名<span class="token code keyword">    |-- .gitignore//git时忽略的文件或目录</span><span class="token code keyword">    |-- package-lock.json</span><span class="token code keyword">    |-- package.json//应用程序的信息</span><span class="token code keyword">    |-- _config.yml//网站的配置信息</span><span class="token code keyword">    |-- scaffolds//模板文件夹，Hexo的模板是指在新建的markdown文件中默认填充的内容。</span><span class="token code keyword">    |   |-- draft.md</span><span class="token code keyword">    |   |-- page.md</span><span class="token code keyword">    |   |-- post.md//博文模板</span><span class="token code keyword">    |-- source//资源文件夹，存放用户资源</span><span class="token code keyword">    |   |-- _posts//博文目录</span><span class="token code keyword">    |       |-- hello-world.md//博文</span><span class="token code keyword">    |-- themes//主题文件夹，Hexo 会根据主题来生成静态页面</span><span class="token code keyword">        |-- landscape.//默认主题</span></code></pre><h2 id="配置git和gitee库"><a href="#配置git和gitee库" class="headerlink" title="配置git和gitee库"></a>配置git和gitee库</h2><ol><li>首先你要有这两个仓库</li><li>修改[^ _config.yml ] 此文件的配置<pre><code>deploy:type: &#39;git&#39;repo:   github: https://github.com/xxxx/xxxx.github.io.git   gitee: https://gitee.com/xxxx/xxxx.gitbranch: master</code></pre></li><li>在执行 hexo d 就能在你的链接访问啦</li><li><strong>提示</strong>：gitee要启动一下gitee Pages<kbd>自你的库-服务- gitee pages</kbd>每次更新后要重新更新一下gitee Pages<h2 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h2><ul><li>执行 <kbd>hexo server</kbd> == <kbd>hexo s</kbd> 默认为 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a><br></li><li><ul><li><kbd>-p</kbd> 选项，指定服务器端口，默认为 4000</li></ul></li><li><ul><li><kbd>-i</kbd> 选项，指定服务器 IP 地址，默认为 0.0.0.0</li></ul></li><li><ul><li><kbd>-s</kbd> 选项，静态模式 ，仅提供 public 文件夹中的文件并禁用文件监视</li></ul></li><li><kbd>hexo generate</kbd> 命令用于生成静态文件，一般可以简写为 hexo g</li><li><kbd>hexo d</kbd> 发布到 git/gitee库</li><li><strong>说明</strong> ：部署前需要修改 _config.yml 配置文件，下面以 git/gitee 为例进行</li><li><kbd>hexo clean</kbd> 命令用于清理缓存文件，是一个比较常用的命令</li><li>根目录命令行输入hexo new &lt;模板&gt; &lt;文章名&gt; 新建博客</li><li>末班在scaffold文件夹下</li></ul></li></ol><table><thead><tr><th>参数</th><th>功能</th><th>路径</th></tr></thead><tbody><tr><td>post</td><td>新建文章</td><td>/source/_posts/</td></tr><tr><td>draft</td><td>新建草稿</td><td>/source/_drafts/</td></tr><tr><td>page</td><td>新建页面（标签页，分类页等）</td><td>/source/</td></tr></tbody></table><h2 id="主题安装配置"><a href="#主题安装配置" class="headerlink" title="主题安装配置"></a>主题安装配置</h2><p> 有很多优秀好看的主题 next等 不想折腾就用next吧 用的多排坑的也多 <br><br> 我的是Matery 我的主页下方有下载地址[^ Theme Matery ] 或者戳<a href="https://github.com/blinkfox/hexo-theme-matery">这里</a><br><br> (下载的主题有说明文档)😜 </p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><blockquote><p> 图片轮播位置: _config.yml/ myGallery:<br>文章图片: _config.yml/  featureImages</p></blockquote>]]></content>
       
       
       <categories>
@@ -314,10 +314,6 @@
       
       
         <tags>
-            
-            <tag> 未完成 </tag>
-            
-            <tag> build </tag>
             
             <tag> hexo </tag>
             
