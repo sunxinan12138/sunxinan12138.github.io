@@ -444,21 +444,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-12
+                    2020-06-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.8k
+                    3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    11 分
                 </div>
                 
 
@@ -513,7 +513,7 @@
 <ul>
 <li>新生(NEW):  当一个Thread类或子类的对象被声明并且创建后,新的线程处于新建状态</li>
 <li>就绪(RUNABLE): 当线程被start()后,将进入线程队列等待cpu时间片</li>
-<li>运行(): 线程被调度并且获得处理器资源时,进入运行状态,-run()方法内执行</li>
+<li>运行(running ): 线程被调度并且获得处理器资源时,进入运行状态,-run()方法内执行</li>
 <li>阻塞(BLOCKED): 被人为挂起或者其它方式,让出cpu并临时终止自己执行<ul>
 <li>(Waiting):正在等待另一个线程执行特定动作的线程出于此状态</li>
 <li>(TIMED_WAITTING):正在等待另一个线程执行动作达到指定等待时间的线程处于此状态</li>
@@ -615,6 +615,25 @@
 <li><p>join(): 在A线程中调用B线程的join方法. （插队）</p>
 <blockquote>
 <p><strong>表示</strong>: A线程停止,直到B线程执行完毕 A线程在执行后面的代码</p>
+<blockquote>
+<p> sleep()和yield()方法</p>
+<ul>
+<li><p>sleep不考虑优先级/yield同优先级</p>
+</li>
+<li><p>sleep 后是阻塞/yield是就绪状态</p>
+</li>
+<li><p>sleep有异常 /而且不会释放线程 – 都不会释放标志锁</p>
+</li>
+<li><p>sleep比yield有更好的移植性</p>
+</li>
+</ul>
+<p>wait()</p>
+<ul>
+<li>和notify()/notifyAll() 一起用</li>
+<li>在synchronized中使用</li>
+<li>wait会释放标志锁/sleep和yield不会</li>
+</ul>
+</blockquote>
 </blockquote>
 </li>
 <li><p>isAlive(): 判断当前线程是否存活</p>
@@ -639,6 +658,14 @@
 </ol>
 </blockquote>
 <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><blockquote>
+<blockquote>
+<p><strong>保证线程安全</strong></p>
+</blockquote>
+<ul>
+<li>尽量避免<strong>共享</strong>资源的存取冲突, 如果必须有共享资源, 那就设计一个规则(锁)来保证, 同时间只有一个线程访问资源  而且<strong>一个客户</strong>的计算工作由<strong>一个线程</strong>解决</li>
+</ul>
+</blockquote>
+<blockquote>
 <p><del>线程不安全的集合:ArrayList –&gt; CopyOnWriterArrayLis(JUC下并发安全的包)</del></p>
 <ul>
 <li><del>ArrayList ：</del></li>
@@ -663,6 +690,8 @@
 </blockquote>
 </li>
 <li><p>java中实现线程安全,线程同步机制:</p>
+<blockquote>
+</blockquote>
 <ul>
 <li><p>一 同步代码块</p>
 <blockquote>
@@ -691,7 +720,7 @@
                 }
             }
         }
-    }
+  }
 ```</code></pre><ul>
 <li><p>二 同步方法</p>
 <blockquote>
@@ -745,16 +774,16 @@
 
     <span class="token punctuation">}</span></code></pre>
 <h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2><blockquote>
-<p>关键字:wait(), notify()和 notifyAll()</p>
+<p>关键字:wait(), notify()和 notifyAll() – 线程调度的方法</p>
 <ul>
 <li><p>wait(): 令当前线程挂起cpu/同步资源器, 使别的线程可以访问并修改公共资源,当前线程会在排队等待状态.</p>
 </li>
 <li><p>notify():唤醒正在排队等待同步资源的的<strong>优先级最高</strong>的线程 – 结束等待</p>
 </li>
 <li><p>notifyAll(): 唤醒正在排队等待同步资源的的<strong>所有</strong>线程 – 结束等待</p>
-<p>注意: 这三个方法为java.lang.Object下的 而且只有在synchronized方法或代码块中才会使用.</p>
 </li>
 </ul>
+<p>注意: 这三个方法为java.lang.Object下的 而且只有在synchronized方法或代码块中才会使用.</p>
 </blockquote>
 <h2 id="写个生产者-消费者练习-不是OO的Pattern"><a href="#写个生产者-消费者练习-不是OO的Pattern" class="headerlink" title="写个生产者/消费者练习(不是OO的Pattern)"></a>写个生产者/消费者练习(不是OO的Pattern)</h2><p><img src="https://i.loli.net/2020/06/01/jQAPyZdFRN1Ye4w.png" alt="image.png"></p>
 <blockquote>
@@ -881,6 +910,21 @@ service<span class="token punctuation">.</span><span class="token function">exec
 service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SJSThread</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 service<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//结束线程连接池</span></code></pre>
+<h2 id="同步-异步"><a href="#同步-异步" class="headerlink" title="同步/异步"></a>同步/异步</h2><blockquote>
+<ul>
+<li><strong>异步: (非阻塞)</strong><ol>
+<li>当程序正在执行一个较长时间的程序, 不等待他的返回,就是异步</li>
+<li>异步效率高.</li>
+</ol>
+</li>
+<li><strong>同步:(阻塞)</strong><ol>
+<li>当程序中存在竞争资源,  或者正在读取的数据可能被修改 就使用同步存取</li>
+<li>如果有公共数据就要用同步方法</li>
+<li>数据库的排它锁</li>
+</ol>
+</li>
+</ul>
+</blockquote>
 
             </div>
             <hr/>
@@ -1170,8 +1214,8 @@ service<span class="token punctuation">.</span><span class="token function">shut
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%A1%86%E6%9E%B6Spring/" class="post-category">
-                                    框架Spring
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    框架
                                 </a>
                             
                             
@@ -1450,7 +1494,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">9.4k</span>&nbsp;字
+                class="white-color">11.1k</span>&nbsp;字
             
             
             

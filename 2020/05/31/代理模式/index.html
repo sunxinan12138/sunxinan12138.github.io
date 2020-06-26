@@ -448,21 +448,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-06
+                    2020-06-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    53
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -478,9 +478,164 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="代理模式-大话设计模式"><a href="#代理模式-大话设计模式" class="headerlink" title="代理模式 - 大话设计模式"></a>代理模式 - 大话设计模式</h1><p><strong><em>每一个模式描述了一个在我们周围不断重复发生的问题,以及该问题的解决方案的核心。</em></strong></p>
-<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><blockquote>
+<p>啊哈<a href="我可真能拖">^ =.= </a> :expressionless:</p>
+<h2 id="代理模式-Proxy"><a href="#代理模式-Proxy" class="headerlink" title="代理模式(Proxy)"></a>代理模式(Proxy)</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><blockquote>
+<p><strong>为其他对象提供一种代理 以控制对这个对象的访问(DP).</strong></p>
+<ul>
+<li>角色:<ol>
+<li>抽象角色: 用接口或者抽象类来实现(真实对象和代理对象的共同方法)</li>
+<li>真实角色: 被代理的角色</li>
+<li>代理角色: 代理真是角色 当然可以扩展其他业务</li>
+<li>客户端: 具体操作 通过代理类访问代理对象</li>
+</ol>
+</li>
+<li>好处<ol>
+<li>可以使真实角色的业务更纯粹! 其他的公共业务和扩展业务不用考虑</li>
+<li>实现了业务的分工 – 公共业务交给代理类</li>
+<li>公共业务发生扩展时, 方便管理 (解耦)</li>
+</ol>
+</li>
+<li><strong>静态代理缺点</strong>显然很明显:  代理只能服务一个类, 要是想代理很多类就要构建多个代理类 </li>
+</ul>
+</blockquote>
+<blockquote>
+<p><img src="https://i.loli.net/2020/06/25/9X4zKnbFwDiRBdH.png" alt="简单工厂类.png"></p>
+<p>代码部分</p>
+<pre class=" language-java"><code class="language-java">            <span class="token comment" spellcheck="true">/* 公用接口类 */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Subject</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 定义 RealSubject和Proxy的公共方法</span>
+<span class="token punctuation">}</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+            <span class="token comment" spellcheck="true">/* 代理类 */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Proxy</span> <span class="token keyword">extends</span> <span class="token class-name">Subject</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 保存一个引用 使得代理可以访问实体 , 继承了同一个接口 所以可以实现真实实体的所有请求</span>
+    <span class="token keyword">private</span> RealSubject realSubject<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 组合形式获取</span>
+    <span class="token comment" spellcheck="true">// 在Spring框架中推荐使用 set方法来获取对象</span>
+    <span class="token annotation punctuation">@Override</span>
+      <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>realSubject <span class="token operator">==</span> null<span class="token punctuation">)</span> realSubject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RealSubject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        realSubject<span class="token punctuation">.</span><span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 调用真实的方法</span>
+        <span class="token comment" spellcheck="true">// 当然可以加点东西</span>
+        <span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 扩展的业务</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"增加了日志方法"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+          <span class="token comment" spellcheck="true">/* 真实实体类 */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RealSubject</span> <span class="token keyword">extends</span> <span class="token class-name">Subject</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 代理类代理的真实实体</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"实际的请求"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token comment" spellcheck="true">// 客户端</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Proxy p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p<span class="token punctuation">.</span><span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 通过代理访问真实的方法</span>
+<span class="token punctuation">}</span></code></pre>
 </blockquote>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><blockquote>
+<ul>
+<li><strong>远程代理</strong><ol>
+<li>就是为一个对象在不同的地址空间提供据不同代表.  这样可以隐藏一个对象存在于不同地址空间的事实</li>
+</ol>
+</li>
+<li>虚拟代理<ol>
+<li>是根据需要创建开销很大的对象. 通过它存放实例化需要很长时间的对象.</li>
+</ol>
+</li>
+<li>安全代理<ol>
+<li>用来控制真实对象访问时的权限.  </li>
+</ol>
+</li>
+<li>只能指引<ol>
+<li>是指当调用真实对象时, 代理处理另外一些事</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><blockquote>
+<p>当然以上是静态代理的实现</p>
+<p><strong>静态代理缺点</strong>显然很明显:  代理只能服务一个类, 要是想代理很多类就要构建多个代理类 </p>
+<blockquote>
+<ul>
+<li>用反射机制构建动态代理</li>
+<li>动态代理的代理类是动态生成的</li>
+<li>动态代理分为两大类 – 基于接口 – 基于类<ol>
+<li>基于接口: JDK动态代理</li>
+<li>基于类: cglib</li>
+<li>java字节码实现: javasist</li>
+</ol>
+</li>
+<li>需要 Proxy 和InvocationHandler 两个类来创建动态代理类</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>JDK动态代理</strong>: 和静态代理共同的是都要有<strong>真实实体类和接口</strong></p>
+<p>实体类和接口:</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 接口</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">interface</span> <span class="token class-name">Subject</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 定义 RealSubject和需要被代理的方法方法</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 真实实体类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RealSubject</span> <span class="token keyword">implements</span> <span class="token class-name">Subject</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 代理类代理的真实实体</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"实际的请求"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>动态代理实现:</p>
+<blockquote>
+<p> InvocationHandler是个接口: 只有一个invoke方法  此方法在生成了一个$Proxy.class文件中被调用– (具体源码)[<a href="https://www.cnblogs.com/liuyun1995/p/8157098.html]" target="_blank" rel="noopener">https://www.cnblogs.com/liuyun1995/p/8157098.html]</a></p>
+<p>Proxy提供了创建动态代理类的静态方法</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 创建动态代理工具 -- 实现接口</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyProxyInvocationHandlerTemplate</span> <span class="token keyword">implements</span> <span class="token class-name">InvocationHandler</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> Object target<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 目标接口 -- 改为可复用的Obj类</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setTarget</span><span class="token punctuation">(</span>Object target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>target <span class="token operator">=</span> target<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> Object <span class="token function">getProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 三个参数 1. 类加载器 2. 反射回去接口 3. InvocationHandler(就是本身)</span>
+        <span class="token keyword">return</span> Proxy<span class="token punctuation">.</span><span class="token function">newProxyInstance</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> target<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInterfaces</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Object <span class="token function">invoke</span><span class="token punctuation">(</span>Object proxy<span class="token punctuation">,</span> Method method<span class="token punctuation">,</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+        <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 扩展业务</span>
+        Object o <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> o<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 扩展业务</span>
+     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"haha"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>客户端:</p>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//        p.method(); // 通过代理访问真实的方法</span>
+        <span class="token comment" spellcheck="true">// 动态代理</span>
+        <span class="token comment" spellcheck="true">// 实例动态代理工具</span>
+        MyProxyInvocationHandlerTemplate template <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyProxyInvocationHandlerTemplate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 实例真真实角色</span>
+        RealSubject subject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RealSubject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        template<span class="token punctuation">.</span><span class="token function">setTarget</span><span class="token punctuation">(</span>subject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Subject sub <span class="token operator">=</span> <span class="token punctuation">(</span>Subject<span class="token punctuation">)</span> template<span class="token punctuation">.</span><span class="token function">getProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//创建代理类</span>
+        sub<span class="token punctuation">.</span><span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 执行公共接口的方法</span>
+        <span class="token comment" spellcheck="true">// 也会有附加业务的调用</span>
+    <span class="token punctuation">}</span></code></pre>
+</blockquote>
 </blockquote>
 
             </div>
@@ -828,8 +983,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%A1%86%E6%9E%B6Spring/" class="post-category">
-                                    框架Spring
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    框架
                                 </a>
                             
                             
@@ -1051,7 +1206,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">9.4k</span>&nbsp;字
+                class="white-color">11.1k</span>&nbsp;字
             
             
             

@@ -424,8 +424,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%A1%86%E6%9E%B6Spring/" class="post-category">
-                                框架Spring
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                框架
                             </a>
                         
                     </div>
@@ -444,14 +444,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-30
+                    2020-06-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    313
+                    420
                 </div>
                 
 
@@ -477,43 +477,44 @@
 <p>Spring(容器/代理类框架)  </p>
 <p><img src="https://i.loli.net/2020/05/27/Pcl8ygk3zEiVHWY.png" alt="image.png"></p>
 </blockquote>
-<h2 id="IOC-控制反转-Inversion-of-Control"><a href="#IOC-控制反转-Inversion-of-Control" class="headerlink" title="IOC(控制反转)(Inversion of Control)"></a>IOC(控制反转)(Inversion of Control)</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><blockquote>
-<ol>
-<li><p>作用: 借助于“第三方”实现具有依赖关系的对象之间的解耦</p>
-</li>
-<li><p>ioc也可以叫DI(依赖注入)</p>
-<ol>
-<li><p>区别</p>
+<h2 id="IOC-控制反转-Inversion-of-Control"><a href="#IOC-控制反转-Inversion-of-Control" class="headerlink" title="IOC(控制反转)(Inversion of Control)"></a>IOC(控制反转)(Inversion of Control)</h2><blockquote>
 <p>DI：依赖注入：实现方式</p>
 <p>IOC：控制反转:一种思想</p>
-</li>
-</ol>
-</li>
-<li><p>IOC:</p>
+</blockquote>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><blockquote>
 <ol>
+<li>作用: 借助于“第三方”实现具有依赖关系的对象之间的解耦</li>
+<li>理念: 应用组件不应该负责查找资源或者其他的对象之间的依赖关系, 配置这个关系的由容器负责, 查找资源从应用组件的代码中抽取出来(get/set); 交给容器</li>
+<li>IOC:<ol>
 <li>对象由Spring创建、管理、装配</li>
-<li>控制的内容：控制对象的创建：传统的由程序本身去创建, 框架由Spring来创建</li>
+<li>控制的内容：控制对象的创建：传统的由程序本身去创建, 框架由Spring来创建和管理</li>
 </ol>
 </li>
-<li><p>反转：(正转：程序自己创建对象) 需要对象时，被动接受Spring容器创建的对象，并且注入程序</p>
+<li>反转：(正转：程序自己创建对象) 需要对象时，被动接受Spring容器创建的对象，并且注入程序</li>
+<li>对象A获得依赖对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”<ol>
+<li>官方一点就是原来对象间的关系由程序控制; 现在由容器框架来创建和管理</li>
+</ol>
 </li>
-<li><p>对象A获得依赖对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”</p>
-</li>
-<li><p>ioc实现由容器BeanFactory实现</p>
+<li>ioc实现由容器BeanFactory和ApplicationContext:<ol>
+<li>BeanFactory是一个古老的工厂不支持spring其他插件</li>
+</ol>
 </li>
 </ol>
 </blockquote>
-<h3 id="java反射机制和工厂模式"><a href="#java反射机制和工厂模式" class="headerlink" title="java反射机制和工厂模式"></a>java反射机制和工厂模式</h3><blockquote>
-<p> 要了解Spring的Ioc实现不得不说到java的反射机制和动态代理模式</p>
+<h3 id="java反射机制"><a href="#java反射机制" class="headerlink" title="java反射机制"></a>java反射机制</h3><blockquote>
+<p> <a href="[https://sunxinan12138.github.io/2020/06/05/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/](https://sunxinan12138.github.io/2020/06/05/JAVA反射机制/)">反射机制</a></p>
 </blockquote>
 <h3 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h3><h2 id="AOP代理-面向切面"><a href="#AOP代理-面向切面" class="headerlink" title="AOP代理-面向切面"></a>AOP代理-面向切面</h2><blockquote>
+<p>了解Spring的AOP实现不得不说到 java的反射机制和 动态<a href="[https://sunxinan12138.github.io/2020/05/31/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/](https://sunxinan12138.github.io/2020/05/31/代理模式/)">代理模式</a> </p>
+</blockquote>
+<blockquote>
 <p>正常编程<img src="https://i.loli.net/2020/05/28/rQZ36jmDFYCR5NI.png" alt="image.png"></p>
 </blockquote>
 <blockquote>
-<p>面向切面: 在一个功能(类)中切入一个功能</p>
+<p>面向切面: 在一个功能(类)中切入另一个功能<img src="https://i.loli.net/2020/06/26/rOYqRu3ZHSNVeMc.png" alt="image.png"></p>
 </blockquote>
 <h3 id="AOP重要性："><a href="#AOP重要性：" class="headerlink" title="AOP重要性："></a>AOP重要性：</h3><p>aop将公共业务（日志，安全）和领域业务结合。公共业务可以重复使用，程序猿更专注与领域业务 本质动态代理</p>
-
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3>
             </div>
             <hr/>
 
@@ -1082,7 +1083,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">9.4k</span>&nbsp;字
+                class="white-color">11.1k</span>&nbsp;字
             
             
             
