@@ -440,7 +440,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-26
+                    2020-06-30
                 </div>
                 
 
@@ -549,7 +549,7 @@
 </ol>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2020/06/07/Ef4mltNyGjrs6Ub.png" alt="JVM.png"></p>
+<p><img src="https://i.loli.net/2020/06/30/pJrK6LaXGIATNFd.png" alt="JVM.png"></p>
 </blockquote>
 <h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><blockquote>
 <p>类加载器就是<strong>将class文件字节码内容加载到内存中</strong>,并将这些静态数据转换成方法去的运行时的数据结构,在堆中生成一个java.lang.class对象,作为访问入口</p>
@@ -587,13 +587,19 @@ ClassLoader loader <span class="token operator">=</span> ClassLoader<span class=
 <li><p>已知某个类的实例,调用它的getClass方法获取Class对象</p>
 <pre class=" language-java"><code class="language-java">Cat cat <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 Class <span class="token class-name">c3</span> <span class="token operator">=</span> cat<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<pre><code></code></pre></li>
+</li>
+</ol>
+<ol start="3">
 <li><p>已知一个类的<strong>限定类名</strong>,且在类路径下, 可以通过Class的静态方法forName()获取</p>
 <pre class=" language-java"><code class="language-java">Class <span class="token class-name">c2</span> <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"com.sjs.Reflect.Cat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 </li>
+</ol>
+<ol start="4">
 <li><p>内置基本数据类型可以直接调用<strong>类名.Type</strong></p>
 <pre class=" language-java"><code class="language-java">Class<span class="token operator">&lt;</span>Integer<span class="token operator">></span> type <span class="token operator">=</span> Integer<span class="token punctuation">.</span>TYPE<span class="token punctuation">;</span></code></pre>
 </li>
+</ol>
+<ol start="5">
 <li><p>还可以用ClassLoader</p>
 <blockquote>
 <p>只要是获取到<strong>同一个类的Class对象都是一个对象</strong></p>
@@ -1311,7 +1317,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">11.1k</span>&nbsp;字
+                class="white-color">14.3k</span>&nbsp;字
             
             
             

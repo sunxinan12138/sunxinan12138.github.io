@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="单例模式, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
+    <meta name="keywords" content="Spring事务, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
     <meta name="description" content="采坑,学习和生活记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>单例模式 | 熙楠の博客</title>
+    <title>Spring事务 | 熙楠の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -286,12 +286,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">单例模式</h1>
+                    <h1 class="description center-align post-title">Spring事务</h1>
                 </div>
             </div>
         </div>
@@ -408,12 +408,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/GOF-23/">
-                                <span class="chip bg-color">GOF-23</span>
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
                             </a>
                         
-                            <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-                                <span class="chip bg-color">单例模式</span>
+                            <a href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/">
+                                <span class="chip bg-color">未完成</span>
                             </a>
                         
                     </div>
@@ -424,12 +424,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                大话设计模式
-                            </a>
-                        
-                            <a href="/categories/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
-                                抄书
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                框架
                             </a>
                         
                     </div>
@@ -441,28 +437,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-31
+                    2020-07-04
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-12
+                    2020-07-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    593
+                    20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -477,80 +473,10 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="单例模式-大话设计模式"><a href="#单例模式-大话设计模式" class="headerlink" title="单例模式 - 大话设计模式"></a>单例模式 - 大话设计模式</h1><p><strong><em>每一个模式描述了一个在我们周围不断重复发生的问题,以及该问题的解决方案的核心。</em></strong></p>
-<h2 id="单例模式-Singleton"><a href="#单例模式-Singleton" class="headerlink" title="单例模式(Singleton)"></a>单例模式(Singleton)</h2><blockquote>
-<p>保证一个类仅有一个实例, 并提供一个访问的全局访问点[^ DP]</p>
-<p>为了不实例化出多个对象,让类自身<strong>负责</strong>保存他的唯一实例. 这个类可以保证没有其他实例可以被创建, 并且他可以提供一个访问该实例的方法</p>
-<p><img src="https://i.loli.net/2020/06/02/epTE4LbXZkhvYFW.png" alt="单例模式"></p>
-<p>单例模式因为Singleton类封装了他唯一的实现类, 可以严格控制客户怎样访问以及何时访问它.—对唯一实例的受控访问</p>
-<p>示例代码:</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton instance<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// private的实例变量</span>
-
-    <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"you win!!!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 私有的构造方法 让其他类不能访问</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> null<span class="token punctuation">)</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果实例为空则创建</span>
-        <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></code></pre>
+                <h1 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><blockquote>
+<p>什么是事务</p>
 </blockquote>
-<h2 id="多线程单例模式"><a href="#多线程单例模式" class="headerlink" title="多线程单例模式"></a>多线程单例模式</h2><blockquote>
-<p>在多个线程中, 单例模式会出现多个线程同时访问Singleton类, 会出现创建了多个实例的情况.   所以我们给他加<strong>锁</strong></p>
-</blockquote>
-<h2 id="双重锁定"><a href="#双重锁定" class="headerlink" title="双重锁定"></a>双重锁定</h2><blockquote>
-<p>当然加锁后每个线程想访问Singleton类都要等待了, 所以我们优化一下 —  双重锁定</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton intance<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// private的实例变量</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> Object synchronizedLOCK <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 锁对象</span>
-    <span class="token comment" spellcheck="true">//只有static的成员才能在没有创建对象时进行初始化。且类的静态成员在类第一次被使用时初始化后就不会再被初始化，保证了单例</span>
-
-    <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"you win!!!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 私有的构造方法 让其他类不能访问</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getIntance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>intance <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>synchronizedLOCK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>intance <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    intance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 如果实例为空则创建</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> intance<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-</blockquote>
-<h2 id="饿汉-懒汉单例类"><a href="#饿汉-懒汉单例类" class="headerlink" title="饿汉/懒汉单例类"></a>饿汉/懒汉单例类</h2><blockquote>
-<ul>
-<li><p>饿汉</p>
-<ol>
-<li>静态初始化的方式在自己被加载时就将自己实例化</li>
-</ol>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SingletonHungry</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> SingletonHungry intance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SingletonHungry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token function">SingletonHungry</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Creat new !!!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> SingletonHungry <span class="token function">getIntance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> intance<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-</li>
-<li><p>懒汉</p>
-<ol>
-<li>在第一次被引用时,才会将自己实例化</li>
-</ol>
-</li>
-<li><p>优缺点: 饿汉类一加载就实例出对象, 会提前占用系统资源.     懒汉面临多线程访问的单圈问题,要加双重锁定. 具体用哪个取决于实际需求</p>
-</li>
-<li><p><strong>具体用哪个取决于实际需求</strong></p>
-</li>
-</ul>
-</blockquote>
-
+<h3 id="声明式事务"><a href="#声明式事务" class="headerlink" title="声明式事务"></a>声明式事务</h3><h3 id="编程式事务"><a href="#编程式事务" class="headerlink" title="编程式事务"></a>编程式事务</h3>
             </div>
             <hr/>
 
@@ -575,7 +501,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</a>
+                    <a href="https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/07/04/Spring%E4%BA%8B%E5%8A%A1/">https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/07/04/Spring%E4%BA%8B%E5%8A%A1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -613,12 +539,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/GOF-23/">
-                                    <span class="chip bg-color">GOF-23</span>
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
                                 </a>
                             
-                                <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-                                    <span class="chip bg-color">单例模式</span>
+                                <a href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/">
+                                    <span class="chip bg-color">未完成</span>
                                 </a>
                             
                         </div>
@@ -789,7 +715,7 @@
         repo: 'sunxinan12138.github.io',
         owner: 'sunxinan12138',
         admin: ["sunxinan12138"],
-        id: '2020-05-31T12-36-45',
+        id: '2020-07-04T17-41-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -813,45 +739,52 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/31/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+                <a href="/2020/07/04/Spring%E4%BA%8B%E5%8A%A1/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/05/31/hHblu2RaDtvCrMX.png" class="responsive-img" alt="Java8新特性">
                         
-                        <span class="card-title">Java8新特性</span>
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Spring事务">
+                        
+                        <span class="card-title">Spring事务</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Java8新特性
+                            Spring事务
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JDK/" class="post-category">
-                                    JDK
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    框架
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JDK1-8/">
-                        <span class="chip bg-color">JDK1.8</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/">
+                        <span class="chip bg-color">未完成</span>
                     </a>
                     
                 </div>
@@ -865,35 +798,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/31/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+                <a href="/2020/07/02/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
                     <div class="card-image">
                         
+                        <img src="/source/images/xxx.jpg" class="responsive-img" alt="原型模式">
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="代理模式">
-                        
-                        <span class="card-title">代理模式</span>
+                        <span class="card-title">原型模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            代理模式
+                            摘要
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    大话设计模式
-                                </a>
-                            
-                            <a href="/categories/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
-                                    抄书
+                            <a href="/categories/%E7%B1%BB%E5%88%AB/" class="post-category">
+                                    类别
                                 </a>
                             
                             
@@ -903,12 +831,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/GOF-23/">
-                        <span class="chip bg-color">GOF-23</span>
-                    </a>
-                    
-                    <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">代理模式</span>
+                    <a href="/tags/%E6%A0%87%E7%AD%BE/">
+                        <span class="chip bg-color">标签</span>
                     </a>
                     
                 </div>
