@@ -440,14 +440,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-30
+                    2020-07-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.4k
                 </div>
                 
 
@@ -512,10 +512,10 @@
 <p><img src="https://i.loli.net/2020/06/07/hqkj6iWFR1vc9Ga.png" alt="类加载的过程"></p>
 <ol>
 <li><strong>加载:</strong> 将class文件字节码加载到内存,将静态数据转换成方法去的运行时数据结构,然后生成一个java.lang.Class对象(堆).</li>
-<li><strong>链接:</strong> 将二进制代码合并到JVM运行状态中<ol>
-<li>验证:确保加载的信息符合JVM规范</li>
-<li>准备:正式为类变量(static)分配内存,并设置初值– Java对象变量的默认值</li>
-<li>解析:虚拟机常量池内的符号引用(常量名)替换为直接引用(地址)</li>
+<li><strong>链接:</strong> 将二进制(字节码)代码合并到JVM运行状态中<ol>
+<li>==验证==:确保加载的信息符合JVM规范</li>
+<li>==准备==:正式为类变量(static)分配内存,并设置初值– Java对象变量的默认值</li>
+<li>==解析==:虚拟机常量池内的符号引用(常量名)替换为直接引用(地址)</li>
 </ol>
 </li>
 <li><strong>初始化:</strong> 执行类构造器的<clinit>()方法的过程: 下面细说</li>
@@ -552,6 +552,10 @@
 <p><img src="https://i.loli.net/2020/06/30/pJrK6LaXGIATNFd.png" alt="JVM.png"></p>
 </blockquote>
 <h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><blockquote>
+<p>如果需要查找一个class对象的时候 先查找内存三种加载器一次查找 如果没有从底层加载器加载 如果都没有抛出ClassNotFoundException</p>
+<p><img src="C:%5CUsers%5C25778%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200705205726521.png" alt="双亲委派"></p>
+</blockquote>
+<blockquote>
 <p>类加载器就是<strong>将class文件字节码内容加载到内存中</strong>,并将这些静态数据转换成方法去的运行时的数据结构,在堆中生成一个java.lang.class对象,作为访问入口</p>
 <p>类缓存:  标准JavaSE类加载器,可以按要求查找类, 一旦某个类被夹在将有一段时间缓存</p>
 <ol>
@@ -567,12 +571,13 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <p><strong>sun.misc.Launcher$AppClassLoader@dad5dc</strong></p>
 <pre class=" language-java"><code class="language-java">   <span class="token comment" spellcheck="true">// 获取系统类加载器  </span>
 ClassLoader loader <span class="token operator">=</span> ClassLoader<span class="token punctuation">.</span><span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p><kbd>系统类 -> 扩展类 -> 引导类</kbd></p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 查看系统内类加载器可以加载的路径</span>
-   System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">"java.class.path"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p><img src="https://i.loli.net/2020/06/07/Dlpi7uRVcFm3MoT.png" alt="image.png"></p>
+<hr>
+<p><kbd>系统类 -> 扩展类 -> 引导类</kbd> 以及自定义加载器</p>
 </li>
 </ol>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 查看系统内类加载器可以加载的路径</span>
+  System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">"java.class.path"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>   <img src="https://i.loli.net/2020/06/07/Dlpi7uRVcFm3MoT.png" alt="image.png"></p>
 </blockquote>
 <h2 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h2><blockquote>
 <p>在Object类下有一个getClass()方法,返回值是一个Class类.所有类都默认继承Object类.<kbd>public final Class getClass()</kbd></p>
@@ -756,6 +761,7 @@ name<span class="token punctuation">.</span><span class="token function">set</sp
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p><img src="https://i.loli.net/2020/06/08/euOnThtcEdpokG4.png" alt="image.png"></p>
+<p>clinitclinit</p>
 
             </div>
             <hr/>
@@ -1317,7 +1323,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">14.5k</span>&nbsp;字
+                class="white-color">17.1k</span>&nbsp;字
             
             
             

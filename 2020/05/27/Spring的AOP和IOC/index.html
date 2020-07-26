@@ -444,21 +444,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-05
+                    2020-07-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.6k
+                    4.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    16 分
+                    18 分
                 </div>
                 
 
@@ -546,59 +546,112 @@
 <li><p>传统的设计模式 由程序本身new出对象,主动去创建依赖,耦合度很高</p>
 </li>
 <li><p>当有了IOC容器后,在客户端类中不再主动去创建这些对象了</p>
+</li>
+</ol>
 <p><img src="https://i.loli.net/2020/06/29/9YnpjRGZdbw1DoL.png" alt="image.png"></p>
 <ol>
 <li>pojo类</li>
 </ol>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Hello</span> <span class="token punctuation">{</span>
 
-    <span class="token keyword">public</span> <span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"new"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token function">Hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"new"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-    String hello<span class="token punctuation">;</span>
+String hello<span class="token punctuation">;</span>
 
-    <span class="token keyword">public</span> String <span class="token function">getHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> hello<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">// 一定要有set方法 Spring通过set来获取对象</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setHello</span><span class="token punctuation">(</span>String hello<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>hello <span class="token operator">=</span> hello<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<span class="token keyword">public</span> String <span class="token function">getHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">return</span> hello<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 一定要有set方法 Spring通过set来获取对象</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setHello</span><span class="token punctuation">(</span>String hello<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>hello <span class="token operator">=</span> hello<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token string">"Hello{"</span> <span class="token operator">+</span>
-                <span class="token string">"hello='"</span> <span class="token operator">+</span> hello <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
-                <span class="token string">'}'</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">return</span> <span class="token string">"Hello{"</span> <span class="token operator">+</span>
+<span class="token string">"hello='"</span> <span class="token operator">+</span> hello <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+<span class="token string">'}'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <ol start="2">
-<li>配置文件</li>
-</ol>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token comment" spellcheck="true">&lt;!-- 在加载配置文件时 对象就已经new出
-        容器创建了对象
-        id 就像对象名
-    --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.sjs.Hello<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Hello Spring<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
+<li><p>配置文件</p>
+<pre class=" language-xml"><code class="language-xml">  <span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
+         <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
+         <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans
+          https://www.springframework.org/schema/beans/spring-beans.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token comment" spellcheck="true">&lt;!-- 在加载配置文件时 对象就已经new出
+          容器创建了对象
+          id 就像对象名
+      --></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.sjs.Hello<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Hello Spring<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
 
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">></span></span></code></pre>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 客户端加载配置文件 获取需要的Bean即可</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        ApplicationContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ClassPathXmlApplicationContext</span><span class="token punctuation">(</span><span class="token string">"ApplicationContext.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 可以加载多个XML文件</span>
-        Hello hello <span class="token operator">=</span> <span class="token punctuation">(</span>Hello<span class="token punctuation">)</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>hello<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></code></pre>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">></span></span></code></pre>
+<pre class=" language-java"><code class="language-java">  <span class="token comment" spellcheck="true">// 客户端加载配置文件 获取需要的Bean即可</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          ApplicationContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ClassPathXmlApplicationContext</span><span class="token punctuation">(</span><span class="token string">"ApplicationContext.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 可以加载多个XML文件</span>
+          Hello hello <span class="token operator">=</span> <span class="token punctuation">(</span>Hello<span class="token punctuation">)</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>hello<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span></code></pre>
+<p><strong>在Spring中对象由容器创建, 管理, 装配</strong></p>
 </li>
 </ol>
-<p>  <strong>在Spring中对象由容器创建, 管理, 装配</strong></p>
+<h3 id="Spring的BeanFactory实现生成Bean"><a href="#Spring的BeanFactory实现生成Bean" class="headerlink" title="Spring的BeanFactory实现生成Bean"></a>Spring的BeanFactory实现生成Bean</h3><ul>
+<li>Spring是一个大的Bean工厂, 负责Bean的创建和注入</li>
+<li>Bean创建流程</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/05/G78ImnKQaSyFwVj.png" alt="image.png"></p>
+<ol>
+<li>ResourceLoader<strong>加载配置文件</strong> </li>
+<li><strong>BeanDefinitionReader解析配置文件</strong>– 将<Bean> <strong>解析为BeanDefinition对象</strong>, 并保存到BeanDefinitionRegistry</li>
+<li>利用后处理器BeanFactoryPostProcessor<strong>对BeanDefinition加工处理</strong><ul>
+<li>使用<Bean>标签进行解析.<strong>将占位符替换为真实值</strong></li>
+<li>对所有的BeanDefinition扫描,<strong>用反射机制找出所有的属性编辑器的Bean</strong>,注册到PropertyEditorRegistry</li>
+</ul>
+</li>
+<li>从BeanDefinitionRegistry中取出BeanDefinition, 调用InstantiationStrategy<strong>进行实例化</strong></li>
+<li>实例化时, 利用BeanWrapper对Bean设置属性</li>
+<li>利用后处理器BeanFactoryPostProcessor<strong>对完成的Bean进行加工</strong> </li>
+</ol>
+<h3 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h3><blockquote>
+<p>ioc启动先产生一个BeanDedinition 后 有可能会触发实例化</p>
+<p>如果是原型模式在getBean时会实例化</p>
+<p>单例模式在初始化实例后回到容器中寻找</p>
+</blockquote>
+<ol>
+<li><strong>实例化bean对象</strong></li>
+<li><strong>设置属性(DI注入)</strong></li>
+<li><strong>调用Bean的初始化方法</strong></li>
+<li><strong>使用Bean</strong></li>
+<li><strong>容器关闭前销毁Bean</strong></li>
+</ol>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//Bean的销毁方法</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroyStudent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Student这个Bean：销毁"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 配置:</span>
+destroy<span class="token operator">-</span>method：指定销毁的方法 </code></pre>
+<h3 id="BeanFactory与ApplicationContext是干什么的-区别"><a href="#BeanFactory与ApplicationContext是干什么的-区别" class="headerlink" title="BeanFactory与ApplicationContext是干什么的,区别?"></a>BeanFactory与ApplicationContext是干什么的,区别?</h3><table>
+<thead>
+<tr>
+<th>BeanFactory</th>
+<th>ApplicationContext</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>都是容器</td>
+<td>都是容器</td>
+</tr>
+<tr>
+<td>顶层-基础接口,实现了基础功能</td>
+<td>容器的高级形态,增加了特性,顶级父类是BeanFactory</td>
+</tr>
+</tbody></table>
+<p>FactoryBean是一个Bean,用于生产修饰其他的Bean实例,典型的是AOP代理类</p>
 <h3 id="Spring的IOC创建对象的方式"><a href="#Spring的IOC创建对象的方式" class="headerlink" title="Spring的IOC创建对象的方式"></a>Spring的IOC创建对象的方式</h3><ol>
 <li><p><strong>无参构造:</strong></p>
 <ul>
@@ -734,7 +787,7 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.sjs.Hello<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello2,23 12<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
 <span class="token comment" spellcheck="true">&lt;!--别名可以用这配置--></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>alias</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span> <span class="token attr-name">alias</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>alias</span><span class="token punctuation">></span></span></code></pre>
-<h3 id="Bean作用区域"><a href="#Bean作用区域" class="headerlink" title="Bean作用区域"></a>Bean作用区域</h3><p>官方文档有四个:</p>
+<h3 id="Bean作用区域"><a href="#Bean作用区域" class="headerlink" title="Bean作用区域"></a>Bean作用区域</h3><p>官方文档有六个:</p>
 <table>
 <thead>
 <tr>
@@ -995,6 +1048,13 @@
 <h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><blockquote>
 <p><a href="[https://sunxinan12138.github.io/2020/06/05/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/](https://sunxinan12138.github.io/2020/06/05/JAVA反射机制/)">反射机制</a> 需要了解一下</p>
 </blockquote>
+<ul>
+<li>哪些方法不能被AOP增强</li>
+</ul>
+<ol>
+<li>基于JDK代理，除public外的其他所有方法，包括public static也不能被增强</li>
+<li>基于CGLIB代理，由于其通过生成目标类子类的方式来增强，因此不能被子类继承的方法都不能被增强，private、static、final 方法</li>
+</ol>
 <h4 id="使用Spring原生接口方式-和JDK动态代理模式很像"><a href="#使用Spring原生接口方式-和JDK动态代理模式很像" class="headerlink" title="使用Spring原生接口方式(和JDK动态代理模式很像)"></a>使用Spring原生接口方式(和JDK动态代理模式很像)</h4><ol>
 <li><p>核心配置文件</p>
 <pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>userService<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.SpringAOP.UserServiceImpl<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span> // 被切入的业务
@@ -1105,7 +1165,17 @@ userService<span class="token punctuation">.</span><span class="token function">
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <ol start="3">
-<li>其他的相比第一种没有变化</li>
+<li><p>其他的相比第一种没有变化</p>
+</li>
+<li><h3 id="六种增强类型"><a href="#六种增强类型" class="headerlink" title="六种增强类型"></a>六种增强类型</h3><ol>
+<li>@Before 前置增强，相当于BeforeAdvice</li>
+<li>@AfterReturning 后置增强，相当于AfterReturningAdvice</li>
+<li>@Around 环绕增强，相当于MethodInterceptor</li>
+<li>@AfterThrowing 抛出增强，相当于ThrowsAdvice</li>
+<li>@AfterFinal增强，不管抛出异常还是正常退出，都会执行，没有对应的增强接口，一般用于释放资源</li>
+<li>@DeclareParents 引介增强，相当于IntroductionInterceptor</li>
+</ol>
+</li>
 </ol>
 <blockquote>
 <p><a href="#">Spring事务运用</a></p>
@@ -1679,7 +1749,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">14.5k</span>&nbsp;字
+                class="white-color">17.1k</span>&nbsp;字
             
             
             

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="每日一题-76.最小覆盖子串, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
+    <meta name="keywords" content="开发插件, [JAVA, WEB, SQL, XML, CSS, JavaScript, JQuery,等]">
     <meta name="description" content="采坑,学习和生活记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>每日一题-76.最小覆盖子串 | 熙楠の博客</title>
+    <title>开发插件 | 熙楠の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -286,12 +286,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/06/12/4LoizAUwIyfQejb.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">每日一题-76.最小覆盖子串</h1>
+                    <h1 class="description center-align post-title">开发插件</h1>
                 </div>
             </div>
         </div>
@@ -408,8 +408,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/DataBase-algorithm/">
-                                <span class="chip bg-color">DataBase&amp;algorithm</span>
+                            <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                                <span class="chip bg-color">工具</span>
                             </a>
                         
                     </div>
@@ -420,8 +420,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%B0%E5%BD%95-%E8%B8%A9%E5%9D%91/" class="post-category">
-                                记录/踩坑
+                            <a href="/categories/TOOL/" class="post-category">
+                                TOOL
                             </a>
                         
                     </div>
@@ -433,21 +433,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-23
+                    2020-07-26
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-25
+                    2020-07-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    260
+                    421
                 </div>
                 
 
@@ -469,57 +469,56 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode每日一题-76-最小覆盖子串"><a href="#leetcode每日一题-76-最小覆盖子串" class="headerlink" title="leetcode每日一题:76.最小覆盖子串"></a>leetcode每日一题:76.最小覆盖子串</h1><p><a href="https://leetcode-cn.com/problems/minimum-window-substring/" target="_blank" rel="noopener">76.最小覆盖子串</a><br><br><img src="/images/76.png" alt="img"><br><br>代码和注释:</p>
-<pre class=" language-java"><code class="language-java"> <span class="token annotation punctuation">@Test</span> 
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">mainTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">minWindow</span><span class="token punctuation">(</span><span class="token string">"ADOBECODEBANC"</span><span class="token punctuation">,</span> <span class="token string">"ABC"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">// 滑动窗口</span>
-    <span class="token keyword">public</span> String <span class="token function">minWindow</span><span class="token punctuation">(</span>String s<span class="token punctuation">,</span> String t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> t<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 左右指针</span>
-        <span class="token keyword">int</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 存储s和t出现次数</span>
-        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> snum <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> tnum <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> tlen <span class="token operator">=</span> t<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// t串存入</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tlen<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            tnum<span class="token punctuation">[</span>t<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-        <span class="token keyword">int</span> minLenth <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> min <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>right <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">// 右指针移动</span>
-            <span class="token keyword">char</span> ch <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            snum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 将s出现的次数存入数组</span>
-            <span class="token comment" spellcheck="true">// 如果满足 当前字符是t字符里的 并且在当前范围只出现一次</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>tnum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> tnum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">>=</span> snum<span class="token punctuation">[</span>ch<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                count<span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token comment" spellcheck="true">// 当长度满足t时</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> tlen<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">char</span> c <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment" spellcheck="true">// 从左到右移动left 指针直到count长度不足</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>tnum<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> tnum<span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">>=</span> snum<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    count<span class="token operator">--</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token comment" spellcheck="true">// 找到最短长度 将初始和结尾储存</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">-</span> left <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&lt;</span> minLenth<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    minLenth <span class="token operator">=</span> right <span class="token operator">-</span> left <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                    min <span class="token operator">=</span> left<span class="token punctuation">;</span>
-                    max <span class="token operator">=</span> right <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                snum<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token operator">--</span><span class="token punctuation">;</span>
-                left<span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            right<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> s<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>min<span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></code></pre>
+                <h1 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h1><h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><h3 id="1-Maven是啥"><a href="#1-Maven是啥" class="headerlink" title="1.Maven是啥"></a>1.Maven是啥</h3><p>当我第一次听到这玩应,觉得很高大上. 说白了 就是个<strong>自动导入jar包的</strong></p>
+<ul>
+<li><p>Maven还是很强大的:</p>
+<ul>
+<li>项目继承(在多个模块的项目中很好用的)</li>
+<li>解决jar冲突</li>
+<li>自动导入jar(从本地库寻找如果没有–会自动去中央仓库下载)<ul>
+<li><a href="https://mvnrepository.com/" target="_blank" rel="noopener">依赖配置地址</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>生命周期</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2018/09/7642256-c967b2c1faeba9ce.png" alt="Maven生命周期"></p>
+</li>
+</ul>
+<h3 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h3><p><a href="https://blog.csdn.net/daffordil/article/details/89419252" target="_blank" rel="noopener">安装看这个</a> 把镜像和本地库地址配置了就好</p>
+<h3 id="3-自动配置"><a href="#3-自动配置" class="headerlink" title="3. 自动配置"></a>3. 自动配置</h3><ul>
+<li>常用的三中模式</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token number">1</span>、cocoon<span class="token operator">-</span><span class="token number">22</span><span class="token operator">-</span>archetype<span class="token operator">-</span>webapp   <span class="token operator">--</span> 
+<span class="token number">2</span>、maven<span class="token operator">-</span>archetype<span class="token operator">-</span>quickstart   <span class="token operator">--</span> <span class="token number">7</span>
+<span class="token number">3</span>、maven<span class="token operator">-</span>archetype<span class="token operator">-</span>webapp       <span class="token operator">--</span> <span class="token number">10</span></code></pre>
+<blockquote>
+<p><a href="https://blog.csdn.net/sirdean/article/details/81636658" target="_blank" rel="noopener">其他的可以看这里</a></p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token string">'groupId'</span><span class="token operator">:</span> 公司名
+<span class="token string">'artifactId'</span><span class="token operator">:</span> 项目名字
+<span class="token string">'version'</span><span class="token operator">:</span> 版本 <span class="token punctuation">(</span>默认是 <span class="token number">1.0</span><span class="token operator">-</span>SNAPSHOT<span class="token punctuation">)</span>
+<span class="token string">'package'</span><span class="token operator">:</span> com<span class="token punctuation">.</span>sjs<span class="token operator">:</span>包名</code></pre>
+<p>Maven通过’groupId’, ‘artifactId’, ‘version’来定位 项目/类库 坐标</p>
+<h3 id="4-cmd配置-命令自动生成"><a href="#4-cmd配置-命令自动生成" class="headerlink" title="4. cmd配置(命令自动生成)"></a>4. cmd配置(命令自动生成)</h3><p>创建:</p>
+<pre class=" language-java"><code class="language-java">mvn archetype<span class="token operator">:</span>generate指令直接创建项目
+    mvn archetype<span class="token operator">:</span>generate <span class="token operator">-</span>DgroupId<span class="token operator">=</span>公司名 <span class="token operator">-</span>DartifactId<span class="token operator">=</span>工程名 <span class="token operator">-</span>Dviersion<span class="token operator">=</span><span class="token number">1.0</span><span class="token operator">-</span>SNAPSHOT <span class="token operator">-</span>Dpackage<span class="token operator">=</span>包名</code></pre>
+<p>常用命令</p>
+<pre class=" language-java"><code class="language-java">maven <span class="token operator">-</span>v
+mvn test<span class="token operator">:</span> 测试 <span class="token punctuation">(</span>会有测试报告日止<span class="token punctuation">)</span>
+mvn clean<span class="token operator">:</span> clean
+mvn <span class="token keyword">package</span><span class="token operator">:</span> 将当前这个项目打包成jar，或者是war，pom
+mvn install<span class="token operator">:</span> 首先将pom<span class="token punctuation">.</span>xml中需要的jar包安装到本地仓库上，并且，将自己打包然后安装到本地仓库上。
+mvn compile<span class="token operator">:</span> 编译源代码</code></pre>
+<ul>
+<li><strong>scope(定义依赖的范围)的6中属性值：</strong></li>
+</ul>
+<pre class=" language-java"><code class="language-java">compile：默认的范围，编译测试运行都有效
+provided：编译和测试有效
+runtime：测试和运行时有效
+test：只在测试时有效
+system：在编译和测试时有效，移植性低，与本机系统相关联
+<span class="token keyword">import</span>：导入范围，她只使用在dependencyManagement中，表示从其他的pom中导入dependency的配置</code></pre>
 
             </div>
             <hr/>
@@ -535,7 +534,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">sunjusong</a>
+                    <a href="/about" rel="external nofollow noreferrer">孙鉅淞</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -545,7 +544,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/23/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2-1/">https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/05/23/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2-1/</a>
+                    <a href="https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/07/26/%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6/">https://github.com/sunxinan12138/sunxinan12138.github.io.git/2020/07/26/%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -558,7 +557,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">sunjusong</a>
+                    <a href="/about" target="_blank">孙鉅淞</a>
                     !
                 </span>
             </div>
@@ -583,8 +582,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/DataBase-algorithm/">
-                                    <span class="chip bg-color">DataBase&amp;algorithm</span>
+                                <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                                    <span class="chip bg-color">工具</span>
                                 </a>
                             
                         </div>
@@ -755,7 +754,7 @@
         repo: 'sunxinan12138.github.io',
         owner: 'sunxinan12138',
         admin: ["sunxinan12138"],
-        id: '2020-05-23T14-59-59',
+        id: '2020-07-26T22-09-58',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -779,54 +778,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/23/%E7%AE%80%E5%8D%95%E7%9A%84%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                <a href="/2020/07/26/%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/05/26/j4v3kfDzehYtUZm.jpg" class="responsive-img" alt="简单的工厂模式">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="开发插件">
                         
-                        <span class="card-title">简单的工厂模式</span>
+                        <span class="card-title">开发插件</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简单的工厂模式
+                            Maven, git
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-26
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    大话设计模式
-                                </a>
-                            
-                            <a href="/categories/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%84%E4%B9%A6/" class="post-category">
-                                    抄书
+                            <a href="/categories/TOOL/" class="post-category">
+                                    TOOL
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">简单工厂模式</span>
-                    </a>
-                    
-                    <a href="/tags/GOF-23/">
-                        <span class="chip bg-color">GOF-23</span>
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
                     </a>
                     
                 </div>
@@ -840,31 +833,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/22/%E6%88%91%E7%9A%84hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%94%B9/">
+                <a href="/2020/07/07/Mysql/">
                     <div class="card-image">
                         
+                        <img src="/source/images/xxx.jpg" class="responsive-img" alt="Mysql">
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="我的hexo博客搭建配置更改">
-                        
-                        <span class="card-title">我的hexo博客搭建配置更改</span>
+                        <span class="card-title">Mysql</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            hexo博客搭建
+                            摘要
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/build/" class="post-category">
-                                    build
+                            <a href="/categories/%E7%B1%BB%E5%88%AB/" class="post-category">
+                                    类别
                                 </a>
                             
                             
@@ -874,8 +866,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hexo/">
-                        <span class="chip bg-color">hexo</span>
+                    <a href="/tags/%E6%A0%87%E7%AD%BE/">
+                        <span class="chip bg-color">标签</span>
                     </a>
                     
                 </div>
