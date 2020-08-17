@@ -444,21 +444,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-03
+                    2020-08-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    3.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    14 分
                 </div>
                 
 
@@ -628,7 +628,7 @@
 <li><p>sleep比yield有更好的移植性</p>
 </li>
 </ul>
-<p>wait()</p>
+<p>wait(): 当前线程等待执行wait的线程(要加同步锁 谁等就锁谁)</p>
 <ul>
 <li>和notify()/notifyAll() 一起用</li>
 <li>在synchronized中使用</li>
@@ -667,17 +667,34 @@
 </ul>
 </blockquote>
 <blockquote>
-<p><del>线程不安全的集合:ArrayList –&gt; CopyOnWriterArrayLis(JUC下并发安全的包)</del></p>
-<ul>
-<li><del>ArrayList ：</del></li>
-<li><del>LinkedList：</del></li>
-<li><del>HashMap：</del></li>
-<li><del>HashSet：</del></li>
-<li><del>TreeMap：</del></li>
-<li><del>TreeSet：</del></li>
-<li><del>StringBulider：</del></li>
-</ul>
-<p>(待完成)</p>
+<p>线程不安全的集合:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>线程不安全</th>
+<th>对应线程安全</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>ArrayList</td>
+<td>CopyOnWriterArrayLis/vector</td>
+</tr>
+<tr>
+<td>2</td>
+<td>HashMap</td>
+<td>HashTable</td>
+</tr>
+<tr>
+<td>3</td>
+<td>StringBuilder</td>
+<td>StringBuffer</td>
+</tr>
+</tbody></table>
+<ol>
+<li>Servlet/Controller线程不安全的</li>
+</ol>
 </blockquote>
 <blockquote>
 <p>刚才的窗口买票程序就会出现安全问题</p>
@@ -898,18 +915,108 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="线程池-了解"><a href="#线程池-了解" class="headerlink" title="线程池(了解)"></a>线程池(了解)</h2><blockquote>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><blockquote>
 <ul>
 <li>将线程放入池子,方便使用和管理,也避免了销毁造成的浪费</li>
+<li>3.Java线程池（工具）</li>
+<li>线程池有很多种，但是核心线程池ThreadPoolExecutor。</li>
 <li>ExecutorService:线程池接口</li>
 <li>Executors(Runable 接口):工具类,线程池工厂</li>
 </ul>
 </blockquote>
+<pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">//线程池：内含了一些线程数量，以及拒绝策略，阻塞队列...内容。</span>
+
+    <span class="token keyword">public</span> <span class="token function">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token keyword">int</span> corePoolSize<span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">//核心线程数,工作的</span>
+                              <span class="token keyword">int</span> maximumPoolSize<span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">//最大线程数</span>
+                              <span class="token keyword">long</span> keepAliveTime<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//最大活跃时间，如果超过最大活跃时间，不工作的线程被回收（优先回收非核心线程）</span>
+                              TimeUnit unit<span class="token punctuation">,</span>        <span class="token comment" spellcheck="true">//时间单位</span>
+                              BlockingQueue<span class="token operator">&lt;</span>Runnable<span class="token operator">></span> workQueue<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//阻塞队列</span>
+                              ThreadFactory threadFactory<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//线程工厂，创建线程的方式</span>
+                              RejectedExecutionHandler handler<span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//拒绝策略</span>
+                              <span class="token punctuation">}</span></code></pre>
+<blockquote>
+<ol>
+<li><p>假设线程池中有20个线程，10个核心线程数，当有10个任务来临，优先使用核心线程来工作，如果又来1个任务:</p>
+<ol>
+<li>第一，创建一个非核心线程工作</li>
+<li>第二，进入阻塞队列</li>
+<li>阻塞队列共有4种：S&gt;L&gt;A:<ol>
+<li>SynchronousQueue:同步队列，如果有任务进入队列，直接创建一个线程工作。</li>
+<li>LinkedBlockingQueue:链表阻塞队列，如果有任务进入队列，直接排队，按照先进先出的规则进行执行，先排队，先执行。</li>
+<li>ArrayBlockingQueue:数组阻塞队列，如果有任务进入队列，直接排队，按照先进先出的规则进行执行，先排队，先执行。</li>
+<li>DelayQueue:延迟队列，如果有任务进入队列，先排队，但是不立即执行，而是等到延迟时间到了，再执行。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>拒绝策略也有4种：当有任务来临时，如果超过了线程池的规定线程数，可以选择任务执行的策略。</p>
+<ol>
+<li>直接丢弃（DiscardPolicy）</li>
+<li>队列中最老的任务（DiscardOldestPolicy）</li>
+<li>抛出异常（AbortPolicy），默认策略</li>
+<li>将任务分配调用线程来执行（CallerRunsPolicy）</li>
+</ol>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadPoolDemo</span> <span class="token punctuation">{</span>
+
+</code></pre>
+</li>
+</ol>
+<pre><code>   //定义核心线程数
+   private static final int MAX_CORE = 4;
+   //定义最大线程数
+   private static final int MAX_THREAD_NUM = 10;
+   //定义活跃时间,单位毫秒
+   private static final long MAX_ACTIVE_TIME = 3000;
+   //定义阻塞队列
+   private static LinkedBlockingQueue&lt;Runnable&gt; workQueue = new LinkedBlockingQueue&lt;&gt;();
+
+   //定义一个线程执行器
+   private static ThreadPoolExecutor threadPoolExecutor;
+
+   //静态代码块
+   static {
+       //实例化一个线程池执行器
+       ThreadPoolExecutor executor = new ThreadPoolExecutor(MAX_CORE,
+               MAX_THREAD_NUM,
+               MAX_ACTIVE_TIME,
+               TimeUnit.MILLISECONDS,
+               workQueue
+               );
+       //允许核心线程超时，核心线程也在销毁之内
+       executor.allowCoreThreadTimeOut(true);
+       //将创建出来的线程池执行器赋值给成员变量
+       threadPoolExecutor = executor;
+   }
+
+
+   public static void main(String[] args) {
+     /*threadPoolExecutor = new ThreadPoolExecutor(MAX_CORE,
+             MAX_THREAD_NUM,
+             MAX_ACTIVE_TIME,
+             TimeUnit.MILLISECONDS,
+             workQueue);*/
+     for(int i = 1;i &lt;= 20;i++){
+         Runnable r =  new Runnable(){
+             public void run(){
+                 try{
+                     Thread.sleep(1000);
+                 }catch (Exception e){
+                     e.printStackTrace();
+                 }
+                 for(int i = 1;i &lt;= 10;i++){
+                     System.out.println(&quot;i = &quot; + i);
+                 }
+             }
+         };
+         threadPoolExecutor.execute(r);
+     }
+   }</code></pre><p>   }</p>
+<pre><code>
+</code></pre></blockquote>
 <pre class=" language-java"><code class="language-java">ExecutorService service <span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 数量</span>
 service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SJSThread</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SJSThread</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SJSThread</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 service<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//结束线程连接池</span></code></pre>
 <h2 id="同步-异步"><a href="#同步-异步" class="headerlink" title="同步/异步"></a>同步/异步</h2><blockquote>
 <ul>
@@ -1495,7 +1602,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">17.1k</span>&nbsp;字
+                class="white-color">17.9k</span>&nbsp;字
             
             
             
