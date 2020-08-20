@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>工厂模式</title>
+      <link href="/2020/08/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2020/08/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 类别 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>观察者模式</title>
+      <link href="/2020/08/17/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2020/08/17/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="观察者例子"><a href="#观察者例子" class="headerlink" title="观察者例子"></a>观察者例子</h2><p>一天<strong>张三</strong>和<strong>李四</strong>在上班时间看股票, 他们不想让<strong>老板</strong>发现, 前台<strong>小姐姐</strong>发现的话会通知他们老板来了</p><pre class=" language-java"><code class="language-java"></code></pre><p><img src="https://i.loli.net/2020/08/18/GRxYKhX5bvAluLs.png" alt="image.png"></p><h2 id="观察者模式-1"><a href="#观察者模式-1" class="headerlink" title="观察者模式"></a>观察者模式</h2><blockquote><p>定义了一种一对多的依赖关系, 让多个观察者对象同时监听某个<strong>主题对象</strong>. 这个主体对象发生变化时会通知所有的<strong>观察者</strong>, 使得他们自己可以更新自己 </p></blockquote><p><img src="https://i.loli.net/2020/08/18/LPSEpFO87CcHmkB.png" alt="image.png"></p><h2 id="观察者模式的特点"><a href="#观察者模式的特点" class="headerlink" title="观察者模式的特点"></a>观察者模式的特点</h2><h2 id="观察者模式的不足"><a href="#观察者模式的不足" class="headerlink" title="观察者模式的不足"></a>观察者模式的不足</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 类别 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>开发插件</title>
       <link href="/2020/07/26/%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6/"/>
       <url>/2020/07/26/%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6/</url>
