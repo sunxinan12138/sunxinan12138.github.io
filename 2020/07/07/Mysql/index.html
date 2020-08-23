@@ -440,21 +440,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-17
+                    2020-08-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    9 分
                 </div>
                 
 
@@ -496,7 +496,7 @@
 <p>==DBSM(数据库管理系统)==</p>
 <ul>
 <li>数据库的管理软件, 管理和维护我们的数据</li>
-<li>MySql 就是DBSM</li>
+<li>MySql 就是DBMS</li>
 </ul>
 <h3 id="Mysql操作语句"><a href="#Mysql操作语句" class="headerlink" title="Mysql操作语句"></a>Mysql操作语句</h3><table>
 <thead>
@@ -585,7 +585,7 @@ creat <span class="token keyword">database</span><span class="token punctuation"
     <span class="token comment" spellcheck="true">-- |  逻辑与</span>
     <span class="token comment" spellcheck="true">-- [abc] 包括其中任一个</span>
     <span class="token comment" spellcheck="true">-- [a-b] - 表示a到b的任一个</span>
-LAST_INSERT_ID<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">-- 最近插入ID</span>
+LAST_INSERT_ID<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">-- 最后一个INSERT或 UPDATE 自增长(AUTO_INCREMENT)列的ID</span>
 <span class="token comment" spellcheck="true">-- 分组</span>
 <span class="token keyword">group</span> <span class="token keyword">by</span> 列<span class="token number">1</span><span class="token punctuation">,</span>列<span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token comment" spellcheck="true">-- 在聚合函数(分组)后使用 的条件筛选</span>
@@ -637,8 +637,12 @@ LAST_INSERT_ID<span class="token punctuation">(</span><span class="token punctua
 <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> 表 <span class="token keyword">where</span> 字段 <span class="token operator">></span> <span class="token keyword">ALL</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">-- = ANY / SOME  (= ANY  和  IN 等效)</span>
 <span class="token comment" spellcheck="true">-- 返回一个集合中所有条件的</span>
-<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> 表 <span class="token keyword">where</span> 字段 <span class="token operator">=</span> <span class="token keyword">ANY</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="查询-排序"><a href="#查询-排序" class="headerlink" title="查询/排序"></a>查询/排序</h3><pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 条件查询</span>
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> 表 <span class="token keyword">where</span> 字段 <span class="token operator">=</span> <span class="token keyword">ANY</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">-- explain + 语句</span>
+查看性能 sql优化</code></pre>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="查询-排序"><a href="#查询-排序" class="headerlink" title="查询/排序"></a>查询/排序</h3><pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 自动那个提交状态</span>
+<span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'autocommit'</span>
+<span class="token comment" spellcheck="true">-- 条件查询</span>
 <span class="token keyword">where</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token operator">and</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token operator">or</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">-- 是否存在 可以代替and操作</span>
     <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token number">a</span><span class="token punctuation">,</span><span class="token number">b</span><span class="token punctuation">,</span><span class="token number">c</span><span class="token punctuation">)</span>
@@ -752,6 +756,46 @@ LAST_INSERT_ID<span class="token punctuation">(</span><span class="token punctua
 <span class="token keyword">delete</span> <span class="token keyword">from</span> 表名 <span class="token keyword">where</span> 字段名 <span class="token operator">=</span> 字段值<span class="token punctuation">;</span>
 当然可以嵌套<span class="token keyword">select</span>语句:
 <span class="token keyword">delete</span> 表名 <span class="token keyword">WHERE</span> 列<span class="token number">1</span><span class="token operator">=</span><span class="token punctuation">(</span> <span class="token keyword">select</span> 语句<span class="token punctuation">)</span></code></pre>
+<h2 id="一些函数"><a href="#一些函数" class="headerlink" title="一些函数"></a>一些函数</h2><pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 判断空</span>
+IFNULL<span class="token punctuation">(</span><span class="token number">a</span><span class="token punctuation">,</span><span class="token number">b</span><span class="token punctuation">)</span> 如果第一个<span class="token number">a</span>是空那么返回<span class="token number">b</span></code></pre>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><blockquote>
+<p>视图数据是同步的(数据同步的)</p>
+<p>创建视图时 <strong>不使用</strong> Distinct / union 以及 sum / group by … 聚合函数 的view 就是可更新表 </p>
+<p>视图可以减小数据库设计改动的影响 简化查询操作</p>
+</blockquote>
+<pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 创建视图</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">VIEW</span> clients_balance <span class="token keyword">AS</span> <span class="token keyword">select</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 把查询的东西存进去
+<span class="token keyword">create</span> <span class="token operator">or</span> replace  或者用这个语句 
+<span class="token comment" spellcheck="true">-- 删除视图</span>
+<span class="token keyword">drop</span> <span class="token keyword">view</span> name
+<span class="token comment" spellcheck="true">-- 修改视图 防止数据被删掉</span>
+在创建视图后加上
+<span class="token keyword">with</span> <span class="token keyword">check</span> <span class="token keyword">option</span></code></pre>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 创建函数(存储过程) </span>
+<span class="token keyword">CREATE</span> <span class="token keyword">PROCEDURE</span> get_invoices_and_balance<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">-- 参数 相当于函数的参数</span>
+<span class="token keyword">BEGIN</span>
+<span class="token keyword">SELECT</span>
+    <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+    invoices 
+<span class="token keyword">WHERE</span>
+    <span class="token punctuation">(</span> invoice_total <span class="token operator">-</span> payment_total <span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">END</span>
+<span class="token comment" spellcheck="true">-- 定义结束符号</span>
+<span class="token keyword">DELIMITER</span> $$ 
+<span class="token keyword">DELIMITER</span> <span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">-- 添加参数 当然查询时也要加参数</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">PROCEDURE</span> name <span class="token punctuation">(</span> valName1 TYPE1<span class="token punctuation">,</span>valName2 TYPE2 <span class="token punctuation">)</span> 
+<span class="token keyword">BEGIN</span> 
+<span class="token comment" spellcheck="true">-- 如果要判断条件</span>
+<span class="token keyword">IF</span> valName1 <span class="token operator">is</span> <span class="token boolean">null</span> <span class="token operator">and</span> valName2 <span class="token operator">is</span> <span class="token boolean">NULL</span> <span class="token keyword">THEN</span>
+<span class="token keyword">ELSE</span>
+<span class="token keyword">END</span> <span class="token keyword">IF</span><span class="token punctuation">;</span>
+</code></pre>
+<pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 执行过程</span>
+<span class="token keyword">CALL</span> get_invoices_and_balance<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">-- 删除过程 If exists 判断是否存在 可以不加</span>
+<span class="token keyword">drop</span> <span class="token keyword">procedure</span> <span class="token keyword">If</span> <span class="token keyword">exists</span> name<span class="token punctuation">;</span></code></pre>
 <h2 id="InnoDB和MySAM"><a href="#InnoDB和MySAM" class="headerlink" title="InnoDB和MySAM"></a>InnoDB和MySAM</h2><ul>
 <li>现在都是默认使用InnoDB</li>
 <li>MySAM 比较老,以前用</li>
@@ -807,7 +851,11 @@ LAST_INSERT_ID<span class="token punctuation">(</span><span class="token punctua
 </ul>
 </li>
 </ul>
-<h2 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h2><p>P52</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>MySQL官方对索引的定义为：索引（Index）是帮助MySQL高效获取数据的数据结构。提取句子主干，就可以得到索引的本质：索引是数据结构。</p>
+<h2 id="LOG"><a href="#LOG" class="headerlink" title="LOG"></a>LOG</h2><p>P52 - p63 一些函数和语句: 我跳了</p>
+<p>P74 - P84 存储过程的其他东西 和 触发器 我跳了</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://blog.csdn.net/jiadajing267/article/details/81269067" target="_blank" rel="noopener">Mysql调优 – explain</a></p>
+<p><a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="noopener">MySQL索引背后的数据结构及算法原理</a></p>
 
             </div>
             <hr/>
@@ -1362,7 +1410,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18.1k</span>&nbsp;字
+                class="white-color">19.4k</span>&nbsp;字
             
             
             
