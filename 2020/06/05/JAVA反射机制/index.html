@@ -440,14 +440,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-17
+                    2020-09-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    2.5k
                 </div>
                 
 
@@ -523,15 +523,23 @@
 </li>
 </ul>
 </blockquote>
-<h3 id="类的初始化"><a href="#类的初始化" class="headerlink" title="类的初始化"></a>类的初始化</h3><blockquote>
+<h3 id="类的初始化-–-赋初值"><a href="#类的初始化-–-赋初值" class="headerlink" title="类的初始化 – 赋初值"></a>类的初始化 – 赋初值</h3><blockquote>
 <ul>
-<li>初始化:  顺序是: <strong><em>先静态对象，后非静态对象，且静态初始化动作只进行一次</em></strong> <ol>
-<li>类构造器<clinit>()方法是由编译器自动收集类中<strong>所有</strong>的类变量赋值和静态代码块的操作(类构造器是构造类的, 不是构造该对象的)</li>
+<li><p>初始化:  顺序是: <strong><em>先静态对象，后非静态对象，且静态初始化动作只进行一次</em></strong> </p>
+<ol>
+<li>类构造器<clinit>()方法是由编译器自动收集类中<strong>所有</strong>的<strong>类变量</strong>赋值和<strong>静态</strong>代码块的操作(类构造器是构造类的, 不是构造该对象的)</li>
 <li>如果初始化时发现父类没有初始化,则初始化父类</li>
 <li>虚拟机会保证<clinit>()方法在多线程中能正确加锁和同步</li>
 </ol>
+<blockquote>
+<p>clinit 只有静态才会生效 而且只有一次 init 在实例化时生效</p>
+</blockquote>
+<ul>
+<li>实例化步骤为：先为属性分配空间，再执行赋默认值，然后按照顺序执行代码块或赋初始值，最后执行构造方法</li>
+</ul>
 </li>
-<li>类什么时候初始化:<ol>
+<li><p>类什么时候初始化:</p>
+<ol>
 <li>类的主动引用(一定发生初始化)<ol>
 <li>一定初始化main方法所在的类</li>
 <li>new对象</li>
@@ -552,8 +560,12 @@
 <p><img src="https://i.loli.net/2020/06/30/pJrK6LaXGIATNFd.png" alt="JVM.png"></p>
 </blockquote>
 <h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><blockquote>
-<p>如果需要查找一个class对象的时候 先查找内存三种加载器一次查找 如果没有从底层加载器加载 如果都没有抛出ClassNotFoundException</p>
-<p><img src="C:%5CUsers%5C25778%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200705205726521.png" alt="双亲委派"></p>
+<p>如果需要查找一个class对象的时候 先查找内存三种加载器一次查找 如果没有从底层加载器加载 如果都没有抛出ClassNotFoundException  或者调用自己加载器的findClass方法加装</p>
+<ol>
+<li>好处: 类不重复加载</li>
+<li>不会产生核心类被后来的覆盖</li>
+</ol>
+<p><img src="https://i.loli.net/2020/09/14/FouWQYTv6GM8zdh.png" alt="双亲委派"></p>
 </blockquote>
 <blockquote>
 <p>类加载器就是<strong>将class文件字节码内容加载到内存中</strong>,并将这些静态数据转换成方法去的运行时的数据结构,在堆中生成一个java.lang.class对象,作为访问入口</p>
@@ -1323,7 +1335,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">19.4k</span>&nbsp;字
+                class="white-color">27.6k</span>&nbsp;字
             
             
             

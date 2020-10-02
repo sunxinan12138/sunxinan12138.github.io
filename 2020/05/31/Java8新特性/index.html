@@ -440,21 +440,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-06
+                    2020-10-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    223
+                    842
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -469,7 +469,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Java8新特性-–-了解一个写一个"><a href="#Java8新特性-–-了解一个写一个" class="headerlink" title="Java8新特性 – 了解一个写一个"></a>Java8新特性 – 了解一个写一个</h1><h2 id="Lamda表达式"><a href="#Lamda表达式" class="headerlink" title="Lamda表达式"></a>Lamda表达式</h2><blockquote>
+                <p>[toc]</p>
+<p><img src="C:%5CUsers%5C25778%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200923231111293.png" alt="image-20200923231111293"></p>
+<h1 id="Java8新特性"><a href="#Java8新特性" class="headerlink" title="Java8新特性"></a>Java8新特性</h1><h2 id="Lamda表达式"><a href="#Lamda表达式" class="headerlink" title="Lamda表达式"></a>Lamda表达式</h2><blockquote>
 <p>λ表达式:</p>
 <p>本质上也是函数式编程:</p>
 <pre class=" language-java"><code class="language-java"><span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> expression<span class="token punctuation">[</span>表达式<span class="token punctuation">]</span>
@@ -513,6 +515,160 @@
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
         a<span class="token punctuation">.</span><span class="token function">testmethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<h2 id="java四个函数式接口"><a href="#java四个函数式接口" class="headerlink" title="java四个函数式接口"></a>java四个函数式接口</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>函数式接口</th>
+<th>参数类型</th>
+<th>返回值</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Consumer<T><br/>     消费型接口</td>
+<td>T(泛型)</td>
+<td>void</td>
+<td>对类型为T的对象应用操作</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Supplier<T> <br>供给型接口</td>
+<td>无</td>
+<td>T</td>
+<td>安徽类型为T的对象</td>
+</tr>
+<tr>
+<td></td>
+<td>Function&lt;T, K&gt;<br>函数型</td>
+<td>T</td>
+<td>R</td>
+<td>参数有两个T和R –  R.apply(T t)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Prediction<T><br>判断断定型接口</td>
+<td>T</td>
+<td>Boolen</td>
+<td>确定类型为T的对象是否满足约束,并且返回Boolean值</td>
+</tr>
+<tr>
+<td>5</td>
+<td>BiFunction&lt;T,U,R&gt;<br>可以传递两个参数的函数型接口</td>
+<td>T,U</td>
+<td>R</td>
+<td>可以传递两个参数</td>
+</tr>
+<tr>
+<td>6</td>
+<td>UnaryOperator<T><br>Function的子接口</td>
+<td>T</td>
+<td>T</td>
+<td>对类型为T的对象进行操作 返回 操作后的T</td>
+</tr>
+<tr>
+<td>7</td>
+<td>BinaryOperator<T><br>BiFunction子接口</td>
+<td>T, T</td>
+<td>T</td>
+<td>二元运算</td>
+</tr>
+<tr>
+<td>8</td>
+<td>BiConsumer&lt;T, U&gt;</td>
+<td>T U</td>
+<td>void</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>ToIntFunction<T><br>ToLongFunction<T><br>ToDoubleFunction<T></td>
+<td>T</td>
+<td>int<br>Long<br/>double</td>
+<td>传参数返回不同类型数值</td>
+</tr>
+<tr>
+<td>10</td>
+<td>IntFunction<R><br/>LongFunction<R><br/>DoubleFunction<R></td>
+<td>int<br/>Long<br/>double</td>
+<td>R</td>
+<td>不同参数类型返回R</td>
+</tr>
+</tbody></table>
+<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><blockquote>
+<p>若lambda体中的方法内容被实现了 就可以用<strong>方法引用</strong>的方式实现</p>
+</blockquote>
+<ul>
+<li>对象::实例方法名</li>
+<li>类::静态方法</li>
+<li>类::实例方法</li>
+</ul>
+<p><strong>使用 方法引用的方法的  ==方法的参数和返回值==  一定要和对应接口中  ==方法的参数和返回值==相等</strong></p>
+<p>构造方法: 类A::new 会根据接口的 返回值和参数 自动匹配构造器</p>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">method</span><span class="token punctuation">(</span>StreamDemo<span class="token operator">:</span><span class="token operator">:</span>_TEST<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> String <span class="token function">_TEST</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"操作1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token string">"000"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span>MyFunction s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"real"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+out<span class="token operator">:</span>
+<span class="token comment" spellcheck="true">/*操作1
+000real*/</span></code></pre>
+<h2 id="stream流计算"><a href="#stream流计算" class="headerlink" title="stream流计算"></a>stream流计算</h2><blockquote>
+<p>流式计算</p>
+</blockquote>
+<p>在项目中数据存储在数据库 集合等地方. 数据的处理就要交给流来计算</p>
+<blockquote>
+<p> 操作步骤</p>
+</blockquote>
+<ol>
+<li>创建Stream流</li>
+</ol>
+<p>根据数据源 集合 数组中创建</p>
+<ol start="2">
+<li>根据API操作数据</li>
+</ol>
+<p>一个操作链进行选择排序,,,</p>
+<ol start="3">
+<li>结束/终止操作</li>
+</ol>
+<p>执行操作了链条产生结果    可以使用java7的try-with-resources</p>
+<p><a href="https://www.runoob.com/java/java8-streams.html" target="_blank" rel="noopener">API看这里</a></p>
+<p>举个🌰</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// id,age,name.major</span>
+<span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Student s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token string">"sjs"</span><span class="token punctuation">,</span> <span class="token string">"jsj"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Student s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token string">"zs"</span><span class="token punctuation">,</span> <span class="token string">"dzx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Student s3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token string">"ls"</span><span class="token punctuation">,</span> <span class="token string">"dzx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Student s4 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token string">"ww"</span><span class="token punctuation">,</span> <span class="token string">"xx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Student s5 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token string">"lb"</span><span class="token punctuation">,</span> <span class="token string">"dzx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Student s6 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">17</span><span class="token punctuation">,</span> <span class="token string">"hhh"</span><span class="token punctuation">,</span> <span class="token string">"jsj"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        List<span class="token operator">&lt;</span>Student<span class="token operator">></span> students <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>s1<span class="token punctuation">,</span> s2<span class="token punctuation">,</span> s3<span class="token punctuation">,</span> s3<span class="token punctuation">,</span> s4<span class="token punctuation">,</span> s5<span class="token punctuation">,</span> s6<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 根据集合创建一个流并操作</span>
+        <span class="token comment" spellcheck="true">/*
+         * 去重
+         * 找到id是偶数的
+         * age 大于14的
+         * 逆序排列
+         * */</span>
+        Stream<span class="token operator">&lt;</span>Student<span class="token operator">></span> stream <span class="token operator">=</span> students<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">distinct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">filter</span><span class="token punctuation">(</span>a <span class="token operator">-</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">14</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">map</span><span class="token punctuation">(</span>a <span class="token operator">-</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">sorted</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> b<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> a<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        stream<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>out<span class="token operator">:</span><span class="token operator">:</span>println<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre>
 
             </div>
             <hr/>
@@ -1079,7 +1235,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">19.4k</span>&nbsp;字
+                class="white-color">27.6k</span>&nbsp;字
             
             
             

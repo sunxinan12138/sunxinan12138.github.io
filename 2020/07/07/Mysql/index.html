@@ -440,21 +440,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-23
+                    2020-09-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    10 分
                 </div>
                 
 
@@ -836,6 +836,11 @@ IFNULL<span class="token punctuation">(</span><span class="token number">a</span
 <td>小</td>
 <td>大,约为MySAM的两倍</td>
 </tr>
+<tr>
+<td>聚集索引</td>
+<td>比普通索引多了个约束</td>
+<td>叶子节点就是数据节点</td>
+</tr>
 </tbody></table>
 <blockquote>
 <p>在物理空间:</p>
@@ -852,6 +857,28 @@ IFNULL<span class="token punctuation">(</span><span class="token number">a</span
 </li>
 </ul>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>MySQL官方对索引的定义为：索引（Index）是帮助MySQL高效获取数据的数据结构。提取句子主干，就可以得到索引的本质：索引是数据结构。</p>
+<p>IO次数和数据结构的次数有关(树 – 就是高度) , 如果没有索引那就是一个数据一次IO</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><a href="https://zhuanlan.zhihu.com/p/29118331" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/29118331</a></p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>mysql的索引分为单列索引(主键索引(聚集索引),唯一索引(UNIQUE INDEX),普通索引(INDEX ))和组合索引.</p>
+<p>单列索引:一个索引只包含一个列,一个表可以有多个单列索引.</p>
+<p>组合索引:一个组合索引包含两个或两个以上的列,</p>
+<hr>
+<p>聚集索引: 数据行的物理顺序与列值的<strong>顺序相同</strong></p>
+<p>非聚集索引: 该索引中索引的逻辑顺序与磁盘上行的物理存储顺序不同，一个表中可以拥有多个非聚集索引。(普通索引，唯一索引，全文索引)</p>
+<p>回表查询解决方式:   复合索引（覆盖索引）</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 组合</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> IndexName <span class="token keyword">On</span> <span class="token punctuation">`</span>TableName<span class="token punctuation">`</span><span class="token punctuation">(</span><span class="token punctuation">`</span>字段名<span class="token punctuation">`</span><span class="token punctuation">(</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">`</span>字段名<span class="token punctuation">`</span><span class="token punctuation">(</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>覆盖索引: select 的 和查找的都是索引</p>
+<blockquote>
+<p> 索引的数据结构:</p>
+</blockquote>
+<p>哈希:</p>
+<p>B树</p>
+<p>B+树</p>
+<blockquote>
+<p>索引</p>
+<p><a href="https://www.jianshu.com/p/2879225ba243" target="_blank" rel="noopener">https://www.jianshu.com/p/2879225ba243</a></p>
+</blockquote>
 <h2 id="LOG"><a href="#LOG" class="headerlink" title="LOG"></a>LOG</h2><p>P52 - p63 一些函数和语句: 我跳了</p>
 <p>P74 - P84 存储过程的其他东西 和 触发器 我跳了</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://blog.csdn.net/jiadajing267/article/details/81269067" target="_blank" rel="noopener">Mysql调优 – explain</a></p>
@@ -1410,7 +1437,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">19.4k</span>&nbsp;字
+                class="white-color">27.6k</span>&nbsp;字
             
             
             

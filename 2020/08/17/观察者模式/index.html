@@ -440,21 +440,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-18
+                    2020-08-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    136
+                    514
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -469,8 +469,143 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="观察者例子"><a href="#观察者例子" class="headerlink" title="观察者例子"></a>观察者例子</h2><p>一天<strong>张三</strong>和<strong>李四</strong>在上班时间看股票, 他们不想让<strong>老板</strong>发现, 前台<strong>小姐姐</strong>发现的话会通知他们老板来了</p>
-<pre class=" language-java"><code class="language-java"></code></pre>
+                <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="观察者例子"><a href="#观察者例子" class="headerlink" title="观察者例子"></a>观察者例子</h2><p>一个气象台 想要<strong>几个显示器</strong> , 数据从<strong>weather对象</strong>中获取 如果 weather 数据更新 显示器要更新对应数据</p>
+<blockquote>
+<p>显示器就是观察者 而气象台的数据weather 就是通知者(<strong>主题对象</strong>)</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">
+<span class="token comment" spellcheck="true">/**
+ * @author SunJusong
+ * 观察者部分
+ * @date 2020年 08月27日 23:17:48
+ */</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Obs</span> <span class="token keyword">implements</span> <span class="token class-name">Observer</span><span class="token punctuation">,</span> DisPlay <span class="token punctuation">{</span>
+    <span class="token keyword">float</span> temp<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> humidity<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> pressur<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Subject weather<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Obs</span><span class="token punctuation">(</span>Subject sub<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>weather <span class="token operator">=</span> sub<span class="token punctuation">;</span>
+        sub<span class="token punctuation">.</span><span class="token function">RegistObserver</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 实现update 方法来显示</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span><span class="token keyword">float</span> temp<span class="token punctuation">,</span> <span class="token keyword">float</span> humidity<span class="token punctuation">,</span> <span class="token keyword">float</span> pressure<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>temp <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>humidity <span class="token operator">=</span> humidity<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>pressur <span class="token operator">=</span> pressure<span class="token punctuation">;</span>
+        <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>temp <span class="token operator">+</span> <span class="token string">"=="</span> <span class="token operator">+</span> humidity <span class="token operator">+</span> <span class="token string">"=="</span> <span class="token operator">+</span> pressur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 观察者接口</span>
+<span class="token keyword">interface</span> <span class="token class-name">Observer</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span><span class="token keyword">float</span> temp<span class="token punctuation">,</span> <span class="token keyword">float</span> humidity<span class="token punctuation">,</span> <span class="token keyword">float</span> pressure<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 显示功能接口</span>
+<span class="token keyword">interface</span> <span class="token class-name">DisPlay</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MainDemo</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 创建主体对象</span>
+        Weather weather <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Weather</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 创建观察者 当然 也可以是多个不同的类</span>
+        Obs obs1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Obs</span><span class="token punctuation">(</span>weather<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Obs obs2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Obs</span><span class="token punctuation">(</span>weather<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Obs obs3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Obs</span><span class="token punctuation">(</span>weather<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        weather<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        weather<span class="token punctuation">.</span><span class="token function">RemoveObserver</span><span class="token punctuation">(</span>obs2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        weather<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @author SunJusong
+ * 主体对象部分
+ * @date 2020年 08月27日 23:14:29
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Weather</span> <span class="token keyword">implements</span> <span class="token class-name">Subject</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> List<span class="token operator">&lt;</span>Observer<span class="token operator">></span> observers<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">float</span> temp<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">float</span> humidity<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">float</span> pressur<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Weather</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>observers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">RegistObserver</span><span class="token punctuation">(</span>Observer o<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        observers<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">RemoveObserver</span><span class="token punctuation">(</span>Observer o<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> observers<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        observers<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">notifyObserver</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>Observer observer <span class="token operator">:</span> observers<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            observer<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>temp<span class="token punctuation">,</span> humidity<span class="token punctuation">,</span> pressur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/* jdk自带 
+    观察者要继承Observable 观察者实现 Observer
+     public void change() {
+         // 封裝了通知和changed方法
+         setChanged();
+         notifyObservers();
+     }
+
+     public float getTemp() {
+         return temp;
+     }
+
+     public float getHumidity() {
+         return humidity;
+     }
+
+     public float getPressur() {
+         return pressur;
+     }
+ */</span>
+    <span class="token comment" spellcheck="true">// 传入更新的数值</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token keyword">float</span> temp<span class="token punctuation">,</span> <span class="token keyword">float</span> humidity<span class="token punctuation">,</span> <span class="token keyword">float</span> pressure<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>temp <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>humidity <span class="token operator">=</span> humidity<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>pressur <span class="token operator">=</span> pressure<span class="token punctuation">;</span>
+        <span class="token function">notifyObserver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 主体对象接口</span>
+<span class="token keyword">interface</span> <span class="token class-name">Subject</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 注册观察者</span>
+    <span class="token keyword">void</span> <span class="token function">RegistObserver</span><span class="token punctuation">(</span>Observer o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 移除观察者</span>
+    <span class="token keyword">void</span> <span class="token function">RemoveObserver</span><span class="token punctuation">(</span>Observer o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 更新信息</span>
+    <span class="token keyword">void</span> <span class="token function">notifyObserver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p><img src="https://i.loli.net/2020/08/18/GRxYKhX5bvAluLs.png" alt="image.png"></p>
 <h2 id="观察者模式-1"><a href="#观察者模式-1" class="headerlink" title="观察者模式"></a>观察者模式</h2><blockquote>
 <p>定义了一种一对多的依赖关系, 让多个观察者对象同时监听某个<strong>主题对象</strong>. 这个主体对象发生变化时会通知所有的<strong>观察者</strong>, 使得他们自己可以更新自己 </p>
@@ -1029,7 +1164,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">19.4k</span>&nbsp;字
+                class="white-color">27.6k</span>&nbsp;字
             
             
             

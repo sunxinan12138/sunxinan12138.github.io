@@ -444,21 +444,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-23
+                    2020-09-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    966
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -508,6 +508,28 @@
 <p>mysql会封装我们写的sql 如果检查无误自动提交</p>
 <p><img src="https://i.loli.net/2020/08/23/LaimKnoYh1dc2P5.png" alt="mysql自动提交属性"></p>
 <p>mysql innodb引擎已经通过MVCC、间隙锁&amp;临键锁解决了可重复读隔离级别下的幻读问题</p>
+<h2 id="创建事务"><a href="#创建事务" class="headerlink" title="创建事务"></a>创建事务</h2><pre class=" language-sql"><code class="language-sql"><span class="token keyword">START</span> <span class="token keyword">TRANSACTION</span> <span class="token punctuation">;</span>
+ <span class="token comment" spellcheck="true">// sql语句...</span>
+<span class="token keyword">Commit</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">-- 提交</span>
+<span class="token keyword">RollBack</span> <span class="token comment" spellcheck="true">-- 回滚</span>
+<span class="token comment" spellcheck="true">-- 保存点</span>
+<span class="token keyword">SAVEPOINT</span> point_name
+<span class="token keyword">RollBack</span>  <span class="token keyword">to</span> point_name <span class="token comment" spellcheck="true">-- 回滚到保存点</span></code></pre>
+<h2 id="并发和锁定"><a href="#并发和锁定" class="headerlink" title="并发和锁定"></a>并发和锁定</h2><blockquote>
+<p>在真实场景中肯定会有多个用户去访问相同的数据 这就是 并发 如果正在访问被修改的数据 那就回出现问题</p>
+</blockquote>
+<ul>
+<li>mysql 默认并发处理 – 锁行</li>
+</ul>
+<p>当一个事务修改行没有结束时    另一个事务再次对其修改会被锁住发生超时 </p>
+<pre class=" language-sql"><code class="language-sql"><span class="token operator">></span> <span class="token number">1205</span> <span class="token operator">-</span> <span class="token keyword">Lock</span> wait timeout exceeded<span class="token punctuation">;</span> try restarting <span class="token keyword">transaction</span>
+<span class="token comment" spellcheck="true">// 超过了锁定等待超时；尝试重新启动事务  -- 事务会失效</span></code></pre>
+<h2 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h2><p><strong>Lost Update :</strong> 当有两个事务修改/删除一个数据时, 后提交的会把先提交的覆盖掉</p>
+<p><strong>脏度</strong>:读取到了<strong>另一个事务未结束</strong>的数据(回滚前 或者更新前)</p>
+<p><code>举个例子:</code>  <strong>A事务</strong> 增加20积分 <strong>B事务</strong> 根据积分来选择折扣  – 如果 A事务在B事务结束前回滚了那么B事务的数据就是不真实的 也就是很笨不存在的</p>
+<p><strong>不可重复读</strong>:(不一致读) 再<strong>一次事务</strong>中, 两次查询不一致,可能在两次查询中更改了数据</p>
+<p><strong>幻读</strong>:  有数据变化时没有查询到 – 事务查询后添加, 修改或删除的</p>
+<p><code>举个例子:</code> A事务查询积分大于100的 B事务将 <em>小明</em>  的积分加到100 先A后B 但是A事务查不到 小明</p>
 <h2 id="四种隔离级别"><a href="#四种隔离级别" class="headerlink" title="四种隔离级别"></a>四种隔离级别</h2><blockquote>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> @<span class="token variable">@tx_isolation</span><span class="token punctuation">;</span> 查看事务隔离级别</code></pre>
 </blockquote>
@@ -520,16 +542,16 @@
 </li>
 <li><p>Repeatable Read（可重读）</p>
 </li>
-<li><p>Serializable（可串行化(可序列化)）</p>
-<p><img src="https://i.loli.net/2020/08/23/42nrMJzVkWZ7Fp6.png" alt="image.png"></p>
-<p>脏度:读取到了<strong>另一个事务未结束</strong>的数据(回滚前 或者更新前)</p>
-<p>不可重复读: 再<strong>一次事务</strong>中, 两次查询不一致,可能在两次查询中更改了数据</p>
-<p>幻读:  两次查询,第二次查到了新的行(多了一行)</p>
+<li><p>Serializable（可串行化(可序列化)） : 防止幻读 当A事务发现有事务在修改我要查询的数据 就会等待</p>
 </li>
 </ol>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">session</span> <span class="token operator">/</span> globel <span class="token keyword">transaction</span> <span class="token keyword">isolation level</span> 级别 <span class="token comment" spellcheck="true">// 设置级别 </span>
-<span class="token keyword">session</span><span class="token punctuation">(</span>当前会话<span class="token punctuation">)</span> <span class="token operator">/</span> globel <span class="token punctuation">(</span>全局<span class="token punctuation">)</span></code></pre>
-<h2 id="事务实现技术-原理"><a href="#事务实现技术-原理" class="headerlink" title="事务实现技术/原理"></a>事务实现技术/原理</h2><p><img src="https://i.loli.net/2020/08/23/O1uMT6z3eIAVWS7.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2020/08/23/42nrMJzVkWZ7Fp6.png" alt="image.png"></p>
+<img src="https://i.loli.net/2020/09/07/iMKPBzVfsqt9oC1.png" alt="image.png" style="zoom:80%;" />
+
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">session</span> <span class="token operator">/</span> globel <span class="token keyword">transaction</span> <span class="token keyword">isolation level</span> 级别 <span class="token comment" spellcheck="true">-- 设置级别 Mysql 默认Repeatable Read</span>
+   <span class="token keyword">session</span><span class="token punctuation">(</span>当前会话<span class="token punctuation">)</span> <span class="token operator">/</span> globel <span class="token punctuation">(</span>全局<span class="token punctuation">)</span></code></pre>
+<p>   事务实现技术/原理</p>
+<p><img src="https://i.loli.net/2020/08/23/O1uMT6z3eIAVWS7.png" alt="image.png"></p>
 <h3 id="事务的实现原理"><a href="#事务的实现原理" class="headerlink" title="事务的实现原理"></a>事务的实现原理</h3><ol>
 <li>事务的<strong>原子性 通过undo log</strong> 实现<ul>
 <li><del>undo log : 操作任何数据之前,将数据备份到一个地方 (Undo log).  然后进行数据修改. 如果出现错误或者执行RollBack语句.  系统用备份在undo log 下的数据进行回滚(sql执行相反操作delect – insetr update – 相反的update)</del> </li>
@@ -568,23 +590,6 @@
 </ul>
 </li>
 </ol>
-<h2 id="创建事务"><a href="#创建事务" class="headerlink" title="创建事务"></a>创建事务</h2><pre class=" language-sql"><code class="language-sql"><span class="token keyword">START</span> <span class="token keyword">TRANSACTION</span> <span class="token punctuation">;</span>
- <span class="token comment" spellcheck="true">// sql语句...</span>
-<span class="token keyword">Commit</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">-- 提交</span>
-<span class="token keyword">RollBack</span> <span class="token comment" spellcheck="true">-- 回滚</span>
-<span class="token comment" spellcheck="true">-- 保存点</span>
-<span class="token keyword">SAVEPOINT</span> point_name
-<span class="token keyword">RollBack</span>  <span class="token keyword">to</span> point_name 回滚到保存点
-</code></pre>
-<h2 id="并发和锁定"><a href="#并发和锁定" class="headerlink" title="并发和锁定"></a>并发和锁定</h2><blockquote>
-<p>在真实场景中肯定会有多个用户去访问相同的数据 这就是 并发 如果正在访问被修改的数据 那就回出现问题</p>
-</blockquote>
-<ul>
-<li>mysql 默认并发处理 – 锁行</li>
-</ul>
-<p>当一个事务修改行没有结束时    另一个事务再次对其修改会被锁住发生超时 </p>
-<pre class=" language-sql"><code class="language-sql"><span class="token operator">></span> <span class="token number">1205</span> <span class="token operator">-</span> <span class="token keyword">Lock</span> wait timeout exceeded<span class="token punctuation">;</span> try restarting <span class="token keyword">transaction</span>
-<span class="token comment" spellcheck="true">// 超过了锁定等待超时；尝试重新启动事务  -- 事务会失效</span></code></pre>
 <h1 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h1><h3 id="声明式事务"><a href="#声明式事务" class="headerlink" title="声明式事务"></a>声明式事务</h3><p>传播特性</p>
 <h3 id="编程式事务"><a href="#编程式事务" class="headerlink" title="编程式事务"></a>编程式事务</h3><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/theory-of-mysql-index.html</a></p>
 <p><a href="http://blog.codinglabs.org/articles/index-condition-pushdown.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/index-condition-pushdown.html</a></p>
@@ -904,31 +909,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/07/02/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+                <a href="/2020/07/04/%E4%BA%8B%E5%8A%A1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="原型模式">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Spring事务">
                         
-                        <span class="card-title">原型模式</span>
+                        <span class="card-title">Spring事务</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            摘要
+                            Spring事务
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%B1%BB%E5%88%AB/" class="post-category">
-                                    类别
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    框架
                                 </a>
                             
                             
@@ -938,8 +943,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%A0%87%E7%AD%BE/">
-                        <span class="chip bg-color">标签</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/">
+                        <span class="chip bg-color">未完成</span>
                     </a>
                     
                 </div>
@@ -1146,7 +1155,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">19.4k</span>&nbsp;字
+                class="white-color">27.6k</span>&nbsp;字
             
             
             
