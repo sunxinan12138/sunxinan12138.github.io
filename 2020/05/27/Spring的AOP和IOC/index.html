@@ -444,14 +444,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-07-17
+                    2020-10-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.1k
+                    4.3k
                 </div>
                 
 
@@ -1180,6 +1180,22 @@ userService<span class="token punctuation">.</span><span class="token function">
 <blockquote>
 <p><a href="#">Spring事务运用</a></p>
 </blockquote>
+<h1 id="加一个MVC的"><a href="#加一个MVC的" class="headerlink" title="加一个MVC的"></a>加一个MVC的</h1><p><img src="https://i.loli.net/2020/10/02/VD3Xah5SyBOoKsQ.png" alt="mvc工作原理"></p>
+<ol>
+<li>客户端<strong>请求</strong>到DispatcherServlet</li>
+<li>DispatcherServlet根据请求地址查询映射处理器<strong>HandleMapping，获取Handler</strong></li>
+<li>请求<strong>HandlerAdapter执行Handler</strong></li>
+<li><strong>执行相应的Controller方法</strong>，执行完毕<strong>返回ModelAndView</strong></li>
+<li>通过<strong>ViewResolver解析视图</strong>，<strong>返回View</strong></li>
+<li><strong>渲染视图</strong>，将<strong>Model数据转换为Response响应</strong></li>
+<li>将<strong>结果返回给客户端</strong></li>
+</ol>
+<p><code>2，3 两步都在DispatcherServlet -&gt; doDispatch中进行处理</code></p>
+<h2 id="Spring-MVC-架构-与原生Servlet区别-请求处理流程"><a href="#Spring-MVC-架构-与原生Servlet区别-请求处理流程" class="headerlink" title="Spring MVC 架构 | 与原生Servlet区别 | 请求处理流程"></a>Spring MVC 架构 | 与原生Servlet区别 | 请求处理流程</h2><ol>
+<li>原生的一个请求对应一个servlet 框架(SpringMVC框架 简写) 由前端控制器去寻找对应的Controller</li>
+<li>框架封装了一些数据</li>
+</ol>
+<p><a href="">Spring注解 boot 会很频繁用到</a></p>
 
             </div>
             <hr/>
@@ -1749,7 +1765,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">27.6k</span>&nbsp;字
+                class="white-color">28.6k</span>&nbsp;字
             
             
             

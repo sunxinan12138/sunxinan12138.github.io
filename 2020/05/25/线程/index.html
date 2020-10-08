@@ -444,21 +444,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-09-03
+                    2020-10-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.9k
+                    4.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    16 分
                 </div>
                 
 
@@ -798,6 +798,63 @@
         <span class="token punctuation">}</span>
 
     <span class="token punctuation">}</span></code></pre>
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>一种处理并发数据的方式 将数据 隔离 每个线程单独持有</p>
+<ol>
+<li><p>用空间换时间  </p>
+</li>
+<li><p>创建副本进行数据隔离</p>
+</li>
+</ol>
+<ul>
+<li><p>要求是多个线程用一个对象,但是每个线程的对象是独立的</p>
+</li>
+<li><p>每个线程独立的改变自己的变量副本,不去影响其他线程</p>
+</li>
+<li><p>Thread里面包含 ThreadLocal</p>
+<p><img src="https://i.loli.net/2020/10/02/AOLEhVptz3QDa1y.png" alt="image-20200720211033368.png"></p>
+<p><img src="https://i.loli.net/2020/10/02/LcskzqfCXDpAihu.png" alt="image-20200720211926178.png"></p>
+</li>
+<li><p>内部类ThreadLocalMap:  k-v组成的entry[]数组</p>
+</li>
+<li><p>key是ThreadLocal的弱引用</p>
+<ul>
+<li>val就是值</li>
+</ul>
+</li>
+</ul>
+<p>get: 获取</p>
+<p>set: 存储</p>
+<p>remove: 移除</p>
+<p>initialValue :重写</p>
+<ul>
+<li><p><strong>内存泄漏问题</strong></p>
+<p>由于key的Thread是弱引用 所以会存在key是null 但是val是强引用 就会内存泄漏</p>
+<p>解决方法:是每一次get和set,remove时都会清楚为null的val 下一次垃圾回收就会清除了</p>
+<p>所以调用一下remove就行了</p>
+</li>
+</ul>
+<pre class=" language-java"><code class="language-java">   <span class="token comment" spellcheck="true">// 创建线程池</span>
+        ExecutorService service <span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        service<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"==="</span> <span class="token operator">+</span> DateUtilSafe<span class="token punctuation">.</span><span class="token function">parsesss</span><span class="token punctuation">(</span><span class="token string">"2020-20-20 21:50:90"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+        service<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 工具类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DateUtilSafe</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 写这个才安全</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> ThreadLocal<span class="token operator">&lt;</span>SimpleDateFormat<span class="token operator">></span> THREAD_LOCAL <span class="token operator">=</span> ThreadLocal<span class="token punctuation">.</span><span class="token function">withInitial</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-DD HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Date <span class="token function">parsesss</span><span class="token punctuation">(</span>String dateStr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Date date <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            date <span class="token operator">=</span> THREAD_LOCAL<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>dateStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ParseException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> date<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2><blockquote>
 <p>关键字:wait(), notify()和 notifyAll() – 线程调度的方法</p>
 <ul>
@@ -1646,7 +1703,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">27.6k</span>&nbsp;字
+                class="white-color">28.6k</span>&nbsp;字
             
             
             

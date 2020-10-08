@@ -440,21 +440,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-02
+                    2020-10-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    4.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    13 分
+                    17 分
                 </div>
                 
 
@@ -496,9 +496,6 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <li>加锁</li>
 <li>finally中释放锁</li>
 </ol>
-<p>分为可重入锁/ 读锁和写锁</p>
-<p>公平锁</p>
-<p>非公平锁</p>
 <blockquote>
 <p>Synchronized和Lock</p>
 </blockquote>
@@ -946,7 +943,7 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <ol>
 <li>IO密集型: 大于 number(程序中十分消耗IO的线程数)的数量 (可以是number的两倍);</li>
 </ol>
-<h2 id="ForkJoin-大数据量-未完成"><a href="#ForkJoin-大数据量-未完成" class="headerlink" title="ForkJoin(大数据量)(未完成)"></a>ForkJoin(大数据量)(未完成)</h2><p>将 大任务分解为多个小任务 然后进行处理  – 递归</p>
+<h2 id="ForkJoin-大数据量"><a href="#ForkJoin-大数据量" class="headerlink" title="ForkJoin(大数据量)"></a>ForkJoin(大数据量)</h2><p>将 大任务分解为多个小任务 然后进行处理  – 递归</p>
 <blockquote>
 <p>工作窃取 利用(双端队列)</p>
 <p>A, B 两个线程 A线程执行结束 </p>
@@ -1028,6 +1025,160 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <p>Future(父)   new CompletableFuture()(子类);</p>
 <p>runAsync(Runnable) 无返回值的异步调用 </p>
 <p>supplyAsync(Runnable) 有返回值</p>
+<h2 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h2><ul>
+<li>什么是JMM(java memory model)</li>
+</ul>
+<p>JMM: java内存模型, 一种规则, 概念, 约定. 主要规定了线程和内存之间的一些关系 为了解决多线程和共享内存进行通信是的问题. </p>
+<p><strong>约定:</strong></p>
+<ol>
+<li>线程解锁前, 必须把共享变量==立即==刷新回主存</li>
+<li>线程加锁前, 必须读取主存中的最新值到工作内存</li>
+<li>线程 有工作内存, 主内存</li>
+</ol>
+<p>JMM和JVM没有什么关系 但都提供了系统的可移植性</p>
+<ul>
+<li>JMM的实现:</li>
+</ul>
+<p><img src="https://i.loli.net/2020/10/03/312ni4afCugcPwT.png" alt="image.png"></p>
+<ul>
+<li>问题的出现</li>
+</ul>
+<p><img src="https://i.loli.net/2020/10/03/rN9vclqCeQuGZxW.png" alt="image.png"></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 线程一</span>
+            <span class="token comment" spellcheck="true">// 如果不作处理</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>num <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 确保上面的线程可以先执行</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 线程二</span>
+            num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 线程一不知道被修改了</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p>注: 并不是所有条件下都会出现问题 和系统环境有关系 但是加上volatile一定不会出现问题</p>
+</blockquote>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>Volatile是java虚拟机提供的<strong>轻量级的同步机制</strong></p>
+<ol>
+<li>保证了内存可见性</li>
+</ol>
+<p>上面的多线程问题只要加上volatile关键字修饰变量就可以解决</p>
+<p><code>private volatile static int num = 1;</code></p>
+<ol start="2">
+<li>但是不保证原子性</li>
+</ol>
+<p>使用JUC自带的原子类和操作 就可以保证原子性</p>
+<h3 id="3-禁止了指令重排序"><a href="#3-禁止了指令重排序" class="headerlink" title="3. 禁止了指令重排序"></a>3. 禁止了指令重排序</h3><blockquote>
+<p>什么是指令重排</p>
+</blockquote>
+<ul>
+<li>说白了就是 某些情况 计算机的CPU并不会哪找你写的程序的顺序去执行 他会自己重新优化排序</li>
+<li>编译器 – 并行指令 – 内存系统 这些地方都会有重排的可能发生</li>
+</ul>
+<blockquote>
+<p>volatile 避免指令重排</p>
+</blockquote>
+<ul>
+<li>当有用Volatile关键字时 在执行时会加上内存屏障 防止指令的重排序</li>
+<li>也保证了内存的可见性</li>
+</ul>
+<h2 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h2><blockquote>
+<p>什么是CAS(CompareAndSet): 比较并交换</p>
+</blockquote>
+<p>举个例子  原子整形中 compareAndSet操作</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 如果是期望值 那么久更新 否则就不更新 CAS是CPU执行并发的一种方式</span>
+    AtomicInteger atomicInteger <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AtomicInteger</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    atomicInteger<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>compareAndSet源码就会有unsafe类 这些原子操作都会用到这个类里面很多native的方法</p>
+<p><img src="https://i.loli.net/2020/10/03/wqRsgcjhiNWrHO5.png" alt="image.png"></p>
+<ul>
+<li><p>因为java无法操作内存 但是可以调用C++来操作内存 (本地的native方法)</p>
+</li>
+<li><p>用自旋锁循环判定是否满足条件</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">getAndAddInt</span><span class="token punctuation">(</span>Object var1<span class="token punctuation">,</span> <span class="token keyword">long</span> var2<span class="token punctuation">,</span> <span class="token keyword">int</span> var4<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">int</span> var5<span class="token punctuation">;</span>
+   <span class="token keyword">do</span> <span class="token punctuation">{</span>
+       var5 <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getIntVolatile</span><span class="token punctuation">(</span>var1<span class="token punctuation">,</span> var2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span> <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">compareAndSwapInt</span><span class="token punctuation">(</span>var1<span class="token punctuation">,</span> var2<span class="token punctuation">,</span> var5<span class="token punctuation">,</span> var5 <span class="token operator">+</span> var4<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">return</span> var5<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+</ul>
+<h3 id="自旋锁产生的ABA问题"><a href="#自旋锁产生的ABA问题" class="headerlink" title="自旋锁产生的ABA问题"></a>自旋锁产生的ABA问题</h3><p><img src="C:%5CUsers%5C25778%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201003195829532.png" alt="image-20201003195829532"></p>
+<p>这就是ABA问题</p>
+<ul>
+<li>循环时间太长开销也会变得很大: 加入pause 指令<ol>
+<li>延迟流水线执行指令(de-pipeline), 使cpu不会消耗过多的资源</li>
+<li>可以避免退出循环的时候 因内存顺序冲突(Memory Order Violation) 引起的CPU流水线被清空</li>
+</ol>
+</li>
+</ul>
+<h4 id="原子引用"><a href="#原子引用" class="headerlink" title="原子引用"></a>原子引用</h4><p>乐观锁的思想</p>
+<p>使用原子引用来解决这个问题</p>
+<p>引入一个版本号的思想:</p>
+<p><img src="https://i.loli.net/2020/10/03/vguV8iRorBGez6P.png" alt="image.png"></p>
+<p>截取一部分</p>
+<pre class=" language-java"><code class="language-java">AtomicStampedReference<span class="token operator">&lt;</span>String<span class="token operator">></span> atomicReference <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AtomicStampedReference</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"2222"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 初始值和版本戳</span>
+    <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> stamp <span class="token operator">=</span> atomicReference<span class="token punctuation">.</span><span class="token function">getStamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"A-stamp: "</span> <span class="token operator">+</span> stamp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        atomicReference<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span><span class="token string">"2222"</span><span class="token punctuation">,</span> <span class="token string">"21"</span><span class="token punctuation">,</span> stamp<span class="token punctuation">,</span> stamp <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>atomicReference<span class="token punctuation">.</span><span class="token function">getReference</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 修改成功 就是21</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<blockquote>
+<p>==注意:== 在Java的CAS底层实现中 比较两个值是否相等时用的是<strong>==</strong> 对于自动装箱的包装类(Integer等) 会出现不相等的问题 (自动装箱的缓存问题, 我就不细说了) </p>
+</blockquote>
+<h2 id="各种锁"><a href="#各种锁" class="headerlink" title="各种锁"></a>各种锁</h2><p><strong>锁的类型:</strong></p>
+<ul>
+<li><p>可重入锁(递归所)（synchronized和ReentrantLock）：在<strong>执行对象中</strong>通用一把锁的方法<strong>不用再次获得锁</strong>(synchronized 和 Lock 都是可重入锁)</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">synchronized</span> 和 Lock区别
+Lock锁 加锁解锁是成对的 获取道A的锁时 默认也获取到了B的锁
+<span class="token comment" spellcheck="true">// -------------------</span>
+<span class="token keyword">synchronized</span> <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token keyword">synchronized</span> <span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// ---------------------------</span>
+<span class="token comment" spellcheck="true">// 如果有线程获取到A方法的锁就默认也获取了B方法的锁 所以 A没有执行结束 B方法是被锁住的状态</span></code></pre>
+</li>
+<li><p>可中断锁（synchronized就不是可中断锁，而Lock是可中断锁）：在等待获取锁过程中可中断</p>
+</li>
+<li><p>公平锁/<strong>非公平锁</strong>（ReentrantLock和ReentrantReadWriteLock）： 按照先来后到排队  / <strong>按等待获取锁的线程的等待时间进行获取，等待时间长的具有优先获取锁权利</strong>(默认都是非公平锁)</p>
+</li>
+<li><p>读写锁（ReadWriteLock和ReentrantReadWriteLock）：对资源读取和写入的时候拆分为2部分处理，读的时候可以多线程一起读，写的时候必须同步地写</p>
+</li>
+<li><p>自旋锁  循环判断锁的状态 </p>
+</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SjsLock</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> AtomicReference<span class="token operator">&lt;</span>Thread<span class="token operator">></span> threadAtomicReference <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AtomicReference</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 大概写一下</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Thread thread <span class="token operator">=</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>thread<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"==get LOCK ing..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>threadAtomicReference<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span>null<span class="token punctuation">,</span> thread<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"锁被拿走了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>thread<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"==GET success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Thread thread <span class="token operator">=</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        threadAtomicReference<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span>thread<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>thread<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"unlock"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="死锁的排查"><a href="#死锁的排查" class="headerlink" title="死锁的排查"></a>死锁的排查</h3><p>死锁四要素 <a href="https://www.cnblogs.com/bopo/p/9228834.html" target="_blank" rel="noopener">https://www.cnblogs.com/bopo/p/9228834.html</a></p>
+<p><code>JPS - l</code>(查看进程) : <a href="https://blog.csdn.net/u013250071/article/details/80496623" target="_blank" rel="noopener">https://blog.csdn.net/u013250071/article/details/80496623</a></p>
+<p><code>jstack - 进程号</code>(查看堆栈信息) 来排查:</p>
 
             </div>
             <hr/>
@@ -1585,7 +1736,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">27.6k</span>&nbsp;字
+                class="white-color">28.6k</span>&nbsp;字
             
             
             

@@ -448,14 +448,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-12
+                    2020-10-03
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    593
+                    745
                 </div>
                 
 
@@ -550,6 +550,22 @@
 </li>
 </ul>
 </blockquote>
+<h3 id="懒汉下防止指令重排序"><a href="#懒汉下防止指令重排序" class="headerlink" title="懒汉下防止指令重排序"></a>懒汉下防止指令重排序</h3><p>创建实例的方式<kbd>intance = new  Singleton();</kbd> 这不是一个原子性的操作</p>
+<p>执行实例化时有三步的</p>
+<ol>
+<li>分配内存空间</li>
+<li>执行构造方法,初始化对象</li>
+<li>将对象指向分配的空间</li>
+</ol>
+<blockquote>
+<p>如果指令2和3重排 那么创建的就是空对象… </p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> Singleton intance<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 加入volatile防止重排</span></code></pre>
+<blockquote>
+<p>防止反射破坏单例模式</p>
+</blockquote>
+<p>使用 一个加密的 开关参数(可以破译)</p>
+<p>使用枚举 反射源码不允许创建枚举的实例  枚举是一个继承了Enum的类</p>
 
             </div>
             <hr/>
@@ -1115,7 +1131,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">27.6k</span>&nbsp;字
+                class="white-color">28.6k</span>&nbsp;字
             
             
             

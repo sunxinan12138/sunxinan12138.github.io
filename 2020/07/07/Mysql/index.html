@@ -440,14 +440,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-09-14
+                    2020-10-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    2.7k
                 </div>
                 
 
@@ -530,6 +530,71 @@
 <td>退出Mysql</td>
 </tr>
 </tbody></table>
+<h3 id="数据库三范式"><a href="#数据库三范式" class="headerlink" title="数据库三范式"></a>数据库三范式</h3><ol>
+<li>表的每一列都是<strong>不可分割的原子数据</strong></li>
+<li>非主键必须<strong>完全依赖于主键</strong></li>
+<li>非主键必须<strong>直接</strong>依赖主键(不能有传递和间接关系)</li>
+</ol>
+<h3 id="InnoDB和MyISAM"><a href="#InnoDB和MyISAM" class="headerlink" title="InnoDB和MyISAM"></a>InnoDB和MyISAM</h3><ul>
+<li>现在都是默认使用InnoDB</li>
+<li>MySAM 比较老,以前用</li>
+</ul>
+<blockquote>
+<p>区别:</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MySAM</th>
+<th>INNODB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 事务</td>
+<td>不支持</td>
+<td><strong>支持</strong>(ACID)</td>
+</tr>
+<tr>
+<td>2. 数据锁定方式</td>
+<td>表锁定</td>
+<td><strong>行锁定,表锁定</strong></td>
+</tr>
+<tr>
+<td>3. 外键约束</td>
+<td>不支持</td>
+<td><strong>支持</strong></td>
+</tr>
+<tr>
+<td>4. 全文索引</td>
+<td><strong>支持</strong></td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>5, 表空间大小</td>
+<td>小</td>
+<td>大,约为MySAM的两倍</td>
+</tr>
+<tr>
+<td>6. 索引</td>
+<td>b+树</td>
+<td>b+树</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>在物理空间:</p>
+</blockquote>
+<p>所有数据库都是以文件形式存储在data目录下,一组文件对应一个数据库,本质还是文件存储</p>
+<p>Mysql引擎</p>
+<ul>
+<li>INNODB在数据库上只有一个*.frm, 以及上级目录的ibdata1文件</li>
+<li>MySAM<ul>
+<li>*.frm 表结构</li>
+<li>*.myd  数据文件(data)</li>
+<li>*.MYI  索引文件(index)</li>
+</ul>
+</li>
+</ul>
 <h2 id="数据库操作语句"><a href="#数据库操作语句" class="headerlink" title="数据库操作语句"></a>数据库操作语句</h2><blockquote>
 <p>书写顺序</p>
 <p>select – from  – where  – group by  – order by</p>
@@ -1437,7 +1502,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">27.6k</span>&nbsp;字
+                class="white-color">28.6k</span>&nbsp;字
             
             
             
