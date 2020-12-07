@@ -440,21 +440,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-08
+                    2020-11-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    3.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    12 分
                 </div>
                 
 
@@ -473,7 +473,6 @@
 <li>java企业级开发离不开数据库</li>
 <li><strong>数据是所有软件体系中核心存在</strong>   (DBA职位)</li>
 </ul>
-<p>狂神说的:</p>
 <blockquote>
 <p>只会写代码,学好数据库,混饭吃</p>
 <p>操作系统,数据结构 ! 不错的程序猿</p>
@@ -861,6 +860,169 @@ IFNULL<span class="token punctuation">(</span><span class="token number">a</span
 <span class="token keyword">CALL</span> get_invoices_and_balance<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">-- 删除过程 If exists 判断是否存在 可以不加</span>
 <span class="token keyword">drop</span> <span class="token keyword">procedure</span> <span class="token keyword">If</span> <span class="token keyword">exists</span> name<span class="token punctuation">;</span></code></pre>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>sql 可以存的格式</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Data and Time</li>
+<li>Blob</li>
+<li>Spatial</li>
+</ul>
+<h3 id="1-常见的String"><a href="#1-常见的String" class="headerlink" title="1. 常见的String"></a>1. 常见的String</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+<th>MAX</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>char()</td>
+<td>固定长度</td>
+</tr>
+<tr>
+<td>2</td>
+<td>varChar()</td>
+<td>65000   Characters(~64kb)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>mediumText</td>
+<td>16MB</td>
+</tr>
+<tr>
+<td>4</td>
+<td>longT`ext</td>
+<td>4GB</td>
+</tr>
+<tr>
+<td>5</td>
+<td>TinyText</td>
+<td>255 bytes</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Text</td>
+<td>64kb</td>
+</tr>
+</tbody></table>
+<h3 id="2-整数类型"><a href="#2-整数类型" class="headerlink" title="2. 整数类型"></a>2. 整数类型</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Data type</th>
+<th>Bytes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>TINYINT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SMALLINT</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>MEDIUMINT</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>INTEGER</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>BIGINT</td>
+<td>8</td>
+</tr>
+</tbody></table>
+<h3 id="3-浮点数"><a href="#3-浮点数" class="headerlink" title="3. 浮点数"></a>3. 浮点数</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Data type</th>
+<th>explain</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Decimal(P, S)</td>
+<td>p: 位数 s: 小数 位 (比较精准)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Dec/Numeric/Fixed</td>
+<td>和上面名字不同</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Float / Double</td>
+<td>科学计数 不是特别精准</td>
+</tr>
+</tbody></table>
+<h3 id="4-时间"><a href="#4-时间" class="headerlink" title="4. 时间"></a>4. 时间</h3><p>存储时间</p>
+<ol>
+<li>Data:</li>
+<li>Time:</li>
+<li>Datetime:       8b</li>
+<li>Timestamp:    4b (因为4b所以会有2038问题(时间存储会出问题) 好奇可以搜索一下)</li>
+<li>Year</li>
+</ol>
+<h3 id="5-blob类型"><a href="#5-blob类型" class="headerlink" title="5. blob类型"></a>5. blob类型</h3><p>存储所有的二进制结构的文件: 图片 pdf word 等等</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Data type</th>
+<th>size</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>TinyBlob</td>
+<td>225b</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Blob</td>
+<td>65kb</td>
+</tr>
+<tr>
+<td>3</td>
+<td>mediumBlob</td>
+<td>16mb</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LongBlob</td>
+<td>4gb</td>
+</tr>
+</tbody></table>
+<p><strong>因为将数据库中存入文件会将数据库变得很大.  而且读取效率  备份时间 以及开发代码 都会变得多 所以考虑存储文件前   线考虑这些问题</strong></p>
+<h3 id="6-Json"><a href="#6-Json" class="headerlink" title="6 Json"></a>6 Json</h3><p>mysql 8 以后开始支持</p>
+<ul>
+<li><p>Json </p>
+</li>
+<li><p>写: Json_Object(json对象)</p>
+</li>
+<li><p>查询</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span> properties <span class="token operator">-</span><span class="token operator">></span> <span class="token string">'$. name.childName'</span> <span class="token keyword">from</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token keyword">where</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
+ properties <span class="token operator">-</span><span class="token operator">>></span> <span class="token string">'$. name.childName'</span> : 值读取值</code></pre>
+<ul>
+<li>json函数 很多都比较方便 可以试试</li>
+</ul>
+</li>
+</ul>
+<h3 id="布尔-集合和枚举"><a href="#布尔-集合和枚举" class="headerlink" title=". 布尔, 集合和枚举"></a>. 布尔, 集合和枚举</h3><ol>
+<li>bool / boolean:  T/F  (1/0)</li>
+<li>set 并不是很好用</li>
+<li>enum(A,B,C) 也不是很建议使用: 是固定的 而且</li>
+</ol>
 <h2 id="InnoDB和MySAM"><a href="#InnoDB和MySAM" class="headerlink" title="InnoDB和MySAM"></a>InnoDB和MySAM</h2><ul>
 <li>现在都是默认使用InnoDB</li>
 <li>MySAM 比较老,以前用</li>
@@ -1502,7 +1664,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">31.5k</span>&nbsp;字
+                class="white-color">31.9k</span>&nbsp;字
             
             
             

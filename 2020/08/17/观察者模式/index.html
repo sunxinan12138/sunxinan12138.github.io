@@ -440,14 +440,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-18
+                    2020-10-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    772
+                    816
                 </div>
                 
 
@@ -607,8 +607,7 @@
 <h2 id="观察者监听"><a href="#观察者监听" class="headerlink" title="观察者监听"></a>观察者监听</h2><p>观察者list </p>
 <p>被观察者event</p>
 <p>初始化和成就事件触发检测需要被移除的观察者</p>
-<p>永久监听怎么实现的?(notforever)</p>
-<h2 id="java中lambda实现委托"><a href="#java中lambda实现委托" class="headerlink" title="java中lambda实现委托"></a>java中lambda实现委托</h2><h3 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h3><p>委托是一种引用方法类型, 一旦为委托分配了方法,委托与该方法有完全相同的行为. 委托方法使用和其他方法一样.委托可以看做对函数的抽象, 是函数的”类”, 委托的实例代表的一个具体的函数,</p>
+<pre><code>事件监听list(在初始化时监听) -- 当事件触(发送时间event.fire) --  obs类根据条件遍历发送消息到对应的对象 -- 对象接收时间判断.... 是否取消监听...</code></pre><h2 id="java中lambda实现委托"><a href="#java中lambda实现委托" class="headerlink" title="java中lambda实现委托"></a>java中lambda实现委托</h2><h3 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h3><p>委托是一种引用方法类型, 一旦为委托分配了方法,委托与该方法有完全相同的行为. 委托方法使用和其他方法一样.委托可以看做对函数的抽象, 是函数的”类”, 委托的实例代表的一个具体的函数,</p>
 <p>委托能搭载的方法必须有相同的参数列表和返回值 和java8中方法引用的实现方式相同</p>
 <p><strong>代码实现:</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyDelegate</span> <span class="token punctuation">{</span>
@@ -1180,7 +1179,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">31.5k</span>&nbsp;字
+                class="white-color">31.9k</span>&nbsp;字
             
             
             
