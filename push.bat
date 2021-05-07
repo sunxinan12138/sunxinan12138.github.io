@@ -7,4 +7,5 @@ git add -v .
 git commit -m "auto push File"
 git push origin backup
 :: 编译hexo 部署到git和gitee
+hexo -v
 pause
