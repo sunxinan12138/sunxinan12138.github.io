@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: 熙楠的Blog 
+subtitle: '' 
+description: '' 
+author: sjs 
 keywords:
-author: John Doe
-language: en
+language: zh-Hans 
 timezone: ''
 
 # URL
@@ -97,9 +97,11 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/sunxinan12138/sunxinan12138.github.io.git
+  branch: master

@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "6e17c87bb749c863",
+    "type": "split",
+    "children": [
+      {
+        "id": "24011bae7a78e09f",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "hello-world.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8e11ff20e465b201",
+    "type": "split",
+    "children": [
+      {
+        "id": "2acb2e2e749a6225",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9e3f3e9c278bdcec",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "eaf99742a66637c7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2967944180e61e13",
+    "type": "split",
+    "children": [
+      {
+        "id": "8ee01e8ec5b77106",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1c7955d2b49cb6ab",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "hello-world.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "24011bae7a78e09f",
+  "lastOpenFiles": [
+    "hello-world.md",
+    "华为gt2.md"
+  ]
+}
