@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>unraid | 大橘のBlog</title><meta name="author" content="大橘"><meta name="copyright" content="大橘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="unraidtodo 未来考虑直接安装linux 完成所有功能 原因：unraid的基础系统为（Linux version 5.19.17-Unraid (root@Develop) (gcc (GCC) 12.2.0, GNU ld version 2.39-slack151) #2 SMP PREEMPT_DYNAMIC Wed Nov 2 11:54:15 PDT 2022） 虽作为nas基">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unraid">
+<meta property="og:url" content="https://sunxinan.gitee.io/2023/08/03/other/UnRaid/index.html">
+<meta property="og:site_name" content="大橘のBlog">
+<meta property="og:description" content="unraidtodo 未来考虑直接安装linux 完成所有功能 原因：unraid的基础系统为（Linux version 5.19.17-Unraid (root@Develop) (gcc (GCC) 12.2.0, GNU ld version 2.39-slack151) #2 SMP PREEMPT_DYNAMIC Wed Nov 2 11:54:15 PDT 2022） 虽作为nas基">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png">
+<meta property="article:published_time" content="2023-08-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-28T06:54:40.643Z">
+<meta property="article:author" content="大橘">
+<meta property="article:tag" content="java music">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png"><link rel="shortcut icon" href="/img/cat.png"><link rel="canonical" href="https://sunxinan.gitee.io/2023/08/03/other/UnRaid/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 大橘","link":"链接: ","source":"来源: 大橘のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'unraid',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-28 14:54:40'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png')"><nav id="nav"><span id="blog-info"><a href="/" title="大橘のBlog"><img class="site-icon" src="/img/cat.png"/><span class="site-name">大橘のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">unraid</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-02T16:00:00.000Z" title="发表于 2023-08-03 00:00:00">2023-08-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-28T06:54:40.643Z" title="更新于 2023-09-28 14:54:40">2023-09-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="unraid"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="unraid"><a href="#unraid" class="headerlink" title="unraid"></a>unraid</h1><h1 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h1><ul>
+<li><p>未来考虑直接安装linux 完成所有功能</p>
+<p>原因：unraid的基础系统为（Linux version 5.19.17-Unraid (root@Develop) (gcc (GCC) 12.2.0, GNU ld version 2.39-slack151) #2 SMP PREEMPT_DYNAMIC Wed Nov 2 11:54:15 PDT 2022） 虽作为nas基本够用但是作为linux服务器用户量小 有些功能实现起来过于繁琐。</p>
+</li>
+<li><p>问题：qb下载cpu占满。安装nvida驱动后 启动系统和docker详情界面极慢（暂时没有找到方案）</p>
+</li>
+</ul>
+<h1 id="1-设备"><a href="#1-设备" class="headerlink" title="1. 设备"></a>1. 设备</h1><p>拯救者r720-15ikbn </p>
+<ul>
+<li>方案： U盘作为启动盘 1t叠瓦机械 和125g的m.2固态作为缓存盘 无外接硬盘柜。功耗 基本在 50左右</li>
+<li>作为一个中转暂缓的方案临时用就笔记本改</li>
+</ul>
+<h1 id="2-安装部署"><a href="#2-安装部署" class="headerlink" title="2.安装部署"></a>2.安装部署</h1><p>安装方案：搜索unraid安装就好了 开心版和正版一样  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14L411b76f/?spm_id_from=333.1245.0.0&vd_source=3bb22ce73abf7cadb35da9d846e87510">最详尽的Unraid安装教程（2）- 国内网络环境下安装APP市场以及几个必要的插件安装与使用（Unraid002）_哔哩哔哩_bilibili</a></p>
+<p><strong>缓存盘机制</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kB4y1c7ES/?vd_source=3bb22ce73abf7cadb35da9d846e87510">Unraid开荒教程03——详细说一说Unraid系统的缓存机制 又灵活又丰富_哔哩哔哩_bilibili</a></p>
+<p>读取不到nvme 固态的话： 需要在bios里设置 sata mode selection ahci </p>
+<p>flash中的go文件设置为：</p>
+<p>原因： unraid每次重启环境数据重置 go文件为启动后执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start the Management Utility</span></span><br><span class="line">http_proxy=http://192.168.1.2:7899 https_proxy=http://192.168.1.2:7899 /usr/local/sbin/emhttp &amp;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">docker</span></span><br><span class="line">mkdir -p /etc/docker</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Update mirrors</span></span><br><span class="line">tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line"> &quot;registry-mirrors&quot;:[</span><br><span class="line">  &quot;https://8odv2i1d.mirror.aliyuncs.com&quot;,</span><br><span class="line">  &quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Update Host</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;199.232.4.133   raw.githubusercontent.com&quot;</span> &gt;&gt;  /etc/hosts</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;20.27.177.113   github.com&quot;</span> &gt;&gt;  /etc/hosts</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Update Clash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;use_proxy=yes&quot;</span> &gt;&gt; /root/.wget-hsts</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;http_proxy=http://192.168.1.2:7899&quot;</span> &gt;&gt; /root/.wget-hsts</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;https_proxy=http://192.168.1.2:7899&quot;</span> &gt;&gt; /root/.wget-hsts</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;wait=10&quot;</span> &gt;&gt; /root/.wget-hsts</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-clash安装"><a href="#1-clash安装" class="headerlink" title="1. clash安装"></a>1. clash安装</h2><p>作用：代理上网， 加速app商店</p>
+<p><a target="_blank" rel="noopener" href="https://homedt.net/47571.html">unraid安装clash 及启用http代理 | 夜风博客 (homedt.net)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/609967222">UnRaid 网络代理填坑，Apps市场安装，Apps不显示内容，Docker镜像加速，适用最新6.11.5，大佬文章填坑 - 知乎 (zhihu.com)</a></p>
+<hr>
+<h2 id="2-电影墙-nastools"><a href="#2-电影墙-nastools" class="headerlink" title="2. 电影墙 nastools"></a>2. 电影墙 nastools</h2><p>nastools 要装下载器（我选的是qbittorrent）解码器（jellyfin）</p>
+<p><strong>参考：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cv4y1S7m7/?vd_source=3bb22ce73abf7cadb35da9d846e87510">Unraid版NAS Tools部署教程，使用NAS打造家庭影音中心！【Unraid篇02】_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://wiki.nastool.org/zh/home">开始 | NAStool Wiki</a> </p>
+<p>上面的打不开 看这个也行 <a target="_blank" rel="noopener" href="https://post.smzdm.com/p/arqgoqp7/">Unraid部署多媒体自动机器人nas-tools全过程，可直接食用_NAS存储_什么值得买 (smzdm.com)</a></p>
+<h3 id="jellyfin-单独说-踩了很多坑"><a href="#jellyfin-单独说-踩了很多坑" class="headerlink" title="jellyfin 单独说 踩了很多坑"></a>jellyfin 单独说 踩了很多坑</h3><p>如果别的比他好用那就别用这个了</p>
+<ol>
+<li><p>首先安装按照视频就可以</p>
+</li>
+<li><p>解码部分 如果用核显可以跳过这部分 独立显卡继续看（我用核显cpu太高所以不想闲着独显）</p>
+</li>
+<li><p>首先安装nvida 驱动 [<a target="_blank" rel="noopener" href="https://forums.unraid.net/topic/98978-plugin-nvidia-driver/">插件]英伟达驱动程序 - 插件支持 - Unraid</a></p>
+</li>
+<li><p>记住： <strong>PCI 设备和 IOMMU 组</strong> 不能使用显卡否则会安装失败。</p>
+</li>
+<li><p>我的版本打不开 <strong>Nvidia Driver</strong> 但是用命令  nvidia-smi 查看是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@Tower:~# nvidia-smi </span><br><span class="line">Wed Aug  2 15:26:26 2023       </span><br><span class="line">+---------------------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 535.54.03              Driver Version: 535.54.03    CUDA Version: 12.2     |</span><br><span class="line">|-----------------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|                                         |                      |               MIG M. |</span><br><span class="line">|=========================================+======================+======================|</span><br><span class="line">|   0  NVIDIA GeForce GTX 1050 Ti     Off | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| N/A   44C    P0              N/A / ERR! |      0MiB /  4096MiB |      0%      Default |</span><br><span class="line">|                                         |                      |                  N/A |</span><br><span class="line">+-----------------------------------------+----------------------+----------------------+</span><br><span class="line">                                                                                         </span><br><span class="line">+---------------------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                                            |</span><br><span class="line">|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |</span><br><span class="line">|        ID   ID                                                             Usage      |</span><br><span class="line">|=======================================================================================|</span><br><span class="line">|  No running processes found                                                           |</span><br><span class="line">+---------------------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置   </p>
+<p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-8267275-1-1.html">群晖docker jellyfin 调用n卡(独显)驱动 ——恩山首发-存储先锋-恩山无线论坛 - Powered by Discuz! (right.com.cn)</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin/issues/7036">问题]： ffmpeg 日志 ·问题 #7036 ·果冻鳍&#x2F;果冻鳍 (github.com)</a></p>
+</li>
+<li><p>要配置gpu额外参数</p>
+</li>
+</ol>
+<p>我改了版本 <em>nyanmisaka&#x2F;jellyfin</em> 因为之前gpu用不了是因为版本问题 但是好像是因为参数问题 所以官方版本应该也行</p>
+<h3 id="nastools"><a href="#nastools" class="headerlink" title="nastools"></a>nastools</h3><p>现在存活的版本是3.x 但是3.x要pt站认证 所以 我找到了 2.9.1的版本 dockerhub很多人在用的</p>
+<p>[nastool V3.x 安装及用户认证-有搞头-有搞头笔记 (ljs.fun)](<a target="_blank" rel="noopener" href="https://ljs.fun:521/?id=340#:~:text=%E7%99%BB%E5%BD%95nastool%E5%B9%B6%E8%AE%A4%E8%AF%81">https://ljs.fun:521/?id=340#:~:text=登录nastool并认证</a> 登录地址： ip%3A3003 用户名： admin 密码： password,*登录成功后请修改用户名和密码 点击左下角 用户认证 选择 IYUU%2C输入 token%2C 即可顺利通过认证，获取nastool全部功能。)</p>
+<h3 id="字幕"><a href="#字幕" class="headerlink" title="字幕"></a>字幕</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1JW4y1W7FW/?vd_source=3bb22ce73abf7cadb35da9d846e87510">部署ChineseSubFinder+NAS Tools联动设置，中文字幕自动化下载，追剧观影必备工具_哔哩哔哩_bilibili</a></p>
+<p>不是很好用 而且我看的很多电影是代字幕的</p>
+<h3 id="qbittorrent"><a href="#qbittorrent" class="headerlink" title="qbittorrent"></a>qbittorrent</h3><p>下载上传没什么感觉 硬盘感觉不够用</p>
+<h2 id="3-pt站"><a href="#3-pt站" class="headerlink" title="3. pt站"></a>3. pt站</h2><p>注册了冰淇淋 刷流都很好用 </p>
+<h1 id="3-其他软件"><a href="#3-其他软件" class="headerlink" title="3. 其他软件"></a>3. 其他软件</h1><h2 id="1-voceChat"><a href="#1-voceChat" class="headerlink" title="1. voceChat"></a>1. voceChat</h2><p>解决局域网实时聊天传文字和文件功能。</p>
+<p><a target="_blank" rel="noopener" href="https://doc.voce.chat/">What is VoceChat | VoceChat</a></p>
+<h2 id="2-iyuu自动辅种"><a href="#2-iyuu自动辅种" class="headerlink" title="2. iyuu自动辅种"></a>2. iyuu自动辅种</h2><p>暂时没有pt认证所以观望中</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io">大橘</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io/2023/08/03/other/UnRaid/">https://sunxinan.gitee.io/2023/08/03/other/UnRaid/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://sunxinan.gitee.io" target="_blank">大橘のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title=""><img class="cover" src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title=""><img class="cover" src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">大橘</div><div class="author-info__description">热爱与分享！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunxinan12138"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/sunxinan12138" target="_blank" title="Gitee"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2577833031@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">感谢访问本站，喜欢请收藏！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#unraid"><span class="toc-number">1.</span> <span class="toc-text">unraid</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#todo"><span class="toc-number">2.</span> <span class="toc-text">todo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E8%AE%BE%E5%A4%87"><span class="toc-number">3.</span> <span class="toc-text">1. 设备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="toc-number">4.</span> <span class="toc-text">2.安装部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-clash%E5%AE%89%E8%A3%85"><span class="toc-number">4.1.</span> <span class="toc-text">1. clash安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%B5%E5%BD%B1%E5%A2%99-nastools"><span class="toc-number">4.2.</span> <span class="toc-text">2. 电影墙 nastools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jellyfin-%E5%8D%95%E7%8B%AC%E8%AF%B4-%E8%B8%A9%E4%BA%86%E5%BE%88%E5%A4%9A%E5%9D%91"><span class="toc-number">4.2.1.</span> <span class="toc-text">jellyfin 单独说 踩了很多坑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nastools"><span class="toc-number">4.2.2.</span> <span class="toc-text">nastools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%B9%95"><span class="toc-number">4.2.3.</span> <span class="toc-text">字幕</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qbittorrent"><span class="toc-number">4.2.4.</span> <span class="toc-text">qbittorrent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-pt%E7%AB%99"><span class="toc-number">4.3.</span> <span class="toc-text">3. pt站</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">3. 其他软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-voceChat"><span class="toc-number">5.1.</span> <span class="toc-text">1. voceChat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-iyuu%E8%87%AA%E5%8A%A8%E8%BE%85%E7%A7%8D"><span class="toc-number">5.2.</span> <span class="toc-text">2. iyuu自动辅种</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他"><img src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电吉他"/></a><div class="content"><a class="title" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他">电吉他</a><time datetime="2023-08-25T09:25:08.000Z" title="发表于 2023-08-25 17:25:08">2023-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题">无题</a><time datetime="2023-08-08T05:04:37.571Z" title="发表于 2023-08-08 13:04:37">2023-08-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/03/other/UnRaid/" title="unraid"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="unraid"/></a><div class="content"><a class="title" href="/2023/08/03/other/UnRaid/" title="unraid">unraid</a><time datetime="2023-08-02T16:00:00.000Z" title="发表于 2023-08-03 00:00:00">2023-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.226Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.224Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 大橘</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="#">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

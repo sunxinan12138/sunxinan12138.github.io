@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OOP编程(面向对象)基础 | 大橘のBlog</title><meta name="author" content="大橘"><meta name="copyright" content="大橘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="OOP编程(面向对象)基础类与实例  OOP: Object-Oriented Programming  对象: 对象是一个自包含的实体,用一组可识别的特性和行为来标识 类: 类就是具有相同属性和功能的对象的抽象集合 实例: 一个真实的对象(实例化就是创建对象的过程)   类A name; &#x2F;&#x2F; 声明一个 类A的对象 叫name name &#x3D; new 类A(); &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OOP编程(面向对象)基础">
+<meta property="og:url" content="https://sunxinan.gitee.io/2021/07/25/JavaBase/OOP%E7%BC%96%E7%A8%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="大橘のBlog">
+<meta property="og:description" content="OOP编程(面向对象)基础类与实例  OOP: Object-Oriented Programming  对象: 对象是一个自包含的实体,用一组可识别的特性和行为来标识 类: 类就是具有相同属性和功能的对象的抽象集合 实例: 一个真实的对象(实例化就是创建对象的过程)   类A name; &#x2F;&#x2F; 声明一个 类A的对象 叫name name &#x3D; new 类A(); &amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg">
+<meta property="article:published_time" content="2021-07-25T09:22:10.000Z">
+<meta property="article:modified_time" content="2023-03-28T09:07:53.415Z">
+<meta property="article:author" content="大橘">
+<meta property="article:tag" content="java music">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg"><link rel="shortcut icon" href="/img/cat.png"><link rel="canonical" href="https://sunxinan.gitee.io/2021/07/25/JavaBase/OOP%E7%BC%96%E7%A8%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 大橘","link":"链接: ","source":"来源: 大橘のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OOP编程(面向对象)基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-28 17:07:53'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="大橘のBlog"><img class="site-icon" src="/img/cat.png"/><span class="site-name">大橘のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">OOP编程(面向对象)基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-25T09:22:10.000Z" title="发表于 2021-07-25 17:22:10">2021-07-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-28T09:07:53.415Z" title="更新于 2023-03-28 17:07:53">2023-03-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="OOP编程(面向对象)基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="OOP编程-面向对象-基础"><a href="#OOP编程-面向对象-基础" class="headerlink" title="OOP编程(面向对象)基础"></a>OOP编程(面向对象)基础</h1><h2 id="类与实例"><a href="#类与实例" class="headerlink" title="类与实例"></a>类与实例</h2><blockquote>
+<ul>
+<li><p>OOP: Object-Oriented Programming</p>
+<ol>
+<li>对象: 对象是一个自包含的实体,用一组可识别的特性和行为来标识</li>
+<li>类: 类就是具有相同属性和功能的对象的抽象集合</li>
+<li>实例: 一个真实的对象(实例化就是创建对象的过程)</li>
+</ol>
+<blockquote>
+<p>类A name; &#x2F;&#x2F; 声明一个 类A的对象 叫name</p>
+<p>name &#x3D; new 类A(); &#x2F;&#x2F; 将name对象实例化</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h2 id="构造方法-x2F-方法重载"><a href="#构造方法-x2F-方法重载" class="headerlink" title="构造方法&#x2F;方法重载"></a>构造方法&#x2F;方法重载</h2><blockquote>
+<ul>
+<li>构造方法—构造函数,就是对类进行初始化. 在被new时调用<ol>
+<li>所有类都有个默认无参数构造方法,,如果你定义了构造方法,则默认的失效</li>
+</ol>
+</li>
+<li>方法重载提供了创建同名的多个方法的能力, 需要<strong>参数类型</strong>,<strong>参数个数</strong>不同</li>
+</ul>
+</blockquote>
+<h2 id="封装-继承和多态"><a href="#封装-继承和多态" class="headerlink" title="封装,继承和多态"></a>封装,继承和多态</h2><blockquote>
+<ul>
+<li><p>封装: 每个对象都包含它能进行操作所需要的所有信息, 这就是封装, 所以对象不必依赖其他对象来完成自己的操作,好处:</p>
+<ol>
+<li>良好的封装能降低耦合</li>
+<li>类内部的实现可以自由修改</li>
+<li>类有清晰的对外接口</li>
+</ol>
+</li>
+<li><p>继承: 面向对象中 <em>is - a</em> 的关系,可以说为<em>是一个</em> 的关系 . (猫类继承动物类—猫是动物) 继承可使得修改和扩展 继承而来的实现 比较容易</p>
+<ol>
+<li>子类拥有父类非private的属性和功能</li>
+<li>子类具有自己的属性和功能</li>
+<li>子类可以通过自己的方式实现弗雷德功能(方法重写)</li>
+<li>protected修饰的只对子类公开</li>
+</ol>
+</li>
+<li><p>多态: 不同的对象可以执行相同的动作,但是要通过他们自己的实现代码执行(实现的结果一样,但是行为方式不同)</p>
+<ol>
+<li>子类以父类的身份出现</li>
+<li>子类在工作时以自己的方式实现</li>
+<li>子类以父类的身份出现是,子类特有的实行和方法不可使用</li>
+</ol>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父 f1 =<span class="keyword">new</span> 子（）；<span class="comment">// 每个子类通过自己的方式完成</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><blockquote>
+<p>重构就是在不改变软件系统外部行为的前提下，改善它的内部结构。具体实现方式不同</p>
+</blockquote>
+<h2 id="抽象类-abstract"><a href="#抽象类-abstract" class="headerlink" title="抽象类(abstract)"></a>抽象类(abstract)</h2><blockquote>
+<ul>
+<li><p>Java可以把类和方法声明为abstract, 即抽象方法和抽象类</p>
+<ol>
+<li>抽象类不能实例化</li>
+<li>抽象方法必须被自类重写</li>
+<li>抽象方法必须在抽象类中</li>
+</ol>
+</li>
+<li><p>抽象类拥有尽可能多的共同代码,尽可能少的数据</p>
+<p>J&amp;DP</p>
+<ol>
+<li>抽象类提供一个继承的出发点–一定使用来继承的</li>
+<li>在一个继承关系里 – 树叶是具体类, 树枝是抽象类</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h2 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口(interface)"></a>接口(interface)</h2><blockquote>
+<p>官方解释:Java接口是一系列方法的声明，是一些方法特征的集合，<strong>一个接口只有方法的特征没有方法的实现，因此这些方法可以在不同的地方被不同的类实现，而这些实现可以具有不同的行为（功能）</strong>。</p>
+<ul>
+<li><p>特性</p>
+<ol>
+<li>实现接口必须实现所有方法和属性</li>
+<li>接口中的方法默认抽象的</li>
+<li>Java只支持单一继承,但是可以实现多个接口,接口也可以被多个类实现</li>
+</ol>
+</li>
+<li><p>接口回调:</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">接口 Interface =<span class="keyword">new</span> 实现（）； <span class="comment">// 接口对象可以调用被实现类中的方法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口和抽象类</p>
+<ol>
+<li>类是对对象的抽象 ,抽象类是对对象的抽象, 接口是对行为的抽象</li>
+<li>如果行为跨越不同的类—可以用接口; 对于一些相似的类对象–用继承抽象类</li>
+<li>实现接口和继承抽象类可以一起用不冲突</li>
+<li>从设计角度来说: 抽象类是从子类中发现了公共选项,泛化出来的(<strong>重构</strong>); 而接口是预先定义设计出来的</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h2 id="委托与事件"><a href="#委托与事件" class="headerlink" title="委托与事件"></a>委托与事件</h2><blockquote>
+<p>一般我们在实现主要业务，一些辅助功能一般是父类(一般类或抽象类)中实现好了或者通过委托实现，大多数中一般使用父类，继承父类需要耦合在主类中，使用的委托的方式是解耦主类，使主类不知道谁帮我做了这些事，但是Java中没有对委托进行封装，则需要开发者自己实现。(待完成)</p>
+</blockquote>
+<h2 id="OOP编程的七大原则"><a href="#OOP编程的七大原则" class="headerlink" title="OOP编程的七大原则"></a>OOP编程的七大原则</h2><blockquote>
+<ul>
+<li><strong>开闭原则:</strong> 对扩展开放,对修改关闭(首要遵守)</li>
+<li>**里氏替换原则: ** 继承必须确保超类拥有的性质在子类中任然成立(尽可能不去重写父类)</li>
+<li><strong>依赖倒置原则：</strong>摆脱面向过程中高层依赖底层, 抽象依赖于具体. 而是面向接口编程</li>
+<li><strong>单一职责原则：</strong>控制累的粒度大小,将对象解耦合,高内聚(一个类的职责尽量单一)</li>
+<li><strong>接口隔离原则：</strong> 为每个类建立属于它们需要的专用接口,使用多个专门的接口比使用单一的总接口要好。</li>
+<li><strong>迪米特原则或最少知识原则：</strong> 只与直接朋友通信,或者通过朋友与陌生人传递消息</li>
+<li><strong>合成服用原则:</strong> 关联关系优于继承关系。尽量使用 <strong>合成&#x2F;聚合</strong>(has - a)、尽量不使用继承(is - a)。</li>
+</ul>
+</blockquote>
+<h1 id="OOP"><a href="#OOP" class="headerlink" title="OOP"></a>OOP</h1><p>要做到低耦合</p>
+<p>资源时独立的(只有 属性和方法)</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io">大橘</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io/2021/07/25/JavaBase/OOP%E7%BC%96%E7%A8%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/">https://sunxinan.gitee.io/2021/07/25/JavaBase/OOP%E7%BC%96%E7%A8%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://sunxinan.gitee.io" target="_blank">大橘のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/25/JavaBase/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" title="Java8新特性"><img class="cover" src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java8新特性</div></div></a></div><div class="next-post pull-right"><a href="/2021/07/25/JavaBase/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" title="JAVA反射机制"><img class="cover" src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JAVA反射机制</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">大橘</div><div class="author-info__description">热爱与分享！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunxinan12138"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/sunxinan12138" target="_blank" title="Gitee"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2577833031@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">感谢访问本站，喜欢请收藏！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OOP%E7%BC%96%E7%A8%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">OOP编程(面向对象)基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E4%B8%8E%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.1.</span> <span class="toc-text">类与实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95-x2F-%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="toc-number">1.2.</span> <span class="toc-text">构造方法&#x2F;方法重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85-%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text">封装,继承和多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%9E%84"><span class="toc-number">1.4.</span> <span class="toc-text">重构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB-abstract"><span class="toc-number">1.5.</span> <span class="toc-text">抽象类(abstract)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3-interface"><span class="toc-number">1.6.</span> <span class="toc-text">接口(interface)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A7%94%E6%89%98%E4%B8%8E%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.7.</span> <span class="toc-text">委托与事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OOP%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="toc-number">1.8.</span> <span class="toc-text">OOP编程的七大原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OOP"><span class="toc-number">2.</span> <span class="toc-text">OOP</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他"><img src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电吉他"/></a><div class="content"><a class="title" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他">电吉他</a><time datetime="2023-08-25T09:25:08.000Z" title="发表于 2023-08-25 17:25:08">2023-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题">无题</a><time datetime="2023-08-08T05:04:37.571Z" title="发表于 2023-08-08 13:04:37">2023-08-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/03/other/UnRaid/" title="unraid"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="unraid"/></a><div class="content"><a class="title" href="/2023/08/03/other/UnRaid/" title="unraid">unraid</a><time datetime="2023-08-02T16:00:00.000Z" title="发表于 2023-08-03 00:00:00">2023-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.226Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.224Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 大橘</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="#">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

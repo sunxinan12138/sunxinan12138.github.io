@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>常用游戏框架 | 大橘のBlog</title><meta name="author" content="大橘"><meta name="copyright" content="大橘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="常用框架 ecs [^文章] 服务器架构[^常用的]  前置内容1. 同步机制  帧同步  moba atc game  按帧同步客户端所有协议给所有玩家 每个客户端都在执行相同的操作，所以最后的结果一样。 需要使用定点数，当你的逻辑中使用了浮点数的时候，因为每一台机器的不同，浮点最后的有效值其实是不一样的，所以为了保证逻辑的同步性，再游戏逻辑中，需要使用定点数。  状态同步 mmo等 状态改变再">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用游戏框架">
+<meta property="og:url" content="https://sunxinan.gitee.io/2023/04/06/javaGame/%E5%B8%B8%E7%94%A8%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="大橘のBlog">
+<meta property="og:description" content="常用框架 ecs [^文章] 服务器架构[^常用的]  前置内容1. 同步机制  帧同步  moba atc game  按帧同步客户端所有协议给所有玩家 每个客户端都在执行相同的操作，所以最后的结果一样。 需要使用定点数，当你的逻辑中使用了浮点数的时候，因为每一台机器的不同，浮点最后的有效值其实是不一样的，所以为了保证逻辑的同步性，再游戏逻辑中，需要使用定点数。  状态同步 mmo等 状态改变再">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png">
+<meta property="article:published_time" content="2023-04-06T02:35:35.000Z">
+<meta property="article:modified_time" content="2023-04-13T06:56:54.755Z">
+<meta property="article:author" content="大橘">
+<meta property="article:tag" content="框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png"><link rel="shortcut icon" href="/img/cat.png"><link rel="canonical" href="https://sunxinan.gitee.io/2023/04/06/javaGame/%E5%B8%B8%E7%94%A8%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 大橘","link":"链接: ","source":"来源: 大橘のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常用游戏框架',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-13 14:56:54'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png')"><nav id="nav"><span id="blog-info"><a href="/" title="大橘のBlog"><img class="site-icon" src="/img/cat.png"/><span class="site-name">大橘のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">常用游戏框架</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-06T02:35:35.000Z" title="发表于 2023-04-06 10:35:35">2023-04-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-13T06:56:54.755Z" title="更新于 2023-04-13 14:56:54">2023-04-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E7%AB%AF/">游戏服务端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="常用游戏框架"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="常用框架"><a href="#常用框架" class="headerlink" title="常用框架"></a>常用框架</h1><ol>
+<li>ecs [^文章]</li>
+<li>服务器架构[^常用的]</li>
+</ol>
+<h2 id="前置内容"><a href="#前置内容" class="headerlink" title="前置内容"></a>前置内容</h2><h3 id="1-同步机制"><a href="#1-同步机制" class="headerlink" title="1. 同步机制"></a>1. 同步机制</h3><blockquote>
+<ul>
+<li><p>帧同步  moba atc game </p>
+<p>按帧同步客户端所有协议给所有玩家</p>
+<p>每个客户端都在执行相同的操作，所以最后的结果一样。</p>
+<p>需要使用定点数，当你的逻辑中使用了浮点数的时候，因为每一台机器的不同，浮点最后的有效值其实是不一样的，所以为了保证逻辑的同步性，再游戏逻辑中，需要使用定点数。</p>
+</li>
+<li><p>状态同步 mmo等</p>
+<p>状态改变再同步</p>
+</li>
+<li><p>状态帧同步 fps游戏</p>
+<p>状态帧同步就是状态同步和帧同步的概念相结合。客户端向服务器上传操作，服务器跑逻辑，但是又在按照固定的每一帧下发所有玩家的状态（属性位置等）给每一个客户端实现同步。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="2-定点数-浮点数"><a href="#2-定点数-浮点数" class="headerlink" title="2. 定点数 浮点数"></a>2. 定点数 浮点数</h3><ul>
+<li><p>帧同步中 定点数 作为一个标准存在</p>
+<p>定点数小数 [^计算方式]</p>
+<p><img src="C:\Users\sunjusong1\AppData\Roaming\Typora\typora-user-images\image-20230406112247469.png" alt="image-20230406112247469"></p>
+</li>
+</ul>
+<p>计算方式和整数一样</p>
+<ul>
+<li>浮点数 定点化</li>
+</ul>
+<p>  java 可以用bigdecimal</p>
+<p>  浮点数的定点化 [^设计用例]</p>
+<p>　IEEE 754 规定，浮点数的表示方法为：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-b5d44cc4d1f293d07826fc052b20213c_720w.jpg?source=1940ef5c" alt="img"></p>
+<p>　　最高的 1 位是符号位 s，接着的 8 位是指数E，剩下的 23 位为有效数字 M。</p>
+<h1 id="ECS框架-和-传统编程方式"><a href="#ECS框架-和-传统编程方式" class="headerlink" title="ECS框架 和 传统编程方式"></a>ECS框架 和 传统编程方式</h1><blockquote>
+<p>主要说明ecs框架 部分内容会带出区别</p>
+</blockquote>
+<p>守望先锋框架使用了这个模式[^守望先锋的架构和网络]</p>
+<h2 id="什么是ECS"><a href="#什么是ECS" class="headerlink" title="什么是ECS"></a>什么是ECS</h2><p>Entity Component System (ECS) 是一个 gameplay 层面的框架，它是建立在渲染引擎、物理引擎之上的，主要解决的问题是如何建立一个模型来处理游戏对象 (Game Object) 的更新操作。</p>
+<h3 id="Entity（实体，本质上是存放组件的容器）"><a href="#Entity（实体，本质上是存放组件的容器）" class="headerlink" title="Entity（实体，本质上是存放组件的容器）"></a>Entity（实体，本质上是存放组件的容器）</h3><p>可以说就是传统引擎中的 Game Object 。但在这个系统下，它仅仅是 C&#x2F;Component 的组合。它的意义在于生命期管理。</p>
+<h3 id="System（系统，根据组件数据处理逻辑状态的管理器）"><a href="#System（系统，根据组件数据处理逻辑状态的管理器）" class="headerlink" title="System（系统，根据组件数据处理逻辑状态的管理器）"></a>System（系统，根据组件数据处理逻辑状态的管理器）</h3><p>C 和 S 是这个框架的核心。System 系统（或者模块）对于游戏来说，每个模块应该专注于干好一件事，而每件事要么是作用于游戏世界里同类的一组对象的每单个个体的，要么是关心这类对象的某种特定的交互行为。比如碰撞系统，就只关心对象的体积和位置，不关心对象的名字，连接状态，音效、敌对关系等。它也不一定关心游戏世界中的所有对象，比如关心那些不参与碰撞的装饰物。所以对每个子系统来说，筛选出系统关心的对象子集以及只给它展示它所关心的数据就是框架的责任了。</p>
+<h3 id="Component（组件，游戏所需的所有数据结构）"><a href="#Component（组件，游戏所需的所有数据结构）" class="headerlink" title="Component（组件，游戏所需的所有数据结构）"></a>Component（组件，游戏所需的所有数据结构）</h3><p>把每个可能单独使用的对象属性归纳为一个个 Component ，比如对象的名字就是一个 Component ，对象的位置状态是另一个 Component 。</p>
+<h2 id="ECS-框架設計方式"><a href="#ECS-框架設計方式" class="headerlink" title="ECS 框架設計方式"></a>ECS 框架設計方式</h2><p>设计观念：DOP(data-oriented programming) 面向数据编程</p>
+<p>组合大于继承： DDD（Date-Driver-Development）数据驱动开发</p>
+<p>和面向对象开发区别是 设计出发点是基于我需要什么数据 而不是要什么玩法逻辑</p>
+<p><img src="D:\moyu\hexo\blog\hexo_back\sjsHexo\source\pic\ecs.png" alt="image-20230412142737884"></p>
+<p>上图大概意思就是，有三个Entity，其中A和B具有相同的Component，还有一个system能够通过Translation和Rotation计算出LocalToWorld。</p>
+<p><img src="D:\moyu\hexo\blog\hexo_back\sjsHexo\source\pic\image-20230412143110113.png" alt="image-20230412143110113"></p>
+<p>先有一个World，它是<strong>系统</strong>和<strong>实体</strong>的集合，而<strong>实体</strong>就是一个ID，这个ID对应了<strong>组件</strong>的集合。<strong>组件</strong>用来存储游戏状态并且没有任何行为，<strong>系统</strong>拥有处理<strong>实体</strong>的行为但是没有状态。</p>
+<blockquote>
+<p>entity – int id （可以是一个id或者构建成一个类型）<br>    | - Component1  附加在实体上的数据 （血量 ）<br>    | - Component2    包含多个 组件  （速度等）<br>    | - Component3    组件 主要是数据 尽可能不涉及函数逻辑</p>
+<p>动态的注册删除组件 很灵活</p>
+<p>system 描写组件的逻辑 我可以查询到所有我想要的实体</p>
+</blockquote>
+<p>项目1[^entt]:c++ 但是大量C++ 模板元编程 看起来不方便</p>
+<p>推荐项目2[^entitas]:c# unity  还有c++版本 比较好理解 实际项目有enttpong也可以看一下</p>
+<h2 id="ecs的一些设计概念-复杂的文字部分"><a href="#ecs的一些设计概念-复杂的文字部分" class="headerlink" title="ecs的一些设计概念 复杂的文字部分"></a>ecs的一些设计概念 复杂的文字部分</h2><ol>
+<li><p>每个 Entity 是由多个 Component 组合而成，共享一个生命期；而 Component 之间可以组合在一起作为 System 筛选的标准。我们在开发的时候，可以定义一个 System 关心某一个固定 Component 的组合；那么框架就会把游戏世界中满足有这个组合的 Entity 都筛选出来供这个 System 遍历，如果一个 Entity 只具备这组 Component 中的一部分，就不会进入这个筛选集合，也就不被这个 System 所关心了。</p>
+</li>
+<li><p>ECS 的设计就是为了管理复杂度，它提供的指导方案就是 Component 是纯数据组合，没有任何操作这个数据的方法；而 System 是纯方法组合，它自己没有内部状态。它要么做成无副作用的纯函数，根据它所能见到的对象 Component 组合计算出某种结果；要么用来更新特定 Component 的状态。System 之间也不需要相互调用（减少耦合），是由游戏世界（外部框架）来驱动若干 System 的。如果满足了这些前提条件，每个 System 都可以独立开发，它只需要遍历给框架提供给它的组件集合，做出正确的处理，更新组件状态就够了。编写 Gameplay 的人更像是在用胶水粘合这些 System ，他只要清楚每个 System 到底做了什么，操作本身对哪些 Component 造成了影响，正确的书写 System 的更新次序就可以了。一个 System 对大多数 Component 是只读的，只对少量 Component 是会改写的，这个可以预先定义清楚，有了这个知识，一是容易管理复杂度，二是给并行处理留下了优化空间。</p>
+</li>
+<li><p>作者自己也说，最终有 40% 的组件就是单件。单件本身其实就和传统面向对象模型差不多了。但是数据和方法分离还是很有意义。我们在用面向对象模式做开发的时候也会碰到一个对象有几个不同的方法，某些方法关注这部分状态、另一些方法关注另一部分状态，还有一些方法关注前面几组状态的集合。这里的方法就是 ECS 中的系统、状态就是组件。将数据和方法分离可以将不同的方法解耦。如果用传统的 C++ 的面向对象模式，很可能需要用多继承、组合转发等等复杂的语法手段。</p>
+</li>
+</ol>
+<h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Dd4y1j7sV/?vd_source=3bb22ce73abf7cadb35da9d846e87510">【构建你自己的ECS系统】1-什么是ECS_哔哩哔哩_bilibili</a></p>
+<p>[^守望先锋的架构和网络]: <a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903635864780813">《守望先锋》架构设计与网络同步 - 掘金 (juejin.cn)</a><br>[^设计用例]: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/xianyufpga/p/13518872.html">校招基础——浮点数的定点化 - 咸鱼FPGA - 博客园 (cnblogs.com)</a><br>[^计算方式]: <a target="_blank" rel="noopener" href="https://blog.csdn.net/wanrenqi/article/details/106000274">(23条消息) 定点小数的运算_定点小数运算_wanrenqi的博客-CSDN博客</a><br>[^常用的]: <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44918090/article/details/126494287">(23条消息) ARPG、MMORPG、MOBA、卡牌类、棋盘类游戏服务器架构图_游戏架构_森明帮大于黑虎帮的博客-CSDN博客</a><br>[^文章]: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30538626">游戏开发中的ECS 架构概述 - 知乎 (zhihu.com)</a><br>[^entt]: <a target="_blank" rel="noopener" href="https://gitee.com/iceeye001/entt">entt: Gaming meets modern C++ - a fast and reliable entity-component system (ECS) and much more (gitee.com)</a></p>
+<p>[^entitas]: <a target="_blank" rel="noopener" href="https://gitee.com/macodes/Entitas-Cpp">HelloMa&#x2F;Entitas-Cpp (gitee.com)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io">大橘</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io/2023/04/06/javaGame/%E5%B8%B8%E7%94%A8%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/">https://sunxinan.gitee.io/2023/04/06/javaGame/%E5%B8%B8%E7%94%A8%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://sunxinan.gitee.io" target="_blank">大橘のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A1%86%E6%9E%B6/">框架</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/05/%E8%AF%BB%E4%B9%A6/%E4%B8%89%E4%BD%93/" title="三体"><img class="cover" src="https://gd-hbimg.huaban.com/b3fe95c12581d8854aec6778974b953b4a3f35d832963-ga6h66_fw658webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">三体</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/06/javaGame/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" title="游戏設計方案"><img class="cover" src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">游戏設計方案</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">大橘</div><div class="author-info__description">热爱与分享！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunxinan12138"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/sunxinan12138" target="_blank" title="Gitee"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2577833031@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">感谢访问本站，喜欢请收藏！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">常用框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.</span> <span class="toc-text">前置内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 同步机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9A%E7%82%B9%E6%95%B0-%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 定点数 浮点数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ECS%E6%A1%86%E6%9E%B6-%E5%92%8C-%E4%BC%A0%E7%BB%9F%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">ECS框架 和 传统编程方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFECS"><span class="toc-number">2.1.</span> <span class="toc-text">什么是ECS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Entity%EF%BC%88%E5%AE%9E%E4%BD%93%EF%BC%8C%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E5%AD%98%E6%94%BE%E7%BB%84%E4%BB%B6%E7%9A%84%E5%AE%B9%E5%99%A8%EF%BC%89"><span class="toc-number">2.1.1.</span> <span class="toc-text">Entity（实体，本质上是存放组件的容器）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System%EF%BC%88%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%A0%B9%E6%8D%AE%E7%BB%84%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91%E7%8A%B6%E6%80%81%E7%9A%84%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%89"><span class="toc-number">2.1.2.</span> <span class="toc-text">System（系统，根据组件数据处理逻辑状态的管理器）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Component%EF%BC%88%E7%BB%84%E4%BB%B6%EF%BC%8C%E6%B8%B8%E6%88%8F%E6%89%80%E9%9C%80%E7%9A%84%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%89"><span class="toc-number">2.1.3.</span> <span class="toc-text">Component（组件，游戏所需的所有数据结构）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ECS-%E6%A1%86%E6%9E%B6%E8%A8%AD%E8%A8%88%E6%96%B9%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">ECS 框架設計方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ecs%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A6%82%E5%BF%B5-%E5%A4%8D%E6%9D%82%E7%9A%84%E6%96%87%E5%AD%97%E9%83%A8%E5%88%86"><span class="toc-number">2.3.</span> <span class="toc-text">ecs的一些设计概念 复杂的文字部分</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%84%9A%E6%B3%A8"><span class="toc-number">3.</span> <span class="toc-text">脚注</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他"><img src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电吉他"/></a><div class="content"><a class="title" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他">电吉他</a><time datetime="2023-08-25T09:25:08.000Z" title="发表于 2023-08-25 17:25:08">2023-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题">无题</a><time datetime="2023-08-08T05:04:37.571Z" title="发表于 2023-08-08 13:04:37">2023-08-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/03/other/UnRaid/" title="unraid"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="unraid"/></a><div class="content"><a class="title" href="/2023/08/03/other/UnRaid/" title="unraid">unraid</a><time datetime="2023-08-02T16:00:00.000Z" title="发表于 2023-08-03 00:00:00">2023-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.226Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.224Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 大橘</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="#">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

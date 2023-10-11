@@ -1,0 +1,450 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JAVA反射机制 | 大橘のBlog</title><meta name="author" content="大橘"><meta name="copyright" content="大橘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="反射反射概述动静态语言  动态语言 运行时可以改变其结构的语言:Object-c, C#, JavaScript, PHP, Python等   静态语言 运行时结构不可变的语言:Java,C,C++    但是! Java虽不是动态语言, 但可以称为“准动态语言”. 因为Java有一定的动态性,可以利用Java的反射机制获得动态语言的特性. 可以让编程更灵活  Reflection Reflec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA反射机制">
+<meta property="og:url" content="https://sunxinan.gitee.io/2021/07/25/JavaBase/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="大橘のBlog">
+<meta property="og:description" content="反射反射概述动静态语言  动态语言 运行时可以改变其结构的语言:Object-c, C#, JavaScript, PHP, Python等   静态语言 运行时结构不可变的语言:Java,C,C++    但是! Java虽不是动态语言, 但可以称为“准动态语言”. 因为Java有一定的动态性,可以利用Java的反射机制获得动态语言的特性. 可以让编程更灵活  Reflection Reflec">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png">
+<meta property="article:published_time" content="2021-07-25T09:22:04.000Z">
+<meta property="article:modified_time" content="2023-03-28T09:07:53.412Z">
+<meta property="article:author" content="大橘">
+<meta property="article:tag" content="java music">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png"><link rel="shortcut icon" href="/img/cat.png"><link rel="canonical" href="https://sunxinan.gitee.io/2021/07/25/JavaBase/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 大橘","link":"链接: ","source":"来源: 大橘のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JAVA反射机制',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-28 17:07:53'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png')"><nav id="nav"><span id="blog-info"><a href="/" title="大橘のBlog"><img class="site-icon" src="/img/cat.png"/><span class="site-name">大橘のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JAVA反射机制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-25T09:22:04.000Z" title="发表于 2021-07-25 17:22:04">2021-07-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-28T09:07:53.412Z" title="更新于 2023-03-28 17:07:53">2023-03-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JAVA反射机制"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h2 id="反射概述"><a href="#反射概述" class="headerlink" title="反射概述"></a>反射概述</h2><h3 id="动静态语言"><a href="#动静态语言" class="headerlink" title="动静态语言"></a>动静态语言</h3><blockquote>
+<ul>
+<li>动态语言<ol>
+<li>运行时可以改变其结构的语言:Object-c, C#, JavaScript, PHP, Python等</li>
+</ol>
+</li>
+<li>静态语言<ol>
+<li>运行时结构不可变的语言:Java,C,C++</li>
+</ol>
+</li>
+</ul>
+<p>但是! Java虽不是动态语言, 但可以称为<strong>“准动态语言”</strong>. 因为Java有一定的动态性,可以利用Java的<strong>反射机制</strong>获得动态语言的特性. 可以让编程更灵活</p>
+</blockquote>
+<h3 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h3><blockquote>
+<p><strong>Reflection(反射)</strong> 是Java被视为动态语言的关键.反射机制是程序执行期间借助于Reflection API获取到<strong>任何类的内部信息,并能直接操作任意对象的内部属性和方法</strong></p>
+<p>加载完类之后, 在堆内存的方法去中就产生了一个Class类型的对象(对于每个类是唯一一个), 这个对象包含了<strong>完整的类的结构信息</strong>. 通过这个对象看到类的结构. 这个对象像个镜子, 透过这个镜子看到了类的结构 ,所以我们叫反射</p>
+<p><img src="https://i.loli.net/2020/06/06/1YROeXfwlsizrCS.png" alt="image.png"></p>
+<p><strong>image.png</strong></p>
+</blockquote>
+<h3 id="JAVA反射机制的优缺点"><a href="#JAVA反射机制的优缺点" class="headerlink" title="JAVA反射机制的优缺点"></a>JAVA反射机制的优缺点</h3><blockquote>
+<ul>
+<li>优点: 很明显它实现了动态创建和编译, 大大增加灵活性</li>
+<li>缺点: 对性能有影响,. 因为反射是一个解释操作, 告诉JVM,我们需要做什么来完成操作. 肯定慢于直接操作</li>
+</ul>
+</blockquote>
+<h2 id="1-类加载和初始化的"><a href="#1-类加载和初始化的" class="headerlink" title="1. 类加载和初始化的"></a>1. 类加载和初始化的</h2><blockquote>
+<p>想要了解反射机制先了解到底类加载是怎么运行的还有初始化时JVM发什么什么</p>
+</blockquote>
+<h3 id="类加载内存分析"><a href="#类加载内存分析" class="headerlink" title="类加载内存分析"></a>类加载内存分析</h3><blockquote>
+<ul>
+<li><p>Jvm中的内存部分:</p>
+<ol>
+<li><p>堆:</p>
+<p>存放new的对象和数组 (垃圾收集器,监控的就是这部分对象)</p>
+<ol>
+<li>可被所有线程共享, 不会存放别的对象引用</li>
+</ol>
+</li>
+<li><p><strong>栈:</strong> 存放基本变量类型(会包含这个基本类型的具体数值),引用对象的变量(存的是这个引用在堆里的地址)</p>
+</li>
+<li><p><strong>方法区:</strong> 可悲线程共享&#x2F; 包含所有的calss和static变量</p>
+</li>
+</ol>
+</li>
+<li><p>类加载的过程</p>
+<p>当程序主动使用某个类, 如果该类还未被夹在到内存中, 则会发生下面的步骤:</p>
+<p><img src="https://i.loli.net/2020/06/07/hqkj6iWFR1vc9Ga.png" alt="类加载的过程"></p>
+<p><strong>类加载的过程</strong></p>
+<ol>
+<li><p><strong>加载:</strong> 将class文件字节码加载到内存,将静态数据转换成方法去的运行时数据结构,然后生成一个java.lang.Class对象(堆).</p>
+</li>
+<li><p>链接:</p>
+<p>将二进制(字节码)代码合并到JVM运行状态中</p>
+<ol>
+<li>&#x3D;&#x3D;验证&#x3D;&#x3D;:确保加载的信息符合JVM规范</li>
+<li>&#x3D;&#x3D;准备&#x3D;&#x3D;:正式为类变量(static)分配内存,并设置初值– Java对象变量的默认值</li>
+<li>&#x3D;&#x3D;解析&#x3D;&#x3D;:虚拟机常量池内的符号引用(常量名)替换为直接引用(地址)</li>
+</ol>
+</li>
+<li><p><strong>初始化:</strong> 执行类构造器的()方法的过程: 下面细说</p>
+</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h3 id="类的初始化-–-赋初值"><a href="#类的初始化-–-赋初值" class="headerlink" title="类的初始化 – 赋初值"></a>类的初始化 – 赋初值</h3><blockquote>
+<ul>
+<li><p>初始化: 顺序是: *<strong>先静态对象，后非静态对象，且静态初始化动作只进行一次*</strong></p>
+<ol>
+<li>类构造器()方法是由编译器自动收集类中<strong>所有</strong>的<strong>类变量</strong>赋值和<strong>静态</strong>代码块的操作(类构造器是构造类的, 不是构造该对象的)</li>
+<li>如果初始化时发现父类没有初始化,则初始化父类</li>
+<li>虚拟机会保证()方法在多线程中能正确加锁和同步</li>
+</ol>
+<blockquote>
+<p>clinit 只有静态才会生效 而且只有一次 init 在实例化时生效</p>
+</blockquote>
+<ul>
+<li>实例化步骤为：先为属性分配空间，再执行赋默认值，然后按照顺序执行代码块或赋初始值，最后执行构造方法</li>
+</ul>
+</li>
+<li><p>类什么时候初始化:</p>
+<ol>
+<li>类的主动引用(一定发生初始化)<ol>
+<li>一定初始化main方法所在的类</li>
+<li>new对象</li>
+<li>通过类调用静态成员(除了final)和静态方法</li>
+<li>反射调用(forName(“”))</li>
+<li>如果初始化时发现父类没有初始化,则初始化父类</li>
+</ol>
+</li>
+<li>类的被动引用(不会发生初始化)<ol>
+<li>访问一个静态域时, 如果没有声明这个域的类(比如子类调用父类的静态变量)就不会初始化</li>
+<li>通过数组定义引用 – 只会分配空间 (类A[] a &#x3D; new 类A[len])</li>
+<li>引用常量不会触发此类的初始化 ( 常量在链接阶段就存入了常量池)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2020/06/30/pJrK6LaXGIATNFd.png" alt="JVM.png"></p>
+<p><strong>JVM.png</strong></p>
+</blockquote>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><blockquote>
+<p>如果需要查找一个class对象的时候 先查找内存三种加载器一次查找 如果没有从底层加载器加载 如果都没有抛出ClassNotFoundException 或者调用自己加载器的findClass方法加装</p>
+<ol>
+<li>好处: 类不重复加载</li>
+<li>不会产生核心类被后来的覆盖</li>
+</ol>
+<p><img src="https://i.loli.net/2020/09/14/FouWQYTv6GM8zdh.png" alt="双亲委派"></p>
+<p><strong>双亲委派</strong></p>
+</blockquote>
+<blockquote>
+<p>类加载器就是<strong>将class文件字节码内容加载到内存中</strong>,并将这些静态数据转换成方法去的运行时的数据结构,在堆中生成一个java.lang.class对象,作为访问入口</p>
+<p>类缓存: 标准JavaSE类加载器,可以按要求查找类, 一旦某个类被夹在将有一段时间缓存</p>
+<ol>
+<li><p>引导类加载器: 底层由C++编写, java自带的加载器, <strong>负责java核心库(rt.jar)</strong>, 装在核心类库. 这个无法直接获取</p>
+</li>
+<li><p>扩展类加载器:负责jre&#x2F;lib&#x2F;ext下的jar包或者java.ext.dirs指定目录的jar加载</p>
+<p><strong>sun.misc.Launcher$ExtClassLoader@1d4e2ba</strong></p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 系统类的父类  扩展类 </span></span><br><span class="line"><span class="type">ClassLoader</span> <span class="variable">parent</span> <span class="operator">=</span> loader.getParent();</span><br><span class="line">System.out.println(parent);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>系统类加载器: 最常用的,负责java-classpath或java.class.path所指向的目录下的类与jar包的加载</p>
+<p><strong>sun.misc.Launcher$AppClassLoader@dad5dc</strong></p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 获取系统类加载器  </span></span><br><span class="line"><span class="type">ClassLoader</span> <span class="variable">loader</span> <span class="operator">=</span> ClassLoader.getSystemClassLoader();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>系统类 -&gt; 扩展类 -&gt; 引导类 以及自定义加载器</p>
+</li>
+</ol>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看系统内类加载器可以加载的路径</span></span><br><span class="line">  System.out.println(System.getProperty(<span class="string">&quot;java.class.path&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.loli.net/2020/06/07/Dlpi7uRVcFm3MoT.png" alt="image.png"></p>
+<p><strong>image.png</strong></p>
+</blockquote>
+<h2 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h2><blockquote>
+<p>在Object类下有一个getClass()方法,返回值是一个Class类.所有类都默认继承Object类.public final Class getClass()</p>
+<p>是Java反射的源头, 所以反射理解为: 可以通过对象反射找到对应的类</p>
+<p><img src="https://i.loli.net/2020/06/06/9fyt2kRnvHcCihs.png" alt="image.png"></p>
+<p><strong>image.png</strong></p>
+</blockquote>
+<h4 id="获取Class类的方法"><a href="#获取Class类的方法" class="headerlink" title="获取Class类的方法"></a>获取Class类的方法</h4><blockquote>
+<ol>
+<li><p>已知具体类, 通过class属性来获取, 该方法<strong>最为安全可靠</strong>,程序性能最高</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;Cat&gt; c1 = Cat.class;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>已知某个类的实例,调用它的getClass方法获取Class对象</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cat</span> <span class="variable">cat</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line"><span class="type">Class</span> <span class="variable">c3</span> <span class="operator">=</span> cat.getClass()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>已知一个类的<strong>限定类名</strong>,且在类路径下, 可以通过Class的静态方法forName()获取</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">c2</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;com.sjs.Reflect.Cat&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内置基本数据类型可以直接调用<strong>类名.Type</strong></p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;Integer&gt; type = Integer.TYPE;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还可以用ClassLoader</p>
+<blockquote>
+<p>只要是获取到<strong>同一个类的Class对象都是一个对象</strong></p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(c1.hashCode());</span><br><span class="line">System.out.println(c2.hashCode());</span><br><span class="line">System.out.println(c3.hashCode());</span><br></pre></td></tr></table></figure>
+
+<p>我们把上面的对象用hashCode()输出数据相同</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="Class类的常用方法"><a href="#Class类的常用方法" class="headerlink" title="Class类的常用方法"></a>Class类的常用方法</h4><blockquote>
+<ol>
+<li><strong>Class getSuperClass():</strong> 返回当前类的父类</li>
+<li><strong>static ClassforName(String name):</strong> 返回指定类名name的Class对象</li>
+<li><strong>Object newInstance():</strong> 调用缺省构造函数,返回Class对象的一个实例</li>
+<li><strong>getName():</strong> 返回Class对象所表示的实体(类, 接口等)的名称</li>
+<li><strong>Class[] getInterfaces():</strong> 返回当前Class对象的接口</li>
+<li><strong>ClassLoader getClassLoader():</strong> 返回该类的类加载器</li>
+</ol>
+</blockquote>
+<h2 id="2-获取类的运行时结构"><a href="#2-获取类的运行时结构" class="headerlink" title="2. 获取类的运行时结构"></a>2. 获取类的运行时结构</h2><blockquote>
+<p>通过反射可以获取运行时的类的完整结构</p>
+<p> 反射创建类的Class对象Class catCl &#x3D; Class.forName(“com.sjs.Reflect.Animal”);</p>
+<ol>
+<li><p>获取属性</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">catCl.getFields(); <span class="comment">// 获取所有public属性</span></span><br><span class="line">catCl.getDeclaredFields();<span class="comment">// 获取所有属性</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取方法</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">catCl.getMethods(); <span class="comment">// 获取包括父类的所有public方法</span></span><br><span class="line">catCl.getDeclaredMethods();<span class="comment">// 获取其他权限的方法</span></span><br><span class="line">   System.out.println(catCl.getDeclaredMethod(<span class="string">&quot;方法名字&quot;</span>, 参数类型.class)); <span class="comment">// 获取指定方法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取构造器</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取构造器</span></span><br><span class="line">     catCl.getConstructors();<span class="comment">// 获取 public所有构造器</span></span><br><span class="line">     catCl.getDeclaredConstructors();<span class="comment">// 获取 public所有构造器</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>等等,,,能获取到类的完整结构(接口,注解, 父类………)</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="动态创建对象-调用运行时类中的结构"><a href="#动态创建对象-调用运行时类中的结构" class="headerlink" title="动态创建对象,调用运行时类中的结构"></a>动态创建对象,调用运行时类中的结构</h2><blockquote>
+<ul>
+<li><p>动态创建:</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Animal</span> <span class="variable">aninmalIns</span> <span class="operator">=</span> (Animal) animal.newInstance(); <span class="comment">// 反射获得的类实例创建实例</span></span><br><span class="line"><span class="comment">/*************************************************************************/</span></span><br><span class="line"> <span class="comment">//调用指定构造器创建对象</span></span><br><span class="line">Constructor&lt;?&gt; constructor = animal.getDeclaredConstructor(String.class);<span class="comment">// 用参数来确定构造方法</span></span><br><span class="line">constructor.setAccessible(<span class="literal">true</span>); <span class="comment">//设置访问权限拦截(true不拦截) 因为这个构造是私有的</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> constructor.newInstance(<span class="string">&quot;参数&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用运行时的方法</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Animal</span> <span class="variable">animal1</span> <span class="operator">=</span> (Animal) animal.newInstance(); <span class="comment">// 创建出声明类实例</span></span><br><span class="line"><span class="comment">// 调用方法</span></span><br><span class="line"><span class="comment">// 创建出Method对象</span></span><br><span class="line"><span class="type">Method</span> <span class="variable">setName</span> <span class="operator">=</span> animal.getDeclaredMethod(<span class="string">&quot;setName&quot;</span>, String.class);<span class="comment">// 方法参数名字和类型</span></span><br><span class="line">setName.invoke(animal1, <span class="string">&quot;参数&quot;</span>); <span class="comment">// 参数对象是声明类的实例</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用属性</p>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 访问和修改属性</span></span><br><span class="line"><span class="type">Field</span> <span class="variable">name</span> <span class="operator">=</span> animal.getDeclaredField(<span class="string">&quot;name&quot;</span>);<span class="comment">// 属性名称</span></span><br><span class="line">name.setAccessible(<span class="literal">true</span>);<span class="comment">// 由于是私有修改拦截方式</span></span><br><span class="line">name.set(animal1, <span class="string">&quot;tuyi&quot;</span>); <span class="comment">// set 将对象和参数传入</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>class对象可以创建类的对象, 可以访问所有权限的方法和属性</li>
+<li><strong>invoke(Object obj, Object args[])方法</strong> 用反射创建出Method对象,用此方法调用 ,参数是类的对象和参数</li>
+<li>setAccessible(boolen par)<ol>
+<li>Method, Field, Constructor对象都有setAccessible()方法</li>
+<li>是用来启动或者禁用访问安全检查的开关</li>
+<li>true为取消java语言访问检察<ol>
+<li><strong>提高反射效率</strong>, 如果必须用反射, 设置为true</li>
+<li>可以访问私有结构</li>
+</ol>
+</li>
+<li>false则为反射的对象开启Java语言访问检察</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h2 id="练习-通过注解和反射完成简单的类和表结构的映射关系-ORM"><a href="#练习-通过注解和反射完成简单的类和表结构的映射关系-ORM" class="headerlink" title="练习:通过注解和反射完成简单的类和表结构的映射关系(ORM)"></a>练习:通过注解和反射完成简单的类和表结构的映射关系(ORM)</h2><p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注解类</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DBAnnotation &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>; <span class="comment">// 库名</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@interface</span> FieldsSJS &#123;</span><br><span class="line">    String <span class="title function_">column</span><span class="params">()</span>; <span class="comment">// 列明</span></span><br><span class="line"></span><br><span class="line">    String <span class="title function_">type</span><span class="params">()</span>; <span class="comment">// 数据类型</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">len</span><span class="params">()</span>; <span class="comment">// 长度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pojo类</span></span><br><span class="line"><span class="meta">@DBAnnotation(&quot;student&quot;)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="meta">@FieldsSJS(column = &quot;id&quot;, type = &quot;int&quot;, len = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="meta">@FieldsSJS(column = &quot;id&quot;, type = &quot;varChar&quot;, len = 10)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(<span class="type">int</span> id, String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ORMExercise</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException &#123;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">studentDB</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;com.sjs.Exercise.Student&quot;</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) studentDB.newInstance();</span><br><span class="line">        <span class="type">DBAnnotation</span> <span class="variable">dbAnnotation</span> <span class="operator">=</span> (DBAnnotation) studentDB.getAnnotation(DBAnnotation.class);</span><br><span class="line">        System.out.println(<span class="string">&quot;当前表是: &quot;</span> + dbAnnotation.value());</span><br><span class="line"></span><br><span class="line">        Field[] fields = studentDB.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            <span class="type">FieldsSJS</span> <span class="variable">fieldsjs</span> <span class="operator">=</span> field.getAnnotation(FieldsSJS.class);</span><br><span class="line">            System.out.println(<span class="string">&quot;类中的参数是:&quot;</span> + field.getName());</span><br><span class="line">            System.out.print(<span class="string">&quot;列名字:&quot;</span> + fieldsjs.column() + <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">            System.out.print(<span class="string">&quot;长度:&quot;</span> + fieldsjs.len() + <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">            System.out.print(<span class="string">&quot;类型:&quot;</span> + fieldsjs.type() + <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.loli.net/2020/06/08/euOnThtcEdpokG4.png" alt="image.png"></p>
+<p><strong>image.png</strong></p>
+<p>clinitclinit</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io">大橘</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io/2021/07/25/JavaBase/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">https://sunxinan.gitee.io/2021/07/25/JavaBase/JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://sunxinan.gitee.io" target="_blank">大橘のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/25/JavaBase/OOP%E7%BC%96%E7%A8%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/" title="OOP编程(面向对象)基础"><img class="cover" src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OOP编程(面向对象)基础</div></div></a></div><div class="next-post pull-right"><a href="/2021/07/25/JavaBase/JAVA%E6%B3%A8%E8%A7%A3/" title="JAVA注解"><img class="cover" src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JAVA注解</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://gd-hbimg.huaban.com/b516605e74dbd9ef122715c37c8dc79e6bc2f19f45dc3-hdriAM_fw658webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">大橘</div><div class="author-info__description">热爱与分享！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunxinan12138"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/sunxinan12138" target="_blank" title="Gitee"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2577833031@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">感谢访问本站，喜欢请收藏！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">1.</span> <span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">反射概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80"><span class="toc-number">1.1.1.</span> <span class="toc-text">动静态语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reflection"><span class="toc-number">1.1.2.</span> <span class="toc-text">Reflection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.3.</span> <span class="toc-text">JAVA反射机制的优缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84"><span class="toc-number">1.2.</span> <span class="toc-text">1. 类加载和初始化的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90"><span class="toc-number">1.2.1.</span> <span class="toc-text">类加载内存分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96-%E2%80%93-%E8%B5%8B%E5%88%9D%E5%80%BC"><span class="toc-number">1.2.2.</span> <span class="toc-text">类的初始化 – 赋初值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">类加载器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">Class对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96Class%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">获取Class类的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Class%E7%B1%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">Class类的常用方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96%E7%B1%BB%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.</span> <span class="toc-text">2. 获取类的运行时结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-%E8%B0%83%E7%94%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%B1%BB%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.</span> <span class="toc-text">动态创建对象,调用运行时类中的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%9A%84%E7%B1%BB%E5%92%8C%E8%A1%A8%E7%BB%93%E6%9E%84%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB-ORM"><span class="toc-number">1.6.</span> <span class="toc-text">练习:通过注解和反射完成简单的类和表结构的映射关系(ORM)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他"><img src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电吉他"/></a><div class="content"><a class="title" href="/2023/08/25/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他">电吉他</a><time datetime="2023-08-25T09:25:08.000Z" title="发表于 2023-08-25 17:25:08">2023-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/08/08/%E5%BE%85%E5%81%9A%E6%96%87%E6%A1%A3/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="无题">无题</a><time datetime="2023-08-08T05:04:37.571Z" title="发表于 2023-08-08 13:04:37">2023-08-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/03/other/UnRaid/" title="unraid"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="unraid"/></a><div class="content"><a class="title" href="/2023/08/03/other/UnRaid/" title="unraid">unraid</a><time datetime="2023-08-02T16:00:00.000Z" title="发表于 2023-08-03 00:00:00">2023-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.226Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/07/29/javaGame/%E5%9B%9E%E6%A1%A3%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/" title="无题">无题</a><time datetime="2023-07-29T05:22:57.224Z" title="发表于 2023-07-29 13:22:57">2023-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 大橘</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="#">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
