@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>分布式 | 大橘のBlog</title><meta name="author" content="大橘"><meta name="copyright" content="大橘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="分布式分布式理论 什么是分布式系统 建立在网络之上的软件系统  在《分布式系统原理与范型》一书中定义:分布式系统是若干独立计算机的集合, 这些计算机对于用户来说就像单个相关系统 分布式系统是由一组通过网络进行通信, 为了完成共同任务而协调工作的计算机节点组成的系统, 分布式系统的出现是为了用廉价的, 普通的机器完成单个计算机无法完成的计算, 存储任务. 其目的是&#x3D;&#x3D;利用更多的机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式">
+<meta property="og:url" content="https://sunxinan.gitee.io/2021/07/25/JavaBase/%E5%88%86%E5%B8%83%E5%BC%8F/index.html">
+<meta property="og:site_name" content="大橘のBlog">
+<meta property="og:description" content="分布式分布式理论 什么是分布式系统 建立在网络之上的软件系统  在《分布式系统原理与范型》一书中定义:分布式系统是若干独立计算机的集合, 这些计算机对于用户来说就像单个相关系统 分布式系统是由一组通过网络进行通信, 为了完成共同任务而协调工作的计算机节点组成的系统, 分布式系统的出现是为了用廉价的, 普通的机器完成单个计算机无法完成的计算, 存储任务. 其目的是&#x3D;&#x3D;利用更多的机">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg">
+<meta property="article:published_time" content="2021-07-25T08:43:04.000Z">
+<meta property="article:modified_time" content="2023-10-12T05:57:58.233Z">
+<meta property="article:author" content="大橘">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg"><link rel="shortcut icon" href="/img/cat.png"><link rel="canonical" href="https://sunxinan.gitee.io/2021/07/25/JavaBase/%E5%88%86%E5%B8%83%E5%BC%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 大橘","link":"链接: ","source":"来源: 大橘のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '分布式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-12 13:57:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2023/10/11/uTQMbXSideKNzVv.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="大橘のBlog"><img class="site-icon" src="/img/cat.png"/><span class="site-name">大橘のBlog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 类别</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">分布式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-25T08:43:04.000Z" title="发表于 2021-07-25 16:43:04">2021-07-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-12T05:57:58.233Z" title="更新于 2023-10-12 13:57:58">2023-10-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java/">java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="分布式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><h2 id="分布式理论"><a href="#分布式理论" class="headerlink" title="分布式理论"></a>分布式理论</h2><blockquote>
+<p>什么是分布式系统</p>
+<p>建立在网络之上的软件系统</p>
+</blockquote>
+<p>在《分布式系统原理与范型》一书中定义:<strong>分布式系统是若干独立计算机的集合, 这些计算机对于用户来说就像单个相关系统</strong></p>
+<p>分布式系统是由一组通过网络进行通信, 为了完成共同任务而协调工作的计算机节点组成的系统, 分布式系统的出现是为了用廉价的, 普通的机器完成单个计算机无法完成的计算, 存储任务. 其目的是&#x3D;&#x3D;利用更多的机器, 处理更多的数据&#x3D;&#x3D;</p>
+<blockquote>
+<p>分布式的进化过程</p>
+</blockquote>
+<ol>
+<li>刚开始是: 单一应用架构ORM</li>
+<li>垂直应用架构MVC</li>
+<li>分布式服务框架**(RPC, 并发)**</li>
+</ol>
+<p><img src="https://i.loli.net/2020/08/24/u8tkBrvRU2ps4Gy.png" alt="image.png"></p>
+<p><strong>image.png</strong></p>
+<ol>
+<li>流动计算架构 <strong>提高机器利用率的资源调度和治理中心</strong>(SOA)</li>
+</ol>
+<blockquote>
+<p>分布式的高性能体现</p>
+</blockquote>
+<ol>
+<li>并行性(parallelism)</li>
+<li>容错性 (fault - tolerance)<ul>
+<li>可用性: 因为系统是相对隔离的所以尽管出现了一些故障 还是可以运行的</li>
+<li>可恢复性: 其中一个服务器坏了 修好了还能正常一样运行 减少一些不必要的重启</li>
+<li>复制技术: 将数据做多个副本, 就算出现问题也能保证数据不出问题</li>
+</ul>
+</li>
+<li>在物理层面实现 ( 不同地方的计算机实现数据交互 )</li>
+<li>实现了系统的隔离 会相对的安全 : (功能分开 利用网络通信来链接 其中一个服务崩溃 不会影响总体的服务)</li>
+<li>可扩展性: 两倍的计算机 可以拥有两倍的处理性能(并行处理)或吞吐量 (理想条件)</li>
+</ol>
+<h2 id="分布式架构的问题"><a href="#分布式架构的问题" class="headerlink" title="分布式架构的问题"></a>分布式架构的问题</h2><p>虽然分布式大大增加了系统的性能但是需要解决的问题也多了 数据一致性啊 传输速度和方案啊 因为服务器数量增加了 单一服务器出现的小概率问题 也会显现出来</p>
+<blockquote>
+<p>一致性</p>
+</blockquote>
+<ul>
+<li><p>强一致性 (每次修改数据同步所有服务器节点)(高消耗) : 因为数据同步时需要网络传输 如果每次操作都需要将所有服务器都同步 开销很大的</p>
+<p>如果创建了副本 副本肯定不在同一个地方 这样的化通信时间也是问题</p>
+</li>
+<li><p>若一致性(修改数据不需要同步所有节点. 要有一些策略来保证获得数据时的正确性): 还是比较优秀的</p>
+<p>还有一种处理方式 在获取数据时 : 多获取几个版本的 做到数据一致性</p>
+</li>
+</ul>
+<blockquote>
+<p>非易失性存储(Non-Volatile-Storage)</p>
+</blockquote>
+<p>非易失性存储的数据更新时的代价很高</p>
+<p>非易失性存储的管理技巧: LOG WAL Redo&#x2F;Undo</p>
+<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>2003年谷歌用来实现分布式计算海量数据的计算的一个技术 当然也是一种思想</p>
+<h3 id="Map和Reduce"><a href="#Map和Reduce" class="headerlink" title="Map和Reduce"></a>Map和Reduce</h3><p>看了知乎的一篇文章解释的很到位</p>
+<p>Map的本质实际上是拆解，比如说有辆红色的小汽车，有一群工人，把它拆成零件了，这就是Map。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-60294db5923f28063681a47e8b4be66e_720w.jpg" alt="img"></p>
+<p><strong>img</strong></p>
+<p>那什么是Reduce呢？Reduce就是组合，我们有很多汽车零件，还有很多其他各种装置零件，把他们一阵拼装，变成变形金刚，这就是Reduce。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-d32f853d005bacd372128679b9fa05ad_720w.jpg" alt="img"></p>
+<p><strong>img</strong></p>
+<ul>
+<li>MapReduce就是把文件输入拆解分类 然后按照你需要的方式传出结果(排序,筛选….)</li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>大致分为六部: Input, Split, Map, Shuffle, Reduce(归约函数), Finalize</p>
+<blockquote>
+<p>举个例子 处理文件中相同数据的个数</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/10/05/yTobZcFjs7IlLm9.png" alt="MapReduce"></p>
+<p><strong>MapReduce</strong></p>
+<p>当然 处理结果也可以作为下一步操作的输入文件</p>
+<p>shuffle 传递时会产生流量 实际上这是大量的数据</p>
+<h3 id="真实情况下MapReduce怎么用众多服务器实现呢"><a href="#真实情况下MapReduce怎么用众多服务器实现呢" class="headerlink" title="真实情况下MapReduce怎么用众多服务器实现呢"></a>真实情况下MapReduce怎么用众多服务器实现呢</h3><p>job: 处理业务逻辑的一个整体</p>
+<p>task: 调用执行MapReduce叫一个Task</p>
+<p>Worker: 程序申请时 由Master worker来负责调度 由不同的worker来进行map&#x2F;Reduce 当然可以是不同的服务器</p>
+<p><img src="https://i.loli.net/2020/10/05/7IgflH1xGoDCSdp.png" alt="MapReduce架构"></p>
+<p><strong>MapReduce架构</strong></p>
+<h1 id="雪花算法-–-分布式中确保唯一id的算法"><a href="#雪花算法-–-分布式中确保唯一id的算法" class="headerlink" title="雪花算法 – 分布式中确保唯一id的算法"></a>雪花算法 – 分布式中确保唯一id的算法</h1><p><img src="https://i.loli.net/2020/10/02/3CITvUSjqGHdsnA.png" alt="image-20200912161729887.png"></p>
+<p><strong>image-20200912161729887.png</strong></p>
+<ol>
+<li>加锁获取id 下面三组数据与运算</li>
+</ol>
+<blockquote>
+<p>private long sequenceMask &#x3D; -1L ^ (-1L &lt;&lt; sequenceBits); 一个long类型的最大值(12位的1) 4096</p>
+<p>-1L二进制全是一(反码的补码) 左移 sequenceBits(12) 位 得到 <strong>12位的1</strong></p>
+</blockquote>
+<ul>
+<li>时间戳 左移22位 <code>如果序列号加一 与上 sequenceMask (12位的1)为0</code> 那么进入下一毫秒<code>tilNextMillis</code></li>
+</ul>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">long</span> <span class="title function_">tilNextMillis</span><span class="params">(<span class="type">long</span> lastTimestamp)</span> &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">timestamp</span> <span class="operator">=</span> timeGen();</span><br><span class="line">        <span class="keyword">while</span> (timestamp &lt;= lastTimestamp) &#123;</span><br><span class="line">            timestamp = timeGen();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> timestamp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>机房号(左移17位) 和 机位id (左移12位) (一共1024个)</li>
+<li>序列号 sequence</li>
+</ul>
+<p>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">if</span> (lastTimestamp == timestamp) &#123;</span><br><span class="line">            sequence = (sequence + <span class="number">1</span>) &amp; sequenceMask; <span class="comment">// 正好12位的值</span></span><br><span class="line">            <span class="keyword">if</span> (sequence == <span class="number">0</span>) &#123; <span class="comment">// 证明数值超出了</span></span><br><span class="line">                timestamp = tilNextMillis(lastTimestamp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            sequence = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">lastTimestamp = timestamp;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32172999">深入浅出MapReduce</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35078688/article/details/83240661">mapreduce Java实现</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io">大橘</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://sunxinan.gitee.io/2021/07/25/JavaBase/%E5%88%86%E5%B8%83%E5%BC%8F/">https://sunxinan.gitee.io/2021/07/25/JavaBase/%E5%88%86%E5%B8%83%E5%BC%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://sunxinan.gitee.io" target="_blank">大橘のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a><a class="post-meta__tags" href="/tags/%E6%A1%86%E6%9E%B6/">框架</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/25/JavaBase/Mysql/" title="Mysql"><img class="cover" src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Mysql</div></div></a></div><div class="next-post pull-right"><a href="/2021/07/25/net/Netty/" title="Netty"><img class="cover" src="https://s2.loli.net/2023/10/11/WfFR7YHJroS1yxU.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Netty</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/04/06/javaGame/%E5%B8%B8%E7%94%A8%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/" title="常用游戏框架"><img class="cover" src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-06</div><div class="title">常用游戏框架</div></div></a></div><div><a href="/2021/07/25/javaGame/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F/" title="游戏服务器中的分布式"><img class="cover" src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-25</div><div class="title">游戏服务器中的分布式</div></div></a></div><div><a href="/2021/07/25/JavaBase/Spring%E4%BA%8B%E5%8A%A1/" title="Spring事务"><img class="cover" src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-25</div><div class="title">Spring事务</div></div></a></div><div><a href="/2020/05/27/JavaBase/Spring%E7%9A%84AOP%E5%92%8CIOC/" title="Spring的AOP和IOC"><img class="cover" src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-27</div><div class="title">Spring的AOP和IOC</div></div></a></div><div><a href="/2022/05/11/javaGame/Xdb%E4%BD%BF%E7%94%A8%E5%8F%82%E8%80%83/" title="Xdb使用参考"><img class="cover" src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-11</div><div class="title">Xdb使用参考</div></div></a></div><div><a href="/2021/08/25/JavaBase/OOP%E7%BC%96%E7%A8%8B-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%9F%BA%E7%A1%80/" title="OOP编程(面向对象)基础"><img class="cover" src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-25</div><div class="title">OOP编程(面向对象)基础</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2023/10/11/uTQMbXSideKNzVv.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">大橘</div><div class="author-info__description">热爱与分享！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunxinan12138"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/sunxinan12138" target="_blank" title="Gitee"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2577833031@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">感谢访问本站，喜欢请收藏！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">分布式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA"><span class="toc-number">1.1.</span> <span class="toc-text">分布式理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">分布式架构的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce"><span class="toc-number">1.3.</span> <span class="toc-text">MapReduce</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map%E5%92%8CReduce"><span class="toc-number">1.3.1.</span> <span class="toc-text">Map和Reduce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%9F%E5%AE%9E%E6%83%85%E5%86%B5%E4%B8%8BMapReduce%E6%80%8E%E4%B9%88%E7%94%A8%E4%BC%97%E5%A4%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%91%A2"><span class="toc-number">1.3.3.</span> <span class="toc-text">真实情况下MapReduce怎么用众多服务器实现呢</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95-%E2%80%93-%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E7%A1%AE%E4%BF%9D%E5%94%AF%E4%B8%80id%E7%9A%84%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">雪花算法 – 分布式中确保唯一id的算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/08/03/other/UnRaid/" title="nas系统Unraid"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nas系统Unraid"/></a><div class="content"><a class="title" href="/2023/08/03/other/UnRaid/" title="nas系统Unraid">nas系统Unraid</a><time datetime="2023-08-02T16:00:00.000Z" title="发表于 2023-08-03 00:00:00">2023-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/25/music/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="电吉他"><img src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电吉他"/></a><div class="content"><a class="title" href="/2023/05/25/music/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/" title="电吉他">电吉他</a><time datetime="2023-05-25T09:25:08.000Z" title="发表于 2023-05-25 17:25:08">2023-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/25/music/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他"><img src="http://www.obzhi.com/wp-content/uploads/2022/03/dazhan-scaled.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电吉他"/></a><div class="content"><a class="title" href="/2023/05/25/music/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/" title="电吉他">电吉他</a><time datetime="2023-05-25T09:25:08.000Z" title="发表于 2023-05-25 17:25:08">2023-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/23/bookNote/effective-Java%E8%AE%B0%E5%BD%95/" title="effective Java记录"><img src="https://s2.loli.net/2023/10/10/N9ZyUOuxBX7litY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="effective Java记录"/></a><div class="content"><a class="title" href="/2023/04/23/bookNote/effective-Java%E8%AE%B0%E5%BD%95/" title="effective Java记录">effective Java记录</a><time datetime="2023-04-23T10:40:30.000Z" title="发表于 2023-04-23 18:40:30">2023-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/06/javaGame/%E5%B8%B8%E7%94%A8%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/" title="常用游戏框架"><img src="https://s2.loli.net/2023/10/10/9OJzXKVBjaGnIQq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用游戏框架"/></a><div class="content"><a class="title" href="/2023/04/06/javaGame/%E5%B8%B8%E7%94%A8%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/" title="常用游戏框架">常用游戏框架</a><time datetime="2023-04-06T02:35:35.000Z" title="发表于 2023-04-06 10:35:35">2023-04-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 大橘</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="#">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4RzPqP0MnOK4RIMOrSnPl0uq-gzGzoHsz',
+      appKey: 'HLvc5kHjBjGlhkziNy5d6ELs',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: {"tv_doge":"6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png","tv_亲亲":"a8111ad55953ef5e3be3327ef94eb4a39d535d06.png","tv_偷笑":"bb690d4107620f1c15cff29509db529a73aee261.png","tv_再见":"180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png","tv_冷漠":"b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png","tv_发怒":"34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png","tv_发财":"34db290afd2963723c6eb3c4560667db7253a21a.png","tv_可爱":"9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png","tv_吐血":"09dd16a7aa59b77baa1155d47484409624470c77.png","tv_呆":"fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png","tv_呕吐":"9f996894a39e282ccf5e66856af49483f81870f3.png","tv_困":"241ee304e44c0af029adceb294399391e4737ef2.png","tv_坏笑":"1f0b87f731a671079842116e0991c91c2c88645a.png","tv_大佬":"093c1e2c490161aca397afc45573c877cdead616.png","tv_大哭":"23269aeb35f99daee28dda129676f6e9ea87934f.png","tv_委屈":"d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png","tv_害羞":"a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png","tv_尴尬":"7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png","tv_微笑":"70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png","tv_思考":"90cf159733e558137ed20aa04d09964436f618a1.png","tv_惊吓":"0d15c7e2ee58e935adc6a7193ee042388adc22af.png"},
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
