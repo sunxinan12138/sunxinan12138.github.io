@@ -402,6 +402,361 @@
       </tags>
   </entry>
   <entry>
+    <title>linux1</title>
+    <url>/2022/06/14/linuxRelevant/linux/</url>
+    <content><![CDATA[<h1 id="常用的基本命令"><a href="#常用的基本命令" class="headerlink" title="常用的基本命令"></a>常用的基本命令</h1><blockquote>
+<p>基于CentOS7</p>
+</blockquote>
+<p>常用的基本命令</p>
+<h3 id="目录管理"><a href="#目录管理" class="headerlink" title="目录管理"></a>目录管理</h3><blockquote>
+<p>绝对路径和相对路径</p>
+</blockquote>
+<p>我们知道Linux的目录结构为树状结构，最顶级的目录为根目录 &#x2F;。</p>
+<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
+<p>在开始本教程前我们需要先知道什么是绝对路径与相对路径。</p>
+<p><strong>绝对路径：</strong></p>
+<p>路径的写法，由根目录 &#x2F; 写起，例如：&#x2F;usr&#x2F;share&#x2F;doc 这个目录。</p>
+<p><strong>相对路径：</strong></p>
+<p>路径的写法，不是由 &#x2F; 写起，例如由 &#x2F;usr&#x2F;share&#x2F;doc 要到 &#x2F;usr&#x2F;share&#x2F;man 底下时，可以写成：cd ..&#x2F;man 这就是相对路径的写法啦！</p>
+<blockquote>
+<p>处理目录的常用命令</p>
+</blockquote>
+<p>接下来我们就来看几个常见的处理目录的命令吧：</p>
+<ul>
+<li>ls: 列出目录</li>
+<li>cd：切换目录</li>
+<li>pwd：显示目前的目录</li>
+<li>mkdir：创建一个新的目录</li>
+<li>rmdir：删除一个空的目录</li>
+<li>cp: 复制文件或目录</li>
+<li>rm: 移除文件或目录</li>
+<li>mv: 移动文件与目录，或修改文件与目录的名称</li>
+</ul>
+<p>你可以使用 <em>man [命令]</em> 来查看各个命令的使用文档，如 ：man cp。</p>
+<blockquote>
+<p>ls （列出目录）</p>
+</blockquote>
+<p>在Linux系统当中， ls 命令可能是最常被运行的。</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls [-aAdfFhilnrRSt] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-a ：全部的文件，连同隐藏文件( 开头为 . 的文件) 一起列出来(常用)</li>
+<li>-l ：长数据串列出，包含文件的属性与权限等等数据；(常用)</li>
+</ul>
+<p>将目录下的所有文件列出来(含属性与隐藏档)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls -al ~</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>cd （切换目录）</p>
+</blockquote>
+<p>cd是Change Directory的缩写，这是用来变换工作目录的命令。</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 切换到用户目录下</span><br><span class="line">[root@kuangshen /]# cd home  </span><br><span class="line"></span><br><span class="line"># 使用 mkdir 命令创建 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# mkdir kuangstudy</span><br><span class="line"></span><br><span class="line"># 进入 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# cd kuangstudy</span><br><span class="line"></span><br><span class="line"># 回到上一级</span><br><span class="line">[root@kuangshen kuangstudy]# cd ..</span><br><span class="line"></span><br><span class="line"># 回到根目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd /</span><br><span class="line"></span><br><span class="line"># 表示回到自己的家目录，亦即是 /root 这个目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd ~</span><br></pre></td></tr></table></figure>
+
+<p>接下来大家多操作几次应该就可以很好的理解 cd 命令的。</p>
+<blockquote>
+<p>pwd ( 显示目前所在的目录 )</p>
+</blockquote>
+<p>pwd 是 <strong>Print Working Directory</strong> 的缩写，也就是显示目前所在目录的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen kuangstudy]#pwd [-P]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：**-P** ：显示出确实的路径，而非使用连接(link) 路径。</p>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 单纯显示出目前的工作目录</span><br><span class="line">[root@kuangshen ~]# pwd</span><br><span class="line">/root</span><br><span class="line"></span><br><span class="line"># 如果是链接，要显示真实地址，可以使用 -P参数</span><br><span class="line">[root@kuangshen /]# cd bin</span><br><span class="line">[root@kuangshen bin]# pwd -P</span><br><span class="line">/usr/bin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mkdir （创建新目录）</p>
+</blockquote>
+<p>如果想要创建新的目录的话，那么就使用mkdir (make directory)吧。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir [-mp] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-m ：配置文件的权限喔！直接配置，不需要看默认权限 (umask) 的脸色～</li>
+<li>-p ：帮助你直接将所需要的目录(包含上一级目录)递归创建起来！</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 进入我们用户目录下</span><br><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line"></span><br><span class="line"># 创建一个 test 文件夹</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 创建多层级目录</span><br><span class="line">[root@kuangshen home]# mkdir test1/test2/test3/test4</span><br><span class="line">mkdir: cannot create directory ‘test1/test2/test3/test4’:</span><br><span class="line">No such file or directory  # &lt;== 没办法直接创建此目录啊！</span><br><span class="line"></span><br><span class="line"># 加了这个 -p 的选项，可以自行帮你创建多层目录！</span><br><span class="line">[root@kuangshen home]# mkdir -p test1/test2/test3/test4</span><br><span class="line"></span><br><span class="line"># 创建权限为 rwx--x--x 的目录。</span><br><span class="line">[root@kuangshen home]# mkdir -m 711 test2</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rmdir ( 删除空的目录 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rmdir [-p] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：**-p ：**连同上一级『空的』目录也一起删除</p>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 看看有多少目录存在？</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br><span class="line"></span><br><span class="line"># 可直接删除掉，没问题</span><br><span class="line">[root@kuangshen home]# rmdir test</span><br><span class="line"></span><br><span class="line"># 因为尚有内容，所以无法删除！</span><br><span class="line">[root@kuangshen home]# rmdir test1</span><br><span class="line">rmdir: failed to remove ‘test1’: Directory not empty</span><br><span class="line"></span><br><span class="line"># 利用 -p 这个选项，立刻就可以将 test1/test2/test3/test4 依次删除。</span><br><span class="line">[root@kuangshen home]# rmdir -p test1/test2/test3/test4</span><br></pre></td></tr></table></figure>
+
+<p>注意：这个 rmdir 仅能删除空的目录，你可以使用 rm 命令来删除非空目录，后面我们会将！</p>
+<blockquote>
+<p>cp ( 复制文件或目录 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)</span><br><span class="line">[root@www ~]# cp [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><strong>-a：</strong>相当於 -pdr 的意思，至於 pdr 请参考下列说明；(常用)</li>
+<li><strong>-p：</strong>连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</li>
+<li><strong>-d：</strong>若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</li>
+<li><strong>-r：</strong>递归持续复制，用於目录的复制行为；(常用)</li>
+<li><strong>-f：</strong>为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</li>
+<li><strong>-i：</strong>若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</li>
+<li><strong>-l：</strong>进行硬式连结(hard link)的连结档创建，而非复制文件本身。</li>
+<li><strong>-s：</strong>复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</li>
+<li><strong>-u：</strong>若 destination 比 source 旧才升级 destination ！</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 找一个有文件的目录，我这里找到 root目录</span><br><span class="line">[root@kuangshen home]# cd /root</span><br><span class="line">[root@kuangshen ~]# ls</span><br><span class="line">install.sh</span><br><span class="line">[root@kuangshen ~]# cd /home</span><br><span class="line"></span><br><span class="line"># 复制 root目录下的install.sh 到 home目录下</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 再次复制，加上-i参数，增加覆盖询问？</span><br><span class="line">[root@kuangshen home]# cp -i /root/install.sh /home</span><br><span class="line">cp: overwrite ‘/home/install.sh’? y # n不覆盖，y为覆盖</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rm ( 移除文件或目录 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rm [-fir] 文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；</li>
+<li>-i ：互动模式，在删除前会询问使用者是否动作</li>
+<li>-r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 将刚刚在 cp 的实例中创建的 install.sh删除掉！</span><br><span class="line">[root@kuangshen home]# rm -i install.sh</span><br><span class="line">rm: remove regular file ‘install.sh’? y</span><br><span class="line"># 如果加上 -i 的选项就会主动询问喔，避免你删除到错误的档名！</span><br><span class="line"></span><br><span class="line"># 尽量不要在服务器上使用 rm -rf /</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mv  ( 移动文件与目录，或修改名称 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# mv [-fiu] source destination</span><br><span class="line">[root@www ~]# mv [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
+<li>-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！</li>
+<li>-u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 复制一个文件到当前目录</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line"></span><br><span class="line"># 创建一个文件夹 test</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 将复制过来的文件移动到我们创建的目录，并查看</span><br><span class="line">[root@kuangshen home]# mv install.sh test</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">test</span><br><span class="line">[root@kuangshen home]# cd test</span><br><span class="line">[root@kuangshen test]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 将文件夹重命名，然后再次查看！</span><br><span class="line">[root@kuangshen test]# cd ..</span><br><span class="line">[root@kuangshen home]# mv test mvtest</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">mvtest</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h3><blockquote>
+<p>看懂文件属性</p>
+</blockquote>
+<p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在Linux中我们可以使用<code>ll</code>或者<code>ls –l</code>命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+<p>实例中，boot文件的第一个属性用”d”表示。”d”在Linux中代表该文件是一个目录文件。</p>
+<p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等：</p>
+<ul>
+<li>当为[ <strong>d</strong> ]则是目录</li>
+<li>当为[ <strong>-</strong> ]则是文件；</li>
+<li>若是[ <strong>l</strong> ]则表示为链接文档 ( link file )；</li>
+<li>若是[ <strong>b</strong> ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；</li>
+<li>若是[ <strong>c</strong> ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为『rwx』 的三个参数的组合。</p>
+<p>其中，[ r ]代表可读(read)、[ w ]代表可写(write)、[ x ]代表可执行(execute)。</p>
+<p>要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号[ - ]而已。</p>
+<p>每个文件的属性由左边第一部分的10个字符来确定（如下图）：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+<p>从左至右用0-9这些数字来表示。</p>
+<p>第0位确定文件类型，第1-3位确定属主（该文件的所有者）拥有该文件的权限。第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中：</p>
+<p>第1、4、7位表示读权限，如果用”r”字符表示，则有读权限，如果用”-“字符表示，则没有读权限；</p>
+<p>第2、5、8位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限；</p>
+<p>第3、6、9位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则没有执行权限。</p>
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，boot 文件是一个目录文件，属主和属组都为 root。</p>
+<blockquote>
+<p>修改文件属性</p>
+</blockquote>
+<p><strong>1、chgrp：更改文件属组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
+
+<p>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
+<p><strong>2、chown：更改文件属主，也可以同时更改文件属组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、chmod：更改文件9个属性</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
+<p>Linux文件的基本权限就有九个，分别是owner&#x2F;group&#x2F;others三种身份各有自己的read&#x2F;write&#x2F;execute权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为：『-rwxrwxrwx』， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">r:4     w:2         x:1</span><br></pre></td></tr></table></figure>
+
+<p>每种身份(owner&#x2F;group&#x2F;others)各自的三个权限(r&#x2F;w&#x2F;x)分数是需要累加的，例如当权限为：[-rwxrwx—] 分数则是：</p>
+<ul>
+<li>owner &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
+<li>group &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
+<li>others&#x3D; — &#x3D; 0+0+0 &#x3D; 0</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 770 filename</span><br></pre></td></tr></table></figure>
+
+<p>可以自己下去多进行测试！</p>
+<h3 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h3><blockquote>
+<p>概述</p>
+</blockquote>
+<p>Linux系统中使用以下命令来查看文件的内容：</p>
+<ul>
+<li>cat 由第一行开始显示文件内容</li>
+<li>tac 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</li>
+<li>nl  显示的时候，顺道输出行号！</li>
+<li>more 一页一页的显示文件内容</li>
+<li>less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</li>
+<li>head 只看头几行</li>
+<li>tail 只看尾巴几行</li>
+</ul>
+<p>你可以使用 *man [命令]*来查看各个命令的使用文档，如 ：man cp。</p>
+<blockquote>
+<p>cat 由第一行开始显示文件内容</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat [-AbEnTv]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；</li>
+<li>-b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！</li>
+<li>-E ：将结尾的断行字节 $ 显示出来；</li>
+<li>-n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；</li>
+<li>-T ：将 [tab] 按键以 ^I 显示出来；</li>
+<li>-v ：列出一些看不出来的特殊字符</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 查看网络配置: 文件地址 /etc/sysconfig/network-scripts/</span><br><span class="line">[root@kuangshen ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tac</p>
+</blockquote>
+<p>tac与cat命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写！如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# tac /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEVICE=eth0</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>nl  显示行号</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nl [-bnw] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-b ：指定行号指定的方式，主要有两种：-b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；-b t ：如果有空行，空的那一行不要列出行号(默认值)；</li>
+<li>-n ：列出行号表示的方法，主要有三种：-n ln ：行号在荧幕的最左方显示；-n rn ：行号在自己栏位的最右方显示，且不加 0 ；-n rz ：行号在自己栏位的最右方显示，且加 0 ；</li>
+<li>-w ：行号栏位的占用的位数。</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# nl /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">1DEVICE=eth0</span><br><span class="line">2BOOTPROTO=dhcp</span><br><span class="line">3ONBOOT=yes</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>more  一页一页翻动</p>
+</blockquote>
+<p>在 more 这个程序的运行过程中，你有几个按键可以按的：</p>
+<ul>
+<li>空白键 (space)：代表向下翻一页；</li>
+<li>Enter   ：代表向下翻『一行』；</li>
+<li>&#x2F;字串   ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；</li>
+<li>:f    ：立刻显示出档名以及目前显示的行数；</li>
+<li>q    ：代表立刻离开 more ，不再显示该文件内容。</li>
+<li>b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">--More--(28%) # 重点在这一行喔！你的光标也会在这里等待你的命令</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>less  一页一页翻动，以下实例输出&#x2F;etc&#x2F;man.config文件的内容：</p>
+</blockquote>
+<p>less运行时可以输入的命令有：</p>
+<ul>
+<li>空白键  ：向下翻动一页；</li>
+<li>[pagedown]：向下翻动一页；</li>
+<li>[pageup] ：向上翻动一页；</li>
+<li>&#x2F;字串  ：向下搜寻『字串』的功能；</li>
+<li>?字串  ：向上搜寻『字串』的功能；</li>
+<li>n   ：重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
+<li>N   ：反向的重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
+<li>q   ：离开 less 这个程序；</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">:   # 这里可以等待你输入命令！</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>head  取出文件前面几行</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">head [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：**-n** 后面接数字，代表显示几行的意思！</p>
+<p>默认的情况中，显示前面 10 行！若要显示前 20 行，就得要这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# head -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>tail  取出文件后面几行</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-n ：后面接数字，代表显示几行的意思</li>
+</ul>
+<p>默认的情况中，显示最后 10 行！若要显示最后 20 行，就得要这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# tail -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>拓展：Linux 链接概念</p>
+</blockquote>
+<p>Linux 链接分两种，一种被称为硬链接（Hard Link），另一种被称为符号链接（Symbolic Link）。</p>
+<p>情况下，<strong>ln</strong> 命令产生硬链接。</p>
+<p><strong>硬连接</strong></p>
+<p>硬连接指通过索引节点来进行连接。在 Linux 的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号(Inode Index)。在 Linux 中，多个文件名指向同一索引节点是存在的。比如：A 是 B 的硬链接（A 和 B 都是文件名），则 A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号相同，即一个 inode 节点对应两个不同的文件名，两个文件名指向同一个文件，A 和 B 对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个的访问。</p>
+<p>硬连接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬连接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的连接。只删除一个连接并不影响索引节点本身和其它的连接，只有当最后一个连接被删除后，文件的数据块及目录的连接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬连接文件均被删除。</p>
+<p><strong>软连接</strong></p>
+<p>另外一种连接称之为符号连接（Symbolic Link），也叫软连接。软链接文件有类似于 Windows 的快捷方式。它实际上是一个特殊的文件。在符号连接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A 是 B 的软链接（A 和 B 都是文件名），A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号不相同，A 和 B 指向的是两个不同的 inode，继而指向两块不同的数据块。但是 A 的数据块中存放的只是 B 的路径名（可以根据这个找到 B 的目录项）。A 和 B 之间是“主从”关系，如果 B 被删除了，A 仍然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p>
+<p><strong>测试：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line">[root@kuangshen home]# touch f1 # 创建一个测试文件f1</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">f1</span><br><span class="line">[root@kuangshen home]# ln f1 f2     # 创建f1的一个硬连接文件f2</span><br><span class="line">[root@kuangshen home]# ln -s f1 f3   # 创建f1的一个符号连接文件f3</span><br><span class="line">[root@kuangshen home]# ls -li       # -i参数显示文件的inode节点信息</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f1</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f2</span><br><span class="line">397248 lrwxrwxrwx 1 root root     2 Mar 13 00:50 f3 -&gt; f1</span><br></pre></td></tr></table></figure>
+
+<p>从上面的结果中可以看出，硬连接文件 f2 与原文件 f1 的 inode 节点相同，均为 397247，然而符号连接文件的 inode 节点不同。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># echo 字符串输出 &gt;&gt; f1 输出到 f1文件</span><br><span class="line">[root@kuangshen home]# echo &quot;I am f1 file&quot; &gt;&gt;f1</span><br><span class="line">[root@kuangshen home]# cat f1</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# rm -f f1</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">cat: f3: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的测试可以看出：当删除原始文件 f1 后，硬连接 f2 不受影响，但是符号连接 f1 文件无效；</p>
+<p>依此您可以做一些相关的测试，可以得到以下全部结论：</p>
+<ul>
+<li>删除符号连接f3,对f1,f2无影响；</li>
+<li>删除硬连接f2，对f1,f3也无影响；</li>
+<li>删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；</li>
+<li>同时删除原文件f1,硬连接f2，整个文件会真正的被删除。</li>
+</ul>
+<p>后面的话，我们就开始学习Vim和用户磁盘相关的命令！从而修改配置！</p>
+<p>视频同步更新，这次一定！</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux2</title>
     <url>/2022/06/14/linuxRelevant/linuxNote/</url>
     <content><![CDATA[<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><blockquote>
@@ -958,1058 +1313,6 @@
       </tags>
   </entry>
   <entry>
-    <title>linux1</title>
-    <url>/2022/06/14/linuxRelevant/linux/</url>
-    <content><![CDATA[<h1 id="常用的基本命令"><a href="#常用的基本命令" class="headerlink" title="常用的基本命令"></a>常用的基本命令</h1><blockquote>
-<p>基于CentOS7</p>
-</blockquote>
-<p>常用的基本命令</p>
-<h3 id="目录管理"><a href="#目录管理" class="headerlink" title="目录管理"></a>目录管理</h3><blockquote>
-<p>绝对路径和相对路径</p>
-</blockquote>
-<p>我们知道Linux的目录结构为树状结构，最顶级的目录为根目录 &#x2F;。</p>
-<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
-<p>在开始本教程前我们需要先知道什么是绝对路径与相对路径。</p>
-<p><strong>绝对路径：</strong></p>
-<p>路径的写法，由根目录 &#x2F; 写起，例如：&#x2F;usr&#x2F;share&#x2F;doc 这个目录。</p>
-<p><strong>相对路径：</strong></p>
-<p>路径的写法，不是由 &#x2F; 写起，例如由 &#x2F;usr&#x2F;share&#x2F;doc 要到 &#x2F;usr&#x2F;share&#x2F;man 底下时，可以写成：cd ..&#x2F;man 这就是相对路径的写法啦！</p>
-<blockquote>
-<p>处理目录的常用命令</p>
-</blockquote>
-<p>接下来我们就来看几个常见的处理目录的命令吧：</p>
-<ul>
-<li>ls: 列出目录</li>
-<li>cd：切换目录</li>
-<li>pwd：显示目前的目录</li>
-<li>mkdir：创建一个新的目录</li>
-<li>rmdir：删除一个空的目录</li>
-<li>cp: 复制文件或目录</li>
-<li>rm: 移除文件或目录</li>
-<li>mv: 移动文件与目录，或修改文件与目录的名称</li>
-</ul>
-<p>你可以使用 <em>man [命令]</em> 来查看各个命令的使用文档，如 ：man cp。</p>
-<blockquote>
-<p>ls （列出目录）</p>
-</blockquote>
-<p>在Linux系统当中， ls 命令可能是最常被运行的。</p>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls [-aAdfFhilnrRSt] 目录名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-a ：全部的文件，连同隐藏文件( 开头为 . 的文件) 一起列出来(常用)</li>
-<li>-l ：长数据串列出，包含文件的属性与权限等等数据；(常用)</li>
-</ul>
-<p>将目录下的所有文件列出来(含属性与隐藏档)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls -al ~</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>cd （切换目录）</p>
-</blockquote>
-<p>cd是Change Directory的缩写，这是用来变换工作目录的命令。</p>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 切换到用户目录下</span><br><span class="line">[root@kuangshen /]# cd home  </span><br><span class="line"></span><br><span class="line"># 使用 mkdir 命令创建 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# mkdir kuangstudy</span><br><span class="line"></span><br><span class="line"># 进入 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# cd kuangstudy</span><br><span class="line"></span><br><span class="line"># 回到上一级</span><br><span class="line">[root@kuangshen kuangstudy]# cd ..</span><br><span class="line"></span><br><span class="line"># 回到根目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd /</span><br><span class="line"></span><br><span class="line"># 表示回到自己的家目录，亦即是 /root 这个目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd ~</span><br></pre></td></tr></table></figure>
-
-<p>接下来大家多操作几次应该就可以很好的理解 cd 命令的。</p>
-<blockquote>
-<p>pwd ( 显示目前所在的目录 )</p>
-</blockquote>
-<p>pwd 是 <strong>Print Working Directory</strong> 的缩写，也就是显示目前所在目录的命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen kuangstudy]#pwd [-P]</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：**-P** ：显示出确实的路径，而非使用连接(link) 路径。</p>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 单纯显示出目前的工作目录</span><br><span class="line">[root@kuangshen ~]# pwd</span><br><span class="line">/root</span><br><span class="line"></span><br><span class="line"># 如果是链接，要显示真实地址，可以使用 -P参数</span><br><span class="line">[root@kuangshen /]# cd bin</span><br><span class="line">[root@kuangshen bin]# pwd -P</span><br><span class="line">/usr/bin</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>mkdir （创建新目录）</p>
-</blockquote>
-<p>如果想要创建新的目录的话，那么就使用mkdir (make directory)吧。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir [-mp] 目录名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-m ：配置文件的权限喔！直接配置，不需要看默认权限 (umask) 的脸色～</li>
-<li>-p ：帮助你直接将所需要的目录(包含上一级目录)递归创建起来！</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 进入我们用户目录下</span><br><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line"></span><br><span class="line"># 创建一个 test 文件夹</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 创建多层级目录</span><br><span class="line">[root@kuangshen home]# mkdir test1/test2/test3/test4</span><br><span class="line">mkdir: cannot create directory ‘test1/test2/test3/test4’:</span><br><span class="line">No such file or directory  # &lt;== 没办法直接创建此目录啊！</span><br><span class="line"></span><br><span class="line"># 加了这个 -p 的选项，可以自行帮你创建多层目录！</span><br><span class="line">[root@kuangshen home]# mkdir -p test1/test2/test3/test4</span><br><span class="line"></span><br><span class="line"># 创建权限为 rwx--x--x 的目录。</span><br><span class="line">[root@kuangshen home]# mkdir -m 711 test2</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>rmdir ( 删除空的目录 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rmdir [-p] 目录名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：**-p ：**连同上一级『空的』目录也一起删除</p>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 看看有多少目录存在？</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br><span class="line"></span><br><span class="line"># 可直接删除掉，没问题</span><br><span class="line">[root@kuangshen home]# rmdir test</span><br><span class="line"></span><br><span class="line"># 因为尚有内容，所以无法删除！</span><br><span class="line">[root@kuangshen home]# rmdir test1</span><br><span class="line">rmdir: failed to remove ‘test1’: Directory not empty</span><br><span class="line"></span><br><span class="line"># 利用 -p 这个选项，立刻就可以将 test1/test2/test3/test4 依次删除。</span><br><span class="line">[root@kuangshen home]# rmdir -p test1/test2/test3/test4</span><br></pre></td></tr></table></figure>
-
-<p>注意：这个 rmdir 仅能删除空的目录，你可以使用 rm 命令来删除非空目录，后面我们会将！</p>
-<blockquote>
-<p>cp ( 复制文件或目录 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)</span><br><span class="line">[root@www ~]# cp [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><strong>-a：</strong>相当於 -pdr 的意思，至於 pdr 请参考下列说明；(常用)</li>
-<li><strong>-p：</strong>连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</li>
-<li><strong>-d：</strong>若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</li>
-<li><strong>-r：</strong>递归持续复制，用於目录的复制行为；(常用)</li>
-<li><strong>-f：</strong>为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</li>
-<li><strong>-i：</strong>若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</li>
-<li><strong>-l：</strong>进行硬式连结(hard link)的连结档创建，而非复制文件本身。</li>
-<li><strong>-s：</strong>复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</li>
-<li><strong>-u：</strong>若 destination 比 source 旧才升级 destination ！</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 找一个有文件的目录，我这里找到 root目录</span><br><span class="line">[root@kuangshen home]# cd /root</span><br><span class="line">[root@kuangshen ~]# ls</span><br><span class="line">install.sh</span><br><span class="line">[root@kuangshen ~]# cd /home</span><br><span class="line"></span><br><span class="line"># 复制 root目录下的install.sh 到 home目录下</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 再次复制，加上-i参数，增加覆盖询问？</span><br><span class="line">[root@kuangshen home]# cp -i /root/install.sh /home</span><br><span class="line">cp: overwrite ‘/home/install.sh’? y # n不覆盖，y为覆盖</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>rm ( 移除文件或目录 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rm [-fir] 文件或目录</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；</li>
-<li>-i ：互动模式，在删除前会询问使用者是否动作</li>
-<li>-r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 将刚刚在 cp 的实例中创建的 install.sh删除掉！</span><br><span class="line">[root@kuangshen home]# rm -i install.sh</span><br><span class="line">rm: remove regular file ‘install.sh’? y</span><br><span class="line"># 如果加上 -i 的选项就会主动询问喔，避免你删除到错误的档名！</span><br><span class="line"></span><br><span class="line"># 尽量不要在服务器上使用 rm -rf /</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>mv  ( 移动文件与目录，或修改名称 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# mv [-fiu] source destination</span><br><span class="line">[root@www ~]# mv [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
-<li>-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！</li>
-<li>-u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 复制一个文件到当前目录</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line"></span><br><span class="line"># 创建一个文件夹 test</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 将复制过来的文件移动到我们创建的目录，并查看</span><br><span class="line">[root@kuangshen home]# mv install.sh test</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">test</span><br><span class="line">[root@kuangshen home]# cd test</span><br><span class="line">[root@kuangshen test]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 将文件夹重命名，然后再次查看！</span><br><span class="line">[root@kuangshen test]# cd ..</span><br><span class="line">[root@kuangshen home]# mv test mvtest</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">mvtest</span><br></pre></td></tr></table></figure>
-
-<h3 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h3><blockquote>
-<p>看懂文件属性</p>
-</blockquote>
-<p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
-<p>在Linux中我们可以使用<code>ll</code>或者<code>ls –l</code>命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
-<p>实例中，boot文件的第一个属性用”d”表示。”d”在Linux中代表该文件是一个目录文件。</p>
-<p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等：</p>
-<ul>
-<li>当为[ <strong>d</strong> ]则是目录</li>
-<li>当为[ <strong>-</strong> ]则是文件；</li>
-<li>若是[ <strong>l</strong> ]则表示为链接文档 ( link file )；</li>
-<li>若是[ <strong>b</strong> ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；</li>
-<li>若是[ <strong>c</strong> ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。</li>
-</ul>
-<p>接下来的字符中，以三个为一组，且均为『rwx』 的三个参数的组合。</p>
-<p>其中，[ r ]代表可读(read)、[ w ]代表可写(write)、[ x ]代表可执行(execute)。</p>
-<p>要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号[ - ]而已。</p>
-<p>每个文件的属性由左边第一部分的10个字符来确定（如下图）：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
-<p>从左至右用0-9这些数字来表示。</p>
-<p>第0位确定文件类型，第1-3位确定属主（该文件的所有者）拥有该文件的权限。第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
-<p>其中：</p>
-<p>第1、4、7位表示读权限，如果用”r”字符表示，则有读权限，如果用”-“字符表示，则没有读权限；</p>
-<p>第2、5、8位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限；</p>
-<p>第3、6、9位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则没有执行权限。</p>
-<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
-<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
-<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
-<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
-<p>在以上实例中，boot 文件是一个目录文件，属主和属组都为 root。</p>
-<blockquote>
-<p>修改文件属性</p>
-</blockquote>
-<p><strong>1、chgrp：更改文件属组</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
-
-<p>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
-<p><strong>2、chown：更改文件属主，也可以同时更改文件属组</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、chmod：更改文件9个属性</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
-
-<p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
-<p>Linux文件的基本权限就有九个，分别是owner&#x2F;group&#x2F;others三种身份各有自己的read&#x2F;write&#x2F;execute权限。</p>
-<p>先复习一下刚刚上面提到的数据：文件的权限字符为：『-rwxrwxrwx』， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">r:4     w:2         x:1</span><br></pre></td></tr></table></figure>
-
-<p>每种身份(owner&#x2F;group&#x2F;others)各自的三个权限(r&#x2F;w&#x2F;x)分数是需要累加的，例如当权限为：[-rwxrwx—] 分数则是：</p>
-<ul>
-<li>owner &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
-<li>group &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
-<li>others&#x3D; — &#x3D; 0+0+0 &#x3D; 0</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 770 filename</span><br></pre></td></tr></table></figure>
-
-<p>可以自己下去多进行测试！</p>
-<h3 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h3><blockquote>
-<p>概述</p>
-</blockquote>
-<p>Linux系统中使用以下命令来查看文件的内容：</p>
-<ul>
-<li>cat 由第一行开始显示文件内容</li>
-<li>tac 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</li>
-<li>nl  显示的时候，顺道输出行号！</li>
-<li>more 一页一页的显示文件内容</li>
-<li>less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</li>
-<li>head 只看头几行</li>
-<li>tail 只看尾巴几行</li>
-</ul>
-<p>你可以使用 *man [命令]*来查看各个命令的使用文档，如 ：man cp。</p>
-<blockquote>
-<p>cat 由第一行开始显示文件内容</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat [-AbEnTv]</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；</li>
-<li>-b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！</li>
-<li>-E ：将结尾的断行字节 $ 显示出来；</li>
-<li>-n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；</li>
-<li>-T ：将 [tab] 按键以 ^I 显示出来；</li>
-<li>-v ：列出一些看不出来的特殊字符</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 查看网络配置: 文件地址 /etc/sysconfig/network-scripts/</span><br><span class="line">[root@kuangshen ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>tac</p>
-</blockquote>
-<p>tac与cat命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写！如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# tac /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEVICE=eth0</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>nl  显示行号</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nl [-bnw] 文件</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-b ：指定行号指定的方式，主要有两种：-b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；-b t ：如果有空行，空的那一行不要列出行号(默认值)；</li>
-<li>-n ：列出行号表示的方法，主要有三种：-n ln ：行号在荧幕的最左方显示；-n rn ：行号在自己栏位的最右方显示，且不加 0 ；-n rz ：行号在自己栏位的最右方显示，且加 0 ；</li>
-<li>-w ：行号栏位的占用的位数。</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# nl /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">1DEVICE=eth0</span><br><span class="line">2BOOTPROTO=dhcp</span><br><span class="line">3ONBOOT=yes</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>more  一页一页翻动</p>
-</blockquote>
-<p>在 more 这个程序的运行过程中，你有几个按键可以按的：</p>
-<ul>
-<li>空白键 (space)：代表向下翻一页；</li>
-<li>Enter   ：代表向下翻『一行』；</li>
-<li>&#x2F;字串   ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；</li>
-<li>:f    ：立刻显示出档名以及目前显示的行数；</li>
-<li>q    ：代表立刻离开 more ，不再显示该文件内容。</li>
-<li>b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">--More--(28%) # 重点在这一行喔！你的光标也会在这里等待你的命令</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>less  一页一页翻动，以下实例输出&#x2F;etc&#x2F;man.config文件的内容：</p>
-</blockquote>
-<p>less运行时可以输入的命令有：</p>
-<ul>
-<li>空白键  ：向下翻动一页；</li>
-<li>[pagedown]：向下翻动一页；</li>
-<li>[pageup] ：向上翻动一页；</li>
-<li>&#x2F;字串  ：向下搜寻『字串』的功能；</li>
-<li>?字串  ：向上搜寻『字串』的功能；</li>
-<li>n   ：重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
-<li>N   ：反向的重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
-<li>q   ：离开 less 这个程序；</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">:   # 这里可以等待你输入命令！</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>head  取出文件前面几行</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">head [-n number] 文件</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：**-n** 后面接数字，代表显示几行的意思！</p>
-<p>默认的情况中，显示前面 10 行！若要显示前 20 行，就得要这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# head -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>tail  取出文件后面几行</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-n ：后面接数字，代表显示几行的意思</li>
-</ul>
-<p>默认的情况中，显示最后 10 行！若要显示最后 20 行，就得要这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# tail -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>拓展：Linux 链接概念</p>
-</blockquote>
-<p>Linux 链接分两种，一种被称为硬链接（Hard Link），另一种被称为符号链接（Symbolic Link）。</p>
-<p>情况下，<strong>ln</strong> 命令产生硬链接。</p>
-<p><strong>硬连接</strong></p>
-<p>硬连接指通过索引节点来进行连接。在 Linux 的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号(Inode Index)。在 Linux 中，多个文件名指向同一索引节点是存在的。比如：A 是 B 的硬链接（A 和 B 都是文件名），则 A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号相同，即一个 inode 节点对应两个不同的文件名，两个文件名指向同一个文件，A 和 B 对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个的访问。</p>
-<p>硬连接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬连接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的连接。只删除一个连接并不影响索引节点本身和其它的连接，只有当最后一个连接被删除后，文件的数据块及目录的连接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬连接文件均被删除。</p>
-<p><strong>软连接</strong></p>
-<p>另外一种连接称之为符号连接（Symbolic Link），也叫软连接。软链接文件有类似于 Windows 的快捷方式。它实际上是一个特殊的文件。在符号连接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A 是 B 的软链接（A 和 B 都是文件名），A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号不相同，A 和 B 指向的是两个不同的 inode，继而指向两块不同的数据块。但是 A 的数据块中存放的只是 B 的路径名（可以根据这个找到 B 的目录项）。A 和 B 之间是“主从”关系，如果 B 被删除了，A 仍然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p>
-<p><strong>测试：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line">[root@kuangshen home]# touch f1 # 创建一个测试文件f1</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">f1</span><br><span class="line">[root@kuangshen home]# ln f1 f2     # 创建f1的一个硬连接文件f2</span><br><span class="line">[root@kuangshen home]# ln -s f1 f3   # 创建f1的一个符号连接文件f3</span><br><span class="line">[root@kuangshen home]# ls -li       # -i参数显示文件的inode节点信息</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f1</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f2</span><br><span class="line">397248 lrwxrwxrwx 1 root root     2 Mar 13 00:50 f3 -&gt; f1</span><br></pre></td></tr></table></figure>
-
-<p>从上面的结果中可以看出，硬连接文件 f2 与原文件 f1 的 inode 节点相同，均为 397247，然而符号连接文件的 inode 节点不同。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># echo 字符串输出 &gt;&gt; f1 输出到 f1文件</span><br><span class="line">[root@kuangshen home]# echo &quot;I am f1 file&quot; &gt;&gt;f1</span><br><span class="line">[root@kuangshen home]# cat f1</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# rm -f f1</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">cat: f3: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<p>通过上面的测试可以看出：当删除原始文件 f1 后，硬连接 f2 不受影响，但是符号连接 f1 文件无效；</p>
-<p>依此您可以做一些相关的测试，可以得到以下全部结论：</p>
-<ul>
-<li>删除符号连接f3,对f1,f2无影响；</li>
-<li>删除硬连接f2，对f1,f3也无影响；</li>
-<li>删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；</li>
-<li>同时删除原文件f1,硬连接f2，整个文件会真正的被删除。</li>
-</ul>
-<p>后面的话，我们就开始学习Vim和用户磁盘相关的命令！从而修改配置！</p>
-<p>视频同步更新，这次一定！</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Xdb使用参考</title>
-    <url>/2022/05/11/javaGame/Xdb%E4%BD%BF%E7%94%A8%E5%8F%82%E8%80%83/</url>
-    <content><![CDATA[<h1 id="Xdb使用参考"><a href="#Xdb使用参考" class="headerlink" title="Xdb使用参考"></a>Xdb使用参考</h1><ul>
-<li>本文档主要介绍完美时空自主研发的xdb数据库的使用接口，以及常见问题和模式。供应用开发者阅读。</li>
-<li>拷贝的 doc文档 方便实用 (原文作者:完美时空 孙长明)</li>
-<li>特别强调：xdb是李成华写的，这个文档不是李成华写的。所以未必准确，并且一切有冲突的地方以李成华讲的为准。</li>
-</ul>
-<h1 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h1><p>xdb是一个内存型数据库，不支持SQL，表与表之间的关系需要应用自己去维护。</p>
-<p>它是一个数据存储的编程接口。</p>
-<p>存储实现底层采用db.h，这个类似于Berkeley DB。</p>
-<p>xdb基于JAVA,它内部使用JNI访问db.h。xdb只允许在java或groovy语言中使用，不提供其它语言的使用接口。</p>
-<p>xdb是多线程的，同步访问数据。</p>
-<p>xdb支持事务。可以回滚修改。</p>
-<p>目前支持的平台有：</p>
-<p>(1).win32：仅用于开发测试</p>
-<p>(2).linux 64位: 推荐</p>
-<p>(3).linux 32位:用户太少，未经充分测试。</p>
-<h2 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h2><p>通过内存访问。数据库管理程序（DBMS）和应用逻辑在同一个进程内。类似的例子有：Berkeley DB，MS Office Access。</p>
-<p>与之相反的有：完美的wdb，oracle的MySQL。 它通过TCP或其它网络方式连接到数据库管理程序，然后发送查询指令，然后把结果传回来。</p>
-<h2 id="基本元素"><a href="#基本元素" class="headerlink" title="基本元素"></a>基本元素</h2><p>database、table、record</p>
-<p> 每个进程只能打开一个database，每个database里由很多table组成。每个table由很多record组成。</p>
-<p>从程序的角度看，每个table就是一个map,维护key—&gt;value这样的映射。每条映射就是一个record。map的key不可重复，key通常是int、long、string这样的简单类型。例如roleid、teamid、rolename等等。</p>
-<p>value可以是简单类型，也可以是由简单类型组成的复杂类型（下面要讲的xbean）</p>
-<h2 id="关系数据库与对象数据库的区别"><a href="#关系数据库与对象数据库的区别" class="headerlink" title="关系数据库与对象数据库的区别"></a>关系数据库与对象数据库的区别</h2><p>xdb不是一个关系型数据库。它是一个对象数据库。</p>
-<p>关系数据库的基础是关系演算。关系数据库包含关系，即元组的集合。而对象数据库包含类，即对象的集合。<br>在关系数据库中，元组的组成部分必须是基本类型。而对象数据库中，对象的组成部分可以是复杂类型（如vector,set）。</p>
-<p>xdb的对象并不支持继承、多态。</p>
-<p>关系数据库的基础是三值逻辑：true，false，null，而xdb不能往表里存储null.</p>
-<h2 id="如何学习xdb"><a href="#如何学习xdb" class="headerlink" title="如何学习xdb"></a>如何学习xdb</h2><p>我的建议是：读文档，读xdb的实现代码，然后针对xdb的实现代码写测试用例。多开口问。</p>
-<h2 id="哪里有例子"><a href="#哪里有例子" class="headerlink" title="哪里有例子"></a>哪里有例子</h2><p>uniqname: 基于xdb的唯一名服务器</p>
-<p>conf&#x2F;gsx.xdb.xml.tmpl(gsx.xdb.xml): 基于xdb的游戏逻辑服务器。</p>
-<h1 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h1><p>这一章主要讲如何定义数据的表结构。对xdb而言，每个database由一个xml描述它。xdb第一次启动的时候，会根据这个xml创建相应的表。</p>
-<p>它的基本结构如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">xdb</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">xbean</span> <span class="attr">name</span>=<span class="string">&quot;Bag&quot;</span>&gt;</span>		</span><br><span class="line">		…</span><br><span class="line">	<span class="tag">&lt;/<span class="name">xbean</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">&quot;bag&quot;</span> <span class="attr">key</span>=<span class="string">&quot;long&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Bag&quot;</span> <span class="attr">cacheCapacity</span>=<span class="string">&quot;10240&quot;</span> <span class="attr">cachehigh</span>=<span class="string">&quot;512&quot;</span> <span class="attr">cachelow</span>=<span class="string">&quot;256&quot;</span> <span class="attr">lock</span>=<span class="string">&quot;rolelock&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">xbean</span> <span class="attr">name</span>=<span class="string">&quot;Pet&quot;</span>&gt;</span>		</span><br><span class="line">		…</span><br><span class="line">	<span class="tag">&lt;/<span class="name">xbean</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">&quot;pet&quot;</span> <span class="attr">key</span>=<span class="string">&quot;long&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Pet&quot;</span> <span class="attr">cacheCapacity</span>=<span class="string">&quot;10240&quot;</span> <span class="attr">cachehigh</span>=<span class="string">&quot;512&quot;</span> <span class="attr">cachelow</span>=<span class="string">&quot;256&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">xdb</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>xdb里数据类型分这么几类：</li>
-</ul>
-<ol>
-<li><p>基本的数据类型。有short、int、long、boolean、string 、binary 。（这些在后面介绍xbean的地方有详细介绍）</p>
-</li>
-<li><p>容器：set&#x2F;vector&#x2F;list&#x2F;map&#x2F;treemap。容器里可以放基本数据类型和xbean。</p>
-</li>
-<li><p>xbean 用户自定义的，几种类型组合起来的复合类型。</p>
-</li>
-<li><p>cbean 用户自定义的，常量的xbean。</p>
-</li>
-</ol>
-<h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><p>表通过这样的方式来定义：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">&quot;produce&quot;</span> <span class="attr">key</span>=<span class="string">&quot;long&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Produce&quot;</span> <span class="attr">cacheCapacity</span>=<span class="string">&quot;15000&quot;</span> <span class="attr">cachehigh</span>=<span class="string">&quot;512&quot;</span> <span class="attr">cachelow</span>=<span class="string">&quot;256&quot;</span> <span class="attr">lock</span>=<span class="string">&quot;rolelock&quot;</span> <span class="attr">foreign</span>=<span class="string">&quot;key:basic&quot;</span> <span class="attr">autoIncrement</span>=<span class="string">&quot;true&quot;</span> <span class="attr">persistence</span>=<span class="string">&quot;MEMORY&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>参数解释</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>属性名</th>
-<th>说明</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>name</td>
-<td>表名。必须是英文字母，全小写。</td>
-<td>无</td>
-</tr>
-<tr>
-<td>key</td>
-<td>key的类型。应该为int、long、string或cbean。</td>
-<td>无</td>
-</tr>
-<tr>
-<td>value</td>
-<td>value的类型。必须是基本类型或xbean。</td>
-<td>无</td>
-</tr>
-<tr>
-<td>persistence</td>
-<td>表的存储类型分两种：硬盘表和内存表。persistence&#x3D;”MEMORY”代表内存表，不写则是硬盘表。硬盘表的数据会定时刷新到硬盘上，内存表则永远不会。对于金钱、元宝、物品、经验这些数据必然需要硬盘表。而对于组队、战斗这样的采用内存表即可，因为它更快。同时，我们约定，在服务器启动完毕开始接收协议之后，最好不要再遍历硬盘表。但是允许遍历内存表。any类型的xbean只能用于内存表,因为它不能被序列化。</td>
-<td>硬盘表</td>
-</tr>
-<tr>
-<td>cacheCapacity</td>
-<td>cache容量(单位：条)。对于内存表，万万不要让这个表的记录数超过cacheCapacity，如果超出，一些记录将被丢弃。</td>
-<td>10240</td>
-</tr>
-<tr>
-<td>cacheCleanTry</td>
-<td>执行clean操作的时候如果没有清除到capacity以下，最多重试几次</td>
-<td>256</td>
-</tr>
-<tr>
-<td>cachehigh</td>
-<td>db.h的cachehigh（单位：页）。一般为512，不需要修改。</td>
-<td>512</td>
-</tr>
-<tr>
-<td>cachelow</td>
-<td>db.h的cachelow（单位：页）。一般为256，不需要修改。</td>
-<td>256</td>
-</tr>
-<tr>
-<td>lock</td>
-<td>lockname。在后面介绍锁的章节有详细介绍</td>
-<td>和name字段相同</td>
-</tr>
-<tr>
-<td>foreign</td>
-<td>外键信息。key:basic是指，key指向basic表。该属性对内存表无效，对硬盘表只有合服时才有影响。</td>
-<td></td>
-</tr>
-<tr>
-<td>autoIncrement</td>
-<td>key是不是自增长。如果为true，那么key采用自增长(要求key的类型必须是long) 。如果为false,那么每次插入的时候必须提供key。</td>
-<td>false</td>
-</tr>
-</tbody></table>
-<h2 id="自定义数据类型：xbean"><a href="#自定义数据类型：xbean" class="headerlink" title="自定义数据类型：xbean"></a>自定义数据类型：xbean</h2><p>xbean就是能回滚的java bean。每个xbean由一个或多个variable组成xbean像协议一样，有arshal&#x2F;unmarshal方法。定义xbean的方式和我们在协议里定义bean很类似。例：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xbean</span> <span class="attr">name</span>=<span class="string">&quot;Bag&quot;</span>&gt;</span>		</span><br><span class="line">    <span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;money&quot;</span> <span class="attr">type</span>=<span class="string">&quot;long&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;capacity&quot;</span> <span class="attr">type</span>=<span class="string">&quot;int&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;nextid&quot;</span> <span class="attr">type</span>=<span class="string">&quot;int&quot;</span>/&gt;</span>		</span><br><span class="line">    <span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">type</span>=<span class="string">&quot;map&quot;</span> <span class="attr">key</span>=<span class="string">&quot;int&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Item&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xbean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>xbean内部除了variable节点之外不会包含其它任何节点。</p>
-<ul>
-<li><p>name: 变量名。程序中会用</p>
-</li>
-<li><p>type: 变量类型</p>
-</li>
-</ul>
-<h3 id="属性-type-说明"><a href="#属性-type-说明" class="headerlink" title="属性(type)说明:"></a>属性(type)说明:</h3><table>
-<thead>
-<tr>
-<th>名字</th>
-<th>内部实现类型</th>
-<th>装箱类型①</th>
-<th>访问接口</th>
-<th>其他</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>short</td>
-<td>short</td>
-<td>short</td>
-<td>get&#x2F;set</td>
-<td>可配置默认值</td>
-</tr>
-<tr>
-<td>int</td>
-<td>int</td>
-<td>Integer</td>
-<td>get&#x2F;set</td>
-<td>可配置默认值</td>
-</tr>
-<tr>
-<td>long</td>
-<td>long</td>
-<td>Long</td>
-<td>get&#x2F;set</td>
-<td>可配置默认值</td>
-</tr>
-<tr>
-<td>float</td>
-<td>float</td>
-<td>Float</td>
-<td>get&#x2F;set</td>
-<td>可配置默认值</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>boolean</td>
-<td>Boolean</td>
-<td>get&#x2F;set</td>
-<td>可配置默认值</td>
-</tr>
-<tr>
-<td>string</td>
-<td>String</td>
-<td>String</td>
-<td>get&#x2F;set</td>
-<td>可配置默认值</td>
-</tr>
-<tr>
-<td>binary</td>
-<td>byte[]</td>
-<td>无</td>
-<td>get&#x2F;set②</td>
-<td></td>
-</tr>
-<tr>
-<td>set</td>
-<td>HashSet③</td>
-<td>无</td>
-<td>Set</td>
-<td>示例：<variable name="items" type="set"  value="Item"/></td>
-</tr>
-<tr>
-<td>list</td>
-<td>LinkedList</td>
-<td>无</td>
-<td>List</td>
-<td>示例：<variable name="items" type="list" value="Item"/></td>
-</tr>
-<tr>
-<td>vector</td>
-<td>ArrayList</td>
-<td>无</td>
-<td>List</td>
-<td>示例：<variable name="items" type="vector" value="Item"/></td>
-</tr>
-<tr>
-<td>map</td>
-<td>HashMap</td>
-<td>无</td>
-<td>Map</td>
-<td>示例：<variable name="items" type="map" key="int" value="Item"/>。key必须是常变量。其中 Map.entrySet().remove(Object)操作不支持。</td>
-</tr>
-<tr>
-<td>treemap</td>
-<td>TreeMap</td>
-<td>无</td>
-<td>NavigableMap</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>注释:</p>
-<ol>
-<li><p>装箱类型决定了这个类型能不能放到容器中，简单类型和自定义个xbean都可以放到容器中。</p>
-</li>
-<li><p>接口比较特殊，看生成出来的代码。</p>
-</li>
-<li><p>实际上是用 xdb.logs.SetX，这个实现和java.util.HashSet基本一样。</p>
-</li>
-</ol>
-<p>capacity: 不是强行的限制,程序运行的时候不会关心这个值。他仅仅是用来辅助预估内存占用量。(后面会详细解释这个)</p>
-<p>default: 默认值。对于简单类型，可以设置一个默认值。</p>
-<h3 id="any类型的xbean"><a href="#any类型的xbean" class="headerlink" title="any类型的xbean"></a>any类型的xbean</h3><p>有时候我们需要把一些特殊的对象也交给xdb管理，如网络连接、文件句柄、Future。这时候就需要把xbean设置成any类型。<strong>any类型的xbean允许引用任何java类型。但是无回滚支持，且不能往硬盘上存储。</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xbean</span> <span class="attr">name</span>=<span class="string">&quot;fdinfo&quot;</span> <span class="attr">any</span>=<span class="string">&quot;true&quot;</span>&gt;</span>		</span><br><span class="line">	<span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">type</span>=<span class="string">&quot;vector&quot;</span> <span class="attr">value</span>=<span class="string">&quot;java.io.File&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xbean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="xbean变量的capacity"><a href="#xbean变量的capacity" class="headerlink" title="xbean变量的capacity"></a>xbean变量的capacity</h3><p>主要用途：通过配置<strong>变长变量的最大容量</strong>，来分析和估算内存的使用状况。</p>
-<p>xgen生成的时候有详细的WARN提示那些类型需要配置。基本规则如下：</p>
-<p>已知固定长度的类型不需要配置，如int,short,long。需要配置的有</p>
-<ol>
-<li>未知类型以及包含固定类型的容器类型，如，any,string,binary。格式: capacity&#x3D;”number”</li>
-<li>容器类型，如,list,vector,map。格式：capacity&#x3D;”number[;key:keynumber;value:valuenumber]”。如果容器内包含的类型需要配置，就是用key:或value:进一步配置。</li>
-</ol>
-<h1 id="xdb-xml"><a href="#xdb-xml" class="headerlink" title="xdb.xml"></a>xdb.xml</h1><p>每个database由一个xml描述它。</p>
-<p>这个文件在编译和启动的时候都需要。编译的时候需要根据它生成代码，启动的时候需要根据它来读取运行时参数。</p>
-<p>下面是一个例子：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xdb</span> <span class="attr">xgenOutput</span>=<span class="string">&quot;src&quot;</span> <span class="attr">trace</span>=<span class="string">&quot;info&quot;</span> <span class="attr">traceTo</span>=<span class="string">&quot;:file&quot;</span> <span class="attr">corePoolSize</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dbhome</span>=<span class="string">&quot;xdb&quot;</span> <span class="attr">logpages</span>=<span class="string">&quot;4096&quot;</span> <span class="attr">backupDir</span>=<span class="string">&quot;xbackup&quot;</span> <span class="attr">checkpointPeriod</span>=<span class="string">&quot;60000&quot;</span> <span class="attr">backupIncPeriod</span>=<span class="string">&quot;600000&quot;</span> <span class="attr">backupFullPeriod</span>=<span class="string">&quot;3600000&quot;</span> <span class="attr">angelPeriod</span>=<span class="string">&quot;5000&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ProcedureConf</span> <span class="attr">executionTime</span>=<span class="string">&quot;3000&quot;</span> <span class="attr">maxExecutionTime</span>=<span class="string">&quot;0&quot;</span> <span class="attr">retryTimes</span>=<span class="string">&quot;3&quot;</span> <span class="attr">retryDelay</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">xbean</span> <span class="attr">name</span>=<span class="string">&quot;Bag&quot;</span>&gt;</span>		</span><br><span class="line">		<span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;money&quot;</span> <span class="attr">type</span>=<span class="string">&quot;long&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;capacity&quot;</span> <span class="attr">type</span>=<span class="string">&quot;int&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;nextid&quot;</span> <span class="attr">type</span>=<span class="string">&quot;int&quot;</span>/&gt;</span>		</span><br><span class="line">		<span class="tag">&lt;<span class="name">variable</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">type</span>=<span class="string">&quot;vector&quot;</span> <span class="attr">value</span>=<span class="string">&quot;int&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">xbean</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">&quot;bag&quot;</span> <span class="attr">key</span>=<span class="string">&quot;long&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Bag&quot;</span> <span class="attr">cacheCapacity</span>=<span class="string">&quot;10240&quot;</span> <span class="attr">cachehigh</span>=<span class="string">&quot;512&quot;</span> <span class="attr">cachelow</span>=<span class="string">&quot;256&quot;</span> <span class="attr">lock</span>=<span class="string">&quot;rolelock&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">TableSysConf</span> <span class="attr">name</span>=<span class="string">&quot;_sys_&quot;</span> <span class="attr">cacheCapacity</span>=<span class="string">&quot;1&quot;</span> <span class="attr">cachehigh</span>=<span class="string">&quot;512&quot;</span> <span class="attr">cachelow</span>=<span class="string">&quot;256&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xdb</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>数据库的结构是静态的。程序在运行的时候无法动态的创建表和数据类型。</p>
-<p>参照下面的表格可知：数据库将被放置在xdb目录下，数据库的备份将会被放在xbackup目录下，备份间隔是3600000毫秒一次。</p>
-<p>每个database可以定义很多个table，很多个xbean。但是TableSysConf只有一个，里面放置一些元数据，一般不需要管。</p>
-<h2 id="根节点属性含义"><a href="#根节点属性含义" class="headerlink" title="根节点属性含义"></a>根节点属性含义</h2><table>
-<thead>
-<tr>
-<th>属性名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>xgenOutput</td>
-<td>指定相对xgen的运行目录，不会自动创建</td>
-</tr>
-<tr>
-<td>日志配置</td>
-<td></td>
-</tr>
-<tr>
-<td>trace</td>
-<td>设定错误输出级别，共有五个级别：DEBUG, INFO, WARN, ERROR, FATAL</td>
-</tr>
-<tr>
-<td>traceTo</td>
-<td>“:file”代表输出到文件，”:out”代表输出到stdout</td>
-</tr>
-<tr>
-<td>traceRotateHourOfDay</td>
-<td>trace.log每天几点回滚。默认为6</td>
-</tr>
-<tr>
-<td>traceRotateMinute</td>
-<td>默认为30。即每天的6:30am回滚trace.log</td>
-</tr>
-<tr>
-<td>线程池配置</td>
-<td></td>
-</tr>
-<tr>
-<td>corePoolSize</td>
-<td>数据库默认线程池大小（即xdb.Executor的大小），主要用来执行协议的process方法</td>
-</tr>
-<tr>
-<td>procPoolSize</td>
-<td>数据库procedure线程池大小 xdb.Procedure的execute,submit进入事务时，使用这个执行器。</td>
-</tr>
-<tr>
-<td>schedPoolSize</td>
-<td>数据库scheduled线程池大小。这个线程池用来调度需要延迟或者定时执行的任务。</td>
-</tr>
-<tr>
-<td>timeoutPeriod</td>
-<td>xdb.util.TimeoutManager多久执行一次。单位:毫秒,默认为2000，这个只是影响内部定时器的精度，一般无须修改。</td>
-</tr>
-<tr>
-<td>存储配置</td>
-<td></td>
-</tr>
-<tr>
-<td>dbhome</td>
-<td>数据库目录。不会自动创建</td>
-</tr>
-<tr>
-<td>logpages</td>
-<td>数据库日志页面配置，单位是pages。用来控制logdir下单个日志文件的最大大小。参见db.h中GlobalLogger的构造函数</td>
-</tr>
-<tr>
-<td>CheckPoint配置</td>
-<td></td>
-</tr>
-<tr>
-<td>allowCheckpointXXX</td>
-<td>是否开启checkpoint,默认为true。修改此参数会导致危险，仅供测试。</td>
-</tr>
-<tr>
-<td>checkpointPeriod</td>
-<td>checkpoint间隔，毫秒</td>
-</tr>
-<tr>
-<td>备份配置</td>
-<td></td>
-</tr>
-<tr>
-<td>allowBackup</td>
-<td>是否开启备份功能。默认为true</td>
-</tr>
-<tr>
-<td>backupDir</td>
-<td>备份目录。不会自动创建</td>
-</tr>
-<tr>
-<td>backupIncPeriod</td>
-<td>（功能尚未开启）增量备份间隔，必须小于backupFullPeriod才有增量意义，否则这种备份不会执行。</td>
-</tr>
-<tr>
-<td>backupFullPeriod</td>
-<td>全备份间隔</td>
-</tr>
-<tr>
-<td>backupDelay</td>
-<td>默认为0</td>
-</tr>
-<tr>
-<td>其它设置</td>
-<td></td>
-</tr>
-<tr>
-<td>angelPeriod</td>
-<td>死锁检测间隔，毫秒</td>
-</tr>
-<tr>
-<td>xdbVerify</td>
-<td>默认为false。只有这个选项打开，并且xgen生成代码的时候也生了verify代码，检查才有效。</td>
-</tr>
-<tr>
-<td>snapshotFatalTime</td>
-<td>默认为2000</td>
-</tr>
-<tr>
-<td>marshalPeriod</td>
-<td>默认为-1</td>
-</tr>
-<tr>
-<td>marshalN</td>
-<td>默认为1</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>serialKey</td>
-<td>默认为1024</td>
-</tr>
-</tbody></table>
-<h2 id="ProcedureConf节点属性含义"><a href="#ProcedureConf节点属性含义" class="headerlink" title="ProcedureConf节点属性含义"></a>ProcedureConf节点属性含义</h2><table>
-<thead>
-<tr>
-<th>属性名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>executionTime</td>
-<td>不晓得有什么用</td>
-</tr>
-<tr>
-<td>maxExecutionTime</td>
-<td>最大执行时间</td>
-</tr>
-<tr>
-<td>retryTimes</td>
-<td>发生死锁时，重试几次</td>
-</tr>
-<tr>
-<td>retryDelay</td>
-<td>发生死锁时，延迟多久重试</td>
-</tr>
-<tr>
-<td>trace</td>
-<td>日志级别</td>
-</tr>
-</tbody></table>
-<h2 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -<span class="built_in">cp</span> xdb.jar  xgen.Main -outputEncoding utf-8 xdb.xml </span><br></pre></td></tr></table></figure>
-
-<h2 id="启动xdb"><a href="#启动xdb" class="headerlink" title="启动xdb"></a>启动xdb</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先载入数据定义文件</span></span><br><span class="line">xdb.Xdb.getInstance().setConf(<span class="keyword">new</span> <span class="title class_">xdb</span>.XdbConf(“xdb.xml”));</span><br><span class="line"><span class="comment">// 然后启动</span></span><br><span class="line">xdb.Xdb.getInstance().start();</span><br><span class="line"><span class="comment">// 程序退出的时候，会自动调用xdb.Xdb.getInstance().stop()。也可在main函数的末尾手动调用</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="更改现有的表定义"><a href="#更改现有的表定义" class="headerlink" title="更改现有的表定义"></a>更改现有的表定义</h2><p>在开发的过程中经常需要添加新表或者给现有的表添字段。</p>
-<p>如果尚未进入运营阶段，那么最简单的方式就是把全部清空重来。</p>
-<p>如果已经开始运营，可使用snail&#x2F;bin&#x2F;xtransform.sh进行数据转换。</p>
-<p><strong>注意：允许添表、添字段、删字段。但是不允许对现有的字段改名。如果添字段和删字段发生在同一次更新中，那么新添的字段不允许使用要删除的字段的名字。</strong></p>
-<h1 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h1><p>这一章主要介绍如何通过xdb提供的函数读写数据。</p>
-<h2 id="从表读取并（或）修改数据"><a href="#从表读取并（或）修改数据" class="headerlink" title="从表读取并（或）修改数据"></a>从表读取并（或）修改数据</h2><p>有两种方式。</p>
-<ul>
-<li><strong>方法一</strong> 存储过程。可读可改</li>
-</ul>
-<p>处理数据最直接的方式写一个存储过程然后调用它。在存储过程内，每个table提供get&#x2F;insert&#x2F;delete方法。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个类，从xdb.Procedure继承，然后实现process方法。</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyProc</span> <span class="keyword">extends</span> <span class="title class_">xdb</span>.Procedure &#123;</span><br><span class="line">	<span class="comment">//return true代表commit这个存储过程。return false代表执行rollback</span></span><br><span class="line">	<span class="comment">//存储过程只有这两种执行结果</span></span><br><span class="line">	<span class="type">boolean</span> <span class="title function_">process</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="type">long</span> roleid=<span class="number">4096L</span>; <span class="comment">//roleid可从protocol对象上通过Onlines类获得</span></span><br><span class="line">	   	xbean.Bag bag=xtable.Bag.get(roleid);</span><br><span class="line">		<span class="type">int</span> money=bag.getMoney();</span><br><span class="line">	       <span class="comment">//....	</span></span><br><span class="line">		bag.setMoney(bag.getMoney()+<span class="number">10</span>);</span><br><span class="line">		bag.getItems().add(xbean.Pod.newItem());</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//然后再这么使用。(比如在协议的处理函数里这么写)</span></span><br><span class="line">MyProc proc=<span class="keyword">new</span> <span class="title class_">MyProc</span>();<span class="comment">//此处可以把一些参数通过构造函数传递进去</span></span><br><span class="line">proc.submit(); <span class="comment">//向数据库提交这个存储过程</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>方法二</strong> select。只能读</li>
-</ul>
-<p>如果是在存储过程外，那么可以通过xtable.Bag.selectMoney(key)这样的方式根据key查找value。例如根据roleid去bag表查找这个人身上有多少钱。这种方式只能查询，不能修改或删除。</p>
-<h2 id="存储过程的调用方式"><a href="#存储过程的调用方式" class="headerlink" title="存储过程的调用方式"></a>存储过程的调用方式</h2><ul>
-<li><p>存储过程的调用方式</p>
-<ol>
-<li>proc.call(): 在当前线程同步执行。如果当前线程正在执行某个存储过程，那么通过这个方法嵌套执行另一个存储过程，否则不推荐这么用。</li>
-<li>proc.execute(): 提交到xdb的线程池中异步执行。调用者不关心proc的执行结果。</li>
-<li>proc.submit(): 提交到xdb的线程池中异步执行。要求当前不能在存储过程中。与proc.execute()的不同是它会返回一个java的future。通过这个future对象可以等待proc执行完或获取proc的执行结果。</li>
-</ol>
-</li>
-<li><p>如果有多个存储过程被异步提交到线程池中执行，xdb未必会按照提交顺序执行。如果一定要有顺序，那么有两种方式</p>
-<ol>
-<li><blockquote>
-<p>应用自己来保证。顺序执行的例子：</p>
-<p>proc1.submit().get();</p>
-<p>proc2.submit().get();</p>
-<p>那么proc2一定在proc1全部执行完之后才开始执行</p>
-</blockquote>
-</li>
-<li><p>使用特殊的线程池如SerialKeyExecutor,提交任务的时候需要添加一个参数用来排序。</p>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="存储过程的执行结果"><a href="#存储过程的执行结果" class="headerlink" title="存储过程的执行结果"></a>存储过程的执行结果</h2><p>存储过程只有两种执行结果，成功提交或回滚。</p>
-<p>process函数最终return false，或者在执行的过程中抛出任何未捕获的异常，都会导致存储过程被回滚。那么对于表的所有的数据修改都会被回退。</p>
-<h2 id="向表插入新的数据"><a href="#向表插入新的数据" class="headerlink" title="向表插入新的数据"></a>向表插入新的数据</h2><p>只有在存储过程之中才可以添加数据。</p>
-<p>由于底层存储引擎的限制，任何table都不允许key重复。</p>
-<p>按key的来源，table分两种，自增长的和非自增长的。</p>
-<p>有两个接口可以向数据库中插入新的数据。xtable.add和xtable.insert。假设key不是自增长的，示例如下：</p>
-<p>xbean.Bag bag&#x3D;xbean.Pod.newBag();</p>
-<p>xtable.Bag.insert(4096L,bag);</p>
-<p>如果已经有key&#x3D;4096L的记录存在，那么insert方法会抛出异常，而add方法会return false,这就是它们的区别。</p>
-<p>假设key是自增长的，那么这个时候add&#x2F;insert接口语义是一样的。并且，插入的时候不需要提供key.</p>
-<p>xtable.Bag.insert(bag);</p>
-<h2 id="从表删除数据"><a href="#从表删除数据" class="headerlink" title="从表删除数据"></a>从表删除数据</h2><p>只有在存储过程之中才可以删除数据。</p>
-<p>有两个函数可以用来删除数据。<strong>xtable.remove和xtable.delete</strong>。</p>
-<p>xtable.Bag.remove( 4096L);</p>
-<p>如果这个记录存在并且被成功删除，那么return true。否则，return false。但是，无论是否删除成功，它都会保持这条记录的锁，一直到存储过程结束。</p>
-<h2 id="xbean的生命周期"><a href="#xbean的生命周期" class="headerlink" title="xbean的生命周期"></a>xbean的生命周期</h2><p>xbean分两种，受xdb管理的和不受xdb管理的。下面分别讨论这种xbean的生命周期。</p>
-<ul>
-<li>受xdb管理的xbean</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建：</span></span><br><span class="line">xbean.Bag bag=xbean.Pod.newBag();</span><br><span class="line">通过xtable.get方法得到的xbean都是受xdb管理的xbean。以前面的例子来说</span><br><span class="line">xbean.Bag bag=xtable.Bag.get(roleid);</span><br><span class="line">那么bag以及bag.getItems()以及bag.getItems.get(<span class="number">0</span>)得到的都是受xdb管理的xbean。</span><br><span class="line">受xdb管理的xbean的生命周期不能超过存储过程的生命周期。永远不要存储过程外读写受xdb管理的xbean。</span><br><span class="line">也就是说，不能这样：</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyProc</span> <span class="keyword">extends</span> <span class="title class_">xdb</span>.Procedure &#123;</span><br><span class="line"><span class="keyword">private</span> xbean.Bag bag;</span><br><span class="line">	<span class="type">boolean</span> <span class="title function_">process</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="type">long</span> roleid=<span class="number">4096L</span>;</span><br><span class="line">	   	bag=xtable.Bag.get(roleid);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   	<span class="keyword">public</span> xbean.Bag <span class="title function_">getBag</span><span class="params">()</span>&#123;</span><br><span class="line">     		<span class="keyword">return</span> bag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">然后在存储过程外执行这样的语句：</span><br><span class="line">MyProc proc=<span class="keyword">new</span> <span class="title class_">MyProc</span>();</span><br><span class="line">proc.call();</span><br><span class="line">proc.getBag();</span><br><span class="line">因为存储过程执行完之后，这个xbean就无效了。但是上面三句如果在另一个存储过程内执行，那么是对的。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>不受xdb管理的xbean</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建：</span></span><br><span class="line">xbean.Bag bag=xbean.Pod.newBagData();</span><br><span class="line">或者xbean.toData()能把一个受xdb管理的xbean变成普通的java bean。这个java bean可以在存储过程外使用。</span><br><span class="line">例如：</span><br><span class="line">xbean.Bag bag=xtable.Bag.get(roleid);</span><br><span class="line">xbean.Bag data=bag.toData();</span><br><span class="line">不受xdb管理的xbean，无回滚支持。</span><br><span class="line">select返回的xbean是不受xdb管理的xbean。</span><br></pre></td></tr></table></figure>
-
-<h2 id="遍历一张硬盘表"><a href="#遍历一张硬盘表" class="headerlink" title="遍历一张硬盘表"></a>遍历一张硬盘表</h2><p>想知道一个表有多少条记录？听起来很简单，但是做起来不那么容易，因为你需要把这个表遍历一遍。遍历一张硬盘表不需要在存储过程内执行。并且为了避免死锁，建议永远不要在存储过程内执行。</p>
-<p>为了遍历一张硬盘表，可以传递一个回调（继承自TTable.IWalk）给TTable.walk或者TTable.browse方法。 </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">xtable.Basic.getTable().browse(</span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">xdb</span>.TTable.IWalk&lt;Long, xbean.Basic&gt;()&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">onRecord</span><span class="params">(Long k, Basic v)</span> &#123;</span><br><span class="line">				System.out.Println(“roleid=”+k);</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>walk和browse的区别是：</p>
-<p>首先，这两个函数都浏览不到xdb的cache中的脏页。</p>
-<p>其次，这两个函数的区别是，walk方法能看到已经flush到db.h中的所有数据（这些数据不一定已经写入到硬盘上），但是browse方法跳过了db.h的缓存，只能看到做完checkpoint已经写入到硬盘上的数据，并且browse方法可以与checkpoint函数的flush过程并发执行而walk方法不行。browse的效率远高于walk方法，但是browse方法有很低的概率会产生误判，比如一个数据库本来有一万条记录但是用browse方法读出来了10100条。这两个方法的具体区别涉及到db.h的底层实现，所以这里不再细说。</p>
-<p>除非你能把onRecord函数里面的逻辑非常简单并且表的行数不大，否则GS启动完毕，开始接受外部请求之后，最好不要再walk硬盘表。使用walk&#x2F;browse方法最大的风险是程序的复杂度很容易跳出你的预想。</p>
-<p>如果要运行时walk硬盘表并且获得最新的数据，也可以这样</p>
-<p>假设shop是一张硬盘表，存储了所有的shop信息。那么再创建一个表，叫mirrorOfShop，key的类型和shop表相同，但是mirrorOfShop是内存表。</p>
-<p>然后，启动的时候，遍历硬盘表，把所有的key插入到内存表中。</p>
-<p>之后，所有对硬盘表的插入和删除操作，都对应着该内存表执行一次。</p>
-<p>需要遍历的时候，遍历那个内存表。</p>
-<h2 id="遍历一张内存表（或硬盘表在xdb中的缓存）"><a href="#遍历一张内存表（或硬盘表在xdb中的缓存）" class="headerlink" title="遍历一张内存表（或硬盘表在xdb中的缓存）"></a>遍历一张内存表（或硬盘表在xdb中的缓存）</h2><p>遍历一张内存表（或硬盘表在xdb中的缓存）不需要在存储过程内执行。为了避免死锁，也永远不要在存储过程内执行。</p>
-<p> 每个Table都有一个getCache方法。因为内存表的所有数据都在Cache当中，所以可以这样遍历：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">xtable.MyTable.getCache().walk(</span><br><span class="line">	<span class="keyword">new</span> <span class="title class_">xdb</span>.CacheQuery&lt;Long, xbean.MyBean&gt;() &#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onQuery</span><span class="params">(Long k, xbean.MyBean value)</span> &#123;</span><br><span class="line">				System.out.Println(“roleid=”+k);		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>walk内存表不存在硬盘表所面临的拿不到最新数据的问题。但是无论怎样，都看不到存储过程内部已修改但是尚未提交的数据。</p>
-<p>逻辑应用一般不会去walk硬盘表在xdb中的缓存。</p>
-<h2 id="批量修改数据"><a href="#批量修改数据" class="headerlink" title="批量修改数据"></a>批量修改数据</h2><p>禁止用xdb批量修改数据，即使用遍历表的方式修改大量数据。例如执行类似于”update mytable set colume1&#x3D;10”这样的操作。</p>
-<p>​	如果有这样的需求，使用dbx在GameServer未启动的时候做。</p>
-<p>​	作为例外，如果这个表的数据量很小，那么可以在启动的时候用xdb做。</p>
-<h2 id="存储过程嵌套"><a href="#存储过程嵌套" class="headerlink" title="存储过程嵌套"></a>存储过程嵌套</h2><p>假如在执行存储过程P1的时候需要执行另一个存储过程P2。那么现在首先考虑这么几个问题：</p>
-<ol>
-<li><p>在当前线程执行，还是另换一个线程执行如果在当前线程执行，那么P1已经拿到的锁会继承给P2。只有在最外层的存储过程执行完之后才会释放所有的锁。（锁的问题在后面的章节具体讲）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">P1</span> <span class="keyword">extends</span> <span class="title class_">xdb</span>.Procedure &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">process</span><span class="params">()</span>&#123;</span><br><span class="line">          …</span><br><span class="line">          Proc2 p2=<span class="keyword">new</span> <span class="title class_">Proc2</span>();</span><br><span class="line">          p2.call();</span><br><span class="line">          …</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">         &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
-
-<p> 这就是平时通常所说的嵌套。由于p2在执行中所有的逻辑异常都会被xdb吃掉，对外只是成功或失败。所以可通过这样的方式，把逻辑操作封装成一个又一个的小单元。</p>
-<p> 如果不希望把现有的锁传递给它，那么就换到另一个线程执行。方法有很多种，例如：Procedure.execute(proc2)。这种方式概念上一般被认为是触发，而不是嵌套。</p>
-</li>
-<li><p>同步执行，还是异步执行？</p>
-<p>在当前线程执行p2.call()这样的方式是同步执行。只有当p2执行完之后，下面其它的代码才会被执行。而Procedure.execute(proc2)这样的方式是异步执行。</p>
-<p>如果要切换到另一个线程里执行，但是当前线程要等待P2执行完。那么可以往线程池扔一个Runnable实例，P1等待在这个Runnable的future上，另一个线程在这个Runnable的run方法里执行Proc2.call()。</p>
-</li>
-<li><p>如果P1回滚了，P2需要回滚吗？</p>
-<p>如果P1直接在当前线程执行p2.call()：如果p2失败了，那么p2.call()会返回false,p1可以忽略这个返回值，也可以根据这个返回值执行其它操作。</p>
-<p>如果p2成功了，但是p1在后面的逻辑执行中失败所以回滚，那么p2也会被回滚。	如果P2是被扔到另一个线程中执行，如果P1回滚了，无法直接影响到P2。</p>
-</li>
-</ol>
-<h2 id="关于持久性-x2F-checkpoint"><a href="#关于持久性-x2F-checkpoint" class="headerlink" title="关于持久性&#x2F;checkpoint"></a>关于持久性&#x2F;checkpoint</h2><p>传统来说，一个存储过程只有把已修改的数据统统写入后备存储（如硬盘）后，存储过程才算已提交。（这里的写操作可能是写数据也可能是写日志或者二者都有）</p>
-<p>xdb在修改数据的时候并非真的把新数据写入硬盘了，commit的时候也没有,xdb只有checkpoint线程在做checkpoint的时候才会写硬盘。在一个商业数据库中，一个存储过程修改几千万条记录也没有问题，但是我们不行，因为任何被修改的数据在做checkpoint前都不可能被写入硬盘。</p>
-<h2 id="超时保护"><a href="#超时保护" class="headerlink" title="超时保护"></a>超时保护</h2><p>当用xdb默认的线程池执行协议或者在xdb的线程池里执行存储过程的时候，都是有超时保护的。意即，如果process方法执行的时间超过了时限，那么就会被打断。这个时间限制在xdb.xml中设置。但是，只有处于可被打断的状态的线程才会被打断，例如，while(true);这样的代码是无法被打断的，但是等锁的状态可被打断。什么状态可被打断具体参见java.lang.Thread.interrupt的文档。</p>
-<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>db.h是不考虑多线程问题的，没有锁。而Xdb是在多线程的环境下运行，所以它必须采用一定手段来达到隔离性。</p>
-<h2 id="隔离度"><a href="#隔离度" class="headerlink" title="隔离度"></a>隔离度</h2><p>按照数据库的理论，隔离级别可以被分为以下四种，从上向下依次增强：</p>
-<ol>
-<li><p>Read Uncommitted: 允许读到其它存储过程已修改但尚未提交的数据。</p>
-</li>
-<li><p>Read Committed：读到的数据一定是已经被提交的，但是可能会产生不可重复的读。Xdb的table的select方法提供的就是这样的隔离级别。对于给定的key,在同一个存储过程中两次调用select得到的可能是不同的值。</p>
-</li>
-<li><p>Repeatable Read：在同一个存储过程中用相同的条件查找，得到的永远是相同的值。但是有可能会产生幻影。但是对于key-value的数据库，一般不考虑这个。</p>
-</li>
-<li><p>Serializable：事务的执行是可串行化的。抛开select方法不谈，xdb采用的就是这样的隔离级别。</p>
-</li>
-</ol>
-<h2 id="实现模型"><a href="#实现模型" class="headerlink" title="实现模型"></a>实现模型</h2><p>Xdb采用基于锁的方式实现事务的隔离型。此处主要考虑两种锁，表锁和记录锁。应用只需要考虑记录锁。</p>
-<p>每个table有一个属性叫lockname，是一个字符串。默认情况下lockname就是table name。每条record的锁(xdb.Lockey)由lockname+key组成。如果这两个都相同，那么就是同一把锁。</p>
-<p>存储过程在执行get&#x2F;insert(add)&#x2F;delete(remove)这些方法的时候，会首先获取这条记录对应的锁，然后一直维持到存储过程结束。特别强调的是remove方法即使失败，也会一直保持锁。</p>
-<p>xtable.Bag.selectMoney这样的东西既可在存储过程外调用也可在存储过程内调用，它会首先获取锁，然后取数据，然后立刻释放，然后返回。它与get方法的区别是它不保持锁，所以这样的语句一定不会导致死锁。</p>
-<p>在存储过程内可以通过this.lock(Lockey[])的方式显式的加锁。这些锁一直被保持到存储过程执行完。注意：只有lock方法，没有unlock。永远没有办法手动的释放一把锁。lock方法一般是在存储过程一开始的时候执行。</p>
-<p>写应用逻辑的时候脑袋必须很清楚，我现在拥有哪些锁，在提交之前，可能还会获取哪些锁？</p>
-<p>  xdb获取记录锁时，永远都是以互斥的方式获取（不区分读写）。</p>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁怎么发生"><a href="#死锁怎么发生" class="headerlink" title="死锁怎么发生"></a>死锁怎么发生</h3><p>存储过程P1，在已经拿到锁A的情况下，请求锁B。</p>
-<p>此时存储过程P2，在已经拿到锁B的情况下，请求锁A。</p>
-<p>它们便会陷入相互的无限等待中。</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">doDeadLock</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">final</span> java.util.concurrent.CyclicBarrier cb=<span class="keyword">new</span> <span class="title class_">java</span>.util.concurrent.CyclicBarrier(<span class="number">2</span>); </span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">xdb</span>.Procedure() &#123;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">process</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">				xtable.Basic.get(<span class="number">4096L</span>);</span><br><span class="line">				cb.await(<span class="number">10</span>, java.util.concurrent.TimeUnit.SECONDS);</span><br><span class="line">				xtable.Basic.get(<span class="number">8192L</span>);</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;.submit();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">xdb</span>.Procedure() &#123;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">process</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">				xtable.Basic.get(<span class="number">8192L</span>);</span><br><span class="line">				cb.await(<span class="number">10</span>, java.util.concurrent.TimeUnit.SECONDS);</span><br><span class="line">				xtable.Basic.get(<span class="number">4096L</span>);</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;.submit();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>线程A去访问Basic这个表的key&#x3D;4096的这条记录。然后故意等10秒。</p>
-<p>线程B去访问Basic这个表的key&#x3D;8192的这条记录。然后故意等10秒。</p>
-<p>然后线程A去访问8192这条记录（它的锁已经被B持有）。线程B去访问4096这条记录（它的锁已经被A持有）。就会陷入相互等待。</p>
-<p>这里举的例子是死锁最简单的例子。因为这里都是互斥锁。当涉及读写锁、条件变量时，问题就复杂的多了。那些复杂的问题此处不考虑。</p>
-<h3 id="发生死锁怎么办"><a href="#发生死锁怎么办" class="headerlink" title="发生死锁怎么办"></a>发生死锁怎么办</h3><p>xdb有一个线程，负责自动检测死锁，发现并打断它。在xdb的trace.log中有死锁打断日志。（可以拿我上面的代码做个实验）</p>
-<p>被打断的存储过程能够被自动重做。</p>
-<h3 id="怎么避免死锁"><a href="#怎么避免死锁" class="headerlink" title="怎么避免死锁"></a>怎么避免死锁</h3><p><strong>所有人以同样的顺序获取锁！</strong></p>
-<p>看这么三种场景：</p>
-<p>A：某人使用一个物品，给他自己增加1000经验。</p>
-<p>此时需要访问两个表，Bag和Properties。key都是roleid。如果这两个表的lockname也一样，那么就太完美了。从头到尾只需要一个锁，所以它永远不会和任何人死锁。于是我们把所有单人数据的表，lockname设计成rolelock。</p>
-<p>B：某玩家给予另外一个玩家1000游戏币</p>
-<p>游戏币的数据存储在Bag表内。此时需要访问Bag这张表的key&#x3D;roleid1和key&#x3D;roleid2两条记录。</p>
-<p>方法是：存储过程的一开始，先把这两个人的roleid排序，然后依次访问Bag表。由于在交易中访问到的所有表，lockname都等于rolelock,所以只要大家都保持这样的原则，那么永远不会有死锁。</p>
-<p>C：某人申请加入一个队伍</p>
-<p>首先有一个表叫做team。每条记录对应着每个队伍。lockname&#x3D;team</p>
-<p>然后还有一个表叫做roleid2team。key是roleid,value是team表的key。lockname&#x3D;rolelock。</p>
-<p>我们称team lock是大锁，rolelock是小锁。那么现在就有两种策略，先大后小或者先小后大。</p>
-<p>先大后小：已获得小锁(rolelock)的情况下不得申请大锁(teamlock)。</p>
-<p>先小后大：已获得大锁(teamlock)的情况下不得申请小锁(rolelock)。</p>
-<p>以先小后大为例：</p>
-<p>例如，A向B申请加入队伍，那么通过协议和协议的上下文很容易知道A、B的roleid。在process函数刚进入的时候，就手动锁定A和B的rolelock，然后再访问team表。</p>
-<p>但某些事情会变得棘手。比如A说他要解散队伍。</p>
-<h3 id="在死锁的问题上，我们常常做不到最完美"><a href="#在死锁的问题上，我们常常做不到最完美" class="headerlink" title="在死锁的问题上，我们常常做不到最完美"></a>在死锁的问题上，我们常常做不到最完美</h3><p>继续说，比如A说他要解散队伍。按照最普通的逻辑，是这样：根据roleid到roleid2team查到teamid,然后根据teamid到team表查到当前有那些人，并删除这条记录。然后根据查到的teamid去roleid2team表挨个删除。可是，这么做违反了我们之前定下的加锁原则。</p>
-<p>假设我们采用的是先小后大的加锁原则。（即先锁rolelock，后锁team表）</p>
-<p><strong>解决方案1：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">写成２个存储过程。第一个存储过程根据roleid查到当前队伍所有人的roleid,然后执行第二个存储过程：</span><br><span class="line">    <span class="built_in">this</span>.lock(roleids,“rolelock”);</span><br><span class="line">    <span class="keyword">final</span> <span class="type">long</span> leaderid=roleids[<span class="number">0</span>];<span class="comment">//人员列表中第一个就是队长</span></span><br><span class="line">    <span class="keyword">final</span> <span class="type">long</span> teamid= xtable.Role2team.get(leaderid);</span><br><span class="line">    xbean.Team team=xtable.Team.remove(teamid);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">final</span> <span class="type">long</span> roleid : team.getRoles()) </span><br><span class="line">        xtable.Role2team.remove(roleid);</span><br><span class="line">可是，如果这两个存储过程之间，新添一个人会怎样？对于上面的代码，就会造成少锁了一个rolelock，就意味着可能会引发死锁。 </span><br></pre></td></tr></table></figure>
-
-<p><strong>解决方案２：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在第二个存储过程中，检查传进来的roleid和team表当前存的是否一致。如果不一致，则rollback。也就是说解散操作偶然会失败。</span><br><span class="line">	<span class="keyword">final</span> <span class="type">long</span> teamid= xtable.Role2team.get(leaderid);</span><br><span class="line">	xbean.Team team=xtable.Team.remove(teamid);</span><br><span class="line">	<span class="keyword">if</span>(team.getRoles().size()!=roleids.length || !team.getRoles().containsAll(roleids)) </span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//发现不一致，立即回滚。</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">final</span> <span class="type">long</span> roleid : team.getRoles())</span><br><span class="line">			xtable.Role2team.remove(roleid);</span><br></pre></td></tr></table></figure>
-
-<p><strong>解决方案3：</strong></p>
-<p>select的好处是，可以让上面的两个存储过程写成一个。先用select方法去查teamid和roleids。然后下面用get&#x2F;remove方法读写。但是这么做只是让代码看起来更紧凑更简洁一些，前面说的风险依然存在。</p>
-<p>两次读到的东西不一致，就算发现了，又该怎么办？上面解决方案1的代码忽略这种不一致，它带来的是潜在的死锁。而其它有时候带来的可能是表与表之间的引用关系被破坏。例如根据roleid查到一个teamid,然后这个teamid在team表根本就不存在。</p>
-<p>解决方案2的代码不能被用在关键场合。例如，我们需要用定时器在7月7日的某个时间点开启一项庆典活动，但是这个开启操作被“偶然性失败”了。这个可被接受吗？（这是个疑问句不是反问句）</p>
-<p>或者我们把加锁的策略改成先大后小呢？ </p>
-<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p>触发器的本意不是用来写游戏逻辑的。是用来在服务器和客户端之间同步数据的。</p>
-<p>（可以完全不用这个功能。触发器的具体介绍待续）</p>
-<h2 id="注册触发器"><a href="#注册触发器" class="headerlink" title="注册触发器"></a>注册触发器</h2><p>每个表都有一个addListener&#x2F;removeListener方法。</p>
-<p>使用方法例如：</p>
-<p>xtable.Bag.getTable().addListener(new BagChanged(), “value”,  “items”);</p>
-<p>其中第一个参数是某个实现了xdb.logs.Listener接口的类的实例。 </p>
-<h2 id="触发器的执行时刻"><a href="#触发器的执行时刻" class="headerlink" title="触发器的执行时刻"></a>触发器的执行时刻</h2><p>触发器在存储过程成功commit之后执行。</p>
-<h2 id="触发器的粒度"><a href="#触发器的粒度" class="headerlink" title="触发器的粒度"></a>触发器的粒度</h2><p>这里是指事件的组成。例如在一个存储过程中多次修改了同一行数据，那么是触发一次还是触发多次呢？1次。在一个存储过程中修改了多行数据，那么是触发一次还是触发多次呢？每行1次。</p>
-<h2 id="避免链式反应"><a href="#避免链式反应" class="headerlink" title="避免链式反应"></a>避免链式反应</h2><p>在触发器执行中出现永远没有结束的链式反应是一个十分严重的问题。最稳妥的做法就是触发器的事件代码一定在存储过程之外并且执行中永远不要调用任何存储过程。</p>
-<h1 id="唯一名"><a href="#唯一名" class="headerlink" title="唯一名"></a>唯一名</h1><p>唯一名主要是为以后数据库合并（合服）设计的。唯一名用来保证特定的数字（如角色id）或字符串（如角色名）在某些服务器是唯一的。</p>
-<p>Uniqname分两部分：服务器和客户端。服务器端需要作为一个单独的进程启动，客户端内嵌在xdb中。</p>
-<p><img src="https://gitee.com/sunxinan/img/raw/master/img/202205111549421.png" alt="唯一名"></p>
-<p>gameserver只有归同一个uniqname管理才能合并。</p>
-<p>gameserver即便不考虑合服的问题，只要xdb任何一个表用到了自增长属性，那么就必须在xdb.xml中配置唯一名。</p>
-<h2 id="游戏服务器配置示例"><a href="#游戏服务器配置示例" class="headerlink" title="游戏服务器配置示例"></a>游戏服务器配置示例</h2><p>在gameserver的xdb的配置文件中加入以下内容（与table节点同级）：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">UniqNameConf</span> <span class="attr">localId</span>=<span class="string">&quot;0&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">XioConf</span> <span class="attr">name</span>=<span class="string">&quot;xdb.util.UniqName&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Manager</span> <span class="attr">name</span>=<span class="string">&quot;Client&quot;</span> <span class="attr">keepSize</span>=<span class="string">&quot;1&quot;</span> <span class="attr">maxSize</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">Coder</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">Rpc</span> <span class="attr">class</span>=<span class="string">&quot;xdb.util.UniqName$Allocate&quot;</span>/&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">Rpc</span> <span class="attr">class</span>=<span class="string">&quot;xdb.util.UniqName$Confirm&quot;</span>/&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">Rpc</span> <span class="attr">class</span>=<span class="string">&quot;xdb.util.UniqName$Release&quot;</span>/&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">Rpc</span> <span class="attr">class</span>=<span class="string">&quot;xdb.util.UniqName$Exist&quot;</span>/&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">Rpc</span> <span class="attr">class</span>=<span class="string">&quot;xdb.util.UniqName$AllocateId&quot;</span>/&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">Rpc</span> <span class="attr">class</span>=<span class="string">&quot;xdb.util.UniqName$ReleaseId&quot;</span>/&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">Coder</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">Connector</span> <span class="attr">remoteIp</span>=<span class="string">&quot;172.16.32.45&quot;</span> <span class="attr">remotePort</span>=<span class="string">&quot;29024&quot;</span> <span class="attr">sendBufferSize</span>=<span class="string">&quot;16384&quot;</span> <span class="attr">receiveBufferSize</span>=<span class="string">&quot;16384&quot;</span> <span class="attr">tcpNoDelay</span>=<span class="string">&quot;true&quot;</span> <span class="attr">inputBufferSize</span>=<span class="string">&quot;131072&quot;</span> <span class="attr">outputBufferSize</span>=<span class="string">&quot;131072&quot;</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">Manager</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">XioConf</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">UniqNameConf</span>&gt;</span>  </span><br></pre></td></tr></table></figure>
-
-<p>其中Connector节点需要配置Uniqname服务器的IP和端口号。xdb在启动的时候会去连接这个服务器。对于Uniqname服务器管辖的每个client，都必须用一个唯一的整数来标识它（0-4095），这个整数就是UniqNameConf节点的localid属性。</p>
-<p>其它的设置不需要改，照抄即可。</p>
-<h2 id="localid分配规则"><a href="#localid分配规则" class="headerlink" title="localid分配规则"></a>localid分配规则</h2><p>切记：localid不可重复，并且不可重用。例如：服务器A的localid是0，服务器B的localid是1，然后A和B合并成一个新的服务器，那么这个新服的localid可以是0，也可以是1，也可以是任何一个尚未使用的数。不可重用的意思是说以后如果要开新服，新服的localid即不能是0，也不能是1。</p>
-<h2 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h2><p>唯一名主要涉及三个功能：给自增长的表分配key、在存储过程中通过rpc请求向唯一名服务器申请名字（字符串）或申请ID（整数）。</p>
-<h2 id="分配自增长ID"><a href="#分配自增长ID" class="headerlink" title="分配自增长ID"></a>分配自增长ID</h2><p>如果一个表是自增长的，那么它的key的类型必须是long。它的第一条记录的key应该是4096L+localid。第二条记录应该是4096*2L+localid，以此类推。这样就可以保证在同一个uniqname管辖的范围内，所有自增长的表在合并的时候不会发生冲突。</p>
-<p>这个分配过程不需要访问网络。只需要在设计表的时候配置自增长属性即可，不需要写什么额外代码。</p>
-<h2 id="分配名字"><a href="#分配名字" class="headerlink" title="分配名字"></a>分配名字</h2><p>要向uniqname申请名字必须在存储过程中执行。在存储过程中，可以通过xdb.util.UniqName.allocate(String, String)这个静态方法向uniqname申请一个名字。其中第一个参数是名字所在分组（即名字空间）。如：”role”(角色名)，”family”(家族名)，”faction”(帮派名)。第二个参数是所要申请的名字。这个函数返回true，代表分配成功，返回false代表分配失败。名字空间是在编译uniqname的时候在uniqname.xdb.xml指定。</p>
-<p>因为这个分配操作需要访问网络，所以必须在xdb已启动网络的状态下执行。</p>
-<p>如果执行allocate方法的这个存储过程最终没有commit，而是rollback了。那么已分配的名字会通过RPC请求被释放。</p>
-<h2 id="分配ID"><a href="#分配ID" class="headerlink" title="分配ID"></a>分配ID</h2><p>在这样的情况下需要通过uniqname分配ID：</p>
-<ol>
-<li><p>这个ID需要是全服唯一的。因为合服后也需要唯一，所以在uniqname管辖的范围内必须是唯一的。</p>
-</li>
-<li><p>这个ID生成的规则是特殊的。不是4096*n+localid这样的格式。</p>
-</li>
-<li><p>合服时这个ID不能变。</p>
-</li>
-</ol>
-<p>参见xdb.util.UniqName.allocateId(String)和xdb.util.UniqName.allocateId(String, long)这两个接口。（待续）</p>
-<h2 id="编译唯一名"><a href="#编译唯一名" class="headerlink" title="编译唯一名"></a>编译唯一名</h2><p>唯一名服务器现在不是作为一个编译好的jar包发布。需要各个项目组自行单独编译。如果你不是从头搭建一个项目，那么这一节先忽略。</p>
-<h3 id="获取发布版本"><a href="#获取发布版本" class="headerlink" title="获取发布版本"></a>获取发布版本</h3><p>发布目录</p>
-<p>​	<a href="http://172.16.10.57/repos/snail/bin">http://172.16.10.57/repos/snail/bin</a></p>
-<p>文件列表</p>
-<p>​	uniqname.jar     可运行发布版本（二进制）</p>
-<p>​	uniqname.xdb.xml   唯一名服务器初始配置，初次安装可以拷贝这个配置当作初始配置，更新时忽略她。</p>
-<p>​	uniqname.install.xml 唯一名服务器更新脚本。</p>
-<p>​	uniqname.class    安装程序。 （下面用不到）</p>
-<h3 id="设置编译脚本"><a href="#设置编译脚本" class="headerlink" title="设置编译脚本"></a>设置编译脚本</h3><p>因为现在的项目普遍以ant作为编译脚本。所以下面以ant为例讲如何编译唯一名。</p>
-<p>首先，在自己的项目目录下创建一个空目录,叫uniq</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">然后，在build.xml中加入：	</span><br><span class="line"><span class="comment">&lt;!-- 相对于本build.xml --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;snail.bin&quot;</span> <span class="attr">value</span>=<span class="string">&quot;../snail/bin&quot;</span>/&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 相对于本build.xml --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;uniqname.dir&quot;</span> <span class="attr">value</span>=<span class="string">&quot;uniq&quot;</span>/&gt;</span>   </span><br><span class="line">  <span class="tag">&lt;<span class="name">target</span> <span class="attr">name</span>=<span class="string">&quot;uniqname&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 拷贝重新打包脚本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">copy</span> <span class="attr">overwrite</span>=<span class="string">&quot;true&quot;</span>  <span class="attr">file</span>=<span class="string">&quot;$&#123;snail.bin&#125;/uniqname.install.xml&quot;</span> <span class="attr">todir</span>=<span class="string">&quot;$&#123;uniqname.dir&#125;&quot;</span>/&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">ant</span> <span class="attr">dir</span>=<span class="string">&quot;$&#123;uniqname.dir&#125;&quot;</span> <span class="attr">antfile</span>=<span class="string">&quot;uniqname.install.xml&quot;</span> <span class="attr">target</span>=<span class="string">&quot;install&quot;</span>&gt;</span> </span><br><span class="line">      <span class="comment">&lt;!--新的uniqname.jar的生成目录 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;output.dir&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;snail.bin&quot;</span> <span class="attr">value</span>=<span class="string">&quot;../$&#123;snail.bin&#125;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;xdb.xml&quot;</span> <span class="attr">value</span>=<span class="string">&quot;../uniqname.xdb.xml&quot;</span>/&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">ant</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">file</span>=<span class="string">&quot;$&#123;uniqname.dir&#125;/uniqname.install.xml&quot;</span>/&gt;</span> </span><br><span class="line">  <span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>把snail&#x2F;bin&#x2F;uniqname.xdb.xml复制到自己的项目的目录下，并按需求修改</p>
-<p>1.如果要增加名字组，那么添加这样的table</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">&quot;role&quot;</span> <span class="attr">key</span>=<span class="string">&quot;string&quot;</span> <span class="attr">value</span>=<span class="string">&quot;NameState&quot;</span>  <span class="attr">cacheCapacity</span>=<span class="string">&quot;10240&quot;</span> <span class="attr">cachehigh</span>=<span class="string">&quot;128&quot;</span> <span class="attr">cachelow</span>=<span class="string">&quot;64&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>如果要增加Id组(不推荐使用) ，那么添加这样的table</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">&quot;familyid&quot;</span> <span class="attr">idmin</span>=<span class="string">&quot;10000&quot;</span> <span class="attr">idmax</span>=<span class="string">&quot;1000000&quot;</span> <span class="attr">key</span>=<span class="string">&quot;long&quot;</span> <span class="attr">value</span>=<span class="string">&quot;IdState&quot;</span> <span class="attr">cacheCapacity</span>=<span class="string">&quot;10240&quot;</span> <span class="attr">cachehigh</span>=<span class="string">&quot;128&quot;</span> <span class="attr">cachelow</span>=<span class="string">&quot;64&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h3><p>  ant uniqname 生好的jar包在uniq目录下。</p>
-<h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><p>一些杂七杂八的东西，我想不到该归在哪一类中。</p>
-<h2 id="使用存储过程简化逻辑代码"><a href="#使用存储过程简化逻辑代码" class="headerlink" title="使用存储过程简化逻辑代码"></a>使用存储过程简化逻辑代码</h2><p>通常来说，一个游戏操作包含这么几步：检查条件-&gt;执行操作-&gt;通知客户端。 </p>
-<p>设想需要完成这样一个游戏功能：</p>
-<p>使用一个药品，这个药品的功能是把hp补满。</p>
-<p>在没有事务保障的情况下，可能会这么写：</p>
-<p>if(包裹里有这个物品){</p>
-<p>   if(hp满) return ;</p>
-<p>   把hp补满;</p>
-<p>   删除物品;</p>
-<p>}</p>
-<p> 使用了xdb后，可以把第一行条件判断删除，不用判断包裹里是否有这个物品。</p>
-<p>执行操作-&gt;扣除物品</p>
-<p>扣除物品如果失败，回滚即可。</p>
-<h2 id="GS的线程模型-不是rj"><a href="#GS的线程模型-不是rj" class="headerlink" title="GS的线程模型(不是rj)"></a>GS的线程模型(不是rj)</h2><p>(不同的游戏不一样)</p>
-<p>GS是单进程，大概有这些线程:</p>
-<ol>
-<li><p>main：主线程。执行初始化操作，然后等待一个条件变量，被唤醒后执行关服逻辑。</p>
-</li>
-<li><p>xio.Engine：维持到link的tcp连接。unmarshal收到的每个Protocol，并扔到xdb的线程池执行。</p>
-</li>
-<li><p>xdb线程池：一共三个线程池，执行协议和存储过程的process方法等等。</p>
-</li>
-<li><p>map: 以单线程方式顺序处理地图相关请求。</p>
-</li>
-<li><p>xdb管理线程：负责写硬盘的checkpoint线程、负责检测死锁的等等。</p>
-</li>
-</ol>
-<p>Protocol的.process通常只有一行，就是new XXXXProc(this).submit()。把自己传递到某个存储过程的构造函数中，然后提交给xdb执行。一般来说，给客户端回协议的代码，会直接写在存储过程中，并在当前的worker线程直接发送。总的来说，一条协议被GS收到，然后到全部处理完毕，一般经过了3个线程：IO、某个worker线程执行process、某个worker线程执行procedure。</p>
-<h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><p>假如策划有这样一个需求：</p>
-<p>玩家在游戏世界里时，每分钟恢复1%的活力。不在线不恢复。</p>
-<p>对程序而言，就是要按固定频率执行某个任务，并且可手动取消这个任务（下线时需要取消）。</p>
-<p>xdb的线程池支持定时任务。所以上面一个问题的最佳实现方式就是扔一个定时任务到xdb的线程池里，然后把返回的future存下来（例如保存在内存表里）。需要取消的时候调用future.cancel()。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.util.concurrent.ScheduledFuture&lt;?&gt; future=xdb.Xdb.executor().scheduleAtFixedRate(new GameTimeTask(), 0,1, TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
-
-<p>第一次执行从0秒后开始，之后每隔一秒，执行一次GameTimeTask.</p>
-<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p>程序中需要用到随机数的地方，请一律用xdb.Xdb.random()获得Random实例。不要自己设置随机数种子。</p>
-<h2 id="在存储过程中发送协议以及执行其它任务"><a href="#在存储过程中发送协议以及执行其它任务" class="headerlink" title="在存储过程中发送协议以及执行其它任务"></a>在存储过程中发送协议以及执行其它任务</h2><p>变量的修改可以被回滚，但是网络包呢？已经发出去的网络消息能被回滚吗？不能。所以xdb后来提供了psend方法。</p>
-<p>首先需要应用实现一个类，继承自xdb.Procedure.IOnlines接口。然后通过xdb.Procedure.setOlines()设置进去。</p>
-<p>Procedure类提供了三组发包函数：</p>
-<p>psend：在存储过程执行完时一定发送。无视存储过程是否执行成功。</p>
-<p>psendWhileCommit： 在存储过程成功提交后发送。即成功才发送。</p>
-<p>psendWhileRollback：在存储过程被回滚时发送。即失败才发送。</p>
-<p>另外还有一个方法：</p>
-<p>ppost: 添加任务到列表中，当存储过程结束时执行，而不管存储过程执行的结果。</p>
-<h2 id="xdb-inuse文件"><a href="#xdb-inuse文件" class="headerlink" title="xdb.inuse文件"></a>xdb.inuse文件</h2><p>如果启动的时候发现dbhome目录下有xdb.inuse文件在，那么说明上次使用xdb的时候，程序未能正常退出（可能是被kill -9杀死的）。</p>
-<p>手动把这个文件删除就能起来了。</p>
-<h2 id="xdb是数据库吗？"><a href="#xdb是数据库吗？" class="headerlink" title="xdb是数据库吗？"></a>xdb是数据库吗？</h2><p>你可以认为xdb是数据库，也可以认为它不是数据库。</p>
-<p>我倾向于认为它不是一个数据库。</p>
-<p>XDB是一个Trasactional Cache。并且xdb的代码中不仅包括数据访问的代码，还包括网络库XIO，还包括应用协议如UniqName。</p>
-]]></content>
-      <categories>
-        <category>游戏服务端</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>服务器停服维护，回档，反外挂</title>
     <url>/2022/04/06/javaGame/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%81%9C%E6%9C%8D%E7%BB%B4%E6%8A%A4,%E5%9B%9E%E6%A1%A3/</url>
     <content><![CDATA[<h1 id="一．-服务器停服维护"><a href="#一．-服务器停服维护" class="headerlink" title="一． 服务器停服维护"></a>一． 服务器停服维护</h1><ol>
@@ -2252,8 +1555,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>设计模式</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -2714,8 +2017,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>设计模式</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -3439,8 +2742,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>设计模式</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -3508,8 +2811,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>设计模式</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -4772,8 +4075,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>设计模式</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
