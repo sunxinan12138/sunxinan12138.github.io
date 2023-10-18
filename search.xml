@@ -140,6 +140,47 @@
       </tags>
   </entry>
   <entry>
+    <title>游戏成就系统实现</title>
+    <url>/2023/10/17/javaGame/%E6%B8%B8%E6%88%8F%E6%88%90%E5%B0%B1%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h1 id="游戏成就系统实现"><a href="#游戏成就系统实现" class="headerlink" title="游戏成就系统实现"></a>游戏成就系统实现</h1><blockquote>
+<p>每个游戏基本都有成就系统，它的实现流程和任务基本相同，但是没有任务功能那么复杂。本质上都是任务系统。所以梳理一下成就系统的实现方案。</p>
+</blockquote>
+<p>成就功能内容和游戏功能的关系。很显然成就功能大部分是基于游戏玩法触发的比如：升到x级，获得xxx道具，xx玩法胜利….。</p>
+<h2 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h2><ol>
+<li><p>触发点</p>
+<blockquote>
+<p>首先是触发点比如升到30级，升级（加经验）的时候在对应模块里触发。获得xxx道具，在背包变更 或者获得物品里触发。</p>
+</blockquote>
+</li>
+<li><p>类型区分</p>
+<blockquote>
+<p>成就部分大多是相同需求不同数值，升到15、20、30级。所以定义一个枚举类型<code>AchievementType</code>  1001是升级，1002是道具….</p>
+</blockquote>
+</li>
+<li><p>统计方式</p>
+<blockquote>
+<p>成就主题 – 成就数据 用一个<code>set&lt;Long&gt;</code> 表示成就完成情况。 可以减少数据的存储和协议的处理</p>
+</blockquote>
+</li>
+<li><p>扩展性</p>
+<blockquote>
+<p>有了<code>AchievementType</code>  如果同类型在细分，比如：升级中新加一个 宠物升级，我们只能新加一个类型1003，但是这样配置和代码都有冗余的可能。</p>
+<p>所以设计是尽可能做到通用，可以加一个类型<code>subKey</code> 用来增加类型。定义为 1&#x3D;&gt;玩家 2&#x3D;&gt;宠物。这样我们只需要根据模块传递的<code>AchievementType</code>  和subKey 就能确定具体是哪个成就了。</p>
+</blockquote>
+</li>
+<li><p>数据一定要和其他模块的定义一致，便于维护，不易出错。</p>
+</li>
+</ol>
+<h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>设计的时候还要考虑有些功能玩法没有但是成就需要，要么扩展之前旧的功能，要么想办法在计数上处理。</p>
+]]></content>
+      <categories>
+        <category>游戏服务端</category>
+      </categories>
+      <tags>
+        <tag>成就</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>nas系统Unraid</title>
     <url>/2023/08/03/other/UnRaid/</url>
     <content><![CDATA[<h1 id="unraid"><a href="#unraid" class="headerlink" title="unraid"></a>unraid</h1><h1 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h1><ul>
@@ -212,6 +253,28 @@
   </entry>
   <entry>
     <title>电吉他</title>
+    <url>/2023/05/25/music/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<h1 id="电吉他-弹奏"><a href="#电吉他-弹奏" class="headerlink" title="电吉他 弹奏"></a>电吉他 弹奏</h1><p>跳弦 也不是什么大问题 是一种演奏技巧  会影响弹奏速度 但是 利于跨弦</p>
+<p>三连音 音阶 5,6  机构先</p>
+<h3 id="音阶"><a href="#音阶" class="headerlink" title="音阶"></a>音阶</h3><p>跨弦八度音找法:65弦找八度就是空一品跨一弦，43弦找八度就是空2品跨一弦 </p>
+<p><strong>弹奏除了摇滚金属以外的</strong></p>
+<blockquote>
+<p> 弹奏抱着电吉他 右手肩膀放松下垂手腕手臂尽量直线 </p>
+<p>不压琴桥,琴桥是放开的 </p>
+<p>可能会有杂音(所以拨弦要准确)</p>
+<p> 下拨:压弦 但是瞬发 上拨:挑弦</p>
+<p>放松弹奏 很快乐!!!  拨弦的感觉类似甩手腕的感觉 </p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>music</category>
+      </categories>
+      <tags>
+        <tag>电吉他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电吉他</title>
     <url>/2023/05/25/music/%E7%94%B5%E5%90%89%E4%BB%96%E5%85%BB%E6%8A%A4/</url>
     <content><![CDATA[<h1 id="电吉他养护"><a href="#电吉他养护" class="headerlink" title="电吉他养护"></a>电吉他养护</h1><h1 id="日常维护"><a href="#日常维护" class="headerlink" title="日常维护"></a>日常维护</h1><ol>
 <li><p>Gibson 硝基漆清洁液</p>
@@ -241,28 +304,6 @@
 </ol>
 <p>找了一阵子 我的Gibson怎么买护理液 找到了这个贴吧</p>
 <p><a href="https://tieba.baidu.com/p/5983584895?pn=1">【图片】关于电吉他的保养维护【老炮可以忽略】_电吉他吧_百度贴吧 (baidu.com)</a></p>
-]]></content>
-      <categories>
-        <category>music</category>
-      </categories>
-      <tags>
-        <tag>电吉他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电吉他</title>
-    <url>/2023/05/25/music/%E7%94%B5%E5%90%89%E4%BB%96%E5%BC%B9%E5%A5%8F%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<h1 id="电吉他-弹奏"><a href="#电吉他-弹奏" class="headerlink" title="电吉他 弹奏"></a>电吉他 弹奏</h1><p>跳弦 也不是什么大问题 是一种演奏技巧  会影响弹奏速度 但是 利于跨弦</p>
-<p>三连音 音阶 5,6  机构先</p>
-<h3 id="音阶"><a href="#音阶" class="headerlink" title="音阶"></a>音阶</h3><p>跨弦八度音找法:65弦找八度就是空一品跨一弦，43弦找八度就是空2品跨一弦 </p>
-<p><strong>弹奏除了摇滚金属以外的</strong></p>
-<blockquote>
-<p> 弹奏抱着电吉他 右手肩膀放松下垂手腕手臂尽量直线 </p>
-<p>不压琴桥,琴桥是放开的 </p>
-<p>可能会有杂音(所以拨弦要准确)</p>
-<p> 下拨:压弦 但是瞬发 上拨:挑弦</p>
-<p>放松弹奏 很快乐!!!  拨弦的感觉类似甩手腕的感觉 </p>
-</blockquote>
 ]]></content>
       <categories>
         <category>music</category>
@@ -343,8 +384,8 @@
         <category>随记</category>
       </categories>
       <tags>
-        <tag>待做</tag>
         <tag>小说</tag>
+        <tag>todo</tag>
       </tags>
   </entry>
   <entry>
@@ -399,361 +440,6 @@
       </categories>
       <tags>
         <tag>时间管理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux1</title>
-    <url>/2022/06/14/linuxRelevant/linux/</url>
-    <content><![CDATA[<h1 id="常用的基本命令"><a href="#常用的基本命令" class="headerlink" title="常用的基本命令"></a>常用的基本命令</h1><blockquote>
-<p>基于CentOS7</p>
-</blockquote>
-<p>常用的基本命令</p>
-<h3 id="目录管理"><a href="#目录管理" class="headerlink" title="目录管理"></a>目录管理</h3><blockquote>
-<p>绝对路径和相对路径</p>
-</blockquote>
-<p>我们知道Linux的目录结构为树状结构，最顶级的目录为根目录 &#x2F;。</p>
-<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
-<p>在开始本教程前我们需要先知道什么是绝对路径与相对路径。</p>
-<p><strong>绝对路径：</strong></p>
-<p>路径的写法，由根目录 &#x2F; 写起，例如：&#x2F;usr&#x2F;share&#x2F;doc 这个目录。</p>
-<p><strong>相对路径：</strong></p>
-<p>路径的写法，不是由 &#x2F; 写起，例如由 &#x2F;usr&#x2F;share&#x2F;doc 要到 &#x2F;usr&#x2F;share&#x2F;man 底下时，可以写成：cd ..&#x2F;man 这就是相对路径的写法啦！</p>
-<blockquote>
-<p>处理目录的常用命令</p>
-</blockquote>
-<p>接下来我们就来看几个常见的处理目录的命令吧：</p>
-<ul>
-<li>ls: 列出目录</li>
-<li>cd：切换目录</li>
-<li>pwd：显示目前的目录</li>
-<li>mkdir：创建一个新的目录</li>
-<li>rmdir：删除一个空的目录</li>
-<li>cp: 复制文件或目录</li>
-<li>rm: 移除文件或目录</li>
-<li>mv: 移动文件与目录，或修改文件与目录的名称</li>
-</ul>
-<p>你可以使用 <em>man [命令]</em> 来查看各个命令的使用文档，如 ：man cp。</p>
-<blockquote>
-<p>ls （列出目录）</p>
-</blockquote>
-<p>在Linux系统当中， ls 命令可能是最常被运行的。</p>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls [-aAdfFhilnrRSt] 目录名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-a ：全部的文件，连同隐藏文件( 开头为 . 的文件) 一起列出来(常用)</li>
-<li>-l ：长数据串列出，包含文件的属性与权限等等数据；(常用)</li>
-</ul>
-<p>将目录下的所有文件列出来(含属性与隐藏档)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls -al ~</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>cd （切换目录）</p>
-</blockquote>
-<p>cd是Change Directory的缩写，这是用来变换工作目录的命令。</p>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 切换到用户目录下</span><br><span class="line">[root@kuangshen /]# cd home  </span><br><span class="line"></span><br><span class="line"># 使用 mkdir 命令创建 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# mkdir kuangstudy</span><br><span class="line"></span><br><span class="line"># 进入 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# cd kuangstudy</span><br><span class="line"></span><br><span class="line"># 回到上一级</span><br><span class="line">[root@kuangshen kuangstudy]# cd ..</span><br><span class="line"></span><br><span class="line"># 回到根目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd /</span><br><span class="line"></span><br><span class="line"># 表示回到自己的家目录，亦即是 /root 这个目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd ~</span><br></pre></td></tr></table></figure>
-
-<p>接下来大家多操作几次应该就可以很好的理解 cd 命令的。</p>
-<blockquote>
-<p>pwd ( 显示目前所在的目录 )</p>
-</blockquote>
-<p>pwd 是 <strong>Print Working Directory</strong> 的缩写，也就是显示目前所在目录的命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen kuangstudy]#pwd [-P]</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：**-P** ：显示出确实的路径，而非使用连接(link) 路径。</p>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 单纯显示出目前的工作目录</span><br><span class="line">[root@kuangshen ~]# pwd</span><br><span class="line">/root</span><br><span class="line"></span><br><span class="line"># 如果是链接，要显示真实地址，可以使用 -P参数</span><br><span class="line">[root@kuangshen /]# cd bin</span><br><span class="line">[root@kuangshen bin]# pwd -P</span><br><span class="line">/usr/bin</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>mkdir （创建新目录）</p>
-</blockquote>
-<p>如果想要创建新的目录的话，那么就使用mkdir (make directory)吧。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir [-mp] 目录名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-m ：配置文件的权限喔！直接配置，不需要看默认权限 (umask) 的脸色～</li>
-<li>-p ：帮助你直接将所需要的目录(包含上一级目录)递归创建起来！</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 进入我们用户目录下</span><br><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line"></span><br><span class="line"># 创建一个 test 文件夹</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 创建多层级目录</span><br><span class="line">[root@kuangshen home]# mkdir test1/test2/test3/test4</span><br><span class="line">mkdir: cannot create directory ‘test1/test2/test3/test4’:</span><br><span class="line">No such file or directory  # &lt;== 没办法直接创建此目录啊！</span><br><span class="line"></span><br><span class="line"># 加了这个 -p 的选项，可以自行帮你创建多层目录！</span><br><span class="line">[root@kuangshen home]# mkdir -p test1/test2/test3/test4</span><br><span class="line"></span><br><span class="line"># 创建权限为 rwx--x--x 的目录。</span><br><span class="line">[root@kuangshen home]# mkdir -m 711 test2</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>rmdir ( 删除空的目录 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rmdir [-p] 目录名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：**-p ：**连同上一级『空的』目录也一起删除</p>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 看看有多少目录存在？</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br><span class="line"></span><br><span class="line"># 可直接删除掉，没问题</span><br><span class="line">[root@kuangshen home]# rmdir test</span><br><span class="line"></span><br><span class="line"># 因为尚有内容，所以无法删除！</span><br><span class="line">[root@kuangshen home]# rmdir test1</span><br><span class="line">rmdir: failed to remove ‘test1’: Directory not empty</span><br><span class="line"></span><br><span class="line"># 利用 -p 这个选项，立刻就可以将 test1/test2/test3/test4 依次删除。</span><br><span class="line">[root@kuangshen home]# rmdir -p test1/test2/test3/test4</span><br></pre></td></tr></table></figure>
-
-<p>注意：这个 rmdir 仅能删除空的目录，你可以使用 rm 命令来删除非空目录，后面我们会将！</p>
-<blockquote>
-<p>cp ( 复制文件或目录 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)</span><br><span class="line">[root@www ~]# cp [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><strong>-a：</strong>相当於 -pdr 的意思，至於 pdr 请参考下列说明；(常用)</li>
-<li><strong>-p：</strong>连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</li>
-<li><strong>-d：</strong>若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</li>
-<li><strong>-r：</strong>递归持续复制，用於目录的复制行为；(常用)</li>
-<li><strong>-f：</strong>为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</li>
-<li><strong>-i：</strong>若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</li>
-<li><strong>-l：</strong>进行硬式连结(hard link)的连结档创建，而非复制文件本身。</li>
-<li><strong>-s：</strong>复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</li>
-<li><strong>-u：</strong>若 destination 比 source 旧才升级 destination ！</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 找一个有文件的目录，我这里找到 root目录</span><br><span class="line">[root@kuangshen home]# cd /root</span><br><span class="line">[root@kuangshen ~]# ls</span><br><span class="line">install.sh</span><br><span class="line">[root@kuangshen ~]# cd /home</span><br><span class="line"></span><br><span class="line"># 复制 root目录下的install.sh 到 home目录下</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 再次复制，加上-i参数，增加覆盖询问？</span><br><span class="line">[root@kuangshen home]# cp -i /root/install.sh /home</span><br><span class="line">cp: overwrite ‘/home/install.sh’? y # n不覆盖，y为覆盖</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>rm ( 移除文件或目录 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rm [-fir] 文件或目录</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；</li>
-<li>-i ：互动模式，在删除前会询问使用者是否动作</li>
-<li>-r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 将刚刚在 cp 的实例中创建的 install.sh删除掉！</span><br><span class="line">[root@kuangshen home]# rm -i install.sh</span><br><span class="line">rm: remove regular file ‘install.sh’? y</span><br><span class="line"># 如果加上 -i 的选项就会主动询问喔，避免你删除到错误的档名！</span><br><span class="line"></span><br><span class="line"># 尽量不要在服务器上使用 rm -rf /</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>mv  ( 移动文件与目录，或修改名称 )</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# mv [-fiu] source destination</span><br><span class="line">[root@www ~]# mv [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
-<li>-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！</li>
-<li>-u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 复制一个文件到当前目录</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line"></span><br><span class="line"># 创建一个文件夹 test</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 将复制过来的文件移动到我们创建的目录，并查看</span><br><span class="line">[root@kuangshen home]# mv install.sh test</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">test</span><br><span class="line">[root@kuangshen home]# cd test</span><br><span class="line">[root@kuangshen test]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 将文件夹重命名，然后再次查看！</span><br><span class="line">[root@kuangshen test]# cd ..</span><br><span class="line">[root@kuangshen home]# mv test mvtest</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">mvtest</span><br></pre></td></tr></table></figure>
-
-<h3 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h3><blockquote>
-<p>看懂文件属性</p>
-</blockquote>
-<p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
-<p>在Linux中我们可以使用<code>ll</code>或者<code>ls –l</code>命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
-<p>实例中，boot文件的第一个属性用”d”表示。”d”在Linux中代表该文件是一个目录文件。</p>
-<p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等：</p>
-<ul>
-<li>当为[ <strong>d</strong> ]则是目录</li>
-<li>当为[ <strong>-</strong> ]则是文件；</li>
-<li>若是[ <strong>l</strong> ]则表示为链接文档 ( link file )；</li>
-<li>若是[ <strong>b</strong> ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；</li>
-<li>若是[ <strong>c</strong> ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。</li>
-</ul>
-<p>接下来的字符中，以三个为一组，且均为『rwx』 的三个参数的组合。</p>
-<p>其中，[ r ]代表可读(read)、[ w ]代表可写(write)、[ x ]代表可执行(execute)。</p>
-<p>要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号[ - ]而已。</p>
-<p>每个文件的属性由左边第一部分的10个字符来确定（如下图）：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
-<p>从左至右用0-9这些数字来表示。</p>
-<p>第0位确定文件类型，第1-3位确定属主（该文件的所有者）拥有该文件的权限。第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
-<p>其中：</p>
-<p>第1、4、7位表示读权限，如果用”r”字符表示，则有读权限，如果用”-“字符表示，则没有读权限；</p>
-<p>第2、5、8位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限；</p>
-<p>第3、6、9位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则没有执行权限。</p>
-<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
-<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
-<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
-<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
-<p>在以上实例中，boot 文件是一个目录文件，属主和属组都为 root。</p>
-<blockquote>
-<p>修改文件属性</p>
-</blockquote>
-<p><strong>1、chgrp：更改文件属组</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
-
-<p>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
-<p><strong>2、chown：更改文件属主，也可以同时更改文件属组</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、chmod：更改文件9个属性</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
-
-<p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
-<p>Linux文件的基本权限就有九个，分别是owner&#x2F;group&#x2F;others三种身份各有自己的read&#x2F;write&#x2F;execute权限。</p>
-<p>先复习一下刚刚上面提到的数据：文件的权限字符为：『-rwxrwxrwx』， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">r:4     w:2         x:1</span><br></pre></td></tr></table></figure>
-
-<p>每种身份(owner&#x2F;group&#x2F;others)各自的三个权限(r&#x2F;w&#x2F;x)分数是需要累加的，例如当权限为：[-rwxrwx—] 分数则是：</p>
-<ul>
-<li>owner &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
-<li>group &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
-<li>others&#x3D; — &#x3D; 0+0+0 &#x3D; 0</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 770 filename</span><br></pre></td></tr></table></figure>
-
-<p>可以自己下去多进行测试！</p>
-<h3 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h3><blockquote>
-<p>概述</p>
-</blockquote>
-<p>Linux系统中使用以下命令来查看文件的内容：</p>
-<ul>
-<li>cat 由第一行开始显示文件内容</li>
-<li>tac 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</li>
-<li>nl  显示的时候，顺道输出行号！</li>
-<li>more 一页一页的显示文件内容</li>
-<li>less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</li>
-<li>head 只看头几行</li>
-<li>tail 只看尾巴几行</li>
-</ul>
-<p>你可以使用 *man [命令]*来查看各个命令的使用文档，如 ：man cp。</p>
-<blockquote>
-<p>cat 由第一行开始显示文件内容</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat [-AbEnTv]</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；</li>
-<li>-b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！</li>
-<li>-E ：将结尾的断行字节 $ 显示出来；</li>
-<li>-n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；</li>
-<li>-T ：将 [tab] 按键以 ^I 显示出来；</li>
-<li>-v ：列出一些看不出来的特殊字符</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 查看网络配置: 文件地址 /etc/sysconfig/network-scripts/</span><br><span class="line">[root@kuangshen ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>tac</p>
-</blockquote>
-<p>tac与cat命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写！如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# tac /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEVICE=eth0</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>nl  显示行号</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nl [-bnw] 文件</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-b ：指定行号指定的方式，主要有两种：-b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；-b t ：如果有空行，空的那一行不要列出行号(默认值)；</li>
-<li>-n ：列出行号表示的方法，主要有三种：-n ln ：行号在荧幕的最左方显示；-n rn ：行号在自己栏位的最右方显示，且不加 0 ；-n rz ：行号在自己栏位的最右方显示，且加 0 ；</li>
-<li>-w ：行号栏位的占用的位数。</li>
-</ul>
-<p>测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# nl /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">1DEVICE=eth0</span><br><span class="line">2BOOTPROTO=dhcp</span><br><span class="line">3ONBOOT=yes</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>more  一页一页翻动</p>
-</blockquote>
-<p>在 more 这个程序的运行过程中，你有几个按键可以按的：</p>
-<ul>
-<li>空白键 (space)：代表向下翻一页；</li>
-<li>Enter   ：代表向下翻『一行』；</li>
-<li>&#x2F;字串   ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；</li>
-<li>:f    ：立刻显示出档名以及目前显示的行数；</li>
-<li>q    ：代表立刻离开 more ，不再显示该文件内容。</li>
-<li>b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">--More--(28%) # 重点在这一行喔！你的光标也会在这里等待你的命令</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>less  一页一页翻动，以下实例输出&#x2F;etc&#x2F;man.config文件的内容：</p>
-</blockquote>
-<p>less运行时可以输入的命令有：</p>
-<ul>
-<li>空白键  ：向下翻动一页；</li>
-<li>[pagedown]：向下翻动一页；</li>
-<li>[pageup] ：向上翻动一页；</li>
-<li>&#x2F;字串  ：向下搜寻『字串』的功能；</li>
-<li>?字串  ：向上搜寻『字串』的功能；</li>
-<li>n   ：重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
-<li>N   ：反向的重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
-<li>q   ：离开 less 这个程序；</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">:   # 这里可以等待你输入命令！</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>head  取出文件前面几行</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">head [-n number] 文件</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：**-n** 后面接数字，代表显示几行的意思！</p>
-<p>默认的情况中，显示前面 10 行！若要显示前 20 行，就得要这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# head -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>tail  取出文件后面几行</p>
-</blockquote>
-<p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li>-n ：后面接数字，代表显示几行的意思</li>
-</ul>
-<p>默认的情况中，显示最后 10 行！若要显示最后 20 行，就得要这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# tail -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>拓展：Linux 链接概念</p>
-</blockquote>
-<p>Linux 链接分两种，一种被称为硬链接（Hard Link），另一种被称为符号链接（Symbolic Link）。</p>
-<p>情况下，<strong>ln</strong> 命令产生硬链接。</p>
-<p><strong>硬连接</strong></p>
-<p>硬连接指通过索引节点来进行连接。在 Linux 的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号(Inode Index)。在 Linux 中，多个文件名指向同一索引节点是存在的。比如：A 是 B 的硬链接（A 和 B 都是文件名），则 A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号相同，即一个 inode 节点对应两个不同的文件名，两个文件名指向同一个文件，A 和 B 对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个的访问。</p>
-<p>硬连接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬连接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的连接。只删除一个连接并不影响索引节点本身和其它的连接，只有当最后一个连接被删除后，文件的数据块及目录的连接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬连接文件均被删除。</p>
-<p><strong>软连接</strong></p>
-<p>另外一种连接称之为符号连接（Symbolic Link），也叫软连接。软链接文件有类似于 Windows 的快捷方式。它实际上是一个特殊的文件。在符号连接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A 是 B 的软链接（A 和 B 都是文件名），A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号不相同，A 和 B 指向的是两个不同的 inode，继而指向两块不同的数据块。但是 A 的数据块中存放的只是 B 的路径名（可以根据这个找到 B 的目录项）。A 和 B 之间是“主从”关系，如果 B 被删除了，A 仍然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p>
-<p><strong>测试：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line">[root@kuangshen home]# touch f1 # 创建一个测试文件f1</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">f1</span><br><span class="line">[root@kuangshen home]# ln f1 f2     # 创建f1的一个硬连接文件f2</span><br><span class="line">[root@kuangshen home]# ln -s f1 f3   # 创建f1的一个符号连接文件f3</span><br><span class="line">[root@kuangshen home]# ls -li       # -i参数显示文件的inode节点信息</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f1</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f2</span><br><span class="line">397248 lrwxrwxrwx 1 root root     2 Mar 13 00:50 f3 -&gt; f1</span><br></pre></td></tr></table></figure>
-
-<p>从上面的结果中可以看出，硬连接文件 f2 与原文件 f1 的 inode 节点相同，均为 397247，然而符号连接文件的 inode 节点不同。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># echo 字符串输出 &gt;&gt; f1 输出到 f1文件</span><br><span class="line">[root@kuangshen home]# echo &quot;I am f1 file&quot; &gt;&gt;f1</span><br><span class="line">[root@kuangshen home]# cat f1</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# rm -f f1</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">cat: f3: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<p>通过上面的测试可以看出：当删除原始文件 f1 后，硬连接 f2 不受影响，但是符号连接 f1 文件无效；</p>
-<p>依此您可以做一些相关的测试，可以得到以下全部结论：</p>
-<ul>
-<li>删除符号连接f3,对f1,f2无影响；</li>
-<li>删除硬连接f2，对f1,f3也无影响；</li>
-<li>删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；</li>
-<li>同时删除原文件f1,硬连接f2，整个文件会真正的被删除。</li>
-</ul>
-<p>后面的话，我们就开始学习Vim和用户磁盘相关的命令！从而修改配置！</p>
-<p>视频同步更新，这次一定！</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1304,6 +990,361 @@
 <p><a href="https://blog.csdn.net/qq_24917475/article/details/123024060">基于Linux(CentOS)快速搭建LNMP环境【使用LNMP安装包一键搭建】_Say Something的博客-CSDN博客_linux lnmp</a></p>
 <p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
 <h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>用户部分跳过了 11-12</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux1</title>
+    <url>/2022/06/14/linuxRelevant/linux/</url>
+    <content><![CDATA[<h1 id="常用的基本命令"><a href="#常用的基本命令" class="headerlink" title="常用的基本命令"></a>常用的基本命令</h1><blockquote>
+<p>基于CentOS7</p>
+</blockquote>
+<p>常用的基本命令</p>
+<h3 id="目录管理"><a href="#目录管理" class="headerlink" title="目录管理"></a>目录管理</h3><blockquote>
+<p>绝对路径和相对路径</p>
+</blockquote>
+<p>我们知道Linux的目录结构为树状结构，最顶级的目录为根目录 &#x2F;。</p>
+<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
+<p>在开始本教程前我们需要先知道什么是绝对路径与相对路径。</p>
+<p><strong>绝对路径：</strong></p>
+<p>路径的写法，由根目录 &#x2F; 写起，例如：&#x2F;usr&#x2F;share&#x2F;doc 这个目录。</p>
+<p><strong>相对路径：</strong></p>
+<p>路径的写法，不是由 &#x2F; 写起，例如由 &#x2F;usr&#x2F;share&#x2F;doc 要到 &#x2F;usr&#x2F;share&#x2F;man 底下时，可以写成：cd ..&#x2F;man 这就是相对路径的写法啦！</p>
+<blockquote>
+<p>处理目录的常用命令</p>
+</blockquote>
+<p>接下来我们就来看几个常见的处理目录的命令吧：</p>
+<ul>
+<li>ls: 列出目录</li>
+<li>cd：切换目录</li>
+<li>pwd：显示目前的目录</li>
+<li>mkdir：创建一个新的目录</li>
+<li>rmdir：删除一个空的目录</li>
+<li>cp: 复制文件或目录</li>
+<li>rm: 移除文件或目录</li>
+<li>mv: 移动文件与目录，或修改文件与目录的名称</li>
+</ul>
+<p>你可以使用 <em>man [命令]</em> 来查看各个命令的使用文档，如 ：man cp。</p>
+<blockquote>
+<p>ls （列出目录）</p>
+</blockquote>
+<p>在Linux系统当中， ls 命令可能是最常被运行的。</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls [-aAdfFhilnrRSt] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-a ：全部的文件，连同隐藏文件( 开头为 . 的文件) 一起列出来(常用)</li>
+<li>-l ：长数据串列出，包含文件的属性与权限等等数据；(常用)</li>
+</ul>
+<p>将目录下的所有文件列出来(含属性与隐藏档)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls -al ~</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>cd （切换目录）</p>
+</blockquote>
+<p>cd是Change Directory的缩写，这是用来变换工作目录的命令。</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 切换到用户目录下</span><br><span class="line">[root@kuangshen /]# cd home  </span><br><span class="line"></span><br><span class="line"># 使用 mkdir 命令创建 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# mkdir kuangstudy</span><br><span class="line"></span><br><span class="line"># 进入 kuangstudy 目录</span><br><span class="line">[root@kuangshen home]# cd kuangstudy</span><br><span class="line"></span><br><span class="line"># 回到上一级</span><br><span class="line">[root@kuangshen kuangstudy]# cd ..</span><br><span class="line"></span><br><span class="line"># 回到根目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd /</span><br><span class="line"></span><br><span class="line"># 表示回到自己的家目录，亦即是 /root 这个目录</span><br><span class="line">[root@kuangshen kuangstudy]# cd ~</span><br></pre></td></tr></table></figure>
+
+<p>接下来大家多操作几次应该就可以很好的理解 cd 命令的。</p>
+<blockquote>
+<p>pwd ( 显示目前所在的目录 )</p>
+</blockquote>
+<p>pwd 是 <strong>Print Working Directory</strong> 的缩写，也就是显示目前所在目录的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen kuangstudy]#pwd [-P]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：**-P** ：显示出确实的路径，而非使用连接(link) 路径。</p>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 单纯显示出目前的工作目录</span><br><span class="line">[root@kuangshen ~]# pwd</span><br><span class="line">/root</span><br><span class="line"></span><br><span class="line"># 如果是链接，要显示真实地址，可以使用 -P参数</span><br><span class="line">[root@kuangshen /]# cd bin</span><br><span class="line">[root@kuangshen bin]# pwd -P</span><br><span class="line">/usr/bin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mkdir （创建新目录）</p>
+</blockquote>
+<p>如果想要创建新的目录的话，那么就使用mkdir (make directory)吧。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir [-mp] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-m ：配置文件的权限喔！直接配置，不需要看默认权限 (umask) 的脸色～</li>
+<li>-p ：帮助你直接将所需要的目录(包含上一级目录)递归创建起来！</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 进入我们用户目录下</span><br><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line"></span><br><span class="line"># 创建一个 test 文件夹</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 创建多层级目录</span><br><span class="line">[root@kuangshen home]# mkdir test1/test2/test3/test4</span><br><span class="line">mkdir: cannot create directory ‘test1/test2/test3/test4’:</span><br><span class="line">No such file or directory  # &lt;== 没办法直接创建此目录啊！</span><br><span class="line"></span><br><span class="line"># 加了这个 -p 的选项，可以自行帮你创建多层目录！</span><br><span class="line">[root@kuangshen home]# mkdir -p test1/test2/test3/test4</span><br><span class="line"></span><br><span class="line"># 创建权限为 rwx--x--x 的目录。</span><br><span class="line">[root@kuangshen home]# mkdir -m 711 test2</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rmdir ( 删除空的目录 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rmdir [-p] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：**-p ：**连同上一级『空的』目录也一起删除</p>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 看看有多少目录存在？</span><br><span class="line">[root@kuangshen home]# ls -l</span><br><span class="line">drwxr-xr-x 2 root root  4096 Mar 12 21:55 test</span><br><span class="line">drwxr-xr-x 3 root root  4096 Mar 12 21:56 test1</span><br><span class="line">drwx--x--x 2 root root  4096 Mar 12 21:58 test2</span><br><span class="line"></span><br><span class="line"># 可直接删除掉，没问题</span><br><span class="line">[root@kuangshen home]# rmdir test</span><br><span class="line"></span><br><span class="line"># 因为尚有内容，所以无法删除！</span><br><span class="line">[root@kuangshen home]# rmdir test1</span><br><span class="line">rmdir: failed to remove ‘test1’: Directory not empty</span><br><span class="line"></span><br><span class="line"># 利用 -p 这个选项，立刻就可以将 test1/test2/test3/test4 依次删除。</span><br><span class="line">[root@kuangshen home]# rmdir -p test1/test2/test3/test4</span><br></pre></td></tr></table></figure>
+
+<p>注意：这个 rmdir 仅能删除空的目录，你可以使用 rm 命令来删除非空目录，后面我们会将！</p>
+<blockquote>
+<p>cp ( 复制文件或目录 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)</span><br><span class="line">[root@www ~]# cp [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><strong>-a：</strong>相当於 -pdr 的意思，至於 pdr 请参考下列说明；(常用)</li>
+<li><strong>-p：</strong>连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</li>
+<li><strong>-d：</strong>若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</li>
+<li><strong>-r：</strong>递归持续复制，用於目录的复制行为；(常用)</li>
+<li><strong>-f：</strong>为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</li>
+<li><strong>-i：</strong>若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</li>
+<li><strong>-l：</strong>进行硬式连结(hard link)的连结档创建，而非复制文件本身。</li>
+<li><strong>-s：</strong>复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</li>
+<li><strong>-u：</strong>若 destination 比 source 旧才升级 destination ！</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 找一个有文件的目录，我这里找到 root目录</span><br><span class="line">[root@kuangshen home]# cd /root</span><br><span class="line">[root@kuangshen ~]# ls</span><br><span class="line">install.sh</span><br><span class="line">[root@kuangshen ~]# cd /home</span><br><span class="line"></span><br><span class="line"># 复制 root目录下的install.sh 到 home目录下</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 再次复制，加上-i参数，增加覆盖询问？</span><br><span class="line">[root@kuangshen home]# cp -i /root/install.sh /home</span><br><span class="line">cp: overwrite ‘/home/install.sh’? y # n不覆盖，y为覆盖</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rm ( 移除文件或目录 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rm [-fir] 文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；</li>
+<li>-i ：互动模式，在删除前会询问使用者是否动作</li>
+<li>-r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 将刚刚在 cp 的实例中创建的 install.sh删除掉！</span><br><span class="line">[root@kuangshen home]# rm -i install.sh</span><br><span class="line">rm: remove regular file ‘install.sh’? y</span><br><span class="line"># 如果加上 -i 的选项就会主动询问喔，避免你删除到错误的档名！</span><br><span class="line"></span><br><span class="line"># 尽量不要在服务器上使用 rm -rf /</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mv  ( 移动文件与目录，或修改名称 )</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www ~]# mv [-fiu] source destination</span><br><span class="line">[root@www ~]# mv [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
+<li>-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！</li>
+<li>-u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 复制一个文件到当前目录</span><br><span class="line">[root@kuangshen home]# cp /root/install.sh /home</span><br><span class="line"></span><br><span class="line"># 创建一个文件夹 test</span><br><span class="line">[root@kuangshen home]# mkdir test</span><br><span class="line"></span><br><span class="line"># 将复制过来的文件移动到我们创建的目录，并查看</span><br><span class="line">[root@kuangshen home]# mv install.sh test</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">test</span><br><span class="line">[root@kuangshen home]# cd test</span><br><span class="line">[root@kuangshen test]# ls</span><br><span class="line">install.sh</span><br><span class="line"></span><br><span class="line"># 将文件夹重命名，然后再次查看！</span><br><span class="line">[root@kuangshen test]# cd ..</span><br><span class="line">[root@kuangshen home]# mv test mvtest</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">mvtest</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h3><blockquote>
+<p>看懂文件属性</p>
+</blockquote>
+<p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在Linux中我们可以使用<code>ll</code>或者<code>ls –l</code>命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+<p>实例中，boot文件的第一个属性用”d”表示。”d”在Linux中代表该文件是一个目录文件。</p>
+<p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等：</p>
+<ul>
+<li>当为[ <strong>d</strong> ]则是目录</li>
+<li>当为[ <strong>-</strong> ]则是文件；</li>
+<li>若是[ <strong>l</strong> ]则表示为链接文档 ( link file )；</li>
+<li>若是[ <strong>b</strong> ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；</li>
+<li>若是[ <strong>c</strong> ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为『rwx』 的三个参数的组合。</p>
+<p>其中，[ r ]代表可读(read)、[ w ]代表可写(write)、[ x ]代表可执行(execute)。</p>
+<p>要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号[ - ]而已。</p>
+<p>每个文件的属性由左边第一部分的10个字符来确定（如下图）：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+<p>从左至右用0-9这些数字来表示。</p>
+<p>第0位确定文件类型，第1-3位确定属主（该文件的所有者）拥有该文件的权限。第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中：</p>
+<p>第1、4、7位表示读权限，如果用”r”字符表示，则有读权限，如果用”-“字符表示，则没有读权限；</p>
+<p>第2、5、8位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限；</p>
+<p>第3、6、9位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则没有执行权限。</p>
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，boot 文件是一个目录文件，属主和属组都为 root。</p>
+<blockquote>
+<p>修改文件属性</p>
+</blockquote>
+<p><strong>1、chgrp：更改文件属组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
+
+<p>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
+<p><strong>2、chown：更改文件属主，也可以同时更改文件属组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、chmod：更改文件9个属性</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
+<p>Linux文件的基本权限就有九个，分别是owner&#x2F;group&#x2F;others三种身份各有自己的read&#x2F;write&#x2F;execute权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为：『-rwxrwxrwx』， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">r:4     w:2         x:1</span><br></pre></td></tr></table></figure>
+
+<p>每种身份(owner&#x2F;group&#x2F;others)各自的三个权限(r&#x2F;w&#x2F;x)分数是需要累加的，例如当权限为：[-rwxrwx—] 分数则是：</p>
+<ul>
+<li>owner &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
+<li>group &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</li>
+<li>others&#x3D; — &#x3D; 0+0+0 &#x3D; 0</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 770 filename</span><br></pre></td></tr></table></figure>
+
+<p>可以自己下去多进行测试！</p>
+<h3 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h3><blockquote>
+<p>概述</p>
+</blockquote>
+<p>Linux系统中使用以下命令来查看文件的内容：</p>
+<ul>
+<li>cat 由第一行开始显示文件内容</li>
+<li>tac 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</li>
+<li>nl  显示的时候，顺道输出行号！</li>
+<li>more 一页一页的显示文件内容</li>
+<li>less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</li>
+<li>head 只看头几行</li>
+<li>tail 只看尾巴几行</li>
+</ul>
+<p>你可以使用 *man [命令]*来查看各个命令的使用文档，如 ：man cp。</p>
+<blockquote>
+<p>cat 由第一行开始显示文件内容</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat [-AbEnTv]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；</li>
+<li>-b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！</li>
+<li>-E ：将结尾的断行字节 $ 显示出来；</li>
+<li>-n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；</li>
+<li>-T ：将 [tab] 按键以 ^I 显示出来；</li>
+<li>-v ：列出一些看不出来的特殊字符</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 查看网络配置: 文件地址 /etc/sysconfig/network-scripts/</span><br><span class="line">[root@kuangshen ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tac</p>
+</blockquote>
+<p>tac与cat命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写！如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# tac /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BOOTPROTO=dhcp</span><br><span class="line">DEVICE=eth0</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>nl  显示行号</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nl [-bnw] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-b ：指定行号指定的方式，主要有两种：-b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；-b t ：如果有空行，空的那一行不要列出行号(默认值)；</li>
+<li>-n ：列出行号表示的方法，主要有三种：-n ln ：行号在荧幕的最左方显示；-n rn ：行号在自己栏位的最右方显示，且不加 0 ；-n rz ：行号在自己栏位的最右方显示，且加 0 ；</li>
+<li>-w ：行号栏位的占用的位数。</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# nl /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">1DEVICE=eth0</span><br><span class="line">2BOOTPROTO=dhcp</span><br><span class="line">3ONBOOT=yes</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>more  一页一页翻动</p>
+</blockquote>
+<p>在 more 这个程序的运行过程中，你有几个按键可以按的：</p>
+<ul>
+<li>空白键 (space)：代表向下翻一页；</li>
+<li>Enter   ：代表向下翻『一行』；</li>
+<li>&#x2F;字串   ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；</li>
+<li>:f    ：立刻显示出档名以及目前显示的行数；</li>
+<li>q    ：代表立刻离开 more ，不再显示该文件内容。</li>
+<li>b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">--More--(28%) # 重点在这一行喔！你的光标也会在这里等待你的命令</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>less  一页一页翻动，以下实例输出&#x2F;etc&#x2F;man.config文件的内容：</p>
+</blockquote>
+<p>less运行时可以输入的命令有：</p>
+<ul>
+<li>空白键  ：向下翻动一页；</li>
+<li>[pagedown]：向下翻动一页；</li>
+<li>[pageup] ：向上翻动一页；</li>
+<li>&#x2F;字串  ：向下搜寻『字串』的功能；</li>
+<li>?字串  ：向上搜寻『字串』的功能；</li>
+<li>n   ：重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
+<li>N   ：反向的重复前一个搜寻 (与 &#x2F; 或 ? 有关！)</li>
+<li>q   ：离开 less 这个程序；</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more /etc/csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">:   # 这里可以等待你输入命令！</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>head  取出文件前面几行</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">head [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：**-n** 后面接数字，代表显示几行的意思！</p>
+<p>默认的情况中，显示前面 10 行！若要显示前 20 行，就得要这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# head -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>tail  取出文件后面几行</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-n ：后面接数字，代表显示几行的意思</li>
+</ul>
+<p>默认的情况中，显示最后 10 行！若要显示最后 20 行，就得要这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# tail -n 20 /etc/csh.login</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>拓展：Linux 链接概念</p>
+</blockquote>
+<p>Linux 链接分两种，一种被称为硬链接（Hard Link），另一种被称为符号链接（Symbolic Link）。</p>
+<p>情况下，<strong>ln</strong> 命令产生硬链接。</p>
+<p><strong>硬连接</strong></p>
+<p>硬连接指通过索引节点来进行连接。在 Linux 的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号(Inode Index)。在 Linux 中，多个文件名指向同一索引节点是存在的。比如：A 是 B 的硬链接（A 和 B 都是文件名），则 A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号相同，即一个 inode 节点对应两个不同的文件名，两个文件名指向同一个文件，A 和 B 对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个的访问。</p>
+<p>硬连接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬连接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的连接。只删除一个连接并不影响索引节点本身和其它的连接，只有当最后一个连接被删除后，文件的数据块及目录的连接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬连接文件均被删除。</p>
+<p><strong>软连接</strong></p>
+<p>另外一种连接称之为符号连接（Symbolic Link），也叫软连接。软链接文件有类似于 Windows 的快捷方式。它实际上是一个特殊的文件。在符号连接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A 是 B 的软链接（A 和 B 都是文件名），A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号不相同，A 和 B 指向的是两个不同的 inode，继而指向两块不同的数据块。但是 A 的数据块中存放的只是 B 的路径名（可以根据这个找到 B 的目录项）。A 和 B 之间是“主从”关系，如果 B 被删除了，A 仍然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p>
+<p><strong>测试：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line">[root@kuangshen home]# touch f1 # 创建一个测试文件f1</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">f1</span><br><span class="line">[root@kuangshen home]# ln f1 f2     # 创建f1的一个硬连接文件f2</span><br><span class="line">[root@kuangshen home]# ln -s f1 f3   # 创建f1的一个符号连接文件f3</span><br><span class="line">[root@kuangshen home]# ls -li       # -i参数显示文件的inode节点信息</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f1</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f2</span><br><span class="line">397248 lrwxrwxrwx 1 root root     2 Mar 13 00:50 f3 -&gt; f1</span><br></pre></td></tr></table></figure>
+
+<p>从上面的结果中可以看出，硬连接文件 f2 与原文件 f1 的 inode 节点相同，均为 397247，然而符号连接文件的 inode 节点不同。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># echo 字符串输出 &gt;&gt; f1 输出到 f1文件</span><br><span class="line">[root@kuangshen home]# echo &quot;I am f1 file&quot; &gt;&gt;f1</span><br><span class="line">[root@kuangshen home]# cat f1</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# rm -f f1</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">cat: f3: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的测试可以看出：当删除原始文件 f1 后，硬连接 f2 不受影响，但是符号连接 f1 文件无效；</p>
+<p>依此您可以做一些相关的测试，可以得到以下全部结论：</p>
+<ul>
+<li>删除符号连接f3,对f1,f2无影响；</li>
+<li>删除硬连接f2，对f1,f3也无影响；</li>
+<li>删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；</li>
+<li>同时删除原文件f1,硬连接f2，整个文件会真正的被删除。</li>
+</ul>
+<p>后面的话，我们就开始学习Vim和用户磁盘相关的命令！从而修改配置！</p>
+<p>视频同步更新，这次一定！</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -2532,8 +2573,8 @@
         <category>技术</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>数据库</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -3384,7 +3425,8 @@
   <entry>
     <title>JAVA的JUC</title>
     <url>/2021/07/25/JavaBase/JAVA%E7%9A%84JUC/</url>
-    <content><![CDATA[<h1 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h1><h2 id="JUC是啥-x2F-为什么要用JUC"><a href="#JUC是啥-x2F-为什么要用JUC" class="headerlink" title="JUC是啥 &#x2F; 为什么要用JUC"></a>JUC是啥 &#x2F; 为什么要用JUC</h2><p><img src="file:///C:/%5CUsers%5C25778%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200903222641670.png" alt="image-20200903222641670"></p>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h1><h2 id="JUC是啥-x2F-为什么要用JUC"><a href="#JUC是啥-x2F-为什么要用JUC" class="headerlink" title="JUC是啥 &#x2F; 为什么要用JUC"></a>JUC是啥 &#x2F; 为什么要用JUC</h2><p><img src="file:///C:/%5CUsers%5C25778%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200903222641670.png" alt="image-20200903222641670"></p>
 <p><strong>image-20200903222641670</strong></p>
 <blockquote>
 <p>JUC是在线程的基础上 为了高效解决并发问题 并且充分利用cpu</p>
@@ -4031,7 +4073,6 @@
       </categories>
       <tags>
         <tag>maven</tag>
-        <tag>待做</tag>
       </tags>
   </entry>
   <entry>
@@ -5175,8 +5216,8 @@
         <category>技术</category>
       </categories>
       <tags>
-        <tag>网络</tag>
         <tag>Netty</tag>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
